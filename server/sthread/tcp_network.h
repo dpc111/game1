@@ -5,7 +5,7 @@
 #include <event2/event.h>
 #include <event2/listener.h>
 
-class tcp_network_t {
+class tcp_network_t : public net_event_t {
 public:
 	typedef std::map<int, tcp_connection_t *> conn_map_t;
 
@@ -30,12 +30,12 @@ public:
 
 	const tcp_network_t& get_local_addr() { return addr_; }
 
-private:
-	static void ev_listen_cb(evconnlistener *listener, evutil_socket_t fd, sockaddr *sa, int socklen, void *ud);
+// private:
+// 	static void ev_listen_cb(evconnlistener *listener, evutil_socket_t fd, sockaddr *sa, int socklen, void *ud);
 
-	static void ev_read_cb(evutil_socket_t fd, const short which, void *arg);
+// 	static void ev_read_cb(evutil_socket_t fd, const short which, void *arg);
 
-	static void ev_write_cb(evutil_socket_t fd, const short which, void *arg);
+// 	static void ev_write_cb(evutil_socket_t fd, const short which, void *arg);
 
 private:
 	net_address_t 							addr_;

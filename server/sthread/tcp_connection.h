@@ -15,7 +15,9 @@ class net_thread_t;
 class tcp_connection_t
 {
 public:
-	tcp_connection_t(int fd, sockaddr_in peer_addr);
+	tcp_connection_t(int fd, sockaddr_in& peer_addr);
+
+	tcp_connection_t();
 
 	~tcp_connection_t();
 
@@ -27,9 +29,13 @@ public:
 
 	net_input_stream_t& get_input_stream() { return input_stream_; }
 
+	void set_peer_addr(sockaddr_in& peer_addr) { peer_addr_ = peer_addr; }
+
 	void set_context(void *context) const { context_ = context; }
 
 	void* get_context() const { return context_; }
+
+	int set_fd(int fd) { fd_ = fd; }
 
 	int get_fd() { return fd_; }
 
@@ -51,7 +57,7 @@ private:
 	tcp_network_t 				*network_;
 	net_output_stream_t 		output_stream_;
 	net_input_stream_t 			input_stream_;
-	net_address_t 				local_addr_;	
+	// net_address_t 				local_addr_;	
 	net_address_t 				peer_addr_;
 	void 						*context_;
 

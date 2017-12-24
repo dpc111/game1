@@ -28,14 +28,21 @@ public:
 
 	void add_connection(tcp_connection_t *conn);
 
-private:
-	static void listener_callback(evconnlistener *listener, evutil_socket_t fd, sockaddr *sa, int socklen, void *ud);
+	const tcp_network_t& get_local_addr() { return addr_; }
 
 private:
-	conn_map_t 		 		conns_;
-	event_base 				*ev_base_;
-	evconnlistener 			*ev_listener_;
+	static void ev_listen_cb(evconnlistener *listener, evutil_socket_t fd, sockaddr *sa, int socklen, void *ud);
 
+	static void ev_read_cb(evutil_socket_t fd, const short which, void *arg);
+
+	static void ev_write_cb(evutil_socket_t fd, const short which, void *arg);
+
+private:
+	net_address_t 							addr_;
+	conn_map_t 		 						conns_;
+	event_base 								*ev_base_;
+	evconnlistener 							*ev_listen_;
+	obj_pool_t<tcp_connection_t>  			conn_pool_;
 }
 
 #endif

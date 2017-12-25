@@ -42,7 +42,7 @@ private:
 	conn_map_t 		 						conns_;
 	event_base 								*ev_base_;
 	evconnlistener 							*ev_listen_;
-	obj_pool_t<tcp_connection_t>  			conn_pool_;
+	// obj_pool_t<tcp_connection_t>  			conn_pool_;
 }
 
 #endif

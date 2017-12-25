@@ -2,7 +2,7 @@
 
 void net_event_t::ev_listen_cb(evconnlistener *listener, evutil_socket_t fd, sockaddr *sa, int socklen, void *ud) {
 	assert(sa->sa_family == AF_INET);
-	tcp_connection_t *conn = conn_pool_.alloc();
+	tcp_connection_t *conn = connection_alloc();
 	conn->set_fd(fd);
 	conn->set_peer_addr(*(sockaddr_in *)sa);
 	conn->set_network(this);

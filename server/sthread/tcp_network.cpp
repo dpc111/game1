@@ -43,24 +43,6 @@ void tcp_network_t::process() {
 
 }
 
-// void tcp_network_t::ev_listen_cb(evconnlistener *listener, evutil_socket_t fd, sockaddr *sa, int socklen, void *ud) {
-// 	assert(sa->sa_family == AF_INET);
-// 	tcp_connection_t *conn = conn_pool_.alloc();
-// 	conn->set_fd(fd);
-// 	conn->set_peer_addr(*(sockaddr_in *)sa);
-// 	conn->set_network(this);
-// 	conn->set_events(ev_base_, ev_read_cb, ev_write_cb);
-// 	this->add_connection(conn);
-// }
-
-// void tcp_network_t::ev_read_cb(evutil_socket_t fd, const short which, void *arg) {
-
-// }
-
-// void tcp_network_t::ev_write_cb(evutil_socket_t fd, const short which, void *arg) {
-
-// }
-
 bool new_connection(const char *ip, int port, void *context) {
 	net_address_t addr(ip, port);
 	int fd = ::socket(AF_INET, SOCK_STREAM, 0);
@@ -70,7 +52,7 @@ bool new_connection(const char *ip, int port, void *context) {
 		evutil_closesocket(fd);
 		return false;
 	}
-	tcp_network_t *conn = conn_pool_.alloc();
+	tcp_connection_t *conn = connection_alloc();
 	conn->set_fd(fd);
 	conn->set_peer_addr(addr);
 	conn->set_network(this);

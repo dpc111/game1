@@ -1,10 +1,6 @@
 #ifndef TCP_NETWORK_H
 #define TCP_NETWORK_H
 
-#include <time.h>
-#include <event2/event.h>
-#include <event2/listener.h>
-
 class tcp_network_t : public net_event_t {
 public:
 	typedef std::map<int, tcp_connection_t *> conn_map_t;
@@ -38,10 +34,6 @@ private:
 	net_address_t addr_;
 
 	conn_map_t conns_;
-
-	event_base *ev_base_;
-
-	evconnlistener *ev_listen_;
 }
 
 #endif

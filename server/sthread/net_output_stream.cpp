@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include "net_output_stream.h"
 #include "tcp_connection.h"
-#include "net_thread.h"
+#include "net_pool.h"
 
 #define IOVEC_NUM 16
 

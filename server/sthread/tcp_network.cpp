@@ -1,8 +1,7 @@
 #include "tcp_network.h"
+#include "net_pool.h"
 
-tcp_network_t::tcp_network_t(const net_address_t& addr){
-	ev_base_ = NULL;
-	ev_listen_ = NULL;
+tcp_network_t::tcp_network_t(const net_address_t& addr) {
 	addr_ = addr;
 }
 
@@ -10,30 +9,8 @@ tcp_network_t::~tcp_network_t() {
 	this->shutdown();
 }
 
-void tcp_network_t::start() {
-	assert(ev_base_ == NULL);
-	assert(ev_listen_ == NULL);
-	ev_base_ = event_base_new();	
-	ev_listen_ = evconnlistener_new_bind(
-		get_ev_base(),
-		ev_listen_cb,
-		this,
-		LEV_OPT_REUSEABLE | LEV_OPT_CLOSE_ON_FREE,
-		-1,
-		(struct sockaddr*)&addr_,
-		sizeof(addr_);
-	);
-}
-
 void tcp_network_t::shutdown() {
-	if (ev_listen_ != NULL) {
-		evconnlistener_free(ev_listen_);
-		ev_listen_ = NULL;
-	}
-	if (ev_base_ != NULL) {
-		event_base_free(ev_base_);
-		ev_base_ = NULL;
-	}
+	ev_close();
 	for (conn_map_t::iterator itr = conns_.begin(); itr != conns_.end(); ++itr) {
 		tcp_connection_t *conn = itr->second;
 		conn_pool_.free(conn);

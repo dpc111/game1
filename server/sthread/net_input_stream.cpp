@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include "chunk.h"
 #include "tcp_connection.h"
-#include "net_thread.h"
+#include "net_pool.h"
 
 net_input_stream_t::net_input_stream_t(tcp_connection_t *conn) 
 	: conn_(conn)

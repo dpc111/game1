@@ -49,6 +49,10 @@ public:
 
 	void unset_events();
 
+	// void incr_write_event() { ++ev_write_num_; }
+
+	// void decr_write_event() { --ev_write_num_; }
+
 	void add_event_write();
 
 	void del_event_write();
@@ -77,6 +81,8 @@ private:
 	bool ev_read_add_;
 	
 	bool ev_write_add_;
+
+	// int ev_write_num_;
 };
 
 #endif

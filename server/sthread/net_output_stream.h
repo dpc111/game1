@@ -6,7 +6,7 @@
 
 class tcp_connection_t;
 
-class net_output_stream_t : public net_stream_t
+class net_output_stream_t
 {
 public:
 	net_output_stream_t(tcp_connection_t *conn);

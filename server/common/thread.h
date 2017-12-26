@@ -32,6 +32,21 @@ private:
 	lock_t *lock_;
 };
 
+class tls_t 
+{
+public:
+	tls_t();
+
+	~tls_t();
+
+	void *get();
+
+	void set(void *ptr);
+
+private:
+	pthread_key_t tls_;
+}
+
 #define GUARD(lock) guard_t guard(lock, __FILE__, __LINE__)
 
 class thread_t

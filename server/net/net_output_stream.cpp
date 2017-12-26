@@ -70,7 +70,7 @@ int net_output_stream_t::write_fd(void *ud, int fd) {
 			break;
 		}
 	}
-	int n = writev(fd, vecs, i);
+	int n = ::writev(fd, vecs, i);
 	if (n < 0) {
 		return n;
 	}

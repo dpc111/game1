@@ -1,3 +1,5 @@
+#include "tcp_network.h"
+
 tcp_network_t::tcp_network_t(const net_address_t& addr){
 	ev_base_ = NULL;
 	ev_listen_ = NULL;
@@ -76,3 +78,14 @@ void tcp_network_t::add_connection(tcp_connection_t *conn) {
 	conns_.insert(conn_map_t::value_type(conn->get_fd(), conn));
 }
 
+void tcp_network_t::remove_connection(fd) {
+	conn_map_t::iterator it = conns_.find(fd);
+	if (it == conns_.end()) {
+		return;
+	}
+	conns_.erase(it);
+}
+
+bool tcp_network_t::on_message_cb(tcp_connection_t *conn) {
+
+}

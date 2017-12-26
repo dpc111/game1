@@ -34,6 +34,32 @@ guard_t::~guard_t() {
 }
 
 //////////////////////////////////////////////////////////////////////////
+tls_t::tls_t() {
+	int r = pthread_key_create(&tls_, NULL);
+	if (r) {
+		assert(false);
+	}
+}
+
+tls_t::~tls_t() {
+	int r = pthread_key_delete(tls_);
+	if (r) {
+		assert(false);
+	}
+}
+
+void *tls_t::get() {
+	return pthread_getspecific(tls_);
+}
+
+void tls_t::set(void *ptr) {
+	int r = pthread_setspecific(tls_);
+	if (r) {
+		assert(false);
+	}
+}
+
+//////////////////////////////////////////////////////////////////////////
 thread_t::thread_t() {
 
 }

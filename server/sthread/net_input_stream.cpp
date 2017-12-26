@@ -32,7 +32,7 @@ int net_input_stream_t::read(void *buff, int size) {
 				input_queue_t::iterator it1 = it;
 				++it;
 				buff_.erase(it1);
-				conn_->get_thread()->input_pool_free(chunk);
+				input_chunk_free(chunk);
 			}
 		}
 		if (size <= 0) {
@@ -40,20 +40,6 @@ int net_input_stream_t::read(void *buff, int size) {
 		}
 	}
 	return ptr - (char *)buff;
-}
-
-void net_input_stream_t::reset() {
-	net_thread_t *thread = conn_->get_thread();
-	while (!buff_.empty()) {
-		input_chunk_t *chunk = buff_.front();
-		thread->input_pool_free(chunk);
-		buff_.pop_front();
-	}
-	size_ = 0;
-}
-
-void net_input_stream_t::backup(int size) {
-	
 }
 
 int net_input_stream_t::read_fd(void *ud, int fd) {
@@ -94,4 +80,49 @@ int net_input_stream_t::read_fd(void *ud, int fd) {
 	}
 	size_ += n;
 	return n;
+}
+
+bool net_input_stream_t::next(const void **data, int *size) {
+	if (size_ == 0) {
+		return false;
+	}
+	for (input_queue_t::iterator *it = buff_.begin(); it++; it != buff_.end()) {
+		input_chunk_t *chunk = *it;
+		if (chunk->read_size() > 0)	{
+			*data = chunk->read_ptr();
+			*size = *size <= chunk->read_size() ? *size : chunk->read_size();
+			chunk->read_offset_ += *size;
+			size_ -= *size;
+			return true;
+		}
+	}
+	return false
+}
+
+void net_input_stream_t::backup(int size) {
+	if (size == 0) {
+		return;
+	}	
+	for (input_queue_t::reverse_iterator it = buff_.rbegin(); it != buff_.rend(); ++it) {
+		input_chunk_t *chunk = *it;
+		if (chunk->read_offset_ == 0) {
+			continue;
+		} 
+		int backup_size = size <= chunk.read_offset_ ? size : chunk.read_offset_;
+		chunk->read_offset_ -= backup_size;
+		size_ += backup_size;
+		num -= backup_size;
+		if (num == 0) {
+			break;
+		}
+	}
+}
+
+void net_input_stream_t::reset() {
+	while (!buff_.empty()) {
+		input_chunk_t *chunk = buff_.front();
+		input_chunk_free(chunk);
+		buff_.pop_front();
+	}
+	size_ = 0;
 }

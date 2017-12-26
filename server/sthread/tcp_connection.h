@@ -54,20 +54,29 @@ public:
 	void del_event_write();
 
 private:
-	tcp_network_t 				*network_;
-	net_output_stream_t 		output_stream_;
-	net_input_stream_t 			input_stream_;
-	// net_address_t 				local_addr_;	
-	net_address_t 				peer_addr_;
-	void 						*context_;
+	tcp_network_t *network_;
 
-	int 						fd_;
-	int 						state_;
-	bool 						closed_;
-	event 						*ev_read_;
-	event 						*ev_write_;
-	bool 						ev_read_add_;
-	bool 						ev_write_add_;
+	net_output_stream_t output_stream_;
+
+	net_input_stream_t input_stream_;
+
+	net_address_t peer_addr_;
+
+	void *context_;
+
+	int fd_;
+
+	int state_;
+
+	bool closed_;
+
+	event *ev_read_;
+
+	event *ev_write_;
+
+	bool ev_read_add_;
+	
+	bool ev_write_add_;
 };
 
 #endif

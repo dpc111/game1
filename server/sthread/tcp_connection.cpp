@@ -7,6 +7,7 @@ tcp_connection_t::tcp_connection_t(int fd, sockaddr_in& peer_addr)
 	, peer_addr_(peer_addr)
 	, closed_(false) {
 }
+
 tcp_connection_t::tcp_connection_t()
 	: input_stream_(this)
 	, output_stream_(this)

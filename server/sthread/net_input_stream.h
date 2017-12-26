@@ -13,20 +13,24 @@ public:
 
 	tcp_connection_t *get_conn() { return conn_; }
 
-	int read(void *buff, int size);
-
-	void reset();
-
 	int size() const { return size_; }
+
+	int read(void *buff, int size);
 
 	int read_fd(void *ud, int fd);
 
+	bool next(const void **data, int *size);
+
 	void backup(int size);
 
+	void reset();
+
 private:
-	tcp_connection_t 			*conn_;
-	input_queue_t 				buff_;
-	int 						size_;
+	tcp_connection_t *conn_;
+
+	input_queue_t buff_;
+
+	int size_;
 };
 
 #endif

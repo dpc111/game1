@@ -21,6 +21,8 @@ public:
 
 	~tcp_connection_t();
 
+	void reliable();
+
 	void set_network(tcp_network_t *network) { network_ = network; }
 
 	tcp_network_t* get_network() { return network_; }
@@ -48,10 +50,6 @@ public:
 	void set_events(event *ev_base, event_callback_fn read_fn, event_callback_fn write_fn);
 
 	void unset_events();
-
-	// void incr_write_event() { ++ev_write_num_; }
-
-	// void decr_write_event() { --ev_write_num_; }
 
 	void add_event_write();
 
@@ -81,8 +79,6 @@ private:
 	bool ev_read_add_;
 	
 	bool ev_write_add_;
-
-	// int ev_write_num_;
 };
 
 #endif

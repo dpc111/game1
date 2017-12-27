@@ -18,6 +18,14 @@ tcp_connection_t::~tcp_connection_t() {
 	closed_ = true;
 }
 
+void tcp_connection_t::reliable() {
+	int err = evutil_socket_geterror(fd_);
+	if (err == 0 || err == EINTR || err == EAGAIN) {
+		return true;
+	}
+	return false; 
+}
+
 void tcp_connection_t::set_events(event *ev_base, event_callback_fn read_fn, event_callback_fn write_fn) {
 	ev_read_ = event_new(ev_base, fd, EV_READ | EV_PERSIST, read_fn, this);
 	ev_write_ = event_new(ev_base, fd, EV_WRITE, write_fn, this);

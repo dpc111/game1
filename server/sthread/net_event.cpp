@@ -51,7 +51,7 @@ void net_event_t::ev_read_cb(evutil_socket_t fd, const short which, void *arg) {
 	net_input_stream_t& stream = conn->get_input_stream();
 	int n = stream.read_fd(fd);
 	if (n <= 0) {
-		if (n == 0 || !conn->reliable) {
+		if (n == 0 || !conn->reliable()) {
 			network->remove_connection(fd);
 		}
 		return

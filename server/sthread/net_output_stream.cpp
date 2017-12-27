@@ -74,6 +74,21 @@ int net_output_stream_t::write_fd(void *ud, int fd) {
 	return n;
 }
 
+bool net_output_stream_t::next(const void **data, int *size) {
+	output_chunk_t *chunk = NULL;
+	if (buff_.size() == 0 || buff_.back().write_size() == 0) {
+		chunk = output_chunk_alloc();
+		buff_.push_back(chunk);
+	} else {
+		chunk = buff_.back();
+	}
+	*data = chunk->write_ptr();
+	*size = chunk->write_size();
+	chunk->write_offset_ += *size;
+	size_ += *size;
+	return true;
+}
+
 void net_output_stream_t::backup(int size) {
 	for (output_queue_t::reverse_iterator it = buff_.rbegin(); it != buff_.rend(); ++it) {
         output_chunk_t *chunk = *it;

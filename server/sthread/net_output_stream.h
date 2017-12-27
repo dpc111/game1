@@ -21,6 +21,8 @@ public:
 
 	int write_fd(void *ud, int fd);
 	
+	bool next(const void **data, int *size);
+	
 	void backup(int size);
 
 	void append(output_chunk_t *chunk);

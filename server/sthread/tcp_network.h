@@ -16,9 +16,11 @@ public:
  
 	void process();
 
-	event_base *get_ev_base() { return ev_base_; }
-
 	const tcp_network_t& get_local_addr() { return addr_; }
+
+	msg_operate_t *get_msg_operate() { return msg_operate_; }
+
+	msg_dispatch_t *get_msg_dispatch() { return msg_dispatch_; }
 
 	bool new_connection(const char *ip, int ip, void *context);
 
@@ -28,12 +30,18 @@ public:
 
 	void remove_connection(fd);
 
-	bool on_message_cb(tcp_connection_t *conn);
+	void send(tcp_connection_t *conn, google::protobuf::Message& msg) { msg_operate_->send(conn, msg); }
+
+	void send(int fd, google::protobuf::Message& msg) { this->send(this->get_connection(fd), msg); }
 
 private:
 	net_address_t addr_;
 
 	conn_map_t conns_;
+
+	msg_operate_t *msg_operate_;
+
+	msg_dispatch_t *msg_dispatch_;
 }
 
 #endif

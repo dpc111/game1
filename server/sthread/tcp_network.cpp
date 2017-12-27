@@ -3,6 +3,8 @@
 
 tcp_network_t::tcp_network_t(const net_address_t& addr) {
 	addr_ = addr;
+	msg_operate_ = new msg_operate_t(this);
+	msg_dispatch_ = new msg_dispatch_t(this);
 }
 
 tcp_network_t::~tcp_network_t() {
@@ -61,8 +63,4 @@ void tcp_network_t::remove_connection(fd) {
 		return;
 	}
 	conns_.erase(it);
-}
-
-bool tcp_network_t::on_message_cb(tcp_connection_t *conn) {
-
 }

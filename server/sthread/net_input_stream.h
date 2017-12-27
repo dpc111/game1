@@ -21,7 +21,11 @@ public:
 
 	bool next(const void **data, int *size);
 
-	void backup(int size);
+	void backup(int num);
+
+	void finish();
+
+	int skip(int num);
 
 	void reset();
 

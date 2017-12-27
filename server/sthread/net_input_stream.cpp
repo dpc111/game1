@@ -99,8 +99,8 @@ bool net_input_stream_t::next(const void **data, int *size) {
 	return false
 }
 
-void net_input_stream_t::backup(int size) {
-	if (size == 0) {
+void net_input_stream_t::backup(int num) {
+	if (num == 0) {
 		return;
 	}	
 	for (input_queue_t::reverse_iterator it = buff_.rbegin(); it != buff_.rend(); ++it) {
@@ -108,7 +108,7 @@ void net_input_stream_t::backup(int size) {
 		if (chunk->read_offset_ == 0) {
 			continue;
 		} 
-		int backup_size = size <= chunk.read_offset_ ? size : chunk.read_offset_;
+		int backup_size = num <= chunk.read_offset_ ? num : chunk.read_offset_;
 		chunk->read_offset_ -= backup_size;
 		size_ += backup_size;
 		num -= backup_size;
@@ -116,6 +116,46 @@ void net_input_stream_t::backup(int size) {
 			break;
 		}
 	}
+}
+
+void net_input_stream_t::finish() {
+	for (input_queue_t::iterator it = buff_.begin(); it != buff_.end();) {
+		input_chunk_t *chunk = *it;
+		if (chunk->read_offset_ == chunk->write_offset_) {
+			if (buff_.size() == 1) {
+				chunk->read_offset_ = 0;
+				chunk->write_offset_ = 0;
+				break;
+			} else {
+				input_queue_t::iterator it1 = it;
+				it = buff_.erase(it1);
+				input_chunk_free(chunk);
+				continue;
+			}
+		}
+		++it;
+	}
+}
+
+int net_input_stream_t::skip(int num) {
+	if (size_ <= 0) {
+		return 0;
+	}
+	int backup = num;
+	for (input_queue_t::iterator it = buff_.begin(); it != buff_.end(); ++it) {
+		input_chunk_t *chunk = *it;
+		if (chunk->read_size() <= 0) {
+			continue;
+		}
+		int skip_size = num <= chunk->read_size() ? num : chunk->read_size();
+		chunk->read_offset_ += skip_size;
+		size_ -= skip_size;
+		num -= skip_size;
+		if (num <= 0) {
+			break;
+		}	
+	}
+	return backup - num;
 }
 
 void net_input_stream_t::reset() {

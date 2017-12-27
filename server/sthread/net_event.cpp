@@ -56,7 +56,7 @@ void net_event_t::ev_read_cb(evutil_socket_t fd, const short which, void *arg) {
 		}
 		return
 	}
-	if (!network->on_message_cb(conn)) {
+	if (!network->get_msg_operate()->on_message(conn)) {
 		stream.reset();
 	}
 }

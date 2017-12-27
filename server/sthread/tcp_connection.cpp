@@ -23,12 +23,12 @@ void tcp_connection_t::set_events(event *ev_base, event_callback_fn read_fn, eve
 	ev_write_ = event_new(ev_base, fd, EV_WRITE, write_fn, this);
 	event_add(ev_read_, NULL);
 	ev_read_add_ = true;
-	// socket套接字关闭后，等到套接字内数据发送完成后才真正关闭连接
+	// socket关闭后等到套接字内数据发送完成后才真正关闭连接
 	linger lin;
 	lin.l_onoff = 1;
 	lin.l_linger = 0;
 	setsocketopt(fd, SOL_SOCKET, SO_LINGER, (const char *)&lin, sizeof(linger));
-	// TCP_NODELAY 不使用Nagle算法，不会将小包进行拼接成大包再进行发送，直接将小包发送出去，会使得小包时候用户体验非常好。
+	// 不会将小包进行拼接成大包再进行发送
 	bool nodelay = true;
 	setsocketopt(fd, IPPROTO_TCP, TCP_NODELAY, (const char *)&nodelay, sizeof(char));
 }

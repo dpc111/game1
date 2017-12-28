@@ -31,13 +31,13 @@ DEPENDS := $(addsuffix .d,$(basename ${SOURCES}))
 #	八、 定义依赖关系  编译、链接规则
 #########################################################################################
 #.PHONY”表示 clean是个伪目标文件。
-.PHONY : all check  clean  install
+.PHONY : all check clean install
 
 #定义编译、链接任务all
 all : ${PROGRAM}
 
 #检查源码中 除了C源码外是否有C++源码 ,并定义变量LDCXX存储检查结果
-LDCXX := $(strip $(filter-out  %.c , ${SOURCES}))
+LDCXX := $(strip $(filter-out %.c,${SOURCES}))
 
 #编译器重置
 ifdef LDCXX   																#有C++源码时,所有源码都使用g++编译 包括C源码 将CC、CFLAGS 的值设置为对应的${CXX} ${CXXFLAGS}的值
@@ -48,9 +48,9 @@ ifdef LDCXX   																#有C++源码时,所有源码都使用g++编译 �
 endif
 
 #链接
-${PROGRAM} :  ${DEPENDS}  ${OBJS}
-ifeq ($(strip $(filter-out  %.c , ${SOURCES})),)    						#只有C源码时使用gcc连接
-	${CC}  ${LIBDIRS}  ${CLDFLAGS}    ${OBJS} -o $@
+${PROGRAM} : ${DEPENDS} ${OBJS}
+ifeq ($(strip $(filter-out %.c,${SOURCES})),)    							#只有C源码时使用gcc连接
+	${CC} ${LIBDIRS} ${CLDFLAGS} ${OBJS} -o $@
 else                                                 						#有C++源码时使用g++连接
     ifdef MODULEFLAGS
 	$(CXX) ${LIBDIRS} ${CXXLDFLAGS} -Wl,--no-undefined ${OBJS} $(MODULEFLAGS) $@
@@ -60,7 +60,7 @@ else                                                 						#有C++源码时使�
     endif
 endif
 
-# Rules for producing the objects. (.o)
+# producing the objects (.o)
 %.o : %.c
 	$(CC)      ${DCPPFLAGS}    ${CXXFLAGS}    ${INCLUDES}   $<
 %.o : %.C
@@ -78,7 +78,7 @@ endif
 %.o : %.cxx
 	${CXX}     ${DCPPFLAGS}    ${CXXFLAGS}    ${INCLUDES}   $<
 
-# Rules for creating the dependency files (.d)
+# creating the dependency files (.d)
 %.d : %.c
 	@${CC}     -M   -MD    ${INCLUDES} $<
 %.d : %.C
@@ -97,7 +97,7 @@ endif
 	@${CXX}    -MM  -MD    ${INCLUDES} $<
 
 #########################################################################################
-#  九、 定义其他 check  install clean 等任务
+#  九、 定义其他 check install clean 等任务
 #########################################################################################
 #定义检查环境相关的变量的任务
 check :

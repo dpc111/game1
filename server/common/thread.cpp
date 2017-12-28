@@ -54,7 +54,7 @@ void *tls_t::get() {
 }
 
 void tls_t::set(void *ptr) {
-	int r = pthread_setspecific(tls_);
+	int r = pthread_setspecific(tls_, ptr);
 	if (r) {
 		assert(false);
 	}

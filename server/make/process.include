@@ -19,13 +19,13 @@ VPATH := ${SRC_DIR}
 SOURCES := $(foreach x,${SRC_DIR},$(wildcard $(addprefix ${x}/*,${SFIX})))
 
 #去掉路径信息 去掉扩展名 再追加.o的扩展名 得到目标文件名集合 (不带路径) 需要去掉路径信息 否则连接时有可能找不到.o文件
-OBJS := $(addsuffix .o ,$(basename $(notdir ${SOURCES}) ) )
+OBJS := $(addsuffix .o,$(basename $(notdir ${SOURCES})))
 
 
 #去掉路径信息 去掉扩展名 再追加.d的扩展名 得到依赖文件名集合 (不带路径)
-#DEPENDS := $(addsuffix .d ,$(basename $(notdir ${SOURCES}) ) )
+#DEPENDS := $(addsuffix .d,$(basename $(notdir ${SOURCES})))
 #去掉扩展名 再追加.d的扩展名 得到依赖文件名集合 (带路径)
-DEPENDS := $(addsuffix .d ,$(basename  ${SOURCES} ) )
+DEPENDS := $(addsuffix .d,$(basename ${SOURCES}))
 
 #########################################################################################
 #	八、 定义依赖关系  编译、链接规则
@@ -34,7 +34,7 @@ DEPENDS := $(addsuffix .d ,$(basename  ${SOURCES} ) )
 .PHONY : all check  clean  install
 
 #定义编译、链接任务all
-all :  ${PROGRAM}
+all : ${PROGRAM}
 
 #检查源码中 除了C源码外是否有C++源码 ,并定义变量LDCXX存储检查结果
 LDCXX := $(strip $(filter-out  %.c , ${SOURCES}))
@@ -42,8 +42,8 @@ LDCXX := $(strip $(filter-out  %.c , ${SOURCES}))
 #编译器重置
 ifdef LDCXX   																#有C++源码时,所有源码都使用g++编译 包括C源码 将CC、CFLAGS 的值设置为对应的${CXX} ${CXXFLAGS}的值
     CC := ${CXX}                    										#重置C编译器为C++编译器
-    CFLAGS :=  ${CXXFLAGS}          										#重置C编译选现为C++编译选现
-    CPP :=  ${CXXPP}                										#重置C预编译器为C++预编译器
+    CFLAGS := ${CXXFLAGS}          											#重置C编译选现为C++编译选现
+    CPP := ${CXXPP}                											#重置C预编译器为C++预编译器
     CPPFLAGS := ${CXXPPFLAGS}       										#重置C预编译的选项为C++预编译的选项
 endif
 

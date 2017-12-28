@@ -1,8 +1,9 @@
-default all:
-	@make -f libCommon.mk
-	@make -f libNet.mk
+all:
+	@make -f libcommon.mk
+	@make -f libnet.mk
+
 install:
-	@make -f libCommon.mk install
+
 clean:
 	-${RM} *.so
 	-${RM} *.o

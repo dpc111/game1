@@ -2,20 +2,24 @@
 #include <stdlib.h>
 #include "net_output_stream.h"
 #include "tcp_connection.h"
-#include "net_pool.h"
+#include "net_thread.h"
 
 #define IOVEC_NUM 16
 
-net_output_stream_t::net_output_stream_t(tcp_connection_t *conn) 
-	: net_stream_t(conn)
-	, size_(0) {
+net_output_stream_t::net_output_stream_t(tcp_connection_t *conn) : net_stream_t(conn) {
+	size_ = 0;
 }
 
 net_output_stream_t::~net_output_stream_t() {
 	reset();
 }
 
+int net_output_stream_t::read(void *buff, int size) {
+	return 0;
+}
+
 int net_output_stream_t::write(const void *buff, int size) {
+	GUARD(&stream_lock_);
 	if (size <= 0) {
 		return 0;
 	}
@@ -23,7 +27,7 @@ int net_output_stream_t::write(const void *buff, int size) {
 	while (true) {
 		output_chunk_t *chunk;
 		if (buff_.size() == 0 || buff_.back()->write_size() == 0) {
-			chunk = output_chunk_alloc();
+			chunk = conn_->get_thread()->output_pool_alloc();
 			chunk->conn_ = conn_;
 			buff_.push_back(chunk);
 		} 
@@ -41,6 +45,17 @@ int net_output_stream_t::write(const void *buff, int size) {
 	}
 	return (char *)buff - ptr;	
 }
+
+void net_output_stream_t::reset() {
+	net_thread_t *thread = conn_->get_thread();
+	while (!buff_.empty()) {
+		output_chunk_t *chunk = buff_.front();
+		thread->output_pool_free(chunk);
+		buff_.pop_front();
+	}
+	size_ = 0;
+}
+
 
 int net_output_stream_t::write_fd(void *ud, int fd) {
 	tcp_connection_t *conn = (tcp_connection_t *)conn;
@@ -67,56 +82,19 @@ int net_output_stream_t::write_fd(void *ud, int fd) {
 			break;
 		}
 		sz -= chunk->read_size();
-		output_chunk_free(chunk);
+		conn->get_thread()->output_pool_free(chunk);
 		buff_.pop_front();
 	}
 	size_ -= n;
 	return n;
 }
 
-bool net_output_stream_t::next(const void **data, int *size) {
-	output_chunk_t *chunk = NULL;
-	if (buff_.size() == 0 || buff_.back().write_size() == 0) {
-		chunk = output_chunk_alloc();
-		buff_.push_back(chunk);
-	} else {
-		chunk = buff_.back();
-	}
-	*data = chunk->write_ptr();
-	*size = chunk->write_size();
-	chunk->write_offset_ += *size;
-	size_ += *size;
-	return true;
-}
-
 void net_output_stream_t::backup(int size) {
-	for (output_queue_t::reverse_iterator it = buff_.rbegin(); it != buff_.rend(); ++it) {
-        output_chunk_t *chunk = *it;
-        if(chunk->write_offset_ == 0) {
-            continue;
-        }
-        size_t backup_size = size <= chunk->write_offset_ ? size : chunk->write_offset_;
-        chunk->write_offset_ -= backup_size;
-        size_ -= backup_size;
-        size -= backup_size;
-        if (size <= 0) {
-            break;
-        }
-    }
+	
 }
 
 void net_output_stream_t::append(output_chunk_t *chunk) {
 	buff_.push_back(chunk);
 	size_ += chunk->read_size();
 }
-
-void net_output_stream_t::reset() {
-	while (!buff_.empty()) {
-		output_chunk_t *chunk = buff_.front();
-		output_chunk_free(chunk);
-		buff_.pop_front();
-	}
-	size_ = 0;
-}
-
 

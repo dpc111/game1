@@ -54,4 +54,5 @@ public:
 public:
 	struct sockaddr_in addr_;
 };
+
 #endif

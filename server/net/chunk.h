@@ -40,8 +40,11 @@ struct chunk_t {
 	}
 
 	tcp_connection_t *conn_;
+
 	char buff_[size];
+
 	int read_offset_;
+
 	int write_offset_;
 };
 

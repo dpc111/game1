@@ -1,93 +1,66 @@
 #include "tcp_network.h"
-#include "net_thread.h"
-#include "tcp_connection.h"
+#include "net_pool.h"
 
-#define NET_THREAD_NUM 4
-
-tcp_network_t::tcp_network_t(const char *ip, int port) {
-	is_quit_ = false;
-	for (int i = 1; i <= NET_THREAD_NUM; i++) {
-		net_thread_t *thread = new net_thread_t(this);
-		threads_[i] = thread;
-	}
-	addr_ = net_address_t(ip, port);
-	poller_ = new poller_t();
+tcp_network_t::tcp_network_t(const net_address_t& addr) {
+	addr_ = addr;
+	msg_operate_ = new msg_operate_t(this);
+	msg_dispatch_ = new msg_dispatch_t(this);
 }
 
 tcp_network_t::~tcp_network_t() {
-	thread_map_t::iterator it = threads_.begin();
-	while (it != threads_.end()) {
-		net_thread_t *thread = it->second;
-		delete thread;
-		threads_.erase(it++);
-	}
-	delete poller_;
+	this->shutdown();
 }
 
-net_thread_t* tcp_network_t::get_idle_thread() {
-	net_thread_t *thread = NULL;
-	for (thread_map_t::iterator it = threads_.begin(); it != threads_.end(); it++) {
-		net_thread_t *cur = it->second;
-		if (!thread) {
-			thread = cur;
-		}
-		if (cur->get_conn_num() < thread->get_conn_num()) {
-			thread = cur;
-		}
+void tcp_network_t::shutdown() {
+	ev_close();
+	for (conn_map_t::iterator itr = conns_.begin(); itr != conns_.end(); ++itr) {
+		tcp_connection_t *conn = itr->second;
+		conn_pool_.free(conn);
 	}
-	return thread;
-}
-
-void tcp_network_t::on_conn_add(tcp_connection_t *conn) {
-	if (conn_add_cb_) {
-		conn_add_cb_(conn);
-	}
-}
-
-void tcp_network_t::on_conn_remove(int fd) {
-	if (conn_remove_cb_) {
-		conn_remove_cb_(fd);
-	}
-}
-
-bool tcp_network_t::on_message_recv(tcp_connection_t *conn) {
-	if (message_recv_cb_) {
-		message_recv_cb_(conn);	
-		return true;
-	}
-	return false;
-}
-
-void tcp_network_t::on_socket_connect(int fd, void *ud) {
-	struct sockaddr_in peer_addr;
-	socklen_t sz;
-	int conn_fd = accept(fd, (struct sockaddr *)&peer_addr, &sz);
-	if (conn_fd < 0) {
-		return;
-	}
-	tcp_network_t *network = (tcp_network_t *)ud;
-	net_thread_t *thread = network->get_idle_thread();
-	tcp_connection_t *conn = new tcp_connection_t(conn_fd, peer_addr);
-	conn->set_network(network);
-	conn->set_thread(thread);
-	network->get_conn_map()[conn_fd] = conn;	
-	thread->post_cmd<cmd_add_t>(conn);
-}
-
-void tcp_network_t::start() {
-	int fd = socket(PF_INET, SOCK_STREAM, 0);
-	if (fd < 0) {
-		return;
-	}
-	if (bind(fd, (sockaddr *)&(addr_.addr_), sizeof(addr_)) < 0) {
-		return;
-	} 
-	poller_->register_listen(fd, this, tcp_network_t::on_socket_connect);
+	conns_.clear();
 }
 
 void tcp_network_t::process() {
-	for (thread_map_t::iterator it = threads_.begin(); it != threads_.end(); it++) {
-		net_thread_t *thread = it->second;
-		thread->process();
+
+}
+
+bool new_connection(const char *ip, int port, void *context) {
+	net_address_t addr(ip, port);
+	int fd = ::socket(AF_INET, SOCK_STREAM, 0);
+	int res = ::connect(fd, (const sockaddr *)&addr, sizeof(addr));
+	if (res) {
+		ERROR();
+		evutil_closesocket(fd);
+		return false;
 	}
+	tcp_connection_t *conn = connection_alloc();
+	conn->set_fd(fd);
+	conn->set_peer_addr(addr);
+	conn->set_network(this);
+	conn->set_context(context);
+	conn->set_events(ev_base_, ev_read_cb, ev_write_cb);
+	this->add_connection(conn);
+	return true;
+}
+
+tcp_connection_t* tcp_network_t::get_connection(int fd) {
+	conn_map_t::iterator it = conns_.find(fd);
+	if (itr == conns_.end()) {
+		return NULL;
+	}
+	return itr->second;
+}
+
+void tcp_network_t::add_connection(tcp_connection_t *conn) {
+	tcp_connection_t *rm_conn = get_connection(conn->get_fd());
+	assert(rm_conn == NULL);
+	conns_.insert(conn_map_t::value_type(conn->get_fd(), conn));
+}
+
+void tcp_network_t::remove_connection(fd) {
+	conn_map_t::iterator it = conns_.find(fd);
+	if (it == conns_.end()) {
+		return;
+	}
+	conns_.erase(it);
 }

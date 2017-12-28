@@ -1,59 +1,47 @@
 #ifndef TCP_NETWORK_H
 #define TCP_NETWORK_H
 
-#include <stdio.h>
-#include <map>
-//#include "net_thread.h"
-#include "thread_cmd.h"
-
-class net_address_t;
-class net_thread_t;
-class poller_t;
-
-class tcp_network_t
-{
+class tcp_network_t : public net_event_t {
 public:
 	typedef std::map<int, tcp_connection_t *> conn_map_t;
-	typedef std::map<int, net_thread_t *> thread_map_t;
 
-public: 
-	tcp_network_t(const char *ip, int port);
+public:
+	tcp_network_t(const net_address_t& addr);
 
 	~tcp_network_t();
 
-	bool is_quit() { return is_quit_; }
-
-	net_thread_t* get_idle_thread();
-
-	conn_map_t& get_conn_map() { return conns_; } 
-
-	void set_conn_add_cb(const conn_add_cb_t& cb) { conn_add_cb_ = cb; }
-
-	void set_conn_remove_cb(const conn_remove_cb_t& cb) { conn_remove_cb_ = cb; }
-
-	void set_message_recv_cb(const message_recv_cb_t& cb) { message_recv_cb_ = cb; }
-
-	void on_conn_add(tcp_connection_t *conn);
-
-	void on_conn_remove(int fd);
-
-	bool on_message_recv(tcp_connection_t *conn);
-
-	static void on_socket_connect(int fd, void *ud);
-
 	void start();
 
-	void process();	
+	void shutdown();
+ 
+	void process();
+
+	const tcp_network_t& get_local_addr() { return addr_; }
+
+	msg_operate_t *get_msg_operate() { return msg_operate_; }
+
+	msg_dispatch_t *get_msg_dispatch() { return msg_dispatch_; }
+
+	bool new_connection(const char *ip, int ip, void *context);
+
+	tcp_connection_t *get_connection(int fd);
+
+	void add_connection(tcp_connection_t *conn);
+
+	void remove_connection(fd);
+
+	void send(tcp_connection_t *conn, google::protobuf::Message& msg) { msg_operate_->send(conn, msg); }
+
+	void send(int fd, google::protobuf::Message& msg) { this->send(this->get_connection(fd), msg); }
 
 private:
-	bool 						is_quit_;
-	conn_map_t 					conns_;
-	thread_map_t 				threads_;
-	poller_t 					*poller_;
-	net_address_t 				addr_;
-	conn_add_cb_t 				conn_add_cb_;
-	conn_remove_cb_t 			conn_remove_cb_;
-	message_recv_cb_t			message_recv_cb_;
-};
+	net_address_t addr_;
+
+	conn_map_t conns_;
+
+	msg_operate_t *msg_operate_;
+
+	msg_dispatch_t *msg_dispatch_;
+}
 
 #endif

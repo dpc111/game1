@@ -4,30 +4,36 @@
 #include "chunk.h"
 #include "net_stream.h"
 
-//struct chunk;
-//class net_stream_t;
-
-class net_input_stream_t : public net_stream_t
+class net_input_stream_t
 {
 public:
 	net_input_stream_t(tcp_connection_t *conn);
 
-	virtual ~net_input_stream_t();
+	~net_input_stream_t();
 
-	virtual int read(void *buff, int size);
+	tcp_connection_t *get_conn() { return conn_; }
 
-	virtual int write(const void *buff, int size);
+	int size() const { return size_; }
 
-	virtual void reset();
-
-	virtual int size() const { return size_; }
+	int read(void *buff, int size);
 
 	int read_fd(void *ud, int fd);
 
-	void backup(int size);
+	bool next(const void **data, int *size);
+
+	void backup(int num);
+
+	void finish();
+
+	int skip(int num);
+
+	void reset();
 
 private:
+	tcp_connection_t *conn_;
+
 	input_queue_t buff_;
+
 	int size_;
 };
 

@@ -2,10 +2,11 @@
 #include <stdlib.h>
 #include "chunk.h"
 #include "tcp_connection.h"
-#include "net_thread.h"
+#include "net_pool.h"
 
-net_input_stream_t::net_input_stream_t(tcp_connection_t *conn) : net_stream_t(conn) {
-	size_ = 0;
+net_input_stream_t::net_input_stream_t(tcp_connection_t *conn) 
+	: conn_(conn)
+	, size_(0) {
 }
 
 net_input_stream_t::~net_input_stream_t() {
@@ -31,7 +32,7 @@ int net_input_stream_t::read(void *buff, int size) {
 				input_queue_t::iterator it1 = it;
 				++it;
 				buff_.erase(it1);
-				conn_->get_thread()->input_pool_free(chunk);
+				input_chunk_free(chunk);
 			}
 		}
 		if (size <= 0) {
@@ -41,28 +42,9 @@ int net_input_stream_t::read(void *buff, int size) {
 	return ptr - (char *)buff;
 }
 
-int net_input_stream_t::write(const void *buff, int size) {
-	return 0;
-}
-
-void net_input_stream_t::reset() {
-	net_thread_t *thread = conn_->get_thread();
-	while (!buff_.empty()) {
-		input_chunk_t *chunk = buff_.front();
-		thread->input_pool_free(chunk);
-		buff_.pop_front();
-	}
-	size_ = 0;
-}
-
-void net_input_stream_t::backup(int size) {
-	
-}
-
 int net_input_stream_t::read_fd(void *ud, int fd) {
 	tcp_connection_t *conn = (tcp_connection_t *)ud;
-	net_thread_t *thread = conn->get_thread();
-	input_queue_t& read_fd_buff = thread->assign_read_fd_buff();
+	input_queue_t& read_fd_buff = assign_read_fd_buff()
 	iovec vecs[NUM_READ_IOVEC];
 	int i = 0;
 	for (input_queue_t::iterator it = read_fd_buff.begin(); it != read_fd_buff.end(); ) {
@@ -74,7 +56,7 @@ int net_input_stream_t::read_fd(void *ud, int fd) {
 			break;
 		}
 	}
-	int n = readv(fd, vecs, i);
+	int n = ::readv(fd, vecs, i);
 	if (n <= 0) {
 		reset();
 		return n;
@@ -98,4 +80,89 @@ int net_input_stream_t::read_fd(void *ud, int fd) {
 	}
 	size_ += n;
 	return n;
+}
+
+bool net_input_stream_t::next(const void **data, int *size) {
+	if (size_ == 0) {
+		return false;
+	}
+	for (input_queue_t::iterator *it = buff_.begin(); it++; it != buff_.end()) {
+		input_chunk_t *chunk = *it;
+		if (chunk->read_size() > 0)	{
+			*data = chunk->read_ptr();
+			*size = *size <= chunk->read_size() ? *size : chunk->read_size();
+			chunk->read_offset_ += *size;
+			size_ -= *size;
+			return true;
+		}
+	}
+	return false
+}
+
+void net_input_stream_t::backup(int num) {
+	if (num == 0) {
+		return;
+	}	
+	for (input_queue_t::reverse_iterator it = buff_.rbegin(); it != buff_.rend(); ++it) {
+		input_chunk_t *chunk = *it;
+		if (chunk->read_offset_ == 0) {
+			continue;
+		} 
+		int backup_size = num <= chunk.read_offset_ ? num : chunk.read_offset_;
+		chunk->read_offset_ -= backup_size;
+		size_ += backup_size;
+		num -= backup_size;
+		if (num == 0) {
+			break;
+		}
+	}
+}
+
+void net_input_stream_t::finish() {
+	for (input_queue_t::iterator it = buff_.begin(); it != buff_.end();) {
+		input_chunk_t *chunk = *it;
+		if (chunk->read_offset_ == chunk->write_offset_) {
+			if (buff_.size() == 1) {
+				chunk->read_offset_ = 0;
+				chunk->write_offset_ = 0;
+				break;
+			} else {
+				input_queue_t::iterator it1 = it;
+				it = buff_.erase(it1);
+				input_chunk_free(chunk);
+				continue;
+			}
+		}
+		++it;
+	}
+}
+
+int net_input_stream_t::skip(int num) {
+	if (size_ <= 0) {
+		return 0;
+	}
+	int backup = num;
+	for (input_queue_t::iterator it = buff_.begin(); it != buff_.end(); ++it) {
+		input_chunk_t *chunk = *it;
+		if (chunk->read_size() <= 0) {
+			continue;
+		}
+		int skip_size = num <= chunk->read_size() ? num : chunk->read_size();
+		chunk->read_offset_ += skip_size;
+		size_ -= skip_size;
+		num -= skip_size;
+		if (num <= 0) {
+			break;
+		}	
+	}
+	return backup - num;
+}
+
+void net_input_stream_t::reset() {
+	while (!buff_.empty()) {
+		input_chunk_t *chunk = buff_.front();
+		input_chunk_free(chunk);
+		buff_.pop_front();
+	}
+	size_ = 0;
 }

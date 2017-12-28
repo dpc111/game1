@@ -16,9 +16,7 @@ VPATH := ${SRC_DIR}
 #########################################################################################
 #依次循环取得各目录下的所有源文件 在各目录下取源文件时过滤不支持的源文件格式 
 #得到源文件集合(带路径)
-SOURCES := $(foreach x,${SRC_DIR},\
-           $(wildcard  \
-             $(addprefix  ${x}/*,${SFIX}) ) )
+SOURCES := $(foreach x,${SRC_DIR},$(wildcard $(addprefix ${x}/*,${SFIX})))
 
 #去掉路径信息 去掉扩展名 再追加.o的扩展名 得到目标文件名集合 (不带路径) 需要去掉路径信息 否则连接时有可能找不到.o文件
 OBJS := $(addsuffix .o ,$(basename $(notdir ${SOURCES}) ) )
@@ -39,7 +37,7 @@ DEPENDS := $(addsuffix .d ,$(basename  ${SOURCES} ) )
 all :  ${PROGRAM}
 
 #检查源码中 除了C源码外是否有C++源码 ,并定义变量LDCXX存储检查结果
-LDCXX := $(strip $(filter-out  %.c , ${SOURCES} ) )
+LDCXX := $(strip $(filter-out  %.c , ${SOURCES}))
 
 #编译器重置
 ifdef LDCXX   																#有C++源码时,所有源码都使用g++编译 包括C源码 将CC、CFLAGS 的值设置为对应的${CXX} ${CXXFLAGS}的值
@@ -51,7 +49,7 @@ endif
 
 #链接
 ${PROGRAM} :  ${DEPENDS}  ${OBJS}
-ifeq ($(strip $(filter-out  %.c  , ${SOURCES} ) ),)    						#只有C源码时使用gcc连接
+ifeq ($(strip $(filter-out  %.c , ${SOURCES})),)    						#只有C源码时使用gcc连接
 	${CC}  ${LIBDIRS}  ${CLDFLAGS}    ${OBJS} -o $@
 else                                                 						#有C++源码时使用g++连接
     ifdef MODULEFLAGS

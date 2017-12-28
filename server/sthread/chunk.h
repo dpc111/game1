@@ -40,14 +40,20 @@ struct chunk_t {
 	}
 
 	tcp_connection_t *conn_;
+
 	char buff_[size];
+
 	int read_offset_;
+
 	int write_offset_;
 };
 
 typedef chunk_t<1024> input_chunk_t;
+
 typedef chunk_t<1024> output_chunk_t;
+
 typedef std::list<input_chunk_t *> input_queue_t;
+
 typedef std::list<output_chunk_t *> output_queue_t;
 
 #endif

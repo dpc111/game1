@@ -1,7 +1,6 @@
 #ifndef NET_EVENT_H
 #define NET_EVENT_H
 
-#include <time.h>
 #include <event2/event.h>
 #include <event2/listener.h>
 

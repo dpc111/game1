@@ -1,5 +1,5 @@
 #include "net_message.h"
-#include "pb_stream.h"
+#include "msg_stream.h"
 
 #define MSG_MAX_LEN 10240
 
@@ -20,7 +20,7 @@ msg_operate_t::msg_operate_t(tcp_network_t *network) {
 msg_operate_t::~msg_operate_t() {
 }
 
-google::protobuf::Message *msg_operate_t::gen_message(int msg_id) {
+google::protobuf::Message *msg_operate_t::gen_message(int msgid) {
 	google::protobuf::Message *msg = NULL;
 	// ???
 	std::string& name = "test";
@@ -90,6 +90,6 @@ bool msg_operate_t::on_message(tcp_connection_t *conn) {
 			break;
 		}
 		network->get_msg_dispatch(conn, header.msgid, msg);
-		stream.finish();
 	}
+	stream.finish();
 }

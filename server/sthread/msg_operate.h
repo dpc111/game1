@@ -7,7 +7,7 @@ public:
 
 	~msg_operate_t();
 
-	google::protobuf::Message *gen_message(int msg_id);
+	google::protobuf::Message *gen_message(int msgid);
 
 	void free_message(google::protobuf::Message *msg);
 

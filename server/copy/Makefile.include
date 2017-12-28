@@ -1,0 +1,37 @@
+#编译执行文件命令
+CPP = g++
+
+#编译静态库命令
+BUILDLIB = ar rc
+
+#C++编译选项（优化等）
+#CFLAGS = -g -O3 -finline-functions -funroll-loops -fomit-frame-pointer -Wno-deprecated
+#CFLAGS = -pg -g -fmudflap -lmudflap -Wno-deprecated
+#CFLAGS = -pg -g -O3 -Wno-deprecated
+CFLAGS = -pg -g -Wno-deprecated
+
+#预定义宏，所有项目可见
+MACROS = -DLINUX #-DNET_DEBUG
+
+#执行文件项目输出目录
+OUTPUTPATH = ../../bin/centos
+
+#库项目输出目录
+LIBPATH = ./lib
+
+#导入库路径（第三方库）
+IMPLIBPATH = ../../implib/lib
+
+#编译工作目录
+OUTDIR = ./obj_files
+
+#源文件后缀名
+SRC_SUFFIX = .cpp
+
+#服务器项目包含目录，将所有可能用到的包含路径填到这里
+INCLUDE = \
+        -I../common
+
+FindSources = $(foreach d, $(1), $(wildcard $(addprefix $(d)/*, $(SRC_SUFFIX))))
+
+FindObjs = $(foreach x, $(1), $(patsubst %$(SRC_SUFFIX), $(2)/%.o, $(notdir $(x))))

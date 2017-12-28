@@ -8,5 +8,3 @@ clean:
 	-${RM} *.so
 	-${RM} *.o
 	-${RM} *.d
-
-include process.include

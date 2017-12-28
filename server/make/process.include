@@ -101,9 +101,9 @@ endif
 #########################################################################################
 #定义检查环境相关的变量的任务
 check :
-#	@${ECHO}  MAKEFILES : ${MAKEFILES}
-#	@${ECHO}  MAKECMDGOALS : ${MAKECMDGOALS}
-#	@${ECHO}  SHELL : ${SHELL}
+	@${ECHO}  MAKEFILES : ${MAKEFILES}
+	@${ECHO}  MAKECMDGOALS : ${MAKECMDGOALS}
+	@${ECHO}  SHELL : ${SHELL}
 	@${ECHO}  OS_NAME : ${OS_NAME}
 	@${ECHO}  SRC_DIR : ${SRC_DIR}
 	@${ECHO}  SFIX : ${SFIX}
@@ -128,12 +128,12 @@ check :
 	@${ECHO}  DCPPFLAGS : ${DCPPFLAGS}
 	uname     -a
 
-#clean :
-#	-${RM} ${BIN}/${PROGRAM}
-#	-${RM} ${BIN}/*.o
-#	-${RM} ${BIN}/*.d
-#	-${RM} *.o
-#	-${RM} *.d
+clean :
+	-${RM} ${BIN}/${PROGRAM}
+	-${RM} ${BIN}/*.o
+	-${RM} ${BIN}/*.d
+	-${RM} *.o
+	-${RM} *.d
 
 install :
 ifdef MODULEFLAGS

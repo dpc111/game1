@@ -8,6 +8,3 @@ clean:
 	-${RM} *.so
 	-${RM} *.o
 	-${RM} *.d
-
-check:
-	@make check

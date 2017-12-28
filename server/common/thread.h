@@ -45,7 +45,7 @@ public:
 
 private:
 	pthread_key_t tls_;
-}
+};
 
 #define GUARD(lock) guard_t guard(lock, __FILE__, __LINE__)
 

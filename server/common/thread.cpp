@@ -1,3 +1,4 @@
+#include <cassert>
 #include "thread.h"
 
 //////////////////////////////////////////////////////////////////////////
@@ -37,7 +38,7 @@ guard_t::~guard_t() {
 tls_t::tls_t() {
 	int r = pthread_key_create(&tls_, NULL);
 	if (r) {
-		assert(false);
+		(false);
 	}
 }
 

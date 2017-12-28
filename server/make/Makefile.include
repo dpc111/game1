@@ -32,7 +32,6 @@ SRC_SUFFIX = .cpp
 INCLUDE = \
         -I../common
 
-
 FindSources = $(foreach d, $(1), $(wildcard $(addprefix $(d)/*, $(SRC_SUFFIX))))
 
 FindObjs = $(foreach x, $(1), $(patsubst %$(SRC_SUFFIX), $(2)/%.o, $(notdir $(x))))

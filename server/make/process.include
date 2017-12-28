@@ -42,8 +42,7 @@ all :  ${PROGRAM}
 LDCXX := $(strip $(filter-out  %.c , ${SOURCES} ) )
 
 #编译器重置
-ifdef 
-LDCXX   																	#有C++源码时,所有源码都使用g++编译 包括C源码 将CC、CFLAGS 的值设置为对应的${CXX} ${CXXFLAGS}的值
+ifdef LDCXX   																#有C++源码时,所有源码都使用g++编译 包括C源码 将CC、CFLAGS 的值设置为对应的${CXX} ${CXXFLAGS}的值
     CC := ${CXX}                    										#重置C编译器为C++编译器
     CFLAGS :=  ${CXXFLAGS}          										#重置C编译选现为C++编译选现
     CPP :=  ${CXXPP}                										#重置C预编译器为C++预编译器
@@ -106,8 +105,8 @@ endif
 check :
 	@${ECHO}  MAKEFILES : ${MAKEFILES}
 	@${ECHO}  MAKECMDGOALS : ${MAKECMDGOALS}
-	@${ECHO}  SHELL  : ${SHELL}
-	@${ECHO}  OS_NAME  : ${OS_NAME}
+	@${ECHO}  SHELL : ${SHELL}
+	@${ECHO}  OS_NAME : ${OS_NAME}
 	@${ECHO}  SRC_DIR : ${SRC_DIR}
 	@${ECHO}  SFIX : ${SFIX}
 	@${ECHO}  VPATH : ${VPATH}
@@ -116,11 +115,11 @@ check :
 	@${ECHO}  OBJS : ${OBJS}
 	@${ECHO}  DEPENDS : ${DEPENDS}
 	@${ECHO}  PROGRAM : ${PROGRAM}
-	@${ECHO}  CC :  ${CC}
+	@${ECHO}  CC : ${CC}
 	@${ECHO}  CFLAGS : ${CFLAGS}
 	@${ECHO}  CPP : ${CPP}
 	@${ECHO}  CPPFLAGS : ${CPPFLAGS}
-	@${ECHO}  CXX :  ${CXX}
+	@${ECHO}  CXX : ${CXX}
 	@${ECHO}  CXXFLAGS : ${CXXFLAGS}
 	@${ECHO}  CXXPP : ${CXXPP}
 	@${ECHO}  CXXPPFLAGS : ${CXXPPFLAGS}
@@ -129,7 +128,7 @@ check :
 	@${ECHO}  CLDFLAGS : ${CLDFLAGS}
 	@${ECHO}  CXXLDFLAGS : ${CXXLDFLAGS}
 	@${ECHO}  DCPPFLAGS : ${DCPPFLAGS}
-	uname    -a
+	uname     -a
 
 clean :
 	-${RM} ${BIN}/${PROGRAM}

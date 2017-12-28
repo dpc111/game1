@@ -8,8 +8,8 @@
 OS_NAME := $(shell uname -s)
 
 AR := ar
-SED:= sed
-AWK:= awk
+SED := sed
+AWK := awk
 MV := mv
 RM := rm -f
 ECHO := echo
@@ -23,7 +23,7 @@ ECHO := echo
 #CFLAGS,C语言编译器参数,编译时使用。
 CFLAGS := -c -g  -W -Wall
 
-# CPP,C预编译器的名称,默认值为 $(CC) -E。
+#CPP,C预编译器的名称,默认值为 $(CC) -E。
 CPP :=
 
 #CPPFLAGS , C 预编译的选项。
@@ -33,7 +33,7 @@ CPP :=
 #	三 、C++编译器选项
 ########################################################################################
 #指定C++编译器, 如g++ 编译器
-CXX      := g++
+CXX := g++
 
 #CXXFLAGS C++语言编译器参数,编译时使用。
 CXXFLAGS := -fPIC -c -g -W -Wall

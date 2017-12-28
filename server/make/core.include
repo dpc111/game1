@@ -6,7 +6,6 @@
 
 #取得操作系统名称#OS_NAME="Linux:SunOS:HP-UX:AIX"
 OS_NAME := $(shell uname -s)
-
 AR := ar
 SED := sed
 AWK := awk

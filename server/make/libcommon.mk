@@ -1,4 +1,5 @@
 include core.include
+
 #链接器参数, 连接时搜索指定的函数库LDFLAG,引入需要的库-lLDFLAGS 指定编译的时候使用的库, 连接库文件开关。例如-lugl, 则是把程序同libugl.a文件进行连接。
 #连接时使用
 #-lclntsh -lnsl -lpthread -Wl,-Bdynamic -lgcc_s, 同时有动态库和静态库时默认使用动态库, -Wl,-Bdynamic 指定和动态库相连, -Wl,-Bstatic 指定和静态库相连

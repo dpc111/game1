@@ -20,12 +20,12 @@ ECHO := echo
 # CC := gcc
 
 #CFLAGS,C语言编译器参数,编译时使用。
-CFLAGS := -c -g  -W -Wall
+CFLAGS := -c -g -W -Wall
 
 #CPP,C预编译器的名称,默认值为 $(CC) -E。
-CPP :=
+#CPP :=
 
-#CPPFLAGS , C 预编译的选项。
+#CPPFLAGS C 预编译的选项。
 #CPPFLAGS :=
 
 ########################################################################################
@@ -52,6 +52,9 @@ INCLUDES := -I../common \
 
 #指定函数库搜索路径DIRECTORY 搜寻库文件(*.a)的路径,加入需要的库搜索路径 功能同–l，由用户指定库的路径，否则编译器将只在标准库的目录找。
 #定义安装目录
-BIN := ../bin
-LIB := ../lib
+#BIN := ../bin
+#LIB := ../lib
+#LIBDIRS := -L$(BIN)
+BIN := ./
+LIB := ./
 LIBDIRS := -L$(BIN)

@@ -1,7 +1,8 @@
 #ifndef NET_POOL_H
 #define NET_POOL_H
 
-#include "obj_pool.h"
+// #include "obj_pool.h"
+class obj_pool_t;
 
 /////////////////////////////////////////////////////////////////////////
 typedef obj_pool_t<input_chunk_t> input_pool_t;

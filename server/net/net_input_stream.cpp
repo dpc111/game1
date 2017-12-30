@@ -86,7 +86,7 @@ bool net_input_stream_t::next(const void **data, int *size) {
 	if (size_ == 0) {
 		return false;
 	}
-	for (input_queue_t::iterator *it = buff_.begin(); it != buff_.end(); ++it) {
+	for (input_queue_t::iterator it = buff_.begin(); it != buff_.end(); ++it) {
 		input_chunk_t *chunk = *it;
 		if (chunk->read_size() > 0)	{
 			*data = chunk->read_ptr();

@@ -1,6 +1,13 @@
 #ifndef MESSAGE_DISPATCH
 #define MESSAGE_DISPATCH
 
+#include <string>
+#include <map>
+#include "google/protobuf/message.h"
+
+class tcp_connection_t;
+class tcp_network_t;
+
 class msg_dispatch_t {
 public:
 	typedef std::map<int, std::string> msg_id_map_t;
@@ -24,6 +31,6 @@ private:
 	msg_id_map_t id_map_;
 
 	msg_name_map_t name_map_;
-}
+};
 
 #endif

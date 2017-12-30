@@ -96,7 +96,7 @@ bool net_input_stream_t::next(const void **data, int *size) {
 			return true;
 		}
 	}
-	return false
+	return false;
 }
 
 void net_input_stream_t::backup(int num) {
@@ -108,7 +108,7 @@ void net_input_stream_t::backup(int num) {
 		if (chunk->read_offset_ == 0) {
 			continue;
 		} 
-		int backup_size = num <= chunk.read_offset_ ? num : chunk.read_offset_;
+		int backup_size = num <= chunk->read_offset_ ? num : chunk->read_offset_;
 		chunk->read_offset_ -= backup_size;
 		size_ += backup_size;
 		num -= backup_size;

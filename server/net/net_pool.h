@@ -5,6 +5,8 @@
 #include "obj_pool.h"
 #include "thread.h"
 
+#define NUM_READ_IOVEC 16
+
 /////////////////////////////////////////////////////////////////////////
 typedef obj_pool_t<input_chunk_t> input_pool_t;
 
@@ -67,16 +69,16 @@ typedef obj_pool_t<tcp_connection_t> connection_pool_t;
 static tls_t tls_connection_pool;
 
 static tcp_connection_t *connection_alloc() {
-	tcp_connection_t *pool = (tcp_connection_t *)tls_connection_pool.get();
+	connection_pool_t *pool = (connection_pool_t *)tls_connection_pool.get();
 	if (pool == NULL) {
-		pool = new tcp_connection_t;
+		pool = new connection_pool_t;
 		tls_connection_pool.set(pool);
 	}
 	return pool->alloc();
 }
 
 static void connection_free(tcp_connection_t *conn) {
-	tls_connection_pool *pool = (tls_connection_pool *)tls_connection_pool.get();
+	connection_pool_t *pool = (connection_pool_t *)tls_connection_pool.get();
 	assert(pool);
 	pool->free(conn);
 }

@@ -44,7 +44,7 @@ int net_input_stream_t::read(void *buff, int size) {
 
 int net_input_stream_t::read_fd(void *ud, int fd) {
 	tcp_connection_t *conn = (tcp_connection_t *)ud;
-	input_queue_t& read_fd_buff = assign_read_fd_buff()
+	input_queue_t& read_fd_buff = assign_read_fd_buff();
 	iovec vecs[NUM_READ_IOVEC];
 	int i = 0;
 	for (input_queue_t::iterator it = read_fd_buff.begin(); it != read_fd_buff.end(); ) {

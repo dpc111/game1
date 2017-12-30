@@ -17,7 +17,7 @@ public:
 public:
 	msg_dispatch_t(tcp_network_t *network);
 
-	msg_dispatch_t();
+	~msg_dispatch_t();
 
 	int msg_id(std::string& name);	
 

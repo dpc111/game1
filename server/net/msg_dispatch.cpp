@@ -18,7 +18,8 @@ int msg_dispatch_t::msg_id(std::string& name) {
 std::string& msg_dispatch_t::msg_name(int id) {
 	msg_id_map_t::iterator it = id_map_.find(id);
 	if (it == id_map_.end()) {
-		return "default";
+		static std::string s("default");
+		return s;
 	}
 	return it->second;
 }

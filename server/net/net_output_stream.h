@@ -2,7 +2,6 @@
 #define NET_OUTPUT_STREAM_H
 
 #include "chunk.h"
-#include "net_stream.h"
 
 class tcp_connection_t;
 

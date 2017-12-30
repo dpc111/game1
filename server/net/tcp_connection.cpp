@@ -26,7 +26,7 @@ void tcp_connection_t::reliable() {
 	return false; 
 }
 
-void tcp_connection_t::set_events(event *ev_base, event_callback_fn read_fn, event_callback_fn write_fn) {
+void tcp_connection_t::set_events(event_base *ev_base, event_callback_fn read_fn, event_callback_fn write_fn) {
 	ev_read_ = event_new(ev_base, fd, EV_READ | EV_PERSIST, read_fn, this);
 	ev_write_ = event_new(ev_base, fd, EV_WRITE, write_fn, this);
 	event_add(ev_read_, NULL);

@@ -2,7 +2,6 @@
 #define NET_INPUT_STREAM_H
 
 #include "chunk.h"
-#include "net_stream.h"
 
 class net_input_stream_t
 {

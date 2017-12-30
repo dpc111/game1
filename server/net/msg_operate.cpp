@@ -1,4 +1,4 @@
-#include "net_message.h"
+#include "msg_operate.h"
 #include "msg_stream.h"
 
 #define MSG_MAX_LEN 10240

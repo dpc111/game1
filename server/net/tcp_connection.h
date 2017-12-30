@@ -5,6 +5,9 @@
 #include "net_input_stream.h"
 #include "net_output_stream.h"
 
+#include <event2/event.h>
+#include <event2/event_struct.h>
+
 #define CNT_STATE_CONNECTING 		1
 #define CNT_STATE_CONNECTED 		2
 #define CNT_STATE_DISCONNECTED 		3
@@ -47,7 +50,7 @@ public:
 
 	bool connected() { return state_ == CNT_STATE_CONNECTED; }
 
-	void set_events(event *ev_base, event_callback_fn read_fn, event_callback_fn write_fn);
+	void set_events(event_base *ev_base, event_callback_fn read_fn, event_callback_fn write_fn);
 
 	void unset_events();
 

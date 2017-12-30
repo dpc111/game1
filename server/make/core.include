@@ -48,13 +48,16 @@ CXXFLAGS := -fPIC -c -g -W -Wall
 #########################################################################################
 #指定搜索路径, 也可用include指定具体文件路径,编译时使用
 INCLUDES := -I../common \
-			-I../net
+	-I../net \
+	-I../3rd/libevent/include \
+	-I../3rd/protobuf/include
+	
 
 #指定函数库搜索路径DIRECTORY 搜寻库文件(*.a)的路径,加入需要的库搜索路径 功能同–l，由用户指定库的路径，否则编译器将只在标准库的目录找。
 #定义安装目录
 #BIN := ../bin
 #LIB := ../lib
 #LIBDIRS := -L$(BIN)
-BIN := ./
-LIB := ./
+BIN := ../bin
+LIB := ../lib
 LIBDIRS := -L$(BIN)

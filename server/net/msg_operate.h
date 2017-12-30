@@ -19,4 +19,4 @@ private:
 	tcp_network_t *network_;
 };
 
-#define
+#endif

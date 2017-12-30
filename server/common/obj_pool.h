@@ -2,6 +2,7 @@
 #define OBJ_POOL_H
 
 #include <stdlib.h>
+#include <queue>
 
 #define OBJ_POOL_MAX_SIZE 1024
 

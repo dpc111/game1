@@ -1,6 +1,7 @@
 #ifndef NET_POOL_H
 #define NET_POOL_H
 
+#include <assert.h>
 #include "obj_pool.h"
 #include "thread.h"
 

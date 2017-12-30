@@ -1,3 +1,8 @@
+#ifndef NET_POOL_H
+#define NET_POOL_H
+
+#include "obj_pool.h"
+
 /////////////////////////////////////////////////////////////////////////
 typedef obj_pool_t<input_chunk_t> input_pool_t;
 
@@ -73,3 +78,5 @@ static void connection_free(tcp_connection_t *conn) {
 	assert(pool);
 	pool->free(conn);
 }
+
+#endif

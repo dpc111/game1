@@ -36,7 +36,7 @@ public:
 
 	void set_peer_addr(sockaddr_in& peer_addr) { peer_addr_ = peer_addr; }
 
-	void set_context(void *context) const { context_ = context; }
+	void set_context(void *context) { context_ = context; }
 
 	void* get_context() const { return context_; }
 

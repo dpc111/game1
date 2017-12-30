@@ -4,7 +4,7 @@ include core.include
 #连接时使用
 #-lclntsh -lnsl -lpthread -Wl,-Bdynamic -lgcc_s    ,同时有动态库和静态库时默认使用动态库，   -Wl,-Bdynamic 指定和动态库相连， -Wl,-Bstatic 指定和静态库相连
 CLDFLAGS := -lm -lrt -lnsl -lpthread  -Wl -Bdynamic -lgcc_s -lcommon
-CXXLDFLAGS := -lm -lrt -lnsl -lpthread -Bdynamic -lcommon
+CXXLDFLAGS := -lm -lrt -lnsl -lpthread -Bdynamic -levent -lprotobuf -lcommon
 MODULEFLAGS := -fPIC -shared -lpthread -o
 
 ##########################################################################################

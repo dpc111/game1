@@ -4,9 +4,6 @@
 #include "obj_pool.h"
 #include "thread.h"
 
-// template <typename obj_t>
-// class obj_pool_t;
-
 /////////////////////////////////////////////////////////////////////////
 typedef obj_pool_t<input_chunk_t> input_pool_t;
 

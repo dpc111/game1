@@ -12,7 +12,7 @@ typedef obj_pool_t<input_chunk_t> input_pool_t;
 static tls_t tls_input_pool;
 
 static input_pool_t *input_chunk_alloc() {
-	input_pool_t *pool = tls_input_pool.get();
+	input_pool_t *pool = (input_pool_t *)tls_input_pool.get();
 	if (pool == NULL) {
 		pool = new input_pool_t;
 		tls_input_pool.set(pool);

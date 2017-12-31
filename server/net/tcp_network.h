@@ -1,6 +1,8 @@
 #ifndef TCP_NETWORK_H
 #define TCP_NETWORK_H
 
+class net_event_t;
+
 class tcp_network_t : public net_event_t {
 public:
 	typedef std::map<int, tcp_connection_t *> conn_map_t;
@@ -42,6 +44,6 @@ private:
 	msg_operate_t *msg_operate_;
 
 	msg_dispatch_t *msg_dispatch_;
-}
+};
 
 #endif

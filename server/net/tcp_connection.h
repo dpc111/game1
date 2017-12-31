@@ -24,7 +24,7 @@ public:
 
 	~tcp_connection_t();
 
-	void reliable();
+	bool reliable();
 
 	void set_network(tcp_network_t *network) { network_ = network; }
 

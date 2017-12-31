@@ -1,3 +1,4 @@
+#include <netinet/tcp.h>
 #include "tcp_connection.h"
 
 tcp_connection_t::tcp_connection_t(int fd, sockaddr_in& peer_addr) 
@@ -18,7 +19,7 @@ tcp_connection_t::~tcp_connection_t() {
 	closed_ = true;
 }
 
-void tcp_connection_t::reliable() {
+bool tcp_connection_t::reliable() {
 	int err = evutil_socket_geterror(fd_);
 	if (err == 0 || err == EINTR || err == EAGAIN) {
 		return true;
@@ -27,18 +28,18 @@ void tcp_connection_t::reliable() {
 }
 
 void tcp_connection_t::set_events(event_base *ev_base, event_callback_fn read_fn, event_callback_fn write_fn) {
-	ev_read_ = event_new(ev_base, fd, EV_READ | EV_PERSIST, read_fn, this);
-	ev_write_ = event_new(ev_base, fd, EV_WRITE, write_fn, this);
+	ev_read_ = event_new(ev_base, fd_, EV_READ | EV_PERSIST, read_fn, this);
+	ev_write_ = event_new(ev_base, fd_, EV_WRITE, write_fn, this);
 	event_add(ev_read_, NULL);
 	ev_read_add_ = true;
 	// socket关闭后等到套接字内数据发送完成后才真正关闭连接
 	linger lin;
 	lin.l_onoff = 1;
 	lin.l_linger = 0;
-	setsocketopt(fd, SOL_SOCKET, SO_LINGER, (const char *)&lin, sizeof(linger));
+	setsocketopt(fd_, SOL_SOCKET, SO_LINGER, (const char *)&lin, sizeof(linger));
 	// 不会将小包进行拼接成大包再进行发送
 	bool nodelay = true;
-	setsocketopt(fd, IPPROTO_TCP, TCP_NODELAY, (const char *)&nodelay, sizeof(char));
+	setsocketopt(fd_, IPPROTO_TCP, TCP_NODELAY, (const char *)&nodelay, sizeof(char));
 }
 
 void tcp_connection_t::unset_events() {

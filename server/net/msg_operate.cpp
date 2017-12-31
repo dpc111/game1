@@ -1,6 +1,7 @@
 #include "stdio.h"
 #include "msg_operate.h"
 #include "msg_stream.h"
+#include "tcp_network.h"
 
 #define MSG_MAX_LEN 10240
 #define ERROR() printf("error") 
@@ -44,7 +45,7 @@ void msg_operate_t::free_message(google::protobuf::Message *msg) {
 	delete msg;
 }
 
-void msg_operate_t::send(const tcp_connection_t *conn, google::protobuf::Message& msg) {
+void msg_operate_t::send(tcp_connection_t *conn, google::protobuf::Message& msg) {
 	net_output_stream_t& stream = conn->get_output_stream();
 	msg_header_t header;
 	header.len = msg.ByteSize();
@@ -62,8 +63,8 @@ void msg_operate_t::send(const tcp_connection_t *conn, google::protobuf::Message
 }
 
 bool msg_operate_t::on_message(tcp_connection_t *conn) {
-	net_input_stream_t& stream = conn_->get_input_stream();
-	tcp_network_t *network = conn_->get_network();
+	net_input_stream_t& stream = conn->get_input_stream();
+	tcp_network_t *network = conn->get_network();
 	while (true) {
 		int walk = 0;
 		if (stream.size() <= sizeof(msg_header_t)) {

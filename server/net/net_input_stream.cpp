@@ -82,7 +82,7 @@ int net_input_stream_t::read_fd(void *ud, int fd) {
 	return n;
 }
 
-bool net_input_stream_t::next(void **data, int *size) {
+bool net_input_stream_t::next(const void **data, int *size) {
 	if (size_ == 0) {
 		return false;
 	}

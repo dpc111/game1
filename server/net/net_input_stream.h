@@ -18,7 +18,7 @@ public:
 
 	int read_fd(void *ud, int fd);
 
-	bool next(void **data, int *size);
+	bool next(const void **data, int *size);
 
 	void backup(int num);
 

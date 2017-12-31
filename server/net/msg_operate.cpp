@@ -1,3 +1,4 @@
+#include "stdio.h"
 #include "msg_operate.h"
 #include "msg_stream.h"
 

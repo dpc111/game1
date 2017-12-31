@@ -46,6 +46,11 @@ void msg_operate_t::free_message(google::protobuf::Message *msg) {
 }
 
 void msg_operate_t::send(tcp_connection_t *conn, google::protobuf::Message& msg) {
+	// test
+	int sid = 1;
+	int tid = 2;
+	int msgid = 3;
+
 	net_output_stream_t& stream = conn->get_output_stream();
 	msg_header_t header;
 	header.len = msg.ByteSize();
@@ -54,7 +59,7 @@ void msg_operate_t::send(tcp_connection_t *conn, google::protobuf::Message& msg)
 	header.msgid = msgid;
 	stream.write(&header, sizeof(header));
 	msg_output_stream_t os(stream);
-	if (!msg->SerializeToZeroCopyStream(&os)) {
+	if (!msg.SerializeToZeroCopyStream(&os)) {
 		ERROR();
 		stream.backup((int)os.ByteCount());
 		return false;

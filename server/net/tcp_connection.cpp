@@ -36,10 +36,10 @@ void tcp_connection_t::set_events(event_base *ev_base, event_callback_fn read_fn
 	linger lin;
 	lin.l_onoff = 1;
 	lin.l_linger = 0;
-	setsocketopt(fd_, SOL_SOCKET, SO_LINGER, (const char *)&lin, sizeof(linger));
+	setsockopt(fd_, SOL_SOCKET, SO_LINGER, (const char *)&lin, sizeof(linger));
 	// 不会将小包进行拼接成大包再进行发送
 	bool nodelay = true;
-	setsocketopt(fd_, IPPROTO_TCP, TCP_NODELAY, (const char *)&nodelay, sizeof(char));
+	setsockopt(fd_, IPPROTO_TCP, TCP_NODELAY, (const char *)&nodelay, sizeof(char));
 }
 
 void tcp_connection_t::unset_events() {

@@ -31,7 +31,7 @@ public:
 		stream_.backup(num); 
 	}
 
-	virtual void Skip(int num) {
+	virtual bool Skip(int num) {
 		int skip = stream_.skip(count);
 		size_ -= num;
 		offset_ += skip;
@@ -43,7 +43,7 @@ public:
 	}
 
 private:
-	net_output_stream_t& stream_;
+	net_input_stream_t& stream_;
 	int size_;
 	int offset_;
 };

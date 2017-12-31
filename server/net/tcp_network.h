@@ -1,7 +1,7 @@
 #ifndef TCP_NETWORK_H
 #define TCP_NETWORK_H
 
-class net_event_t;
+#include "net_event.h"
 
 class tcp_network_t : public net_event_t {
 public:

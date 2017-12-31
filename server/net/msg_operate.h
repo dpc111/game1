@@ -1,6 +1,11 @@
 #ifndef NET_MESSAGE_H
 #define NET_MESSAGE_H
 
+#include "google/protobuf/message.h"
+
+class tcp_network_t;
+class tcp_connection_t;
+
 class msg_operate_t {
 public:
 	msg_operate_t(tcp_network_t *network);

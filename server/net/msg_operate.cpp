@@ -24,7 +24,7 @@ msg_operate_t::~msg_operate_t() {
 google::protobuf::Message *msg_operate_t::gen_message(int msgid) {
 	google::protobuf::Message *msg = NULL;
 	// ???
-	const static std::string s("test");
+	static std::string s("test");
 	std::string& name = s;
 	const google::protobuf::Descriptor *des = google::protobuf::DescriptorPool::generated_pool()->FindMessageTypeByName(name);
 	if (des) {

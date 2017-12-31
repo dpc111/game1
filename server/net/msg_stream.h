@@ -4,10 +4,10 @@
 
 class msg_input_stream_t : public google::protobuf::io::ZeroCopyInputStream {
 public:
-	msg_input_stream_t(net_input_stream_t& stream, int size) {
-		stream_ = stream;
-		size_ = size;
-		offset_ = 0;
+	msg_input_stream_t(net_input_stream_t& stream, int size)
+		: stream_(stream)
+		, size_(size)
+		, offset_(0) {
 	} 
 
 	~msg_input_stream_t() {
@@ -32,7 +32,7 @@ public:
 	}
 
 	virtual bool Skip(int num) {
-		int skip = stream_.skip(count);
+		int skip = stream_.skip(num);
 		size_ -= num;
 		offset_ += skip;
 		return skip == num;
@@ -50,9 +50,9 @@ private:
 
 class msg_output_stream_t : public google::protobuf::io::ZeroCopyOutputStream {
 public:
-	msg_output_stream_t(net_output_stream_t& stream) {
-		stream_ = stream;
-		offset_ = 0;		
+	msg_output_stream_t(net_output_stream_t& stream)
+		: stream_(stream)
+		, offset_(0) {
 	}
 
 	~msg_output_stream_t() {

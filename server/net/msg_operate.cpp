@@ -2,6 +2,7 @@
 #include "msg_stream.h"
 
 #define MSG_MAX_LEN 10240
+#define ERROR() printf("error") 
 
 #pragma pack(push, 1)
 struct msg_header_t {
@@ -23,7 +24,8 @@ msg_operate_t::~msg_operate_t() {
 google::protobuf::Message *msg_operate_t::gen_message(int msgid) {
 	google::protobuf::Message *msg = NULL;
 	// ???
-	std::string& name = "test";
+	const static std::string s("test");
+	std::string& name = s;
 	const google::protobuf::Descriptor *des = google::protobuf::DescriptorPool::generated_pool()->FindMessageTypeByName(name);
 	if (des) {
 		const google::protobuf::Message *tmsg = google::protobuf::MessageFactory::generated_factory()->GetPrototype(des);

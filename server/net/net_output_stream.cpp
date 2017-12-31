@@ -6,8 +6,8 @@
 
 #define IOVEC_NUM 16
 
-net_output_stream_t::net_output_stream_t(tcp_connection_t *conn) 
-	: net_stream_t(conn)
+net_output_stream_t::net_output_stream_t(tcp_connection_t *conn)
+	: conn_(conn) 
 	, size_(0) {
 }
 

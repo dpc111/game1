@@ -2,6 +2,7 @@
 #include "msg_operate.h"
 #include "msg_stream.h"
 #include "tcp_network.h"
+#include "msg_dispatch.h"
 
 #define MSG_MAX_LEN 10240
 #define ERROR() printf("error") 

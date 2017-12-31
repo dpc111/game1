@@ -76,7 +76,7 @@ int net_output_stream_t::write_fd(void *ud, int fd) {
 
 bool net_output_stream_t::next(const void **data, int *size) {
 	output_chunk_t *chunk = NULL;
-	if (buff_.size() == 0 || buff_.back().write_size() == 0) {
+	if (buff_.size() == 0 || buff_.back()->write_size() == 0) {
 		chunk = output_chunk_alloc();
 		buff_.push_back(chunk);
 	} else {

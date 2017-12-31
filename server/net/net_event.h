@@ -24,6 +24,6 @@ protected:
 	event_base *ev_base_;
 
 	evconnlistener *ev_listen_;
-}
+};
 
 #endif

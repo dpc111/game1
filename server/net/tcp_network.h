@@ -3,6 +3,11 @@
 
 #include "net_event.h"
 
+class net_address_t;
+class msg_operate_t;
+class msg_dispatch_t;
+class tcp_connection_t;
+
 class tcp_network_t : public net_event_t {
 public:
 	typedef std::map<int, tcp_connection_t *> conn_map_t;
@@ -24,13 +29,13 @@ public:
 
 	msg_dispatch_t *get_msg_dispatch() { return msg_dispatch_; }
 
-	bool new_connection(const char *ip, int ip, void *context);
+	bool new_connection(const char *ip, int port, void *context);
 
 	tcp_connection_t *get_connection(int fd);
 
 	void add_connection(tcp_connection_t *conn);
 
-	void remove_connection(fd);
+	void remove_connection(int fd);
 
 	void send(tcp_connection_t *conn, google::protobuf::Message& msg) { msg_operate_->send(conn, msg); }
 

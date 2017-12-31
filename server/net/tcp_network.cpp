@@ -57,7 +57,7 @@ void tcp_network_t::add_connection(tcp_connection_t *conn) {
 	conns_.insert(conn_map_t::value_type(conn->get_fd(), conn));
 }
 
-void tcp_network_t::remove_connection(fd) {
+void tcp_network_t::remove_connection(int fd) {
 	conn_map_t::iterator it = conns_.find(fd);
 	if (it == conns_.end()) {
 		return;

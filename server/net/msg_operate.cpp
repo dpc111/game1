@@ -62,7 +62,7 @@ void msg_operate_t::send(tcp_connection_t *conn, google::protobuf::Message& msg)
 	if (!msg.SerializeToZeroCopyStream(&os)) {
 		ERROR();
 		stream.backup((int)os.ByteCount());
-		return false;
+		return;
 	}
 	conn->add_event_write();
 }
@@ -98,7 +98,7 @@ bool msg_operate_t::on_message(tcp_connection_t *conn) {
 			stream.reset();
 			break;
 		}
-		network->get_msg_dispatch(conn, header.msgid, msg);
+		network->get_msg_dispatch()->on_message(conn, header.msgid, msg);
 	}
 	stream.finish();
 }

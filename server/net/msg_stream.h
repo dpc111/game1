@@ -13,7 +13,7 @@ public:
 	~msg_input_stream_t() {
 	}
 
-	virtual bool Next(void **data, int *size) {
+	virtual bool Next(const void **data, int *size) {
 		if (size_ <= 0) {
 			return false;
 		}

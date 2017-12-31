@@ -58,7 +58,7 @@ public:
 	~msg_output_stream_t() {
 	}
 
-	virtual bool Next(const void **data, int *size) {
+	virtual bool Next(void **data, int *size) {
 		if (stream_.next(data, size)) {
 			offset_ += *size;
 			return true;

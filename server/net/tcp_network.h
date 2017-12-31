@@ -2,11 +2,11 @@
 #define TCP_NETWORK_H
 
 #include "net_event.h"
+#include "net_address.h"
+#include "tcp_connection.h"
 
-class net_address_t;
 class msg_operate_t;
 class msg_dispatch_t;
-class tcp_connection_t;
 
 class tcp_network_t : public net_event_t {
 public:

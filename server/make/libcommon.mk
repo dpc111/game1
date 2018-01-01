@@ -5,7 +5,7 @@ include core.include
 #-lclntsh -lnsl -lpthread -Wl,-Bdynamic -lgcc_s, 同时有动态库和静态库时默认使用动态库, -Wl,-Bdynamic 指定和动态库相连, -Wl,-Bstatic 指定和静态库相连
 CLDFLAGS := -lm -lrt -lnsl -lpthread -Wl,-Bdynamic -lgcc_s
 CXXLDFLAGS := -lm -lrt -lnsl -lpthread
-MODULEFLAGS := -fPIC -shared -o
+MODULEFLAGS := -fPIC -shared -lpthread -o
 
 #########################################################################################
 #  五、 指定源文件的路径 、支持的源文件的扩展名 、源文件搜索路径

@@ -3,7 +3,6 @@
 
 #include <event2/event.h>
 #include <event2/listener.h>
-#include "net_event.h"
 #include "net_address.h"
 #include "tcp_connection.h"
 

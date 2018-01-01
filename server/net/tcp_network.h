@@ -1,6 +1,7 @@
 #ifndef TCP_NETWORK_H
 #define TCP_NETWORK_H
 
+#include <map>
 #include <event2/event.h>
 #include <event2/listener.h>
 #include "net_address.h"

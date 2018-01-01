@@ -1,5 +1,7 @@
 #include "tcp_network.h"
+#include "log.h"
 #include "net_pool.h"
+#include "msg_dispatch.h"
 
 tcp_network_t::tcp_network_t(const net_address_t& addr) {
 	addr_ = addr;
@@ -17,7 +19,7 @@ void tcp_network_t::shutdown() {
 	ev_close();
 	for (conn_map_t::iterator itr = conns_.begin(); itr != conns_.end(); ++itr) {
 		tcp_connection_t *conn = itr->second;
-		conn_pool_.free(conn);
+		connection_free(conn);
 	}
 	conns_.clear();
 }
@@ -26,7 +28,7 @@ void tcp_network_t::process() {
 
 }
 
-bool new_connection(const char *ip, int port, void *context) {
+bool tcp_network_t::new_connection(const char *ip, int port, void *context) {
 	net_address_t addr(ip, port);
 	int fd = ::socket(AF_INET, SOCK_STREAM, 0);
 	int res = ::connect(fd, (const sockaddr *)&addr, sizeof(addr));
@@ -37,7 +39,7 @@ bool new_connection(const char *ip, int port, void *context) {
 	}
 	tcp_connection_t *conn = connection_alloc();
 	conn->set_fd(fd);
-	conn->set_peer_addr(addr);
+	//conn->set_peer_addr(addr);
 	conn->set_network(this);
 	conn->set_context(context);
 	conn->set_events(ev_base_, ev_read_cb, ev_write_cb);
@@ -47,10 +49,10 @@ bool new_connection(const char *ip, int port, void *context) {
 
 tcp_connection_t* tcp_network_t::get_connection(int fd) {
 	conn_map_t::iterator it = conns_.find(fd);
-	if (itr == conns_.end()) {
+	if (it == conns_.end()) {
 		return NULL;
 	}
-	return itr->second;
+	return it->second;
 }
 
 void tcp_network_t::add_connection(tcp_connection_t *conn) {
@@ -74,7 +76,7 @@ void tcp_network_t::ev_start() {
 	ev_listen_ = evconnlistener_new_bind(
 		ev_base_,
 		ev_listen_cb,
-		network_,
+		this,
 		LEV_OPT_REUSEABLE | LEV_OPT_CLOSE_ON_FREE,
 		-1,
 		(struct sockaddr*)&addr_,
@@ -100,7 +102,7 @@ void tcp_network_t::ev_listen_cb(evconnlistener *listener, evutil_socket_t fd, s
 	conn->set_fd(fd);
 	conn->set_peer_addr(*(sockaddr_in *)sa);
 	conn->set_network(network);
-	conn->set_events(ev_base_, ev_read_cb, ev_write_cb);
+	conn->set_events(network->get_ev_base(), ev_read_cb, ev_write_cb);
 	network->add_connection(conn);
 }
 
@@ -108,12 +110,13 @@ void tcp_network_t::ev_read_cb(evutil_socket_t fd, const short which, void *arg)
 	tcp_connection_t *conn = (tcp_connection_t *)arg;
 	tcp_network_t *network = conn->get_network();
 	net_input_stream_t& stream = conn->get_input_stream();
-	int n = stream.read_fd(fd);
+	int n = stream.read_fd(conn, fd);
 	if (n <= 0) {
 		if (n == 0 || !conn->reliable()) {
 			network->remove_connection(fd);
 		}
-		return
+		return;
+
 	}
 	if (!network->get_msg_operate()->on_message(conn)) {
 		stream.reset();

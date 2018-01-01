@@ -4,10 +4,11 @@
 #include <map>
 #include <event2/event.h>
 #include <event2/listener.h>
+#include "google/protobuf/message.h"
 #include "net_address.h"
 #include "tcp_connection.h"
+#include "msg_operate.h"
 
-class msg_operate_t;
 class msg_dispatch_t;
 
 class tcp_network_t {
@@ -42,6 +43,8 @@ public:
 	void send(tcp_connection_t *conn, google::protobuf::Message& msg) { msg_operate_->send(conn, msg); }
 
 	void send(int fd, google::protobuf::Message& msg) { this->send(this->get_connection(fd), msg); }
+
+	event_base *get_ev_base() { return ev_base_; }
 
 	void ev_close();
 

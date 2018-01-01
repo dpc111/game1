@@ -136,12 +136,14 @@ clean :
 	-${RM} *.d
 
 install :
-ifdef MODULEFLAGS
-	-${MV} ${PROGRAM} ${BIN}
-else
-	-mkdir -p ${LIB}
-	-${MV} ${PROGRAM} ${BIN}
-endif
-	-mkdir -p ${BIN}/$(OUTDIR)/$(OUTTARGET)
-	-${MV}  *.o ${BIN}/            ##$(OUTDIR)/$(OUTTARGET)
-	-${MV}  *.d ${BIN}/            ##$(OUTDIR)/$(OUTTARGET)
+	-${CP} ${PROGRAM} ${BIN}
+#ifdef MODULEFLAGS
+#	-${CP} ${PROGRAM} ${BIN}
+#	-${MV} ${PROGRAM} ${BIN}
+#else
+#	-mkdir -p ${LIB}
+#	-${MV} ${PROGRAM} ${BIN}
+#endif
+#	-mkdir -p ${BIN}/$(OUTDIR)/$(OUTTARGET)
+#	-${MV}  *.o ${BIN}/            ##$(OUTDIR)/$(OUTTARGET)
+#	-${MV}  *.d ${BIN}/            ##$(OUTDIR)/$(OUTTARGET)

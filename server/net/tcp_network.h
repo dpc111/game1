@@ -1,6 +1,8 @@
 #ifndef TCP_NETWORK_H
 #define TCP_NETWORK_H
 
+#include <event2/event.h>
+#include <event2/listener.h>
 #include "net_event.h"
 #include "net_address.h"
 #include "tcp_connection.h"
@@ -8,7 +10,7 @@
 class msg_operate_t;
 class msg_dispatch_t;
 
-class tcp_network_t : public net_event_t {
+class tcp_network_t {
 public:
 	typedef std::map<int, tcp_connection_t *> conn_map_t;
 
@@ -41,6 +43,16 @@ public:
 
 	void send(int fd, google::protobuf::Message& msg) { this->send(this->get_connection(fd), msg); }
 
+	void ev_close();
+
+	void ev_start();
+
+	static void ev_listen_cb(evconnlistener *listener, evutil_socket_t fd, sockaddr *sa, int socklen, void *ud);
+
+	static void ev_read_cb(evutil_socket_t fd, const short which, void *arg);
+
+	static void ev_write_cb(evutil_socket_t fd, const short which, void *arg);
+
 private:
 	net_address_t addr_;
 
@@ -49,6 +61,10 @@ private:
 	msg_operate_t *msg_operate_;
 
 	msg_dispatch_t *msg_dispatch_;
+
+	event_base *ev_base_;
+
+	evconnlistener *ev_listen_;
 };
 
 #endif

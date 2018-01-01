@@ -60,5 +60,5 @@ INCLUDES := -I../common \
 #LIB := ../lib
 #LIBDIRS := -L$(BIN)
 BIN := .
-LIB := ../lib
+LIB := .
 LIBDIRS := -L$(BIN)

@@ -2,6 +2,7 @@ all:
 	@make -f libcommon.mk
 	@make install -f libcommon.mk
 	@make -f libnet.mk
+	@make install -f libnet.mk
 
 install:
 

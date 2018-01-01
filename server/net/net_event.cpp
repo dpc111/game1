@@ -1,6 +1,11 @@
+#include <assert.h>
 #include "net_event.h"
+#include "net_address.h"
+#include "tcp_connection.h"
+#include "net_pool.h"
 
-net_event_t::net_event_t() {
+net_event_t::net_event_t(tcp_network_t *network) {
+	network_ = network;
 	ev_base_ = NULL;
 	ev_listen_ = NULL;
 }
@@ -9,18 +14,18 @@ net_event_t::~net_event_t() {
 
 }
 
-void tcp_network_t::ev_start() {
+void net_event_t::ev_start(net_address_t& addr) {
 	assert(ev_base_ == NULL);
 	assert(ev_listen_ == NULL);
 	ev_base_ = event_base_new();	
 	ev_listen_ = evconnlistener_new_bind(
 		ev_base_,
 		ev_listen_cb,
-		this,
+		network_,
 		LEV_OPT_REUSEABLE | LEV_OPT_CLOSE_ON_FREE,
 		-1,
-		(struct sockaddr*)&addr_,
-		sizeof(addr_);
+		(struct sockaddr*)&addr,
+		sizeof(addr)
 	);
 }
 
@@ -36,13 +41,14 @@ void net_event_t::ev_close() {
 }
 
 void net_event_t::ev_listen_cb(evconnlistener *listener, evutil_socket_t fd, sockaddr *sa, int socklen, void *ud) {
+	tcp_network_t *network = (tcp_network_t *)ud;
 	assert(sa->sa_family == AF_INET);
 	tcp_connection_t *conn = connection_alloc();
 	conn->set_fd(fd);
 	conn->set_peer_addr(*(sockaddr_in *)sa);
-	conn->set_network(this);
+	conn->set_network(network);
 	conn->set_events(ev_base_, ev_read_cb, ev_write_cb);
-	this->add_connection(conn);
+	network->add_connection(conn);
 }
 
 void net_event_t::ev_read_cb(evutil_socket_t fd, const short which, void *arg) {

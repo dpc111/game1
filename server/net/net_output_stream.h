@@ -16,11 +16,11 @@ public:
 
 	int size() const { return size_; }
 
-	int write(void *buff, int size);
+	int write(const void *buff, int size);
 
 	int write_fd(void *ud, int fd);
 	
-	bool next(const void **data, int *size);
+	bool next(void **data, int *size);
 	
 	void backup(int size);
 

@@ -53,8 +53,8 @@ ifeq ($(strip $(filter-out %.c,${SOURCES})),)    							#只有C源码时使用g
 	${CC} ${LIBDIRS} ${CLDFLAGS} ${OBJS} -o $@
 else                                                 						#有C++源码时使用g++连接
     ifdef MODULEFLAGS
-	$(CXX) ${LIBDIRS} ${CXXLDFLAGS} -Wl,--no-undefined ${OBJS} $(MODULEFLAGS) $@
-	#$(CXX) ${LIBDIRS} ${CXXLDFLAGS} ${OBJS} $(MODULEFLAGS) $@
+	$(CXX) ${LIBDIRS} ${CXXLDFLAGS} ${OBJS} $(MODULEFLAGS) $@
+	#$(CXX) ${LIBDIRS} ${CXXLDFLAGS} -Wl,--no-undefined ${OBJS} $(MODULEFLAGS) $@
     else
 	$(AR) cr $@ $(OBJS)
     endif

@@ -4,7 +4,7 @@ include core.include
 #连接时使用
 #-lclntsh -lnsl -lpthread -Wl,-Bdynamic -lgcc_s    ,同时有动态库和静态库时默认使用动态库，   -Wl,-Bdynamic 指定和动态库相连， -Wl,-Bstatic 指定和静态库相连
 CLDFLAGS := -lm -lrt -lnsl -lpthread -Wl,-Bdynamic
-CXXLDFLAGS := -lm -lrt -lnsl -lpthread -lprotobuf -Bynamic -lnet -lcommon -lgcc_s
+CXXLDFLAGS := -lm -lrt -lnsl -lpthread -levent -lprotobuf -Bynamic -lnet -lcommon -lgcc_s
 MODULEFLAGS := -fPIC -g3 -o
 
 ##########################################################################################
@@ -19,6 +19,6 @@ SRC_DIR := ../test
 #生成可执行程序的名称
 PROGRAM := test
 OUTDIR := obj_files
-OUTTARGET := net
+OUTTARGET := test
 
 include process.include

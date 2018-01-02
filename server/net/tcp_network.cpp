@@ -15,6 +15,10 @@ tcp_network_t::~tcp_network_t() {
 	this->shutdown();
 }
 
+void tcp_network_t::start() {
+	this->ev_start();
+}
+
 void tcp_network_t::shutdown() {
 	ev_close();
 	for (conn_map_t::iterator itr = conns_.begin(); itr != conns_.end(); ++itr) {

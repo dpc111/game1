@@ -1,6 +1,6 @@
 #ifndef LOG_H
 #define LOG_H
 
-#define ERROR() printf("error")
+#define ERROR() printf("error\n")
 
 #endif

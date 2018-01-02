@@ -2,5 +2,5 @@
 
 int main() {
 	printf("server start\n");
-	return 1
+	return 1;
 }

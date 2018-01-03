@@ -3,7 +3,7 @@
 
 #include <string>
 #include <map>
-#include <functional>
+#include <tr1/functional>
 #include "google/protobuf/message.h"
 
 class tcp_connection_t;

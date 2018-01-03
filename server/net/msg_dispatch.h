@@ -21,7 +21,7 @@ public:
 
 	int msg_id(std::string& name);	
 
-	std::string& msg_name(int id);
+	const char *msg_name(int id);
 
 	void on_message(tcp_connection_t *conn, int msgid, google::protobuf::Message *msg);
 

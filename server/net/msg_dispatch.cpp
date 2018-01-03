@@ -15,14 +15,14 @@ int msg_dispatch_t::msg_id(std::string& name) {
 	return it->second;
 }
 
-std::string& msg_dispatch_t::msg_name(int id) {
+const char *msg_dispatch_t::msg_name(int id) {
 	msg_id_map_t::iterator it = id_map_.find(id);
 	if (it == id_map_.end()) {
 		// static std::string s("default");
 		// return s;
-		return s;
+		return NULL;
 	}
-	return it->second;
+	return (it->second).c_str();
 }
 
 void msg_dispatch_t::on_message(tcp_connection_t *conn, int msgid, google::protobuf::Message *msg) {

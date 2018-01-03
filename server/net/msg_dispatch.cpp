@@ -24,5 +24,50 @@ const char *msg_dispatch_t::msg_name(int id) {
 }
 
 void msg_dispatch_t::on_message(tcp_connection_t *conn, int msgid, google::protobuf::Message *msg) {
-	
+	msg_map_t::iterator it = msgs_.find(msgid);
+	if (it == msgs_.end()) {
+		ERROR();
+		return;
+	}
+	cb_t *cb = it->second();
+	if (conn->get_sid() > 0) {
+		cb->on_message(conn->get_sid(), msg);
+	}
+	cb->on_net_message(conn, msg);
+}
+
+template<typename T>
+void msg_dispatch_t::register_message(const char *name, const typename cbT_t<T>::msg_cb_& cbfun) {
+	int msgid = msg_id(name);
+	if (msgid == 0) {
+		ERROR();
+		return;
+	}
+	msg_map_t::iterator it = msgs_.find(msgid);
+	if (it != msgs_.end()) {
+		cb_t *cb = it->second;
+		cb->msg_cb_ = cbfun;
+		return;
+	}
+	cbT_t<T> *cb = new cbT_t<T>();
+	cb.msg_cb_ = cbfun;
+	cb.name_ = name;
+}
+
+template<typename T>
+void msg_dispatch_t::register_net_message(const char *name, const typename cbT_t<T>::net_msg_cb_& cbfun) {
+	int msgid = msg_id(name);
+	if (msgid == 0) {
+		ERROR();
+		return;
+	}
+	msg_map_t::iterator it = msgs_.find(msgid);
+	if (it != msgs_.end()) {
+		cb_t *cb = it->second;
+		cb->net_msg_cb_ = cbfun;
+		return;
+	}
+	cbT_t<T> *cb = new cbT_t<T>();
+	cb.net_msg_cb_ = cbfun;
+	cb.name_ = name;
 }

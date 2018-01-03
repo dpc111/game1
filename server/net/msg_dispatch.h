@@ -9,20 +9,46 @@
 class tcp_connection_t;
 class tcp_network_t;
 
-template<typename T>
-typedef std::tr1::function<void (int, const T&)> msg_cb;
-
-typedef std::tr1::function<void (tcp_connection_t *, const T&)> net_msg_cb;
-
 class msg_dispatch_t {
 public:
-	typedef struct {
-		msg_cb *msg_cb_;
-		net_msg_cb *net_msg_cb_;
-		const char *name_;
-	} info_t;
+	class cb_t {
+	public:
+		virtual void on_message(int sid, const google::protobuf::Message *msg) = 0;
 
-	typedef std::map<int, info_t *> msg_map_t;
+		virtual void on_net_message(tcp_connection_t *conn, const google::protobuf::Message *msg) = 0;
+	};
+
+	template<typename T>
+	class cbT_t : public cb_t {
+	public:
+		typedef std::tr1::function<void (int, const T&)> msg_cb_t;
+
+		typedef std::tr1::function<void (tcp_connection_t *, const T&)> net_msg_cb_t;
+
+	public:
+		virtual void on_message(int sid, const google::protobuf::Message *msg) {
+			if (msg_cb_) {
+				const T *tmsg = dynamic_cast<const T *> (msg);
+				msg_cb_(conn, tmsg);
+			}
+		}
+
+		virtual void on_net_message(tcp_connection_t *conn, const google::protobuf::Message *msg) {
+			if (net_msg_cb_) {
+				const T *tmsg = dynamic_cast<const T *> (msg);
+				net_msg_cb_(conn, tmsg);
+			}
+		}
+
+	public:
+		msg_cb_t *msg_cb_;
+
+		net_msg_cb_t *net_msg_cb_;
+
+		const char *name_;
+	};
+
+	typedef std::map<int, cb_t *> msg_map_t;
 
 	typedef std::map<const char *, int> name_map_t;
 
@@ -36,6 +62,12 @@ public:
 	const char *msg_name(int id);
 
 	void on_message(tcp_connection_t *conn, int msgid, google::protobuf::Message *msg);
+
+	template<typename T>
+	void register_message(const char *name, const typename cbT_t<T>::msg_cb_& cb);
+
+	template<typename T>
+	void register_net_message(const char *name, const typename cbT_t<T>::net_msg_cb_& cb);
 
 private:
 	tcp_network_t *network_;

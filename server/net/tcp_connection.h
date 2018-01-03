@@ -1,12 +1,11 @@
 #ifndef TCP_CONNECTION_H
 #define TCP_CONNECTION_H
 
+#include <event2/event.h>
+#include <event2/event_struct.h>
 #include "net_address.h"
 #include "net_input_stream.h"
 #include "net_output_stream.h"
-
-#include <event2/event.h>
-#include <event2/event_struct.h>
 
 #define CNT_STATE_CONNECTING 		1
 #define CNT_STATE_CONNECTED 		2

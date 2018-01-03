@@ -31,7 +31,7 @@ void tcp_network_t::shutdown() {
 }
 
 void tcp_network_t::process() {
-
+	event_base_loop(ev_base_, EVLOOP_ONCE);
 }
 
 bool tcp_network_t::connect_to(const char *ip, int port, void *context) {

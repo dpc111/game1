@@ -8,18 +8,29 @@
 class tcp_connection_t;
 class tcp_network_t;
 
+template<typename T>
+typedef std::tr1::function<void (int, const T&)> msg_cb;
+
+typedef std::tr1::function<void (tcp_connection_t *, const T&)> net_msg_cb;
+
 class msg_dispatch_t {
 public:
-	typedef std::map<int, std::string> msg_id_map_t;
+	typedef struct {
+		msg_cb *msg_cb_;
+		net_msg_cb *net_msg_cb_;
+		const char *name_;
+	} info_t;
 
-	typedef std::map<std::string, int> msg_name_map_t;
+	typedef std::map<int, info_t *> msg_map_t;
+
+	typedef std::map<const char *, int> name_map_t;
 
 public:
 	msg_dispatch_t(tcp_network_t *network);
 
 	~msg_dispatch_t();
 
-	int msg_id(std::string& name);	
+	int msg_id(const char *name);	
 
 	const char *msg_name(int id);
 
@@ -28,9 +39,9 @@ public:
 private:
 	tcp_network_t *network_;
 
-	msg_id_map_t id_map_;
+	msg_map_t msgs_;
 
-	msg_name_map_t name_map_;
+	name_map_t names_;
 };
 
 #endif

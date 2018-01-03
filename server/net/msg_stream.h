@@ -77,5 +77,6 @@ public:
 
 private:
 	net_output_stream_t& stream_;
+	
 	int offset_;
 };

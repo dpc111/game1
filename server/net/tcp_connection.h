@@ -58,6 +58,10 @@ public:
 
 	void del_event_write();
 
+	void set_peer_id(int peer_id) { peer_id_ = peer_id; }
+
+	int get_peer_id() { return peer_id_; }
+
 private:
 	tcp_network_t *network_;
 
@@ -82,6 +86,8 @@ private:
 	bool ev_read_add_;
 	
 	bool ev_write_add_;
+
+	int peer_id_;
 };
 
 #endif

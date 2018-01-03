@@ -25,19 +25,19 @@ msg_operate_t::~msg_operate_t() {
 }
 
 google::protobuf::Message *msg_operate_t::gen_message(int msgid) {
+	const char *name = network_->get_msg_dispatch()->msg_name(msgid);
+	if (!name) {
+		ERROR();
+		return NULL;
+	}
+	// thread safe ???
 	google::protobuf::Message *msg = NULL;
-	// ???
-	static std::string s("test");
-	std::string& name = s;
 	const google::protobuf::Descriptor *des = google::protobuf::DescriptorPool::generated_pool()->FindMessageTypeByName(name);
 	if (des) {
 		const google::protobuf::Message *tmsg = google::protobuf::MessageFactory::generated_factory()->GetPrototype(des);
  		if (tmsg) {
  			msg = tmsg->New(); 
  		}
-	}
-	if (!msg) {
-		ERROR();
 	}
 	return msg;
 }
@@ -47,16 +47,13 @@ void msg_operate_t::free_message(google::protobuf::Message *msg) {
 }
 
 void msg_operate_t::send(tcp_connection_t *conn, google::protobuf::Message& msg) {
-	// test
-	int sid = 1;
-	int tid = 2;
-	int msgid = 3;
-
+	std::string& name = msg.GetDescriptor()->full_name();
+	int msgid = network_->get_msg_dispatch()->msg_id(name);
 	net_output_stream_t& stream = conn->get_output_stream();
 	msg_header_t header;
 	header.len = msg.ByteSize();
-	header.sid = sid;
-	header.tid = tid;
+	header.sid = network_->get_sid();
+	header.tid = conn->get_peer_id();
 	header.msgid = msgid;
 	stream.write(&header, sizeof(header));
 	msg_output_stream_t os(stream);
@@ -87,7 +84,7 @@ bool msg_operate_t::on_message(tcp_connection_t *conn) {
 			stream.backup(walk);
 			break;
 		}
-		google::protobuf::Message *msg = this->gen_message(header.msgid);
+		google::protobuf::Message *msg = gen_message(header.msgid);
 		if (msg == NULL) {
 			ERROR();
 			stream.reset();
@@ -97,9 +94,11 @@ bool msg_operate_t::on_message(tcp_connection_t *conn) {
 		if (!msg->ParseFromZeroCopyStream(&is)) {
 			ERROR();
 			stream.reset();
+			free_message(msg);
 			break;
 		}
 		network->get_msg_dispatch()->on_message(conn, header.msgid, msg);
+		free_message(msg);
 	}
 	stream.finish();
 }

@@ -56,6 +56,10 @@ public:
 
 	static void ev_write_cb(evutil_socket_t fd, const short which, void *arg);
 
+	void set_sid(int sid) { sid_ = sid; }
+
+	int get_sid() { return sid_ = 0; }
+
 private:
 	net_address_t addr_;
 
@@ -68,6 +72,8 @@ private:
 	event_base *ev_base_;
 
 	evconnlistener *ev_listen_;
+
+	int sid_;
 };
 
 #endif

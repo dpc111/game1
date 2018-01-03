@@ -9,10 +9,12 @@ tcp_network_t::tcp_network_t(const net_address_t& addr) {
 	msg_dispatch_ = new msg_dispatch_t(this);
 	ev_base_ = NULL;
 	ev_listen_ = NULL;
+	sid_ = 0;
 }
 
 tcp_network_t::~tcp_network_t() {
 	this->shutdown();
+	sid_ = 0;
 }
 
 void tcp_network_t::start() {
@@ -43,7 +45,6 @@ bool tcp_network_t::new_connection(const char *ip, int port, void *context) {
 	}
 	tcp_connection_t *conn = connection_alloc();
 	conn->set_fd(fd);
-	//conn->set_peer_addr(addr);
 	conn->set_network(this);
 	conn->set_context(context);
 	conn->set_events(ev_base_, ev_read_cb, ev_write_cb);
@@ -120,7 +121,6 @@ void tcp_network_t::ev_read_cb(evutil_socket_t fd, const short which, void *arg)
 			network->remove_connection(fd);
 		}
 		return;
-
 	}
 	if (!network->get_msg_operate()->on_message(conn)) {
 		stream.reset();

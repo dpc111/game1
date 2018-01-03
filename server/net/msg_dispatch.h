@@ -1,5 +1,5 @@
-#ifndef MESSAGE_DISPATCH
-#define MESSAGE_DISPATCH
+#ifndef MESSAGE_DISPATCH_T
+#define MESSAGE_DISPATCH_T
 
 #include <string>
 #include <map>

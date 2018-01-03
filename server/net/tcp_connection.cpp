@@ -6,17 +6,20 @@ tcp_connection_t::tcp_connection_t(int fd, sockaddr_in& peer_addr)
 	, output_stream_(this)
 	, fd_(fd)
 	, peer_addr_(peer_addr)
-	, closed_(false) {
+	, closed_(false),
+	, peer_id_(0) {
 }
 
 tcp_connection_t::tcp_connection_t()
 	: input_stream_(this)
 	, output_stream_(this)
-	, closed_(false) {
+	, closed_(false)
+	, peer_id_(0) {
 }
 
 tcp_connection_t::~tcp_connection_t() {
 	closed_ = true;
+	peer_id_ = 0;
 }
 
 bool tcp_connection_t::reliable() {

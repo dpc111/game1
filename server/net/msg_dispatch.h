@@ -16,6 +16,14 @@ public:
 		virtual void on_message(int sid, const google::protobuf::Message *msg) = 0;
 
 		virtual void on_net_message(tcp_connection_t *conn, const google::protobuf::Message *msg) = 0;
+
+		virtual void get_name() = 0;
+
+		virtual void set_name() = 0;
+
+		virtual void set_msg_cb() = 0;
+
+		virtual void set_net_msg_cb() = 0;
 	};
 
 	template<typename T>
@@ -26,10 +34,18 @@ public:
 		typedef std::tr1::function<void (tcp_connection_t *, const T&)> net_msg_cb_t;
 
 	public:
+		virtual void get_name() { return name_; }
+
+		virtual void set_name() { name_ = name}
+
+		virtual void set_msg_cb();
+
+		virtual void set_net_msg_cb();
+
 		virtual void on_message(int sid, const google::protobuf::Message *msg) {
 			if (msg_cb_) {
 				const T *tmsg = dynamic_cast<const T *> (msg);
-				msg_cb_(conn, tmsg);
+				msg_cb_(sid, tmsg);
 			}
 		}
 

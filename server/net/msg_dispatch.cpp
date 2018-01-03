@@ -20,7 +20,7 @@ const char *msg_dispatch_t::msg_name(int id) {
 	if (it == msgs_.end()) {
 		return NULL;
 	}
-	return it->second->name_;
+	return it->second->get_name();
 }
 
 void msg_dispatch_t::on_message(tcp_connection_t *conn, int msgid, google::protobuf::Message *msg) {

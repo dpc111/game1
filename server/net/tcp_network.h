@@ -32,7 +32,7 @@ public:
 
 	msg_dispatch_t *get_msg_dispatch() { return msg_dispatch_; }
 
-	bool new_connection(const char *ip, int port, void *context);
+	bool connect_to(const char *ip, int port, void *context);
 
 	tcp_connection_t *get_connection(int fd);
 
@@ -42,7 +42,7 @@ public:
 
 	void send(tcp_connection_t *conn, google::protobuf::Message& msg) { msg_operate_->send(conn, msg); }
 
-	void send(int fd, google::protobuf::Message& msg) { this->send(this->get_connection(fd), msg); }
+	void send(int fd, google::protobuf::Message& msg) { send(get_connection(fd), msg); }
 
 	event_base *get_ev_base() { return ev_base_; }
 

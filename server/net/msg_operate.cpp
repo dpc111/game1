@@ -30,7 +30,6 @@ google::protobuf::Message *msg_operate_t::gen_message(int msgid) {
 		ERROR();
 		return NULL;
 	}
-	// thread safe ???
 	google::protobuf::Message *msg = NULL;
 	const google::protobuf::Descriptor *des = google::protobuf::DescriptorPool::generated_pool()->FindMessageTypeByName(name);
 	if (des) {

@@ -34,7 +34,7 @@ void tcp_network_t::process() {
 
 }
 
-bool tcp_network_t::new_connection(const char *ip, int port, void *context) {
+bool tcp_network_t::connect_to(const char *ip, int port, void *context) {
 	net_address_t addr(ip, port);
 	int fd = ::socket(AF_INET, SOCK_STREAM, 0);
 	int res = ::connect(fd, (const sockaddr *)&addr, sizeof(addr));

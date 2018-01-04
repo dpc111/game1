@@ -13,7 +13,7 @@ class msg_dispatch_t {
 public:
 	class cb_t {
 	public:
-		virtual cosnt char *get_name() = 0;
+		virtual const char *get_name() = 0;
 
 		virtual void set_name() = 0;
 

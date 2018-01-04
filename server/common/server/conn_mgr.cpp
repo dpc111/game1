@@ -48,7 +48,7 @@ tcp_connection_t *conn_mgr_t::connect_to(int sid) {
 	}
 	server_addr_t *addr = it1->second;
 	tcp_network_t *network = server_->get_network();
-	tcp_connection_t *conn = network->connect_to(addr.ip, addr.port);
+	tcp_connection_t *conn = network->connect_to(addr->ip, addr->port);
 	return conn;
 }
 

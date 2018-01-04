@@ -16,6 +16,8 @@ public:
 
 	void process();
 
+	tcp_network_t *get_network() { return network_; }
+
 	void send(int sid, google::protobuf::Message& msg);
 
 	void send(tcp_connection_t *conn, google::protobuf::Message& msg);

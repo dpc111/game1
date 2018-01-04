@@ -22,7 +22,7 @@ void server_t::process() {
 	network_->process();
 }
 
-void server_t::send(int sid, google::protobuf::Message *msg) {
+void server_t::send(int sid, google::protobuf::Message& msg) {
 	tcp_connection_t *conn = conn_mgr_->get_conn(sid);
 	if (!conn) {
 		conn = conn_mgr_->connect_to(sid);
@@ -33,7 +33,7 @@ void server_t::send(int sid, google::protobuf::Message *msg) {
 	network_->send(conn, msg);
 }
 
-void server_t::send(tcp_connection_t *conn, google::protobuf::Message *msg) {
+void server_t::send(tcp_connection_t *conn, google::protobuf::Message& msg) {
 	network_->send(conn, msg);
 }
 

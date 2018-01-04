@@ -16,9 +16,9 @@ public:
 
 	void process();
 
-	void send(int sid, google::protobuf::Message *msg);
+	void send(int sid, google::protobuf::Message& msg);
 
-	void send(tcp_connection_t *conn, google::protobuf::Message *msg);
+	void send(tcp_connection_t *conn, google::protobuf::Message& msg);
 
 private:
 	tcp_network_t *network_;

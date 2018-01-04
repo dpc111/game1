@@ -33,8 +33,8 @@ void msg_dispatch_t::on_message(tcp_connection_t *conn, int msgid, google::proto
 		return;
 	}
 	cb_t *cb = it->second;
-	if (conn->get_sid() > 0) {
-		cb->on_message(conn->get_sid(), msg);
+	if (conn->get_peer_id() > 0) {
+		cb->on_message(conn->get_peer_id(), msg);
 	}
 	cb->on_net_message(conn, msg);
 }

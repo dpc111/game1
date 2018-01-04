@@ -80,10 +80,10 @@ public:
 	void on_message(tcp_connection_t *conn, int msgid, google::protobuf::Message *msg);
 
 	template<typename T>
-	void register_message(const char *name, const typename cbT_t<T>::msg_cb_& cb);
+	void register_message(const char *name, const typename cbT_t<T>::msg_cb_t& cb);
 
 	template<typename T>
-	void register_net_message(const char *name, const typename cbT_t<T>::net_msg_cb_& cb);
+	void register_net_message(const char *name, const typename cbT_t<T>::net_msg_cb_t& cb);
 
 private:
 	tcp_network_t *network_;

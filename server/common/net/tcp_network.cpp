@@ -3,8 +3,8 @@
 #include "net_pool.h"
 #include "msg_dispatch.h"
 
-tcp_network_t::tcp_network_t(const char *ip, int port) {
-	addr_(ip, port);
+tcp_network_t::tcp_network_t(const char *ip, int port)
+	: addr_(ip, port) {
 	msg_operate_ = new msg_operate_t(this);
 	msg_dispatch_ = new msg_dispatch_t(this);
 	ev_base_ = NULL;

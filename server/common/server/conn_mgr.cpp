@@ -2,6 +2,7 @@
 #include "conn_mgr.h"
 #include "tcp_network.h"
 #include "tcp_connection.h"
+#include "server.h"
 
 conn_mgr_t::conn_mgr_t(server_t *server) {
 	server_ = server;
@@ -53,12 +54,12 @@ tcp_connection_t *conn_mgr_t::connect_to(int sid) {
 }
 
 void conn_mgr_t::on_disconnect(tcp_connection_t *conn) {
-	conns_t::iterator it = conns_.find(sid);
+	conns_t::iterator it = conns_.find(conn->get_sid());
 	if (it == conns_.end()) {
 		return;
 	}
-	tcp_connection_t *conn = it->second;
-	conn->set_sid(0);
-	erease(it);
+	tcp_connection_t *conn1 = it->second;
+	conn1->set_sid(0);
+	conns_.erase(it);
 	--conn_num_;
 }

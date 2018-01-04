@@ -48,9 +48,11 @@ CXXFLAGS := -fPIC -c -g -W -Wall
 #	四、指定额外搜索的头文件路径、库文件路径 、引入的库
 #########################################################################################
 #指定搜索路径, 也可用include指定具体文件路径,编译时使用
-INCLUDES := -I../common \
-	-I../net \
-	-I../test \
+INCLUDES := -I../common/common \
+	-I../common/net \
+	-I../common/test \
+	-I../common/timer \
+	-I../common/server \
 	-I../3rd/libevent/include \
 	-I../3rd/protobuf/include
 	

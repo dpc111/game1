@@ -37,7 +37,7 @@ void msg_dispatch_t::on_message(tcp_connection_t *conn, int msgid, google::proto
 }
 
 template<typename T>
-void msg_dispatch_t::register_message(const char *name, const typename cbT_t<T>::msg_cb_& cbfun) {
+void msg_dispatch_t::register_message(const char *name, const typename cbT_t<T>::msg_cb_t& cbfun) {
 	int msgid = msg_id(name);
 	if (msgid == 0) {
 		ERROR();
@@ -46,16 +46,16 @@ void msg_dispatch_t::register_message(const char *name, const typename cbT_t<T>:
 	msg_map_t::iterator it = msgs_.find(msgid);
 	if (it != msgs_.end()) {
 		cb_t *cb = it->second;
-		cb->msg_cb_ = cbfun;
+		cb->set_msg_cb(cbfun);
 		return;
 	}
 	cbT_t<T> *cb = new cbT_t<T>();
-	cb.msg_cb_ = cbfun;
-	cb.name_ = name;
+	cb->set_msg_cb(cbfun);
+	cb->set_name(name);
 }
 
 template<typename T>
-void msg_dispatch_t::register_net_message(const char *name, const typename cbT_t<T>::net_msg_cb_& cbfun) {
+void msg_dispatch_t::register_net_message(const char *name, const typename cbT_t<T>::net_msg_cb_t& cbfun) {
 	int msgid = msg_id(name);
 	if (msgid == 0) {
 		ERROR();
@@ -64,10 +64,10 @@ void msg_dispatch_t::register_net_message(const char *name, const typename cbT_t
 	msg_map_t::iterator it = msgs_.find(msgid);
 	if (it != msgs_.end()) {
 		cb_t *cb = it->second;
-		cb->net_msg_cb_ = cbfun;
+		cb->set_net_msg_cb(cbfun);
 		return;
 	}
 	cbT_t<T> *cb = new cbT_t<T>();
-	cb.net_msg_cb_ = cbfun;
-	cb.name_ = name;
+	cb->set_net_msg_cb(cbfun);
+	cb->set_name(name);
 }

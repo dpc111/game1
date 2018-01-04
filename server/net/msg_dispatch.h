@@ -13,17 +13,17 @@ class msg_dispatch_t {
 public:
 	class cb_t {
 	public:
-		virtual void on_message(int sid, const google::protobuf::Message *msg) = 0;
-
-		virtual void on_net_message(tcp_connection_t *conn, const google::protobuf::Message *msg) = 0;
-
 		virtual void get_name() = 0;
 
 		virtual void set_name() = 0;
 
-		virtual void set_msg_cb() = 0;
+		virtual void set_msg_cb(void *) = 0;
 
-		virtual void set_net_msg_cb() = 0;
+		virtual void set_net_msg_cb(void *) = 0;
+
+		virtual void on_message(int sid, const google::protobuf::Message *msg) = 0;
+
+		virtual void on_net_message(tcp_connection_t *conn, const google::protobuf::Message *msg) = 0;
 	};
 
 	template<typename T>
@@ -36,11 +36,11 @@ public:
 	public:
 		virtual void get_name() { return name_; }
 
-		virtual void set_name() { name_ = name}
+		virtual void set_name(const char *name) { name_ = name; }
 
-		virtual void set_msg_cb();
+		virtual void set_msg_cb(void *cb) { msg_cb_ = (msg_cb_t *) cb; }
 
-		virtual void set_net_msg_cb();
+		virtual void set_net_msg_cb(void *cb) { net_msg_cb_ = (net_msg_cb_t *) cb; }
 
 		virtual void on_message(int sid, const google::protobuf::Message *msg) {
 			if (msg_cb_) {

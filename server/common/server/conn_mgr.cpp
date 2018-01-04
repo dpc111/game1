@@ -1,3 +1,4 @@
+#include "log.h"
 #include "conn_mgr.h"
 #include "tcp_network.h"
 #include "tcp_connection.h"
@@ -40,12 +41,12 @@ tcp_connection_t *conn_mgr_t::connect_to(int sid) {
 	if (it != conns_.end()) {
 		return NULL;
 	}
-	server_addrs_t::iterator it = server_addrs_.find(sid);
-	if (it == server_addrs_.end()) {
+	server_addrs_t::iterator it1 = server_addrs_.find(sid);
+	if (it1 == server_addrs_.end()) {
 		ERROR();
 		return NULL;
 	}
-	server_addr_t *addr = it->second;
+	server_addr_t *addr = it1->second;
 	tcp_network_t *network = server_->get_network();
 	tcp_connection_t *conn = network->connect_to(addr.ip, addr.port);
 	return conn;

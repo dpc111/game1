@@ -1,5 +1,7 @@
 #include "msg_dispatch.h"
 #include "log.h"
+#include "tcp_connection.h"
+#include "tcp_network.h"
 
 msg_dispatch_t::msg_dispatch_t(tcp_network_t *network) {
 	network_ = network;

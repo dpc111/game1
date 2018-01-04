@@ -26,7 +26,7 @@ public:
  
 	void process();
 
-	const tcp_network_t& get_local_addr() { return addr_; }
+	const net_address_t& get_local_addr() { return addr_; }
 
 	msg_operate_t *get_msg_operate() { return msg_operate_; }
 

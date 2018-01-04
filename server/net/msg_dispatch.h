@@ -13,7 +13,7 @@ class msg_dispatch_t {
 public:
 	class cb_t {
 	public:
-		virtual void get_name() = 0;
+		virtual cosnt char *get_name() = 0;
 
 		virtual void set_name() = 0;
 
@@ -34,7 +34,7 @@ public:
 		typedef std::tr1::function<void (tcp_connection_t *, const T&)> net_msg_cb_t;
 
 	public:
-		virtual void get_name() { return name_; }
+		virtual const char *get_name() { return name_; }
 
 		virtual void set_name(const char *name) { name_ = name; }
 

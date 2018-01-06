@@ -7,7 +7,7 @@ public:
 	bool operator()(const T *time) {
 		return !time->is_cancelled();
 	}
-}
+};
 
 //////////////////////////////////////////////////////////////////////////////////////////////////
 void timer_handle_t::cancel() {
@@ -18,7 +18,7 @@ void timer_handle_t::cancel() {
 }
 
 //////////////////////////////////////////////////////////////////////////////////////////////////
-timer_t::timer_t(timers_t &owner, timer_handler_t *handler, void *user_data, timestamp time, timestamp interval)
+ctimer_t::ctimer_t(timers_t &owner, timer_handler_t *handler, void *user_data, timestamp time, timestamp interval)
 	: owner_(owner)
 	, handler_(handler)
 	, user_data_(user_data)
@@ -28,7 +28,7 @@ timer_t::timer_t(timers_t &owner, timer_handler_t *handler, void *user_data, tim
 	handler_->inc_register_num();
 }
 
-void timer_t::cancel() {
+void ctimer_t::cancel() {
 	if (this->is_cancelled()) {
 		return;
 	}
@@ -41,7 +41,7 @@ void timer_t::cancel() {
 	owner_.on_cancel(); 
 }
 
-void timer_t::trigger() {
+void ctimer_t::trigger() {
 	if (!this->is_cancelled()) {
 		state_ = TIME_EXECUTING;
 		handler_->handle_timeout(timer_handle_t(this), user_data_);
@@ -72,7 +72,7 @@ int timers_t::process(timestamp now) {
 	while ((!time_queue_.empty()) 
 		&& (time_queue_.top()->time() <= now
 		|| time_queue_.top()->is_cancelled())) {
-		timer_t *timer = process_node_ = time_queue_.top();
+		ctimer_t *timer = process_node_ = time_queue_.top();
 		time_queue_.pop();
 		if (!timer->is_cancelled()) {
 			++fired_num;
@@ -92,8 +92,8 @@ int timers_t::process(timestamp now) {
 }
 
 bool timers_t::legal(timer_handle_t handle) const {
-	typedef timer_t * const * timer_iter;
-	timer_t *time = handle.timer();
+	typedef ctimer_t * const * timer_iter;
+	ctimer_t *time = handle.timer();
 	if (time == NULL) {
 		return false;
 	}
@@ -120,7 +120,7 @@ timestamp timers_t::next_exp(timestamp now) const {
 void timers_t::clear(bool should_call_cancel = true) {
 	int max_loop_num = time_queue_.size();
 	while (!time_queue_.empty()) {
-		timer_t *timer = time_queue_.unsafe_pop_back();
+		ctimer_t *timer = time_queue_.unsafe_pop_back();
 		if (!timer->is_cancelled() && should_call_cancel) {
 			--cancelled_num_;
 			timer->cancel();
@@ -137,7 +137,7 @@ void timers_t::clear(bool should_call_cancel = true) {
 }
 
 bool timers_t::get_timer_info(timer_handle_t handle, void *& user, timestamp& time, timestamp& interval) const {
-	timer_t *timer = handle.timer();
+	ctimer_t *timer = handle.timer();
 	if (!timer->is_cancelled()) {
 		user = timer->user_data();
 		time = timer->time();
@@ -148,14 +148,14 @@ bool timers_t::get_timer_info(timer_handle_t handle, void *& user, timestamp& ti
 }
 
 timer_handle_t timers_t::add(timer_handler_t *handler, void *user, timestamp time, timestamp interval) {
-	timer_t *timer = new timer_t(*this, handler, user_data, time, interval);
+	ctimer_t *timer = new ctimer_t(*this, handler, user_data, time, interval);
 	time_queue_.push(timer);
 	return timer_handle_t(timer);
 }
 
 void timers_t::purge_cancelled_times() {
 	priority_queue_t::container_t& container = time_queue_.container();
-	priority_queue_t::container_t::iterator new_end = std::partition(container.begin(), container.end(), is_not_cancelled_t<timer_t>());
+	priority_queue_t::container_t::iterator new_end = std::partition(container.begin(), container.end(), is_not_cancelled_t<ctimer_t>());
 	for (priority_queue_t::container_t::iterator it = new_end; it != container.end(); ++it) {
 		delete *it;
 	} 

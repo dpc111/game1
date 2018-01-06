@@ -6,14 +6,14 @@
 #include <algorithm>
 #include <vector>
 
-class timer_t;
+class timer__t;
 class timers_t;
 typedef int timestamp;
 
 //////////////////////////////////////////////////////////////////////////////////////////////////
 class timer_handle_t {
 public:
-	timer_handle_t(timer_t *timer = NULL) : timer_(timer) {}
+	timer_handle_t(timer__t *timer = NULL) : timer_(timer) {}
 
 	void cancel();
 
@@ -23,10 +23,10 @@ public:
 
 	friend bool operator==(timer_handle_t h1, timer_handle_t h2);
 
-	timer_t *timer() const { return timer_; }
+	timer__t *timer() const { return timer_; }
 
 private:
-	timer_t *timer_;
+	timer__t *timer_;
 };
 
 inline bool operator==(timer_handle_t h1, timer_handle_t h2) {
@@ -46,7 +46,7 @@ protected:
 	virtual void on_release(timer_handle_t handle, void *user) {}
 
 private:
-	friend class timer_t;
+	friend class timer__t;
 
 	void inc_register_num() { ++register_num_; }
 
@@ -62,7 +62,7 @@ private:
 };
 
 //////////////////////////////////////////////////////////////////////////////////////////////////
-class timer_t {
+class timer__t {
 public:
 	enum time_state_t {
 		TIME_PENDING,
@@ -71,13 +71,13 @@ public:
 	};
 
 public:
-	timer_t(timers_t &owner, timer_handler_t *handler, void *user_data, timestamp time, timestamp interval);
+	timer__t(timers_t &owner, timer_handler_t *handler, void *user_data, timestamp time, timestamp interval);
 	
-	timer_t(const timer_t &);
+	timer__t(const timer__t &);
 
-	~timer_t() {}
+	~timer__t() {}
 
-	timer_t &operator=(const timer_t &);
+	timer__t &operator=(const timer__t &);
 
 	void cancel();
 
@@ -115,7 +115,7 @@ private:
 //////////////////////////////////////////////////////////////////////////////////////////////////
 class comparator_t {
 public:
-	bool operator()(const timer_t *a, const timer_t *b) {
+	bool operator()(const timer__t *a, const timer__t *b) {
 		return a->time() > b->time();
 	}
 };
@@ -123,7 +123,7 @@ public:
 //////////////////////////////////////////////////////////////////////////////////////////////////
 class priority_queue_t {
 public:
-	typedef std::vector<timer_t *> container_t;
+	typedef std::vector<timer__t *> container_t;
 
 public:
 	bool empty() const { return container_.empty(); }
@@ -142,8 +142,8 @@ public:
 		container_.pop_back();
 	}
 
-	timer_t *unsafe_pop_back() {
-		timer_t *time = container_.back();
+	timer__t *unsafe_pop_back() {
+		timer__t *time = container_.back();
 		container_.pop_back();
 		return time;
 	}
@@ -186,7 +186,7 @@ public:
 private:
 	priority_queue_t time_queue_;
 
-	timer_t *process_node_;
+	timer__t *process_node_;
 
 	timestamp last_process_time_;
 

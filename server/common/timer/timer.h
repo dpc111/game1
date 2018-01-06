@@ -3,6 +3,7 @@
 
 #include <assert.h>
 #include <stdio.h>
+#include <vector>
 
 class timer_t;
 class timers_t;
@@ -36,7 +37,7 @@ class timer_handler_t {
 public:
 	timer_handler_t() : register_num_(0) {}
 
-	virtual void ~timer_handler_t() { assert(reg_num_ == 0); }
+	virtual ~timer_handler_t() { assert(register_num_ == 0); }
 
 	virtual void handle_timeout(timer_handle_t handle, void *user) = 0;
 
@@ -130,7 +131,7 @@ public:
 
 	const timer_t& top() const { return container_.front(); }
 
-	void push(const value_type& x) {
+	void push(const timer_t& x) {
 		container_.push_back(x);
 		std::push_heap(container_.begin(), container_.end(), comparator_t());
 	}

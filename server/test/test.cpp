@@ -22,7 +22,7 @@ int main() {
 	server_t server("0.0.0.0", 7768);
 	server.start();
 	test_timer timer;
-	server.register_timer(&timer, NULL, 100000, 200000);
+	server.register_timer(&timer, NULL, 10000, 10000);
 	server.process();
 
 	printf("llllllllllsdssd\n");

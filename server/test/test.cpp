@@ -11,7 +11,7 @@ class test_timer : public timer_handler_t {
 	virtual void handle_timeout(timer_handle_t handle, void *user) {
 		printf("aaaaaahhshsdfdfs\n");
 	}
-}
+};
 
 int main() {
 	printf("server start\n");

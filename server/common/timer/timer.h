@@ -5,10 +5,11 @@
 #include <stdio.h>
 #include <algorithm>
 #include <vector>
+#include "type.h"
 
 class ctimer_t;
 class timers_t;
-typedef int timestamp;
+// typedef int timestamp;
 
 //////////////////////////////////////////////////////////////////////////////////////////////////
 class timer_handle_t {

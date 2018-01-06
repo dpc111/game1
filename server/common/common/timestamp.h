@@ -28,10 +28,10 @@ int64 getms() {
 	return getus() / 1000;
 }
 
-void sleepmsg(int64 ms) {
+void sleepms(int64 ms) {
 	struct timeval tv;
 	tv.tv_sec = ms / 1000;
-	tv.tv_usec = msg % 1000 * 1000;
+	tv.tv_usec = ms % 1000 * 1000;
 	if (select(0, NULL, NULL, NULL, &tv) == -1) {
 		printf("sleep fail\n");
 	}

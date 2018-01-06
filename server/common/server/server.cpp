@@ -1,4 +1,5 @@
 #include "server.h"
+#include "timestamp.h"
 
 server_t::server_t(const char *ip, int port) {
 	network_ = new tcp_network_t(ip, port);

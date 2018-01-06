@@ -3,6 +3,7 @@
 server_t::server_t(const char *ip, int port) {
 	network_ = new tcp_network_t(ip, port);
 	conn_mgr_ = new conn_mgr_t(this);
+	times_ = new timers_t();
 }
 
 server_t::~server_t() {
@@ -19,7 +20,11 @@ void server_t::start() {
 }
 
 void server_t::process() {
-	network_->process();
+	while (true) {
+		network_->process();
+		times_->process(getms());
+		sleepms(1);
+	}
 }
 
 void server_t::send(int sid, google::protobuf::Message& msg) {
@@ -37,3 +42,6 @@ void server_t::send(tcp_connection_t *conn, google::protobuf::Message& msg) {
 	network_->send(conn, msg);
 }
 
+void server_t::register_timer(timer_handler_t *handler, void *user, timestamp start, timestamp interval) {
+	times_->add(handler, user, start, interval);
+}

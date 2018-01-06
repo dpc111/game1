@@ -50,7 +50,7 @@ void ctimer_t::trigger() {
 		}
 	}
 	if (!this->is_cancelled()) {
-		time += interval_;
+		time_ += interval_;
 		state_ = TIME_PENDING;
 	}
 }
@@ -117,7 +117,7 @@ timestamp timers_t::next_exp(timestamp now) const {
 	return time_queue_.top()->time() - now;
 }
 
-void timers_t::clear(bool should_call_cancel = true) {
+void timers_t::clear(bool should_call_cancel) {
 	int max_loop_num = time_queue_.size();
 	while (!time_queue_.empty()) {
 		ctimer_t *timer = time_queue_.unsafe_pop_back();
@@ -148,7 +148,7 @@ bool timers_t::get_timer_info(timer_handle_t handle, void *& user, timestamp& ti
 }
 
 timer_handle_t timers_t::add(timer_handler_t *handler, void *user, timestamp time, timestamp interval) {
-	ctimer_t *timer = new ctimer_t(*this, handler, user_data, time, interval);
+	ctimer_t *timer = new ctimer_t(*this, handler, user, time, interval);
 	time_queue_.push(timer);
 	return timer_handle_t(timer);
 }

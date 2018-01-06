@@ -175,7 +175,7 @@ public:
 
 	void clear(bool should_call_cancel = true);
 
-	bool get_timer_info(timer_handle_t handle, timestamp& time, timestamp& interval, void *& user) const;
+	bool get_timer_info(timer_handle_t handle, void *& user, timestamp& time, timestamp& interval) const;
 
 	timer_handle_t add(timer_handler_t *handler, void *user, timestamp start, timestamp interval);
 

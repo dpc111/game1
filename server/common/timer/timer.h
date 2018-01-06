@@ -3,6 +3,7 @@
 
 #include <assert.h>
 #include <stdio.h>
+#include <algorithm>
 #include <vector>
 
 class timer_t;

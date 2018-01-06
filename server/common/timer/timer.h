@@ -129,7 +129,7 @@ public:
 
 	int size() const { return container_.size(); }
 
-	timer_t *& top() const { return (timer_t *) container_.front(); }
+	container_t::value_type & top() const { return container_.front(); }
 
 	void push(const timer_t& x) {
 		container_.push_back(x);

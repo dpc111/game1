@@ -19,8 +19,8 @@ SRC_DIR := ../common/server \
 #  七、 定义生成程序的名称
 ##########################################################################################
 #生成可执行程序的名称
-PROGRAM := libserver.so
+PROGRAM := libservers.so
 OUTDIR := obj_files
-OUTTARGET := server
+OUTTARGET := servers
 
 include process.include

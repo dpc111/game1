@@ -22,13 +22,9 @@ void server_t::start() {
 
 void server_t::process() {
 	while (true) {
-		printf("aaa\n");
 		network_->process();
-		printf("aaa1\n");
 		times_->process(getms());
-		printf("aaa2\n");
 		sleepms(1);
-		printf("aaa3\n");
 	}
 }
 

@@ -131,7 +131,7 @@ public:
 
 	const container_t::value_type & top() const { return container_.front(); }
 
-	void push(const timer_t& x) {
+	void push(const timer_t *& x) {
 		container_.push_back(x);
 		std::push_heap(container_.begin(), container_.end(), comparator_t());
 	}

@@ -1,6 +1,8 @@
 #ifndef TIMER_H
 #define TIMER_H
 
+#include "assert.h"
+
 class timer_t;
 class timers_t;
 typedef int timestamp;

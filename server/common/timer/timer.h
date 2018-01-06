@@ -1,7 +1,8 @@
 #ifndef TIMER_H
 #define TIMER_H
 
-#include "assert.h"
+#include <assert.h>
+#include <stdio.h>
 
 class timer_t;
 class timers_t;

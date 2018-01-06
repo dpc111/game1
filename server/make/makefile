@@ -3,8 +3,8 @@ all:
 	@make install -f libcommon.mk
 	@make -f libnet.mk
 	@make install -f libnet.mk
-	@make -f server.mk
-	@make install -f server.mk
+	@make -f libserver.mk
+	@make install -f libserver.mk
 	@make -f test.mk
 
 install:

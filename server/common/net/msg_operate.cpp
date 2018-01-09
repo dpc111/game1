@@ -1,11 +1,11 @@
 #include "stdio.h"
+#include "log.h"
 #include "msg_operate.h"
 #include "msg_stream.h"
 #include "tcp_network.h"
 #include "msg_dispatch.h"
 
 #define MSG_MAX_LEN 10240
-#define ERROR() printf("error") 
 
 #pragma pack(push, 1)
 struct msg_header_t {
@@ -27,7 +27,7 @@ msg_operate_t::~msg_operate_t() {
 google::protobuf::Message *msg_operate_t::gen_message(int msgid) {
 	const char *name = network_->get_msg_dispatch()->msg_name(msgid);
 	if (!name) {
-		ERROR();
+		ERROR("");
 		return NULL;
 	}
 	google::protobuf::Message *msg = NULL;
@@ -57,7 +57,7 @@ void msg_operate_t::send(tcp_connection_t *conn, google::protobuf::Message& msg)
 	stream.write(&header, sizeof(header));
 	msg_output_stream_t os(stream);
 	if (!msg.SerializeToZeroCopyStream(&os)) {
-		ERROR();
+		ERROR("");
 		stream.backup((int)os.ByteCount());
 		return;
 	}
@@ -75,7 +75,7 @@ bool msg_operate_t::on_message(tcp_connection_t *conn) {
 		msg_header_t header;
 		walk += stream.read(&header, sizeof(header));
 		if (header.len < 0 || header.len > MSG_MAX_LEN) {
-			ERROR();
+			ERROR("");
 			stream.reset();
 			break;
 		}
@@ -85,13 +85,13 @@ bool msg_operate_t::on_message(tcp_connection_t *conn) {
 		}
 		google::protobuf::Message *msg = gen_message(header.msgid);
 		if (msg == NULL) {
-			ERROR();
+			ERROR("");
 			stream.reset();
 			break;
 		}
 		msg_input_stream_t is(stream, header.len);
 		if (!msg->ParseFromZeroCopyStream(&is)) {
-			ERROR();
+			ERROR("");
 			stream.reset();
 			free_message(msg);
 			break;

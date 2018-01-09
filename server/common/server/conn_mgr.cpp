@@ -21,7 +21,7 @@ void conn_mgr_t::init() {
 void conn_mgr_t::verify(int sid, tcp_connection_t *conn) {
 	conns_t::iterator it = conns_.find(sid);
 	if (it != conns_.end()) {
-		ERROR();
+		ERROR("");
 		return;
 	}
 	conns_[sid] = conn;
@@ -44,7 +44,7 @@ tcp_connection_t *conn_mgr_t::connect_to(int sid) {
 	}
 	server_addrs_t::iterator it1 = server_addrs_.find(sid);
 	if (it1 == server_addrs_.end()) {
-		ERROR();
+		ERROR("");
 		return NULL;
 	}
 	server_addr_t *addr = it1->second;

@@ -40,7 +40,7 @@ tcp_connection_t *tcp_network_t::connect_to(const char *ip, int port, void *cont
 	int fd = ::socket(AF_INET, SOCK_STREAM, 0);
 	int res = ::connect(fd, (const sockaddr *)&addr, sizeof(addr));
 	if (res) {
-		ERROR();
+		ERROR("");
 		evutil_closesocket(fd);
 		return NULL;
 	}

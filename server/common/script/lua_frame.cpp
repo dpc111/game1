@@ -116,7 +116,7 @@ bool lua_frame_t::run_func(const char *funcname, const char *fmt, va_list vlist)
 			*va_arg(vlist, double *) = (double) lua_tonumber(lua_state_, -nres);
 			break;
 		case 's' :
-			*va_arg(vlist, char **) = lua_tostring(lua_state_, -nres);
+			*va_arg(vlist, const char **) = lua_tostring(lua_state_, -nres);
 			break;
 		case 'p' :
 			*va_arg(vlist, const void **) = aux_topointer(lua_state_, -nres);

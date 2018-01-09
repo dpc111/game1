@@ -1,5 +1,6 @@
 #include "lua_frame.h"
 #include "log.h"
+#include "type.h"
 
 lua_State *lua_frame_t::get_lua_state() {
 	return lua_state_;
@@ -39,7 +40,7 @@ bool lua_frame_t::call_func(const char *funcname, const char *args, ...) {
 	va_start(vlist, args);
 	bool res = call_func(funcname, args, vlist);
 	va_end(vlist);
-	return res
+	return res;
 }
 
 bool lua_frame_t::call_func(const char *funcname, const char *args, va_list vlist) {

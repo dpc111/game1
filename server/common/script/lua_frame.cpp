@@ -2,6 +2,21 @@
 #include "log.h"
 #include "type.h"
 
+static const void *aux_topointer(lua_State *l, int idx)
+{
+	switch(lua_type(l, -idx))
+	{
+	case LUA_TLIGHTUSERDATA:
+		return lua_topointer(l, -idx);
+		break;
+	case LUA_TUSERDATA:
+		return *(void **) lua_touserdata(l, -idx);
+		break;
+	default:
+		return NULL;
+	}
+}
+
 lua_State *lua_frame_t::get_lua_state() {
 	return lua_state_;
 }
@@ -133,5 +148,5 @@ bool lua_frame_t::run_func(const char *funcname, const char *fmt, va_list vlist)
 }
 
 int lua_frame_t::run_func(const char *funcname, int nargs, int nres, int errfunc) {
-	return lua_pcall(funcname, nargs, nres, errfunc);
+	return lua_pcall(lua_state_, nargs, nres, errfunc);
 }

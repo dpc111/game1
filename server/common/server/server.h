@@ -4,6 +4,7 @@
 #include "tcp_network.h"
 #include "conn_mgr.h"
 #include "timer.h"
+#include "lua_frame.h"
 
 class server_t {
 public:
@@ -31,6 +32,8 @@ private:
 	conn_mgr_t *conn_mgr_;
 
 	timers_t *times_;
+
+	lua_frame_t *lua_frame_;
 };
 
 #endif

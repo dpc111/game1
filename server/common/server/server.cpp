@@ -5,11 +5,18 @@ server_t::server_t(const char *ip, int port) {
 	network_ = new tcp_network_t(ip, port);
 	conn_mgr_ = new conn_mgr_t(this);
 	times_ = new timers_t();
+	lua_frame_ = new lua_frame_t();
 }
 
 server_t::~server_t() {
+	delete network_;
+	delete conn_mgr_;
+	delete times_;
+	delete lua_frame_;
 	network_ = NULL;
 	conn_mgr_ = NULL;
+	times_ = NULL;
+	lua_frame_ = NULL;
 }
 
 void server_t::init() {

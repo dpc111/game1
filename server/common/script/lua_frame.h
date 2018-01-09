@@ -7,6 +7,7 @@ extern "C"
 #include "lauxlib.h"
 #include "lualib.h"
 };
+#include <map>
 
 class lua_frame_t {
 public:

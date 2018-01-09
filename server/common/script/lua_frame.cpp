@@ -1,15 +1,16 @@
 #include "lua_frame.h"
+#include "log.h"
 
 lua_State *lua_frame_t::get_lua_state() {
 	return lua_state_;
 }
 
 int lua_frame_t::load_string(const char *str) {
-	if (luaL_loadstring(lua_state_)) {
-		ERROR("%d\n", lua_tostring(lua_state_, -1));
+	if (luaL_loadstring(lua_state_, str)) {
+		ERROR("%s\n", lua_tostring(lua_state_, -1));
 		return 1;
 	}
-	return 0
+	return 0;
 }
 
 int lua_frame_t::load_script(const char *file) {

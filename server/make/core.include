@@ -51,6 +51,7 @@ CXXFLAGS := -fPIC -c -g -W -Wall
 INCLUDES := -I../common/common \
 	-I../common/net \
 	-I../common/test \
+	-I../common/script \
 	-I../common/timer \
 	-I../common/server \
 	-I../3rd/libevent/include \

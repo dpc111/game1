@@ -76,9 +76,13 @@ bool lua_frame_t::call_func(const char *funcname, const char *args, va_list vlis
 
 bool lua_frame_t::run_func(const char *funcname, const char *fmt, va_list vlist) {
 	lua_getglobal(lua_state_, funcname);
+	if (lua_isnil(lua_state_, -1)) {
+		ERROR("");
+		return false;
+	}
 	lua_pushvalue(lua_state_, -1);
 	if (!lua_isfunction(lua_state_, -1)) {
-		ERROR("1");
+		ERROR("");
 		return false;
 	}
 	lua_pushvalue(lua_state_, -1);
@@ -106,7 +110,7 @@ bool lua_frame_t::run_func(const char *funcname, const char *fmt, va_list vlist)
 		case ':' :
 			break;
 		default :
-			ERROR("3");
+			ERROR("");
 			return false;
 		}
 		if (*fmt == ':') {
@@ -126,7 +130,7 @@ bool lua_frame_t::run_func(const char *funcname, const char *fmt, va_list vlist)
 	lua_pushcfunction(lua_state_, traceback);
 	lua_insert(lua_state_, -nargs - 2);
 	if (lua_pcall(lua_state_, nargs, nres, -nres - 2) != 0) {
-		ERROR("4");
+		ERROR("");
 		return false;
 	}
 	while (*fmt != '\0') {
@@ -150,7 +154,7 @@ bool lua_frame_t::run_func(const char *funcname, const char *fmt, va_list vlist)
 			*va_arg(vlist, const void **) = aux_topointer(lua_state_, -nres);
 			break;
 		default :
-			ERROR("5");
+			ERROR("");
 			return false;
 		}
 		++fmt;

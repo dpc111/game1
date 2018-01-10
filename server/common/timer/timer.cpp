@@ -72,6 +72,12 @@ int timers_t::process(timestamp now) {
 	while ((!time_queue_.empty()) 
 		&& (time_queue_.top()->time() <= now
 		|| time_queue_.top()->is_cancelled())) {
+		if (time_queue_.top()->time() <= now) {
+			printf("%ld  %ld\n", time_queue_.top()->time(), now);
+		}
+		if (time_queue_.top()->is_cancelled()) {
+			printf("ssssssss\n");
+		}
 		ctimer_t *timer = process_node_ = time_queue_.top();
 		time_queue_.pop();
 		if (!timer->is_cancelled()) {

@@ -20,6 +20,8 @@ public:
 
 	tcp_network_t *get_network() { return network_; }
 
+	lua_frame_t *get_lua_frame() { return lua_frame_; }
+
 	void send(int sid, google::protobuf::Message& msg);
 
 	void send(tcp_connection_t *conn, google::protobuf::Message& msg);

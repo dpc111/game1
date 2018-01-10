@@ -17,6 +17,15 @@ static const void *aux_topointer(lua_State *l, int idx)
 	}
 }
 
+lua_frame_t::lua_frame_t() {
+	lua_state_ = luaL_newstate();
+	luaL_openlibs(lua_state_);
+}
+
+lua_frame_t::~lua_frame_t() {
+	lua_close(lua_state_);
+}
+
 lua_State *lua_frame_t::get_lua_state() {
 	return lua_state_;
 }

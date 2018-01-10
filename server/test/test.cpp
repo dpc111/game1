@@ -27,6 +27,7 @@ int main() {
 	// network.start();
 
 	server.get_lua_frame()->load_script("test.lua");
+	server.get_lua_frame()->run_script();
 	server.start();
 	test_timer timer;
 	server.register_timer(&timer, NULL, 10000, 10000);

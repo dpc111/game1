@@ -40,7 +40,7 @@ int lua_frame_t::load_string(const char *str) {
 
 int lua_frame_t::load_script(const char *file) {
 	if (luaL_loadfile(lua_state_, file)) {
-		ERROR("%s\n", lua_tostring(lua_state_, -1));
+		ERROR("load file fail %s\n", lua_tostring(lua_state_, -1));
 		return 1;
 	}
 	return 0;

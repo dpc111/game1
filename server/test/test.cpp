@@ -15,8 +15,9 @@ class test_timer : public timer_handler_t {
 	virtual void handle_timeout(timer_handle_t handle, void *user) {
 		//printf("aaaaaahhshsdfdfs%ld\n", getms());
 		int res;
-		server.get_lua_frame()->call_func("test_add", "ii:i", 1, 2, &res);
+		bool ok = server.get_lua_frame()->call_func("test_add", "ii:i", 1, 2, &res);
 		printf(".....%d\n", res);
+		assert(ok);
 	}
 };
 

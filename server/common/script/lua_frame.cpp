@@ -76,6 +76,7 @@ bool lua_frame_t::call_func(const char *funcname, const char *args, va_list vlis
 
 bool lua_frame_t::run_func(const char *funcname, const char *fmt, va_list vlist) {
 	lua_getglobal(lua_state_, funcname);
+	lua_pushvalue(lua_state_, -1);
 	if (!lua_isfunction(lua_state_, -1)) {
 		ERROR("1");
 		return false;

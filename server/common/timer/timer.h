@@ -82,7 +82,7 @@ public:
 
 	void cancel();
 
-	void trigger();
+	void trigger(timestamp now);
 
 	timers_t& owner() const { return owner_; }
 

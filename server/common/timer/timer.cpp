@@ -41,7 +41,7 @@ void ctimer_t::cancel() {
 	owner_.on_cancel(); 
 }
 
-void ctimer_t::trigger() {
+void ctimer_t::trigger(timestamp now) {
 	if (!this->is_cancelled()) {
 		state_ = TIME_EXECUTING;
 		handler_->handle_timeout(timer_handle_t(this), user_data_);
@@ -50,7 +50,8 @@ void ctimer_t::trigger() {
 		}
 	}
 	if (!this->is_cancelled()) {
-		time_ += interval_;
+		// time_ += interval_;
+		time_ = now + interval_;
 		state_ = TIME_PENDING;
 	}
 }
@@ -82,7 +83,7 @@ int timers_t::process(timestamp now) {
 		time_queue_.pop();
 		if (!timer->is_cancelled()) {
 			++fired_num;
-			timer->trigger();
+			timer->trigger(now);
 		}
 		if (!timer->is_cancelled()) {
 			time_queue_.push(timer);

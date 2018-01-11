@@ -1,8 +1,10 @@
 #include <string.h>
 #include <stdlib.h>
+#include <typeinfo>
 #include "chunk.h"
 #include "tcp_connection.h"
 #include "net_pool.h"
+#include "log.h"
 
 net_input_stream_t::net_input_stream_t(tcp_connection_t *conn) 
 	: conn_(conn)

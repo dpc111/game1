@@ -122,6 +122,9 @@ void net_input_stream_t::backup(int num) {
 
 void net_input_stream_t::finish() {
 	for (input_queue_t::iterator it = buff_.begin(); it != buff_.end();) {
+		if (*it == NULL) {
+			ERROR("");
+		}
 		*it;
 		ERROR("%d", buff_.size());
 		ERROR("%d", it);

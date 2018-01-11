@@ -70,6 +70,8 @@ int net_input_stream_t::read_fd(void *ud, int fd) {
 		}
 		input_chunk_t *chunk = read_fd_buff.front();
 		read_fd_buff.pop_front();
+		ERROR(buff_.size());
+		assert(chunk);
 		buff_.push_back(chunk);
 		if (read_size < chunk->total_size()) {
 			chunk->write_offset_ += read_size;

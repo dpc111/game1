@@ -125,7 +125,6 @@ void net_input_stream_t::finish() {
 		*it;
 		ERROR("%d", buff_.size());
 		ERROR("%d", it);
-		ERROR("%d", *it);
 		assert(*it);
 		input_chunk_t *chunk = *it;
 		if (chunk->read_offset_ == chunk->write_offset_) {

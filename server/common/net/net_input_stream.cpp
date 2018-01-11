@@ -112,7 +112,9 @@ void net_input_stream_t::backup(int num) {
 		input_chunk_t *chunk = *it;
 		if (chunk->read_offset_ == 0) {
 			continue;
-		} 
+		}
+		ERROR("%d", num); 
+		ERROR("%d", chunk->read_offset_ ); 
 		int backup_size = num <= chunk->read_offset_ ? num : chunk->read_offset_;
 		chunk->read_offset_ -= backup_size;
 		size_ += backup_size;

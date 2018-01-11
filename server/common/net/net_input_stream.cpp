@@ -120,6 +120,7 @@ void net_input_stream_t::backup(int num) {
 
 void net_input_stream_t::finish() {
 	for (input_queue_t::iterator it = buff_.begin(); it != buff_.end();) {
+		assert(*it);
 		input_chunk_t *chunk = *it;
 		if (chunk->read_offset_ == chunk->write_offset_) {
 			if (buff_.size() == 1) {

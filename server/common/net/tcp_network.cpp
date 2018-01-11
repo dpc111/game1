@@ -64,6 +64,7 @@ tcp_connection_t* tcp_network_t::get_connection(int fd) {
 void tcp_network_t::add_connection(tcp_connection_t *conn) {
 	tcp_connection_t *rm_conn = get_connection(conn->get_fd());
 	assert(rm_conn == NULL);
+	assert(conn);
 	conns_.insert(conn_map_t::value_type(conn->get_fd(), conn));
 }
 

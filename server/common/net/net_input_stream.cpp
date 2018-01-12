@@ -172,7 +172,7 @@ int net_input_stream_t::skip(int num) {
 }
 
 void net_input_stream_t::reset() {
-	while (!buff_.empty()) {
+	while (buff_.size() > 0) {
 		input_chunk_t *chunk = buff_.front();
 		input_chunk_free(chunk);
 		buff_.pop_front();

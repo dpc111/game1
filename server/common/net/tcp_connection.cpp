@@ -88,7 +88,8 @@ void tcp_connection_t::del_event_write() {
 }
 
 void tcp_connection_t::connect_destroy() {
-	::shutdown(fd_, SD_BOTH);
+	// ::shutdown(fd_, SD_BOTH);
+	::shutdown(fd_, SHUT_RDWR);
 	evutil_closesocket(fd_);
 	fd_ = -1;
 	state_ = CNT_STATE_DISCONNECTED;	

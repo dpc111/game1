@@ -9,11 +9,13 @@
 net_input_stream_t::net_input_stream_t(tcp_connection_t *conn) 
 	: conn_(conn)
 	, size_(0) {
+	buff_.clear()
 	ERROR("%d", buff_.size());
 }
 
 net_input_stream_t::~net_input_stream_t() {
 	reset();
+	buff_.clear()
 }
 
 int net_input_stream_t::read(void *buff, int size) {

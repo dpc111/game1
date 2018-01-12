@@ -131,10 +131,6 @@ void net_input_stream_t::backup(int num) {
 
 void net_input_stream_t::finish() {
 	for (input_queue_t::iterator it = buff_.begin(); it != buff_.end();) {
-		ERROR("%d", buff_.size());
-		ERROR("%d", it);
-		*it;
-		assert(*it);
 		input_chunk_t *chunk = *it;
 		if (chunk->read_offset_ == chunk->write_offset_) {
 			if (buff_.size() == 1) {
@@ -174,6 +170,7 @@ int net_input_stream_t::skip(int num) {
 }
 
 void net_input_stream_t::reset() {
+	ERROR("reset");
 	while (buff_.size() > 0) {
 		input_chunk_t *chunk = buff_.front();
 		input_chunk_free(chunk);

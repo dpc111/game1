@@ -9,12 +9,12 @@
 net_output_stream_t::net_output_stream_t(tcp_connection_t *conn)
 	: conn_(conn) 
 	, size_(0) {
-	buff_.clear()
+	buff_.clear();
 }
 
 net_output_stream_t::~net_output_stream_t() {
 	reset();
-	buff_.clear()
+	buff_.clear();
 }
 
 int net_output_stream_t::write(const void *buff, int size) {

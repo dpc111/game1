@@ -1,3 +1,4 @@
+#include <stdlib.h>
 #include <netinet/tcp.h>
 #include "tcp_connection.h"
 

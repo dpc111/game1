@@ -1,23 +1,3 @@
-#include <sys/socket.h>   //connect,send,recv,setsockopt等
-#include <sys/types.h>      
-
-#include <netinet/in.h>     // sockaddr_in, "man 7 ip" ,htons
-#include <poll.h>             //poll,pollfd
-#include <arpa/inet.h>   //inet_addr,inet_aton
-#include <unistd.h>        //read,write
-#include <netdb.h>         //gethostbyname
-
-#include <error.h>         //perror
-#include <stdio.h>
-#include <errno.h>         //errno
-
-#include <string.h>          // memset
-#include <string>
-#include <iostream>
-
-#include <stdio.h>
-#include <stdlib.h>
-#include <sys/types.h>
 #include <sys/socket.h>
 #include <netinet/tcp.h>
 #include "tcp_connection.h"

@@ -69,10 +69,16 @@ void tcp_network_t::add_connection(tcp_connection_t *conn) {
 }
 
 void tcp_network_t::remove_connection(int fd) {
+	ERROR("conn remove fd: %d", fd);
 	conn_map_t::iterator it = conns_.find(fd);
 	if (it == conns_.end()) {
+		ERROR();
 		return;
 	}
+	tcp_connection_t *conn = *it;
+	conn->set_closed(true);
+	conn->unset_events();
+	conn->connect_destroy();
 	conns_.erase(it);
 }
 

@@ -57,6 +57,8 @@ public:
 
 	void del_event_write();
 
+	void connect_destroy();
+
 	void set_sid(int sid) { sid_ = sid; }
 
 	int get_sid() { return sid_; }

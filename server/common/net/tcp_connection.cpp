@@ -65,3 +65,10 @@ void tcp_connection_t::del_event_write() {
 		event_del(ev_write_);
 	}
 }
+
+void tcp_connection_t::connect_destroy() {
+	::shutdown(fd_, SD_BOTH);
+	evutil_closesocket(fd_);
+	fd_ = -1;
+	state_ = CNT_STATE_DISCONNECTED;	
+}

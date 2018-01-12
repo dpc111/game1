@@ -58,7 +58,7 @@ public:
 
 	void set_sid(int sid) { sid_ = sid; }
 
-	int get_sid() { return sid_ = 0; }
+	int get_sid() { return sid_; }
 
 private:
 	net_address_t addr_;

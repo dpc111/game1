@@ -109,6 +109,7 @@ void tcp_network_t::ev_close() {
 }
 
 void tcp_network_t::ev_listen_cb(evconnlistener *listener, evutil_socket_t fd, sockaddr *sa, int socklen, void *ud) {
+	ERROR("connect fd %d", fd);
 	tcp_network_t *network = (tcp_network_t *)ud;
 	assert(sa->sa_family == AF_INET);
 	tcp_connection_t *conn = connection_alloc();

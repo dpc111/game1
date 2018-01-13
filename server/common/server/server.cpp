@@ -35,7 +35,7 @@ void server_t::process() {
 	}
 }
 
-tcp_connection_t *server_t::connect_to(const char *ip, int port, void *context = NULL) {
+tcp_connection_t *server_t::connect_to(const char *ip, int port, void *context) {
 	return network_->connect_to(ip, port, context);
 }
 

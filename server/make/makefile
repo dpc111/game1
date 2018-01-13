@@ -6,7 +6,7 @@ all:
 	@make -f libserver.mk
 	@make install -f libserver.mk
 	@make -f test.mk
-	@make install -f test.mk
+#	@make install -f test.mk
 
 install:
 

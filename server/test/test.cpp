@@ -9,11 +9,11 @@
 #include "server.h"
 #include "lua_frame.h"
 
-server_t server("0.0.0.0", 7768);
+//server_t server("0.0.0.0", 7768);
+server_t server("0.0.0.0", 7769);
 
 class test_timer : public timer_handler_t {
 	virtual void handle_timeout(timer_handle_t handle, void *user) {
-		//printf("aaaaaahhshsdfdfs%ld\n", getms());
 		int res;
 		bool ok = server.get_lua_frame()->call_func("test_add", "ii:i", 1, 2, &res);
 		printf(".....%d\n", res);
@@ -22,15 +22,13 @@ class test_timer : public timer_handler_t {
 };
 
 int main() {
-	printf("server start\n");
-	// tcp_network_t network("0.0.0.0", 7768);
-	// network.start();
-
 	server.get_lua_frame()->load_script("test.lua");
 	server.get_lua_frame()->run_script();
 	server.start();
 	test_timer timer;
 	server.register_timer(&timer, NULL, 10000, 10000);
+	// test
+	server.connect_to("127.0.0.1", 7768);
 	server.process();
 
 	printf("llllllllllsdssd\n");

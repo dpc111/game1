@@ -35,6 +35,14 @@ void server_t::process() {
 	}
 }
 
+tcp_connection_t *server_t::connect_to(const char *ip, int port, void *context = NULL) {
+	return network_->connect_to(ip, port, context);
+}
+
+tcp_connection_t *server_t::connect_to(int sid) {
+	return conn_mgr_->connect_to(sid);
+}
+
 void server_t::send(int sid, google::protobuf::Message& msg) {
 	tcp_connection_t *conn = conn_mgr_->get_conn(sid);
 	if (!conn) {

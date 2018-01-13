@@ -22,6 +22,10 @@ public:
 
 	lua_frame_t *get_lua_frame() { return lua_frame_; }
 
+	tcp_connection_t *connect_to(const char *ip, int port, void *context = NULL);
+
+	tcp_connection_t *connect_to(int sid);
+
 	void send(int sid, google::protobuf::Message& msg);
 
 	void send(tcp_connection_t *conn, google::protobuf::Message& msg);

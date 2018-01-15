@@ -89,7 +89,7 @@ public:
 	template<typename T>
 	void register_net_message(const char *name, const typename cbT_t<T>::net_msg_cb_t& cb);
 
-	void set_on_script_func(on_script_func_t *func) { on_script_func_ = func; }
+	void set_on_script_func(on_script_func_t func) { on_script_func_ = func; }
 
 private:
 	tcp_network_t *network_;
@@ -98,7 +98,7 @@ private:
 
 	name_map_t names_;
 
-	on_script_func_t *on_script_func_;
+	on_script_func_t on_script_func_;
 };
 
 #endif

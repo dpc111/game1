@@ -77,7 +77,6 @@ void msg_operate_t::send_func(tcp_connection_t *conn, const char *funcname, cons
 	header.msgid = 0;
 	header.msgtype = MSG_TYPE_SCRIPT;
 	stream.write(&header, sizeof(header));
-	const char *walk = fmt;
 	int ilen = sizeof(int);
 	int dlen = sizeof(double);
 	int slen = 0;
@@ -87,23 +86,21 @@ void msg_operate_t::send_func(tcp_connection_t *conn, const char *funcname, cons
 	slen = strlen(fmt);
 	stream.write(&slen, ilen);
 	stream.write(fmt, slen);
+	const char *walk = fmt;
 	while (*walk != '\0') {
 		switch (*walk) {
-		case 'i':
-			int ival = (int) va_arg(vlist, int);
+		case 'i' :
 			stream.write(&ilen, ilen);
-			stream.write(&ival, ilen);
+			stream.write(&(int) va_arg(vlist, int), ilen);
 			break;
-		case 'd':
-			double dval = (double) va_arg(vlist, double);
+		case 'd' :
 			stream.write(&dlen, ilen);
-			stream.write(&dval, dlen);
+			stream.write(&(double) va_arg(vlist, double), dlen);
 			break;
-		case 's':
-			char *sval = (char *) va_arg(vlist, char *);
+		case 's' :
 			slen = strlen(sval);
 			stream.write(&slen, ilen);
-			stream.write(sval, slen);
+			stream.write((char *) (vlist, char *), slen);
 			break;
 		default :
 			ERROR("");

@@ -107,7 +107,7 @@ void msg_operate_t::send_func(tcp_connection_t *conn, const char *funcname, cons
 			break;
 		default :
 			ERROR("");
-			stream:reset();
+			stream.reset();
 			return;
 		}
 		++fmt;

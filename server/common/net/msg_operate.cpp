@@ -128,27 +128,41 @@ bool msg_operate_t::on_message(tcp_connection_t *conn) {
 		if (header.len < 0 || header.len > MSG_MAX_LEN) {
 			ERROR("");
 			stream.reset();
-			break;
+			// break;
+			return false;
 		}
 		if (header.len > stream.size()) {
 			stream.backup(walk);
 			break;
 		}
-		google::protobuf::Message *msg = gen_message(header.msgid);
-		if (msg == NULL) {
-			ERROR("");
-			stream.reset();
-			break;
-		}
-		msg_input_stream_t is(stream, header.len);
-		if (!msg->ParseFromZeroCopyStream(&is)) {
-			ERROR("");
-			stream.reset();
+		if (header.msgtype == MSG_TYPE_PB) {
+			google::protobuf::Message *msg = gen_message(header.msgid);
+			if (msg == NULL) {
+				ERROR("");
+				stream.reset();
+				// break;
+				return false;
+			}
+			msg_input_stream_t is(stream, header.len);
+			if (!msg->ParseFromZeroCopyStream(&is)) {
+				ERROR("");
+				stream.reset();
+				free_message(msg);
+				// break;
+				return false;
+			}
+			network->get_msg_dispatch()->on_message(conn, header.msgid, msg);
 			free_message(msg);
-			break;
-		}
-		network->get_msg_dispatch()->on_message(conn, header.msgid, msg);
-		free_message(msg);
+		} else if (header.msgtype == MSG_TYPE_SCRIPT) {
+			bool ok = network->get_msg_dispatch()->on_script_func(conn);
+			if (!ok) {
+				ERROR("");
+				stream.reset();
+				// break;
+				return false;
+			}
+		} 
 	}
 	stream.finish();
+	return true;
 }

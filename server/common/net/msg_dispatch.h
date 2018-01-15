@@ -68,6 +68,8 @@ public:
 
 	typedef std::map<const char *, int> name_map_t;
 
+	typedef std::tr1::function<bool (tcp_connection_t *)> on_script_func_t;
+
 public:
 	msg_dispatch_t(tcp_network_t *network);
 
@@ -79,11 +81,15 @@ public:
 
 	void on_message(tcp_connection_t *conn, int msgid, google::protobuf::Message *msg);
 
+	bool on_script_func(tcp_connection_t *conn);
+
 	template<typename T>
 	void register_message(const char *name, const typename cbT_t<T>::msg_cb_t& cb);
 
 	template<typename T>
 	void register_net_message(const char *name, const typename cbT_t<T>::net_msg_cb_t& cb);
+
+	void set_on_script_func(on_script_func_t *func) { on_script_func_ = func; }
 
 private:
 	tcp_network_t *network_;
@@ -91,6 +97,8 @@ private:
 	msg_map_t msgs_;
 
 	name_map_t names_;
+
+	on_script_func_t *on_script_func_;
 };
 
 #endif

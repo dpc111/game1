@@ -1,6 +1,8 @@
 #ifndef LUA_FRAME_H
 #define LUA_FRAME_H
 
+#define LUA_MAX_STR_PARAM_LEN 1024
+
 extern "C"
 {
 #include "lua.h"
@@ -9,12 +11,14 @@ extern "C"
 };
 #include <map>
 
+class tcp_connection_t;
+
 class lua_frame_t {
 public:
 	typedef std::map<const char *, int> func_map_t;
 
 public:
-	lua_frame_t();
+	lua_frame_t(server_t *server);
 
 	~lua_frame_t();
 
@@ -35,10 +39,17 @@ public:
 	bool run_func(const char *funcname, const char *fmt, va_list vlist);
 
 	int run_func(const char *funcname, int nargs, int nres, int errfunc);
+
+	bool on_script_func(tcp_connection_t *conn);
+
 private:
+	server_t *server_;
+
 	func_map_t *func_map_;
 
 	lua_State *lua_state_;
+
+	char str_params_[20][LUA_MAX_STR_PARAM_LEN];
 };
 
 #endif

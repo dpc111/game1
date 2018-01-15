@@ -5,9 +5,12 @@
 
 msg_dispatch_t::msg_dispatch_t(tcp_network_t *network) {
 	network_ = network;
+	on_script_func_ = NULL;
 }
 
 msg_dispatch_t::~msg_dispatch_t() {
+	network_ = NULL;
+	on_script_func_ = NULL;
 }
 
 int msg_dispatch_t::msg_id(const char *name) {
@@ -37,6 +40,13 @@ void msg_dispatch_t::on_message(tcp_connection_t *conn, int msgid, google::proto
 		cb->on_message(conn->get_sid(), msg);
 	}
 	cb->on_net_message(conn, msg);
+}
+
+bool msg_dispatch_t::on_script_func(tcp_connection_t *conn) {
+	if (on_script_func_) {
+		return on_script_func_(conn);
+	}
+	return false;
 }
 
 template<typename T>

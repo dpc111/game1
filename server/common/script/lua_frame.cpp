@@ -1,8 +1,10 @@
+#include <tr1/functional>
 #include "lua_frame.h"
 #include "log.h"
 #include "type.h"
 #include "tcp_connection.h"
 #include "net_input_stream.h"
+#include "server.h"
 
 static const void *aux_topointer(lua_State *l, int idx)
 {

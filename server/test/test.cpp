@@ -12,7 +12,7 @@
 
 server_t server("0.0.0.0", 7768);
 // server_t server("0.0.0.0", 7769);
-tcp_connection_t *conn
+tcp_connection_t *conn;
 
 class test_timer : public timer_handler_t {
 	virtual void handle_timeout(timer_handle_t handle, void *user) {

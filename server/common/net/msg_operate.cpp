@@ -91,16 +91,19 @@ void msg_operate_t::send_func(tcp_connection_t *conn, const char *funcname, cons
 		switch (*walk) {
 		case 'i' :
 			stream.write(&ilen, ilen);
-			stream.write(&(int) va_arg(vlist, int), ilen);
+			stream.write((int *)vlist, ilen);
+			va_arg(vlist, int);
 			break;
 		case 'd' :
 			stream.write(&dlen, ilen);
-			stream.write(&(double) va_arg(vlist, double), dlen);
+			stream.write(&vlist, dlen);
+			va_arg(vlist, double);
 			break;
 		case 's' :
 			slen = strlen(sval);
 			stream.write(&slen, ilen);
-			stream.write((char *) (vlist, char *), slen);
+			stream.write((char *)vlist, slen);
+			va_arg(vlist, char *);
 			break;
 		default :
 			ERROR("");

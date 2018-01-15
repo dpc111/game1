@@ -100,7 +100,7 @@ void msg_operate_t::send_func(tcp_connection_t *conn, const char *funcname, cons
 			va_arg(vlist, double);
 			break;
 		case 's' :
-			slen = strlen(sval);
+			slen = strlen((char *)vlist);
 			stream.write(&slen, ilen);
 			stream.write((char *)vlist, slen);
 			va_arg(vlist, char *);

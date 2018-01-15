@@ -199,7 +199,7 @@ bool lua_frame_t::on_script_func(tcp_connection_t *conn) {
 	int fpos = lua_gettop(lua_state_);
 
 	++str_param_pos;
-	stream.len(&len, sizeof(int));
+	stream.read(&len, sizeof(int));
 	stream.read(str_params_[str_param_pos], len);
 	char *pos = str_params_[str_param_pos];
 	while (*pos != '\0') {
@@ -237,5 +237,5 @@ bool lua_frame_t::on_script_func(tcp_connection_t *conn) {
 		return false;
 	}
 	lua_settop(lua_state_, top);
-	return true
+	return true;
 }

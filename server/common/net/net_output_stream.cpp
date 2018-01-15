@@ -28,8 +28,7 @@ int net_output_stream_t::write(const void *buff, int size) {
 			chunk = output_chunk_alloc();
 			chunk->conn_ = conn_;
 			buff_.push_back(chunk);
-		} 
-		else {
+		} else {
 			chunk = buff_.back();
 		}
 		int write_size = size < chunk->write_size() ? size : chunk->write_size();
@@ -57,7 +56,9 @@ int net_output_stream_t::write_fd(void *ud, int fd) {
 			break;
 		}
 	}
+	ERROR("dddd %d", i);
 	int n = ::writev(fd, vecs, i);
+	ERROR("dddd %d", n);
 	if (n < 0) {
 		return n;
 	}

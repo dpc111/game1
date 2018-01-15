@@ -71,7 +71,7 @@ void msg_operate_t::send(tcp_connection_t *conn, google::protobuf::Message& msg)
 void msg_operate_t::send_func(tcp_connection_t *conn, const char *funcname, const char *fmt, va_list vlist, int len) {
 	net_output_stream_t& stream = conn->get_output_stream();
 	msg_header_t header;
-	header.len = 0;
+	header.len = len;
 	header.sid = network_->get_sid();
 	header.tid = conn->get_sid();
 	header.msgid = 0;

@@ -4,6 +4,8 @@
 #include "type.h"
 #include "tcp_connection.h"
 #include "net_input_stream.h"
+#include "msg_dispatch.h"
+#include "tcp_network.h"
 #include "server.h"
 
 static const void *aux_topointer(lua_State *l, int idx)

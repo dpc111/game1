@@ -1,5 +1,6 @@
 #include "server.h"
 #include "timestamp.h"
+#include "msg_operate.h"
 
 server_t::server_t(const char *ip, int port) {
 	network_ = new tcp_network_t(ip, port);
@@ -51,11 +52,18 @@ void server_t::send(int sid, google::protobuf::Message& msg) {
 	if (!conn) {
 		return;
 	}
-	network_->send(conn, msg);
+	network_->get_msg_operate()->send(conn, msg);
 }
 
 void server_t::send(tcp_connection_t *conn, google::protobuf::Message& msg) {
-	network_->send(conn, msg);
+	network_->get_msg_operate()->send(conn, msg);
+}
+
+void server_t::send_func(tcp_connection_t *conn, const char *funcname, const char *fmt, ...) {
+	va_list vlist;
+	va_start(vlist, fmt);
+	network_->get_msg_operate()->send_func(conn, funcname, fmt, vlist);
+	va_end(vlist);
 }
 
 void server_t::register_timer(timer_handler_t *handler, void *user, timestamp start, timestamp interval) {

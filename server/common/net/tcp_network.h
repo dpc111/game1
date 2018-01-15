@@ -40,9 +40,11 @@ public:
 
 	void remove_connection(int fd);
 
-	void send(tcp_connection_t *conn, google::protobuf::Message& msg) { msg_operate_->send(conn, msg); }
+	// void send(tcp_connection_t *conn, google::protobuf::Message& msg) { msg_operate_->send(conn, msg); }
 
-	void send(int fd, google::protobuf::Message& msg) { send(get_connection(fd), msg); }
+	// void send(int fd, google::protobuf::Message& msg) { send(get_connection(fd), msg); }
+
+	// void send_func(tcp_connection_t *conn, const char *funcname, const char *fmt, va_list vlist) { msg_operate_->send_func(conn, funcname, vlist); }
 
 	event_base *get_ev_base() { return ev_base_; }
 

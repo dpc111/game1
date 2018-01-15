@@ -27,7 +27,7 @@ lua_frame_t::lua_frame_t(server_t *server)
 	: server_(server) {
 	lua_state_ = luaL_newstate();
 	luaL_openlibs(lua_state_);
-	server_->get_network()->get_msg_dispatch()->set_on_script_func(std::tr1::bind(&lua_frame_t::on_script_func, std::tr1::placeholders::_1));
+	server_->get_network()->get_msg_dispatch()->set_on_script_func(std::tr1::bind(&lua_frame_t::on_script_func, this, std::tr1::placeholders::_1));
 }
 
 lua_frame_t::~lua_frame_t() {

@@ -18,6 +18,8 @@ public:
 
 	void send(tcp_connection_t *conn, google::protobuf::Message& msg);
 
+	void send_func(tcp_connection_t *conn, const char *funcname, const char *fmt, va_list vlist);
+
 	bool on_message(tcp_connection_t *conn);
 
 private:

@@ -21,6 +21,7 @@ tcp_connection_t::tcp_connection_t()
 tcp_connection_t::~tcp_connection_t() {
 	closed_ = true;
 	sid_ = 0;
+	fd_ = -1;
 }
 
 bool tcp_connection_t::reliable() {

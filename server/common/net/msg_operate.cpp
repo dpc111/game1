@@ -6,6 +6,8 @@
 #include "msg_dispatch.h"
 
 #define MSG_MAX_LEN 10240
+#define MSG_TYPE_PB 0x1
+#define MSG_TYPE_SCRIPT 0x2 
 
 #pragma pack(push, 1)
 struct msg_header_t {
@@ -13,7 +15,8 @@ struct msg_header_t {
 	int sid;
 	int tid;
 	int msgid;
-	msg_header_t() : len(0), sid(0), tid(0), msgid(0) {}
+	int msgtype;
+	msg_header_t() : len(0), sid(0), tid(0), msgid(0), msgtype(MSG_TYPE_PB) {}
 }; 
 #pragma pack(pop)
 
@@ -54,12 +57,60 @@ void msg_operate_t::send(tcp_connection_t *conn, google::protobuf::Message& msg)
 	header.sid = network_->get_sid();
 	header.tid = conn->get_sid();
 	header.msgid = msgid;
+	header.msgtype = MSG_TYPE_PB;
 	stream.write(&header, sizeof(header));
 	msg_output_stream_t os(stream);
 	if (!msg.SerializeToZeroCopyStream(&os)) {
 		ERROR("");
 		stream.backup((int)os.ByteCount());
 		return;
+	}
+	conn->add_event_write();
+}
+
+void msg_operate_t::send_func(tcp_connection_t *conn, const char *funcname, const char *fmt, va_list vlist) {
+	net_output_stream_t& stream = conn->get_output_stream();
+	msg_header_t header;
+	header.len = 0;
+	header.sid = network_->get_sid();
+	header.tid = conn->get_sid();
+	header.msgid = 0;
+	header.msgtype = MSG_TYPE_SCRIPT;
+	stream.write(&header, sizeof(header));
+	const char *walk = fmt;
+	int ilen = sizeof(int);
+	int dlen = sizeof(double);
+	int slen = 0;
+	slen = strlen(funcname);
+	stream.write(&slen, ilen);
+	stream.write(funcname, slen);
+	slen = strlen(fmt);
+	stream.write(&slen, ilen);
+	stream.write(fmt, slen);
+	while (*walk != "\0") {
+		switch (*walk) {
+		case "i":
+			int val = (int) va_arg(va_list, int);
+			stream.write(&ilen, ilen);
+			stream.write(&val, ilen);
+			break;
+		case "d":
+			double val = (double) va_arg(va_list, double);
+			stream.write(&dlen, ilen);
+			stream.write(&val, dlen);
+			break;
+		case "s":
+			char *val = (char *) va_arg(va_list, char *);
+			slen = strlen(val);
+			stream.write(&slen, ilen);
+			stream.write(val, slen);
+			break;
+		default :
+			ERROR("");
+			stream:reset();
+			return;
+		}
+		++fmt;
 	}
 	conn->add_event_write();
 }

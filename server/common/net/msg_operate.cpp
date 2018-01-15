@@ -110,7 +110,7 @@ void msg_operate_t::send_func(tcp_connection_t *conn, const char *funcname, cons
 			stream.reset();
 			return;
 		}
-		++fmt;
+		++walk;
 	}
 	conn->add_event_write();
 }

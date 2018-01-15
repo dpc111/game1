@@ -68,7 +68,7 @@ void msg_operate_t::send(tcp_connection_t *conn, google::protobuf::Message& msg)
 	conn->add_event_write();
 }
 
-void msg_operate_t::send_func(tcp_connection_t *conn, const char *funcname, const char *fmt, va_list vlist) {
+void msg_operate_t::send_func(tcp_connection_t *conn, const char *funcname, const char *fmt, va_list vlist, int len) {
 	net_output_stream_t& stream = conn->get_output_stream();
 	msg_header_t header;
 	header.len = 0;

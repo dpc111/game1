@@ -18,7 +18,7 @@ public:
 
 	void send(tcp_connection_t *conn, google::protobuf::Message& msg);
 
-	void send_func(tcp_connection_t *conn, const char *funcname, const char *fmt, va_list vlist);
+	void send_func(tcp_connection_t *conn, const char *funcname, const char *fmt, va_list vlist, int len);
 
 	bool on_message(tcp_connection_t *conn);
 

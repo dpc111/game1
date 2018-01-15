@@ -62,7 +62,34 @@ void server_t::send(tcp_connection_t *conn, google::protobuf::Message& msg) {
 void server_t::send_func(tcp_connection_t *conn, const char *funcname, const char *fmt, ...) {
 	va_list vlist;
 	va_start(vlist, fmt);
-	network_->get_msg_operate()->send_func(conn, funcname, fmt, vlist);
+	int len = 0;
+	len += sizeof(int);
+	len += strlen(funcname);
+	len += sizeof(int);
+	len += fmt;
+	const char *walk = fmt;
+	while (*walk != '\0') {
+		switch (*walk) {
+		case 'i' :
+			len += sizeof(int);
+			len += sizeof(int);
+			va_arg(vlist, int);
+		case 'd'
+			len += sizeof(int);
+			len += sizeof(double);
+			va_arg(vlist, double);
+		case 's'
+			len += sizeof(int);
+			len += strlen((char *)vlist);
+			va_arg(vlist, char *);
+		default :
+			ERROR("");
+			break;
+		}
+		++walk;
+	}
+	va_start(vlist, fmt);
+	network_->get_msg_operate()->send_func(conn, funcname, fmt, vlist, len);
 	va_end(vlist);
 }
 

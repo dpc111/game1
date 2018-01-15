@@ -148,6 +148,7 @@ void tcp_network_t::ev_write_cb(evutil_socket_t fd, const short which, void *arg
 		return;
 	}
 	int n = stream.write_fd(conn, fd);
+	ERROR("read fd %d len %d", fd, n);
 	if (n < 0) {
 		if (conn->reliable()) {
 			conn->add_event_write();

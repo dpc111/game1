@@ -12,6 +12,7 @@ extern "C"
 #include <map>
 
 class tcp_connection_t;
+class server_t;
 
 class lua_frame_t {
 public:

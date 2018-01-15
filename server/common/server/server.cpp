@@ -1,3 +1,4 @@
+#include "log.h"
 #include "server.h"
 #include "timestamp.h"
 #include "msg_operate.h"
@@ -66,7 +67,7 @@ void server_t::send_func(tcp_connection_t *conn, const char *funcname, const cha
 	len += sizeof(int);
 	len += strlen(funcname);
 	len += sizeof(int);
-	len += fmt;
+	len += strlen(fmt);
 	const char *walk = fmt;
 	while (*walk != '\0') {
 		switch (*walk) {
@@ -74,11 +75,11 @@ void server_t::send_func(tcp_connection_t *conn, const char *funcname, const cha
 			len += sizeof(int);
 			len += sizeof(int);
 			va_arg(vlist, int);
-		case 'd'
+		case 'd' :
 			len += sizeof(int);
 			len += sizeof(double);
 			va_arg(vlist, double);
-		case 's'
+		case 's' :
 			len += sizeof(int);
 			len += strlen((char *)vlist);
 			va_arg(vlist, char *);

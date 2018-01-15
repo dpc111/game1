@@ -1,5 +1,6 @@
 #include <string.h>
 #include <stdlib.h>
+#include "log.h"
 #include "net_output_stream.h"
 #include "tcp_connection.h"
 #include "net_pool.h"

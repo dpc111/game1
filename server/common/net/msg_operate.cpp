@@ -90,20 +90,20 @@ void msg_operate_t::send_func(tcp_connection_t *conn, const char *funcname, cons
 	while (*walk != '\0') {
 		switch (*walk) {
 		case 'i':
-			int val1 = (int) va_arg(va_list, int);
+			int ival = (int) va_arg(va_list, int);
 			stream.write(&ilen, ilen);
-			stream.write(&val, ilen);
+			stream.write(&ival, ilen);
 			break;
 		case 'd':
-			double val2 = (double) va_arg(va_list, double);
+			double dval = (double) va_arg(va_list, double);
 			stream.write(&dlen, ilen);
-			stream.write(&val, dlen);
+			stream.write(&dval, dlen);
 			break;
 		case 's':
-			char *val3 = (char *) va_arg(va_list, char *);
-			slen = strlen(val);
+			char *sval = (char *) va_arg(va_list, char *);
+			slen = strlen(sval);
 			stream.write(&slen, ilen);
-			stream.write(val, slen);
+			stream.write(sval, slen);
 			break;
 		default :
 			ERROR("");

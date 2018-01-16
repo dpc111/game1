@@ -54,6 +54,7 @@ int net_output_stream_t::write_fd(void *ud, int fd) {
 		output_chunk_t *chunk = *it;
 		vecs[i].iov_base = chunk->read_ptr();
 		vecs[i].iov_len = chunk->read_size();
+		ERROR("llllllllllll %d", chunk->read_size());
 		i++;
 		if (i >= IOVEC_NUM) {
 			break;

@@ -18,12 +18,15 @@ static input_chunk_t *input_chunk_alloc() {
 		pool = new input_pool_t;
 		tls_input_pool.set(pool);
 	}
-	return pool->alloc();
+	input_chunk_t *chunk = pool->alloc();
+	assert(chunk);
+	return new chunk input_chunk_t;
 }
 
 static void input_chunk_free(input_chunk_t *chunk) {
 	input_pool_t *pool = (input_pool_t *)tls_input_pool.get();
 	assert(pool);
+	chunk->~input_chunk_t();
 	pool->free(chunk);
 }
 
@@ -38,12 +41,15 @@ static output_chunk_t *output_chunk_alloc() {
 		pool = new output_pool_t;
 		tls_output_pool.set(pool);
 	}
-	return pool->alloc();
+	output_chunk_t *chunk = pool->alloc();
+	assert(chunk);
+	return new chunk output_chunk_t;
 }
 
 static void output_chunk_free(output_chunk_t *chunk) {
 	output_pool_t *pool = (output_pool_t *)tls_output_pool.get();
 	assert(pool);
+	chunk->~output_pool_t();
 	pool->free(chunk);
 }
 
@@ -74,12 +80,15 @@ static tcp_connection_t *connection_alloc() {
 		pool = new connection_pool_t;
 		tls_connection_pool.set(pool);
 	}
-	return pool->alloc();
+	tcp_connection_t *conn = pool->alloc();
+	assert(conn);
+	return new conn tcp_connection_t;
 }
 
 static void connection_free(tcp_connection_t *conn) {
 	connection_pool_t *pool = (connection_pool_t *)tls_connection_pool.get();
 	assert(pool);
+	conn->~tcp_connection_t();
 	pool->free(conn);
 }
 

@@ -43,7 +43,7 @@ static output_chunk_t *output_chunk_alloc() {
 	}
 	output_chunk_t *chunk = pool->alloc();
 	assert(chunk);
-	return new chunk output_chunk_t;
+	return new (chunk) output_chunk_t;
 }
 
 static void output_chunk_free(output_chunk_t *chunk) {
@@ -82,7 +82,7 @@ static tcp_connection_t *connection_alloc() {
 	}
 	tcp_connection_t *conn = pool->alloc();
 	assert(conn);
-	return new conn tcp_connection_t;
+	return new (conn) tcp_connection_t;
 }
 
 static void connection_free(tcp_connection_t *conn) {

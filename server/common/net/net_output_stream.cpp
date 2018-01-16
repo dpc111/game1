@@ -36,6 +36,7 @@ int net_output_stream_t::write(const void *buff, int size) {
 		int write_size = size < chunk->write_size() ? size : chunk->write_size();
 		ERROR("%d %d %d", size, chunk->write_size(), write_size);
 		memcpy(chunk->write_ptr(), ptr, write_size);
+		chunk->write_offset_ += write_size;
 		ptr += write_size;
 		size -= write_size;
 		size_ += write_size;

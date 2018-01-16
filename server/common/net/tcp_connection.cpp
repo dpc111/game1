@@ -36,7 +36,8 @@ bool tcp_connection_t::reliable() {
 
 void tcp_connection_t::set_events(event_base *ev_base, event_callback_fn read_fn, event_callback_fn write_fn) {
 	ev_read_ = event_new(ev_base, fd_, EV_READ | EV_PERSIST, read_fn, this);
-	ev_write_ = event_new(ev_base, fd_, EV_WRITE, write_fn, this);
+	// ev_write_ = event_new(ev_base, fd_, EV_WRITE, write_fn, this);
+	ev_write_ = event_new(ev_base, fd_, EV_WRITE | EV_PERSIST, write_fn, this);
 	event_add(ev_read_, NULL);
 	ev_read_add_ = true;
 	// socket关闭后等到套接字内数据发送完成后才真正关闭连接

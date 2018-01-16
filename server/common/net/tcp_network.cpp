@@ -31,8 +31,8 @@ void tcp_network_t::shutdown() {
 }
 
 void tcp_network_t::process() {
-	event_base_loop(ev_base_, EVLOOP_ONCE);
-	// event_base_loop(ev_base_, EVLOOP_NONBLOCK);
+	// event_base_loop(ev_base_, EVLOOP_ONCEVLOOP_NONBLOCKE);
+	event_base_loop(ev_base_, );
 }
 
 tcp_connection_t *tcp_network_t::connect_to(const char *ip, int port, void *context) {
@@ -89,10 +89,10 @@ void tcp_network_t::ev_start() {
 	assert(ev_listen_ == NULL);
 	ev_base_ = event_base_new();
 
-	struct timeval tv = { 0, 30 * 1000 };
-    struct event timeout;
-    event_assign(&timeout, ev_base_, -1, EV_PERSIST, NULL, NULL);
-    event_add(&timeout, &tv);
+	// struct timeval tv = { 0, 30 * 1000 };
+ //    struct event timeout;
+ //    event_assign(&timeout, ev_base_, -1, EV_PERSIST, NULL, NULL);
+ //    event_add(&timeout, &tv);
 
 	ev_listen_ = evconnlistener_new_bind(
 		ev_base_,

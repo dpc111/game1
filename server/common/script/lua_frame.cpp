@@ -207,9 +207,9 @@ bool lua_frame_t::on_script_func(tcp_connection_t *conn) {
 	stream.read(&len, sizeof(int));
 	stream.read(str_params_[str_param_pos], len);
 	ERROR("%s", str_params_[str_param_pos]);
-	char *pos = str_params_[str_param_pos];
-	while (*pos != '\0') {
-		if (*pos == 'i') {
+	char *walk = str_params_[str_param_pos];
+	while (*walk != '\0') {
+		if (*walk == 'i') {
 			int val;
 			ERROR("");
 			stream.read(&len, sizeof(int));
@@ -217,7 +217,7 @@ bool lua_frame_t::on_script_func(tcp_connection_t *conn) {
 			stream.read(&val, sizeof(int));
 			ERROR("");
 			lua_pushnumber(lua_state_, val);
-		} else if (*pos == 'd') {
+		} else if (*walk == 'd') {
 			double val;
 			ERROR("");
 			stream.read(&len, sizeof(int));
@@ -225,7 +225,7 @@ bool lua_frame_t::on_script_func(tcp_connection_t *conn) {
 			stream.read(&val, sizeof(double));
 			ERROR("");
 			lua_pushnumber(lua_state_, val);
-		} else if (*pos == 's') {
+		} else if (*walk == 's') {
 			++str_param_pos;
 			if (str_param_pos >= 20) {
 				ERROR("");
@@ -245,6 +245,7 @@ bool lua_frame_t::on_script_func(tcp_connection_t *conn) {
 			ERROR("");
 			return false;
 		}
+		++walk;
 	}
 
 	int nargs = lua_gettop(lua_state_) - fpos;

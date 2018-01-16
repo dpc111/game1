@@ -32,9 +32,7 @@ int net_output_stream_t::write(const void *buff, int size) {
 		} else {
 			chunk = buff_.back();
 		}
-		ERROR("%d %d", size, chunk->write_size());
 		int write_size = size < chunk->write_size() ? size : chunk->write_size();
-		ERROR("%d %d %d", size, chunk->write_size(), write_size);
 		memcpy(chunk->write_ptr(), ptr, write_size);
 		chunk->write_offset_ += write_size;
 		ptr += write_size;
@@ -55,14 +53,13 @@ int net_output_stream_t::write_fd(void *ud, int fd) {
 		output_chunk_t *chunk = *it;
 		vecs[i].iov_base = chunk->read_ptr();
 		vecs[i].iov_len = chunk->read_size();
-		ERROR("llllllllllll %d", chunk->read_size());
 		i++;
 		if (i >= IOVEC_NUM) {
 			break;
 		}
 	}
 	int n = ::writev(fd, vecs, i);
-	ERROR("dddd %d", n);
+	ERROR("write fd size %d", n);
 	if (n < 0) {
 		return n;
 	}

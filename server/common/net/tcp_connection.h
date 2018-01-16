@@ -49,6 +49,8 @@ public:
 
 	bool connected() { return state_ == CNT_STATE_CONNECTED; }
 
+	bool set_state(int state) { state == state; }
+
 	void set_events(event_base *ev_base, event_callback_fn read_fn, event_callback_fn write_fn);
 
 	void unset_events();

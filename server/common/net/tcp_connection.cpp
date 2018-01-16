@@ -6,6 +6,7 @@ tcp_connection_t::tcp_connection_t(int fd, sockaddr_in& peer_addr)
 	: input_stream_(this)
 	, output_stream_(this)
 	, fd_(fd)
+	, state_(CNT_STATE_DISCONNECTED)
 	, peer_addr_(peer_addr)
 	, closed_(false)
 	, sid_(0) {
@@ -14,6 +15,7 @@ tcp_connection_t::tcp_connection_t(int fd, sockaddr_in& peer_addr)
 tcp_connection_t::tcp_connection_t()
 	: input_stream_(this)
 	, output_stream_(this)
+	, state_(CNT_STATE_DISCONNECTED)
 	, closed_(false)
 	, sid_(0) {
 }

@@ -49,6 +49,7 @@ tcp_connection_t *tcp_network_t::connect_to(const char *ip, int port, void *cont
 	conn->set_network(this);
 	conn->set_context(context);
 	conn->set_events(ev_base_, ev_read_cb, ev_write_cb);
+	conn->set_state(CNT_STATE_CONNECTED);
 	this->add_connection(conn);
 	return conn;
 }
@@ -120,6 +121,7 @@ void tcp_network_t::ev_listen_cb(evconnlistener *listener, evutil_socket_t fd, s
 	conn->set_peer_addr(*(sockaddr_in *)sa);
 	conn->set_network(network);
 	conn->set_events(network->get_ev_base(), ev_read_cb, ev_write_cb);
+	conn->set_state(CNT_STATE_CONNECTED);
 	network->add_connection(conn);
 }
 

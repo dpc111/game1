@@ -50,7 +50,7 @@ public:
 
 	bool connected() { ERROR("%d", state_); ERROR("%d", CNT_STATE_CONNECTED); return state_ == CNT_STATE_CONNECTED; }
 
-	bool set_state(int state) { state == state; }
+	bool set_state(int state) { state_ == state; }
 
 	void set_events(event_base *ev_base, event_callback_fn read_fn, event_callback_fn write_fn);
 

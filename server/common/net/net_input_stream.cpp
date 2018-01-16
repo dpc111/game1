@@ -66,6 +66,7 @@ int net_input_stream_t::read_fd(void *ud, int fd) {
 	if (n <= 0) {
 		ERROR("");
 		reset();
+		// conn->del_event_write();
 		return n;
 	}
 	int read_size = n;

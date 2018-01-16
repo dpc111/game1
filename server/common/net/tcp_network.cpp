@@ -70,6 +70,7 @@ void tcp_network_t::add_connection(tcp_connection_t *conn) {
 
 void tcp_network_t::remove_connection(int fd) {
 	ERROR("conn remove fd: %d", fd);
+	assert(false);
 	conn_map_t::iterator it = conns_.find(fd);
 	if (it == conns_.end()) {
 		ERROR("");

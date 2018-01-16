@@ -208,22 +208,18 @@ bool lua_frame_t::on_script_func(tcp_connection_t *conn) {
 	stream.read(str_params_[str_param_pos], len);
 	ERROR("%s", str_params_[str_param_pos]);
 	char *walk = str_params_[str_param_pos];
+	// protect
+	str_params_[str_param_pos][len] = '\0';
 	while (*walk != '\0') {
 		if (*walk == 'i') {
 			int val;
-			ERROR("");
 			stream.read(&len, sizeof(int));
-			ERROR("");
 			stream.read(&val, sizeof(int));
-			ERROR("");
 			lua_pushnumber(lua_state_, val);
 		} else if (*walk == 'd') {
 			double val;
-			ERROR("");
 			stream.read(&len, sizeof(int));
-			ERROR("");
 			stream.read(&val, sizeof(double));
-			ERROR("");
 			lua_pushnumber(lua_state_, val);
 		} else if (*walk == 's') {
 			++str_param_pos;
@@ -232,17 +228,11 @@ bool lua_frame_t::on_script_func(tcp_connection_t *conn) {
 				lua_settop(lua_state_, top);
 				return false;
 			}
-			ERROR("");
 			stream.read(&len, sizeof(int));
-			ERROR("");
 			stream.read(str_params_[str_param_pos], len);
-			ERROR("");
 			lua_pushstring(lua_state_, str_params_[str_param_pos]);
 		} else {
-			ERROR("");
-			ERROR("");
 			lua_settop(lua_state_, top);
-			ERROR("");
 			return false;
 		}
 		++walk;

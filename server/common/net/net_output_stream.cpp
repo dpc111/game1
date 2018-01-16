@@ -61,7 +61,6 @@ int net_output_stream_t::write_fd(void *ud, int fd) {
 			break;
 		}
 	}
-	ERROR("dddd %d", i);
 	int n = ::writev(fd, vecs, i);
 	ERROR("dddd %d", n);
 	if (n < 0) {

@@ -26,7 +26,7 @@ static input_chunk_t *input_chunk_alloc() {
 static void input_chunk_free(input_chunk_t *chunk) {
 	input_pool_t *pool = (input_pool_t *)tls_input_pool.get();
 	assert(pool);
-	chunk->~input_chunk_t();
+	chunk->~chunk_t();
 	pool->free(chunk);
 }
 
@@ -49,7 +49,7 @@ static output_chunk_t *output_chunk_alloc() {
 static void output_chunk_free(output_chunk_t *chunk) {
 	output_pool_t *pool = (output_pool_t *)tls_output_pool.get();
 	assert(pool);
-	chunk->~output_pool_t();
+	chunk->~chunk_t();
 	pool->free(chunk);
 }
 

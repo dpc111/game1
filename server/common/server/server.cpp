@@ -75,14 +75,17 @@ void server_t::send_func(tcp_connection_t *conn, const char *funcname, const cha
 			len += sizeof(int);
 			len += sizeof(int);
 			va_arg(vlist, int);
+			break;
 		case 'd' :
 			len += sizeof(int);
 			len += sizeof(double);
 			va_arg(vlist, double);
+			break;
 		case 's' :
 			len += sizeof(int);
 			len += strlen((char *)vlist);
 			va_arg(vlist, char *);
+			break;
 		default :
 			ERROR("");
 			break;

@@ -87,7 +87,13 @@ void tcp_network_t::remove_connection(int fd) {
 void tcp_network_t::ev_start() {
 	assert(ev_base_ == NULL);
 	assert(ev_listen_ == NULL);
-	ev_base_ = event_base_new();	
+	ev_base_ = event_base_new();
+
+	struct timeval tv = { 0, 30 * 1000 };
+    struct event timeout;
+    event_assign(&timeout, ev_base_, -1, EV_PERSIST, NULL, NULL);
+    event_add(&timeout, &tv);
+
 	ev_listen_ = evconnlistener_new_bind(
 		ev_base_,
 		ev_listen_cb,

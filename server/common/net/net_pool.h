@@ -20,7 +20,7 @@ static input_chunk_t *input_chunk_alloc() {
 	}
 	input_chunk_t *chunk = pool->alloc();
 	assert(chunk);
-	return new chunk input_chunk_t;
+	return new (chunk) input_chunk_t;
 }
 
 static void input_chunk_free(input_chunk_t *chunk) {

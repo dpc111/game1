@@ -80,10 +80,10 @@ void msg_operate_t::send_func(tcp_connection_t *conn, const char *funcname, cons
 	int ilen = sizeof(int);
 	int dlen = sizeof(double);
 	int slen = 0;
-	slen = strlen(funcname);
+	slen = strlen(funcname) + 1;
 	stream.write(&slen, ilen);
 	stream.write(funcname, slen);
-	slen = strlen(fmt);
+	slen = strlen(fmt) + 1;
 	stream.write(&slen, ilen);
 	stream.write(fmt, slen);
 	const char *walk = fmt;
@@ -100,7 +100,7 @@ void msg_operate_t::send_func(tcp_connection_t *conn, const char *funcname, cons
 			va_arg(vlist, double);
 			break;
 		case 's' :
-			slen = strlen((char *)vlist);
+			slen = strlen((char *)vlist) + 1;
 			stream.write(&slen, ilen);
 			stream.write((char *)vlist, slen);
 			va_arg(vlist, char *);

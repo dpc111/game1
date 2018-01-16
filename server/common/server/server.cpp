@@ -65,9 +65,9 @@ void server_t::send_func(tcp_connection_t *conn, const char *funcname, const cha
 	va_start(vlist, fmt);
 	int len = 0;
 	len += sizeof(int);
-	len += strlen(funcname);
+	len += strlen(funcname) + 1;
 	len += sizeof(int);
-	len += strlen(fmt);
+	len += strlen(fmt) + 1;
 	const char *walk = fmt;
 	while (*walk != '\0') {
 		switch (*walk) {
@@ -83,7 +83,7 @@ void server_t::send_func(tcp_connection_t *conn, const char *funcname, const cha
 			break;
 		case 's' :
 			len += sizeof(int);
-			len += strlen((char *)vlist);
+			len += strlen((char *)vlist) + 1;
 			va_arg(vlist, char *);
 			break;
 		default :

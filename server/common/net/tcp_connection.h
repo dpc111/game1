@@ -6,6 +6,7 @@
 #include "net_address.h"
 #include "net_input_stream.h"
 #include "net_output_stream.h"
+#include "log.h"
 
 #define CNT_STATE_CONNECTING 		1
 #define CNT_STATE_CONNECTED 		2

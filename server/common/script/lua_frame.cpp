@@ -188,6 +188,7 @@ bool lua_frame_t::on_script_func(tcp_connection_t *conn) {
 	}
 	int str_param_pos = 0;
 	stream.read(str_params_[str_param_pos], len);
+	ERROR("%s", str_params_[str_param_pos]);
 	lua_getglobal(lua_state_, str_params_[str_param_pos]);
 	if (lua_isnil(lua_state_, 1)) {
 		ERROR("");
@@ -205,6 +206,7 @@ bool lua_frame_t::on_script_func(tcp_connection_t *conn) {
 	++str_param_pos;
 	stream.read(&len, sizeof(int));
 	stream.read(str_params_[str_param_pos], len);
+	ERROR("%s", str_params_[str_param_pos]);
 	char *pos = str_params_[str_param_pos];
 	while (*pos != '\0') {
 		if (*pos == 'i') {

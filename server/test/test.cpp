@@ -11,7 +11,7 @@
 #include "lua_frame.h"
 
 //server_t server("0.0.0.0", 7768);
- server_t server("0.0.0.0", 7769);
+server_t server("0.0.0.0", 7769);
 tcp_connection_t *conn;
 
 class test_timer : public timer_handler_t {
@@ -19,15 +19,10 @@ class test_timer : public timer_handler_t {
 		int res;
 		bool ok = server.get_lua_frame()->call_func("test_add", "ii:i", 1, 2, &res);
 		printf(".....%d\n", res);
-
-
 		ERROR("");
-
 		// test
 		server.send_func(conn, "msg_func", "iis", 11, 22, "dpc");
-	
 		ERROR("");
-			
 		assert(ok);
 	}
 };

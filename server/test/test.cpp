@@ -33,7 +33,7 @@ int main() {
 	server.get_lua_frame()->run_script();
 	server.start();
 	test_timer timer;
-	server.register_timer(&timer, NULL, 10000, 5000);
+	server.register_timer(&timer, NULL, 10000, 300);
 
 	// test
 	 conn = server.connect_to("127.0.0.1", 7768);

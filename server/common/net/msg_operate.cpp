@@ -126,7 +126,7 @@ bool msg_operate_t::on_message(tcp_connection_t *conn) {
 		msg_header_t header;
 		walk += stream.read(&header, sizeof(header));
 		if (header.len < 0 || header.len > MSG_MAX_LEN) {
-			ERROR("");
+			ERROR("%d", header.len);
 			stream.reset();
 			// break;
 			return false;

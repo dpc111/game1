@@ -40,8 +40,8 @@ public:
 		size_ += 1;
 		while (size_ > OBJ_POOL_MAX_SIZE) {
 			obj_t* obj = pool_.front();
-			// free(obj);
-			delete obj;
+			free(obj);
+			// delete obj;
 			pool_.pop();
 			size_ -= 1;
 		}
@@ -49,8 +49,8 @@ public:
 
 private:
 	void alloc_obj() {
-		// obj_t* obj = (obj_t*)malloc(sizeof(obj_t)); 
-		obj_t* obj = new obj_t; 
+		obj_t* obj = (obj_t*)malloc(sizeof(obj_t)); 
+		// obj_t* obj = new obj_t; 
 		pool_.push(obj);
 		size_ += 1;
 	} 

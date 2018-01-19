@@ -21,7 +21,7 @@ class test_timer : public timer_handler_t {
 		printf(".....%d\n", res);
 		ERROR("");
 		// test
-		for (int i = 1; i < 21; i++) 
+		for (int i = 1; i < 2; i++) 
 			server.send_func(conn, "msg_func", "iis", 11, 22, "dpc");
 		ERROR("");
 		assert(ok);
@@ -33,7 +33,7 @@ int main() {
 	server.get_lua_frame()->run_script();
 	server.start();
 	test_timer timer;
-	server.register_timer(&timer, NULL, 10000, 70);
+	server.register_timer(&timer, NULL, 10000, 1000);
 
 	// test
 	 conn = server.connect_to("127.0.0.1", 7768);

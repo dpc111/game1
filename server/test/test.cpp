@@ -21,7 +21,7 @@ class test_timer : public timer_handler_t {
 		printf(".....%d\n", res);
 		ERROR("");
 		// test
-		for (int i = 1; i < 40; i++) 
+		for (int i = 1; i < 10; i++) 
 			server.send_func(conn, "msg_func", "iis", 11, 22, "dpc");
 		ERROR("");
 		assert(ok);

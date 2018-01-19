@@ -28,18 +28,19 @@ int net_input_stream_t::read(void *buff, int size) {
 		size -= read_size;
 		chunk->read_offset_ += read_size;
 		size_ -= read_size;
-		if (chunk->read_size() == 0) {
-			if (buff_.size() == 1) {
-				chunk->read_offset_ = 0;
-				chunk->write_offset_ = 0;
-				break;
-			} else {
-				input_queue_t::iterator it1 = it;
-				++it;
-				buff_.erase(it1);
-				input_chunk_free(chunk);
-			}
-		}
+		// need backup
+		// if (chunk->read_size() == 0) {
+		// 	if (buff_.size() == 1) {
+		// 		chunk->read_offset_ = 0;
+		// 		chunk->write_offset_ = 0;
+		// 		break;
+		// 	} else {
+		// 		input_queue_t::iterator it1 = it;
+		// 		++it;
+		// 		buff_.erase(it1);
+		// 		input_chunk_free(chunk);
+		// 	}
+		// }
 		if (size <= 0) {
 			break;
 		}
@@ -134,18 +135,22 @@ void net_input_stream_t::finish() {
 	for (input_queue_t::iterator it = buff_.begin(); it != buff_.end();) {
 		input_chunk_t *chunk = *it;
 		if (chunk->read_offset_ == chunk->write_offset_) {
-			if (buff_.size() == 1) {
-				chunk->read_offset_ = 0;
-				chunk->write_offset_ = 0;
-				break;
-			} else {
-				input_queue_t::iterator it1 = it;
-				it = buff_.erase(it1);
-				input_chunk_free(chunk);
-				continue;
-			}
+			// if (buff_.size() == 1) {
+			// 	chunk->read_offset_ = 0;
+			// 	chunk->write_offset_ = 0;
+			// 	break;
+			// } else {
+			// 	input_queue_t::iterator it1 = it;
+			// 	it = buff_.erase(it1);
+			// 	input_chunk_free(chunk);
+			// 	continue;
+			// }
+			input_queue_t::iterator it1 = it;
+			it = buff_.erase(it1);
+			input_chunk_free(chunk);
+		} else {
+			++it;
 		}
-		++it;
 	}
 }
 

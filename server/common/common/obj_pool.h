@@ -17,7 +17,7 @@ public:
 	~obj_pool_t() {
 		while (pool_.empty()) {
 			obj_t* obj = pool_.front();
-			free(obj);
+			this->free(obj);
 			pool_.pop();
 			size_ -= 1;
 		}
@@ -40,7 +40,7 @@ public:
 		size_ += 1;
 		while (size_ > OBJ_POOL_MAX_SIZE) {
 			obj_t* obj = pool_.front();
-			free(obj);
+			::free(obj);
 			// delete obj;
 			pool_.pop();
 			size_ -= 1;

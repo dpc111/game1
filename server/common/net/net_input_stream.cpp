@@ -53,7 +53,7 @@ int net_input_stream_t::read_fd(void *ud, int fd) {
 	input_queue_t& read_fd_buff = assign_read_fd_buff();
 	iovec vecs[NUM_READ_IOVEC];
 	int i = 0;
-	for (input_queue_t::iterator it = read_fd_buff.begin(); it != read_fd_buff.end(); ) {
+	for (input_queue_t::iterator it = read_fd_buff.begin(); it != read_fd_buff.end(); it++) {
 		input_chunk_t *chunk = *it;
 		vecs[i].iov_base = chunk->write_ptr();
 		vecs[i].iov_len = chunk->write_size();

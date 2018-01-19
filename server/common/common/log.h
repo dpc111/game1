@@ -3,6 +3,6 @@
 
 #include "stdio.h"
 
-#define ERROR(fmt, ...) printf("[%s][%d] ", __FILE__, __LINE__); printf(fmt, ##__VA_ARGS__); printf("\n")
+#define ERROR(fmt, ...) // printf("[%s][%d] ", __FILE__, __LINE__); printf(fmt, ##__VA_ARGS__); printf("\n")
 
 #endif

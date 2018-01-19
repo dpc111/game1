@@ -20,7 +20,7 @@ net_input_stream_t::~net_input_stream_t() {
 
 int net_input_stream_t::read(void *buff, int size) {
 	char *ptr = (char *)buff;
-	for (input_queue_t::iterator it = buff_.begin(); it != buff_.end(); ) {
+	for (input_queue_t::iterator it = buff_.begin(); it != buff_.end(); ++it) {
 		input_chunk_t *chunk = *it;
 		int read_size = size < chunk->read_size() ? size : chunk->read_size(); 
 		memcpy(ptr, chunk->read_ptr(), read_size);

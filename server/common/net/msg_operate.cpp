@@ -295,9 +295,9 @@ void msg_operate_t::send(tcp_connection_t *conn, google::protobuf::Message& msg)
 	int ilen = sizeof(int);
 	int dlen = sizeof(double);
 	int slen = 0;
-	slen = strlen(funcname) + 1;
+	// slen = strlen(funcname) + 1;
 	// stream.write(&slen, ilen);
-	stream.write(funcname, slen);
+	// stream.write(funcname, slen);
 	slen = strlen(fmt) + 1;
 	stream.write(&slen, ilen);
 	stream.write(fmt, slen);

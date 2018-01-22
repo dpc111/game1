@@ -1,3 +1,5 @@
+syntax = "proto2";
+
 package hall;
 
 message c2r_login {

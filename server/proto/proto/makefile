@@ -19,4 +19,9 @@ $(foreach s,$(PROTOSRCS),$(eval $(call PROTO_temp,$(s))))
 all : $(PROTO) proto
 
 proto:
-	protoc --cpp_out=../proto_cpp *.proto
+	../../3rd/protobuf/bin/protoc --cpp_out=../proto_cpp *.proto
+	#protoc --cpp_out=../proto_cpp *.proto
+
+clean:
+	rm ../proto_pb/*
+	rm ../proto_cpp/*

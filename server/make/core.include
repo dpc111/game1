@@ -56,7 +56,8 @@ INCLUDES := -I../common/common \
 	-I../common/server \
 	-I../3rd/libevent/include \
 	-I../3rd/protobuf/include \
-	-I../3rd/lua-5.3.4/src
+	-I../3rd/lua-5.3.4/src \
+	-I../proto/proto_cpp
 	
 
 #指定函数库搜索路径DIRECTORY 搜寻库文件(*.a)的路径,加入需要的库搜索路径 功能同–l，由用户指定库的路径，否则编译器将只在标准库的目录找。

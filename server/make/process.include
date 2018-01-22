@@ -50,7 +50,8 @@ endif
 #链接
 ${PROGRAM} : ${DEPENDS} ${OBJS}
 ifeq ($(strip $(filter-out %.c,${SOURCES})),)    							#只有C源码时使用gcc连接
-	${CC} ${LIBDIRS} ${CLDFLAGS} ${OBJS} -o $@
+	#${CC} ${LIBDIRS} ${CLDFLAGS} ${OBJS} -o $@
+	$(CXX) ${LIBDIRS} -Wl,--no-undefined ${OBJS} $(MODULEFLAGS) $@ ${CXXLDFLAGS}
 else                                                 						#有C++源码时使用g++连接
     ifdef MODULEFLAGS
 	#$(CXX) ${LIBDIRS} ${CXXLDFLAGS} ${OBJS} $(MODULEFLAGS) $@

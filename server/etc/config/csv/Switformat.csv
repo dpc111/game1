@@ -1,0 +1,7 @@
+id(6000 - 7000),开放,初始人数,初始积分,总要要打的轮数,一轮要打的局数,每轮要淘汰的类别,每轮要淘汰的值,最终晋级人数
+index,int,int,int,int,int,int,int,int
+id,open,initPlayerCount,initScore,roundNum,gameNum,obsoletedType,obsoletedValue,victoryNum
+6001,1,9,2000,2,1,2,3,3
+6002,0,12,1000,3,2,2,3,3
+6003,0,3000,2000,9,1,2,300,300
+6004,0,300,2000,6,1,2,45,30

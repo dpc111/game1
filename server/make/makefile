@@ -5,6 +5,8 @@ all:
 	@make install -f libnet.mk
 	@make -f libserver.mk
 	@make install -f libserver.mk
+	@make -f libmsg.mk
+	@make install -f libmsg.mk
 	@make -f test.mk
 #	@make install -f test.mk
 

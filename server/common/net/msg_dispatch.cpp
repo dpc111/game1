@@ -122,9 +122,9 @@ void on_message(tcp_connection_t *conn, google::protobuf::Message *msg) {
 	ERROR("msg call back not found");
 }
 
-bool msg_dispatch_t::on_script_func(tcp_connection_t *conn) {
+bool msg_dispatch_t::on_script_func(tcp_connection_t *conn, const char *name) {
 	if (on_script_func_) {
-		return on_script_func_(conn);
+		return on_script_func_(conn, name);
 	}
 	return false;
 }

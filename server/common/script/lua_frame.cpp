@@ -27,7 +27,7 @@ lua_frame_t::lua_frame_t(server_t *server)
 	: server_(server) {
 	lua_state_ = luaL_newstate();
 	luaL_openlibs(lua_state_);
-	server_->get_network()->get_msg_dispatch()->set_on_script_func(std::tr1::bind(&lua_frame_t::on_script_func, this, std::tr1::placeholders::_1));
+	server_->get_network()->get_msg_dispatch()->set_on_script_func(std::tr1::bind(&lua_frame_t::on_script_func, this, std::tr1::placeholders::_1, std::tr1::placeholders::_2));
 }
 
 lua_frame_t::~lua_frame_t() {
@@ -177,7 +177,78 @@ int lua_frame_t::run_func(const char *funcname, int nargs, int nres, int errfunc
 	return lua_pcall(lua_state_, nargs, nres, errfunc);
 }
 
-bool lua_frame_t::on_script_func(tcp_connection_t *conn) {
+// bool lua_frame_t::on_script_func(tcp_connection_t *conn, const char *name) {
+// 	int top = lua_gettop(lua_state_);
+// 	net_input_stream_t& stream = conn->get_input_stream();
+// 	int len;
+// 	stream.read(&len, sizeof(int));
+// 	if (len <= 0 || len > LUA_MAX_STR_PARAM_LEN) {
+// 		lua_settop(lua_state_, top);
+// 		return false;
+// 	}
+// 	int str_param_pos = 0;
+// 	stream.read(str_params_[str_param_pos], len);
+// 	ERROR("%s", str_params_[str_param_pos]);
+// 	lua_getglobal(lua_state_, str_params_[str_param_pos]);
+// 	if (lua_isnil(lua_state_, 1)) {
+// 		ERROR("");
+// 		lua_settop(lua_state_, top);
+// 		return false;
+// 	}
+// 	lua_pushvalue(lua_state_, -1);
+// 	if (!lua_isfunction(lua_state_, -1)) {
+// 		ERROR("");
+// 		lua_settop(lua_state_, top);
+// 		return false;
+// 	}
+// 	int fpos = lua_gettop(lua_state_);
+
+// 	++str_param_pos;
+// 	stream.read(&len, sizeof(int));
+// 	stream.read(str_params_[str_param_pos], len);
+// 	ERROR("%s", str_params_[str_param_pos]);
+// 	char *walk = str_params_[str_param_pos];
+// 	// protect
+// 	str_params_[str_param_pos][len] = '\0';
+// 	while (*walk != '\0') {
+// 		if (*walk == 'i') {
+// 			int val;
+// 			stream.read(&len, sizeof(int));
+// 			stream.read(&val, sizeof(int));
+// 			lua_pushnumber(lua_state_, val);
+// 		} else if (*walk == 'd') {
+// 			double val;
+// 			stream.read(&len, sizeof(int));
+// 			stream.read(&val, sizeof(double));
+// 			lua_pushnumber(lua_state_, val);
+// 		} else if (*walk == 's') {
+// 			++str_param_pos;
+// 			if (str_param_pos >= 20) {
+// 				ERROR("");
+// 				lua_settop(lua_state_, top);
+// 				return false;
+// 			}
+// 			stream.read(&len, sizeof(int));
+// 			stream.read(str_params_[str_param_pos], len);
+// 			lua_pushstring(lua_state_, str_params_[str_param_pos]);
+// 		} else {
+// 			lua_settop(lua_state_, top);
+// 			return false;
+// 		}
+// 		++walk;
+// 	}
+
+// 	int nargs = lua_gettop(lua_state_) - fpos;
+// 	if (lua_pcall(lua_state_, nargs, 0, 0) != 0) {
+// 		ERROR("");
+// 		lua_settop(lua_state_, top);
+// 		return false;
+// 	}
+// 	lua_settop(lua_state_, top);
+// 	return true;
+// }
+
+bool lua_frame_t::on_script_func(tcp_connection_t *conn, const char *name) {
 	int top = lua_gettop(lua_state_);
 	net_input_stream_t& stream = conn->get_input_stream();
 	int len;
@@ -186,10 +257,8 @@ bool lua_frame_t::on_script_func(tcp_connection_t *conn) {
 		lua_settop(lua_state_, top);
 		return false;
 	}
-	int str_param_pos = 0;
-	stream.read(str_params_[str_param_pos], len);
-	ERROR("%s", str_params_[str_param_pos]);
-	lua_getglobal(lua_state_, str_params_[str_param_pos]);
+	ERROR("%s", name);
+	lua_getglobal(lua_state_, name);
 	if (lua_isnil(lua_state_, 1)) {
 		ERROR("");
 		lua_settop(lua_state_, top);
@@ -203,7 +272,7 @@ bool lua_frame_t::on_script_func(tcp_connection_t *conn) {
 	}
 	int fpos = lua_gettop(lua_state_);
 
-	++str_param_pos;
+	int str_param_pos = 0;
 	stream.read(&len, sizeof(int));
 	stream.read(str_params_[str_param_pos], len);
 	ERROR("%s", str_params_[str_param_pos]);

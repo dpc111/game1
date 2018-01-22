@@ -233,7 +233,56 @@ void msg_operate_t::send(tcp_connection_t *conn, google::protobuf::Message& msg)
 	conn->add_event_write();
 }
 
-void msg_operate_t::send_func(tcp_connection_t *conn, const char *funcname, const char *fmt, va_list vlist, int len) {
+// void msg_operate_t::send_func(tcp_connection_t *conn, const char *funcname, const char *fmt, va_list vlist, int len) {
+// 	net_output_stream_t& stream = conn->get_output_stream();
+// 	msg_header_t header;
+// 	header.len = len;
+// 	header.name_len = strlen(funcname) + 1;
+// 	header.msg_type = MSG_TYPE_SCRIPT;
+// 	header.sid = network_->get_sid();
+// 	header.tid = conn->get_sid();
+// 	stream.write(&header, sizeof(header));
+// 	stream.write(funcname, header.name_len);
+// 	int ilen = sizeof(int);
+// 	int dlen = sizeof(double);
+// 	int slen = 0;
+// 	slen = strlen(funcname) + 1;
+// 	stream.write(&slen, ilen);
+// 	stream.write(funcname, slen);
+// 	slen = strlen(fmt) + 1;
+// 	stream.write(&slen, ilen);
+// 	stream.write(fmt, slen);
+// 	const char *walk = fmt;
+// 	while (*walk != '\0') {
+// 		switch (*walk) {
+// 		case 'i' :
+// 			stream.write(&ilen, ilen);
+// 			stream.write((int *)vlist, ilen);
+// 			va_arg(vlist, int);
+// 			break;
+// 		case 'd' :
+// 			stream.write(&dlen, ilen);
+// 			stream.write(&vlist, dlen);
+// 			va_arg(vlist, double);
+// 			break;
+// 		case 's' :
+// 			slen = strlen((char *)vlist) + 1;
+// 			stream.write(&slen, ilen);
+// 			stream.write((char *)vlist, slen);
+// 			va_arg(vlist, char *);
+// 			break;
+// 		default :
+// 			ERROR("");
+// 			stream.reset();
+// 			return;
+// 		}
+// 		++walk;
+// 	}
+// 	conn->add_event_write();
+// }
+// 
+
+ void msg_operate_t::send_func(tcp_connection_t *conn, const char *funcname, const char *fmt, va_list vlist, int len) {
 	net_output_stream_t& stream = conn->get_output_stream();
 	msg_header_t header;
 	header.len = len;
@@ -247,7 +296,7 @@ void msg_operate_t::send_func(tcp_connection_t *conn, const char *funcname, cons
 	int dlen = sizeof(double);
 	int slen = 0;
 	slen = strlen(funcname) + 1;
-	stream.write(&slen, ilen);
+	// stream.write(&slen, ilen);
 	stream.write(funcname, slen);
 	slen = strlen(fmt) + 1;
 	stream.write(&slen, ilen);
@@ -323,10 +372,10 @@ bool msg_operate_t::on_message(tcp_connection_t *conn) {
 				// break;
 				return false;
 			}
-			network->get_msg_dispatch()->on_message(conn, header.msgid, msg);
+			network->get_msg_dispatch()->on_message(conn, msg);
 			free_message(msg);
 		} else if (header.msg_type == MSG_TYPE_SCRIPT) {
-			bool ok = network->get_msg_dispatch()->on_script_func(conn);
+			bool ok = network->get_msg_dispatch()->on_script_func(conn, msg_name_);
 			if (!ok) {
 				ERROR("");
 				stream.reset();

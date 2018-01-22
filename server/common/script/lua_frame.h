@@ -41,7 +41,7 @@ public:
 
 	int run_func(const char *funcname, int nargs, int nres, int errfunc);
 
-	bool on_script_func(tcp_connection_t *conn);
+	bool on_script_func(tcp_connection_t *conn, const char *name);
 
 private:
 	server_t *server_;

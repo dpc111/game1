@@ -172,7 +172,7 @@ public:
 
 	typedef std::map<const google::protobuf::Descriptor *, cb_net_t *> msg_net_map_t;
 
-	typedef std::tr1::function<bool (tcp_connection_t *)> on_script_func_t;
+	typedef std::tr1::function<bool (tcp_connection_t *, const char *)> on_script_func_t;
 
 public:
 	msg_dispatch_t(tcp_network_t *network);
@@ -190,7 +190,7 @@ public:
 private:
 	void on_message(tcp_connection_t *conn, google::protobuf::Message *msg);
 
-	bool on_script_func(tcp_connection_t *conn);
+	bool on_script_func(tcp_connection_t *conn, const char *name);
 
 private:
 	tcp_network_t *network_;

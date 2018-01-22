@@ -1,3 +1,5 @@
+syntax = "proto2";
+
 package battle;
 
 message c2s_join {

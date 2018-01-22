@@ -255,7 +255,6 @@ void msg_operate_t::send(tcp_connection_t *conn, google::protobuf::Message& msg)
 			int i = va_arg(vlist, int);
 			stream.write(&ilen, ilen);
 			stream.write(&i, ilen);
-			ERROR("%d", i);
 		} else if (*walk == 'd') {
 			double d = va_arg(vlist, double);
 			stream.write(&ilen, ilen);
@@ -265,7 +264,6 @@ void msg_operate_t::send(tcp_connection_t *conn, google::protobuf::Message& msg)
 			slen = strlen(s) + 1;
 			stream.write(&ilen, ilen);
 			stream.write(s, slen);
-			ERROR("%s", s);
 		}
 		++walk;
 	}

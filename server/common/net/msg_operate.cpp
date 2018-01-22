@@ -223,7 +223,7 @@ void msg_operate_t::send(tcp_connection_t *conn, google::protobuf::Message& msg)
 	header.sid = network_->get_sid();
 	header.tid = conn->get_sid();
 	stream.write(&header, sizeof(header));
-	stream.write(name.c_str(), header.name_len)
+	stream.write(name.c_str(), header.name_len);
 	msg_output_stream_t os(stream);
 	if (!msg.SerializeToZeroCopyStream(&os)) {
 		ERROR("");
@@ -347,7 +347,7 @@ bool msg_operate_t::on_message(tcp_connection_t *conn) {
 			return false;
 		}
 		if (header.name_len > MSG_NAME_MAX_LEN) {
-			ERROR("%d", header.MSG_NAME_MAX_LEN);
+			ERROR("%d", header.name_len);
 			stream.reset();
 			return false;
 		}
@@ -355,7 +355,7 @@ bool msg_operate_t::on_message(tcp_connection_t *conn) {
 			stream.backup(walk);
 			break;
 		}
-		stream.read(msg_name_, header.name_len)；
+		stream.read(msg_name_, header.name_len);
 		if (header.msg_type == MSG_TYPE_PB) {
 			google::protobuf::Message *msg = gen_message(msg_name_);
 			if (msg == NULL) {

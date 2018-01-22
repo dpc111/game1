@@ -3,7 +3,7 @@
 
 #include "google/protobuf/message.h"
 
-#define MSG_NAME_MAX_LEN
+#define MSG_NAME_MAX_LEN 1024
 
 class tcp_network_t;
 class tcp_connection_t;
@@ -27,7 +27,7 @@ public:
 private:
 	tcp_network_t *network_;
 
-	char *msg_name_[MSG_NAME_MAX_LEN];
+	char msg_name_[MSG_NAME_MAX_LEN];
 };
 
 #endif

@@ -275,7 +275,7 @@ bool lua_frame_t::on_script_func(tcp_connection_t *conn, const char *name) {
 	int str_param_pos = 0;
 	stream.read(&len, sizeof(int));
 	stream.read(str_params_[str_param_pos], len);
-	ERROR("%s", str_params_[str_param_pos]);
+	ERROR("%d  %s", len, str_params_[str_param_pos]);
 	char *walk = str_params_[str_param_pos];
 	// protect
 	str_params_[str_param_pos][len] = '\0';

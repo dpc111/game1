@@ -105,7 +105,7 @@ void server_t::send_func(tcp_connection_t *conn, const char *funcname, const cha
 	len += strlen(fmt) + 1;
 	const char *walk = fmt;
 	while (*walk != '\0') {
-		switch (*walk) {
+		// switch (*walk) {
 		// case 'i' :
 		// 	len += sizeof(int);
 		// 	len += sizeof(int);

@@ -3,6 +3,8 @@
 
 #include "google/protobuf/message.h"
 
+#define MSG_NAME_MAX_LEN
+
 class tcp_network_t;
 class tcp_connection_t;
 
@@ -12,7 +14,7 @@ public:
 
 	~msg_operate_t();
 
-	google::protobuf::Message *gen_message(int msgid);
+	google::protobuf::Message *gen_message(const char *name);
 
 	void free_message(google::protobuf::Message *msg);
 
@@ -24,6 +26,8 @@ public:
 
 private:
 	tcp_network_t *network_;
+
+	char *msg_name_[MSG_NAME_MAX_LEN];
 };
 
 #endif

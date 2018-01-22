@@ -251,12 +251,6 @@ int lua_frame_t::run_func(const char *funcname, int nargs, int nres, int errfunc
 bool lua_frame_t::on_script_func(tcp_connection_t *conn, const char *name) {
 	int top = lua_gettop(lua_state_);
 	net_input_stream_t& stream = conn->get_input_stream();
-	// int len;
-	// stream.read(&len, sizeof(int));
-	// if (len <= 0 || len > LUA_MAX_STR_PARAM_LEN) {
-	// 	lua_settop(lua_state_, top);
-	// 	return false;
-	// }
 	ERROR("%s", name);
 	lua_getglobal(lua_state_, name);
 	if (lua_isnil(lua_state_, 1)) {
@@ -301,6 +295,7 @@ bool lua_frame_t::on_script_func(tcp_connection_t *conn, const char *name) {
 			stream.read(&len, sizeof(int));
 			stream.read(str_params_[str_param_pos], len);
 			lua_pushstring(lua_state_, str_params_[str_param_pos]);
+			ERROR("%d  %s", len, str_params_[str_param_pos]);
 		} else {
 			lua_settop(lua_state_, top);
 			return false;

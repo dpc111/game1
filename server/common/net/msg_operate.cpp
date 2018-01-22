@@ -233,55 +233,6 @@ void msg_operate_t::send(tcp_connection_t *conn, google::protobuf::Message& msg)
 	conn->add_event_write();
 }
 
-// void msg_operate_t::send_func(tcp_connection_t *conn, const char *funcname, const char *fmt, va_list vlist, int len) {
-// 	net_output_stream_t& stream = conn->get_output_stream();
-// 	msg_header_t header;
-// 	header.len = len;
-// 	header.name_len = strlen(funcname) + 1;
-// 	header.msg_type = MSG_TYPE_SCRIPT;
-// 	header.sid = network_->get_sid();
-// 	header.tid = conn->get_sid();
-// 	stream.write(&header, sizeof(header));
-// 	stream.write(funcname, header.name_len);
-// 	int ilen = sizeof(int);
-// 	int dlen = sizeof(double);
-// 	int slen = 0;
-// 	slen = strlen(funcname) + 1;
-// 	stream.write(&slen, ilen);
-// 	stream.write(funcname, slen);
-// 	slen = strlen(fmt) + 1;
-// 	stream.write(&slen, ilen);
-// 	stream.write(fmt, slen);
-// 	const char *walk = fmt;
-// 	while (*walk != '\0') {
-// 		switch (*walk) {
-// 		case 'i' :
-// 			stream.write(&ilen, ilen);
-// 			stream.write((int *)vlist, ilen);
-// 			va_arg(vlist, int);
-// 			break;
-// 		case 'd' :
-// 			stream.write(&dlen, ilen);
-// 			stream.write(&vlist, dlen);
-// 			va_arg(vlist, double);
-// 			break;
-// 		case 's' :
-// 			slen = strlen((char *)vlist) + 1;
-// 			stream.write(&slen, ilen);
-// 			stream.write((char *)vlist, slen);
-// 			va_arg(vlist, char *);
-// 			break;
-// 		default :
-// 			ERROR("");
-// 			stream.reset();
-// 			return;
-// 		}
-// 		++walk;
-// 	}
-// 	conn->add_event_write();
-// }
-// 
-
  void msg_operate_t::send_func(tcp_connection_t *conn, const char *funcname, const char *fmt, va_list vlist, int len) {
 	net_output_stream_t& stream = conn->get_output_stream();
 	msg_header_t header;
@@ -300,28 +251,6 @@ void msg_operate_t::send(tcp_connection_t *conn, google::protobuf::Message& msg)
 	stream.write(fmt, slen);
 	const char *walk = fmt;
 	while (*walk != '\0') {
-		// switch (*walk) {
-		// case 'i' :
-		// 	stream.write(&ilen, ilen);
-		// 	stream.write((int *)vlist, ilen);
-		// 	va_arg(vlist, int);
-		// 	break;
-		// case 'd' :
-		// 	stream.write(&dlen, ilen);
-		// 	stream.write(&vlist, dlen);
-		// 	va_arg(vlist, double);
-		// 	break;
-		// case 's' :
-		// 	slen = strlen((char *)vlist) + 1;
-		// 	stream.write(&slen, ilen);
-		// 	stream.write((char *)vlist, slen);
-		// 	va_arg(vlist, char *);
-		// 	break;
-		// default :
-		// 	ERROR("");
-		// 	stream.reset();
-		// 	return;
-		// }
 		if (*walk == 'i') {
 			int i = va_arg(vlist, int);
 			stream.write(&ilen, ilen);
@@ -356,7 +285,6 @@ bool msg_operate_t::on_message(tcp_connection_t *conn) {
 		if (header.len < 0 || header.len > MSG_MAX_LEN) {
 			ERROR("%d", header.len);
 			stream.reset();
-			// break;
 			return false;
 		}
 		if (header.name_len > MSG_NAME_MAX_LEN) {

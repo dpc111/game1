@@ -60,43 +60,6 @@ void server_t::send(tcp_connection_t *conn, google::protobuf::Message& msg) {
 	network_->get_msg_operate()->send(conn, msg);
 }
 
-// void server_t::send_func(tcp_connection_t *conn, const char *funcname, const char *fmt, ...) {
-// 	va_list vlist;
-// 	va_start(vlist, fmt);
-// 	int len = 0;
-// 	len += sizeof(int);
-// 	len += strlen(funcname) + 1;
-// 	len += sizeof(int);
-// 	len += strlen(fmt) + 1;
-// 	const char *walk = fmt;
-// 	while (*walk != '\0') {
-// 		switch (*walk) {
-// 		case 'i' :
-// 			len += sizeof(int);
-// 			len += sizeof(int);
-// 			va_arg(vlist, int);
-// 			break;
-// 		case 'd' :
-// 			len += sizeof(int);
-// 			len += sizeof(double);
-// 			va_arg(vlist, double);
-// 			break;
-// 		case 's' :
-// 			len += sizeof(int);
-// 			len += strlen((char *)vlist) + 1;
-// 			va_arg(vlist, char *);
-// 			break;
-// 		default :
-// 			ERROR("");
-// 			break;
-// 		}
-// 		++walk;
-// 	}
-// 	va_start(vlist, fmt);
-// 	network_->get_msg_operate()->send_func(conn, funcname, fmt, vlist, len);
-// 	va_end(vlist);
-// }
-
 void server_t::send_func(tcp_connection_t *conn, const char *funcname, const char *fmt, ...) {
 	va_list vlist;
 	va_start(vlist, fmt);
@@ -105,31 +68,6 @@ void server_t::send_func(tcp_connection_t *conn, const char *funcname, const cha
 	len += strlen(fmt) + 1;
 	const char *walk = fmt;
 	while (*walk != '\0') {
-		// switch (*walk) {
-		// case 'i' :
-		// 	len += sizeof(int);
-		// 	len += sizeof(int);
-		// 	va_arg(vlist, int);
-		// 	ERROR("%ld", va_arg(vlist, int));
-		// 	break;
-		// case 'd' :
-		// 	len += sizeof(int);
-		// 	len += sizeof(double);
-		// 	va_arg(vlist, double);
-		// 	ERROR("%ld", va_arg(vlist, double));
-		// 	break;
-		// case 's' :
-		// 	len += sizeof(int);
-		// 	len += strlen((char *)vlist) + 1;
-		// 	ERROR("%d", strlen((char *)vlist));
-		// 	ERROR("%s", (char *)vlist);
-		// 	va_arg(vlist, char *);
-		// 	ERROR("%s", s);
-		// 	break;
-		// default :
-		// 	ERROR("");
-		// 	break;
-		// }
 		if (*walk == 'i') {
 			va_arg(vlist, int);
 			len += sizeof(int);
@@ -151,7 +89,6 @@ void server_t::send_func(tcp_connection_t *conn, const char *funcname, const cha
 	network_->get_msg_operate()->send_func(conn, funcname, fmt, vlist, len);
 	va_end(vlist);
 }
-
 
 void server_t::register_timer(timer_handler_t *handler, void *user, timestamp start, timestamp interval) {
 	times_->add(handler, user, start, interval);

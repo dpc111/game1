@@ -1,0 +1,10 @@
+package battle;
+
+message c2s_join {
+}
+
+message s2c_join {
+	required int32 uid = 1;
+	required string name = 2;
+	required string icon = 3;
+}

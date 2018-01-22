@@ -325,12 +325,12 @@ void msg_operate_t::send(tcp_connection_t *conn, google::protobuf::Message& msg)
 		if (*walk == 'i') {
 			int i = va_arg(vlist, int);
 			stream.write(&ilen, ilen);
-			stream.write((&i, ilen);
+			stream.write(&i, ilen);
 			ERROR("%d", i);
 		} else if (*walk == 'd') {
 			double d = va_arg(vlist, double);
 			stream.write(&ilen, ilen);
-			stream.write((&d, dlen);
+			stream.write(&d, dlen);
 		} else if (*walk == 's') {
 			char *s = va_arg(vlist, char *);
 			slen = strlen(s) + 1;

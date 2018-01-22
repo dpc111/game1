@@ -104,32 +104,46 @@ void server_t::send_func(tcp_connection_t *conn, const char *funcname, const cha
 	len += sizeof(int);
 	len += strlen(fmt) + 1;
 	const char *walk = fmt;
-	char *s;
 	while (*walk != '\0') {
 		switch (*walk) {
-		case 'i' :
+		// case 'i' :
+		// 	len += sizeof(int);
+		// 	len += sizeof(int);
+		// 	va_arg(vlist, int);
+		// 	ERROR("%ld", va_arg(vlist, int));
+		// 	break;
+		// case 'd' :
+		// 	len += sizeof(int);
+		// 	len += sizeof(double);
+		// 	va_arg(vlist, double);
+		// 	ERROR("%ld", va_arg(vlist, double));
+		// 	break;
+		// case 's' :
+		// 	len += sizeof(int);
+		// 	len += strlen((char *)vlist) + 1;
+		// 	ERROR("%d", strlen((char *)vlist));
+		// 	ERROR("%s", (char *)vlist);
+		// 	va_arg(vlist, char *);
+		// 	ERROR("%s", s);
+		// 	break;
+		// default :
+		// 	ERROR("");
+		// 	break;
+		// }
+		if (*walk == 'i') {
+			va_arg(vlist, int);
 			len += sizeof(int);
 			len += sizeof(int);
-			//va_arg(vlist, int);
-			ERROR("%ld", va_arg(vlist, int));
-			break;
-		case 'd' :
+		} else if (*walk == 'd') {
+			va_arg(vlist, double);
 			len += sizeof(int);
 			len += sizeof(double);
-//			va_arg(vlist, double);
-			ERROR("%ld", va_arg(vlist, double));
-			break;
-		case 's' :
+		} else if (*walk == 's') {
+			char *s = va_arg(vlist, char *);
 			len += sizeof(int);
 			len += strlen((char *)vlist) + 1;
-			ERROR("%d", strlen((char *)vlist));
-			ERROR("%s", (char *)vlist);
-			s = va_arg(vlist, char *);
-			ERROR("%s", s);
-			break;
-		default :
+		} else {
 			ERROR("");
-			break;
 		}
 		++walk;
 	}

@@ -295,35 +295,48 @@ void msg_operate_t::send(tcp_connection_t *conn, google::protobuf::Message& msg)
 	int ilen = sizeof(int);
 	int dlen = sizeof(double);
 	int slen = 0;
-	// slen = strlen(funcname) + 1;
-	// stream.write(&slen, ilen);
-	// stream.write(funcname, slen);
 	slen = strlen(fmt) + 1;
 	stream.write(&slen, ilen);
 	stream.write(fmt, slen);
 	const char *walk = fmt;
 	while (*walk != '\0') {
-		switch (*walk) {
-		case 'i' :
+		// switch (*walk) {
+		// case 'i' :
+		// 	stream.write(&ilen, ilen);
+		// 	stream.write((int *)vlist, ilen);
+		// 	va_arg(vlist, int);
+		// 	break;
+		// case 'd' :
+		// 	stream.write(&dlen, ilen);
+		// 	stream.write(&vlist, dlen);
+		// 	va_arg(vlist, double);
+		// 	break;
+		// case 's' :
+		// 	slen = strlen((char *)vlist) + 1;
+		// 	stream.write(&slen, ilen);
+		// 	stream.write((char *)vlist, slen);
+		// 	va_arg(vlist, char *);
+		// 	break;
+		// default :
+		// 	ERROR("");
+		// 	stream.reset();
+		// 	return;
+		// }
+		if (*walk == 'i') {
+			int i = va_arg(vlist, int);
 			stream.write(&ilen, ilen);
-			stream.write((int *)vlist, ilen);
-			va_arg(vlist, int);
-			break;
-		case 'd' :
-			stream.write(&dlen, ilen);
-			stream.write(&vlist, dlen);
-			va_arg(vlist, double);
-			break;
-		case 's' :
-			slen = strlen((char *)vlist) + 1;
-			stream.write(&slen, ilen);
-			stream.write((char *)vlist, slen);
-			va_arg(vlist, char *);
-			break;
-		default :
-			ERROR("");
-			stream.reset();
-			return;
+			stream.write((&i, ilen);
+			ERROR("%d", i);
+		} else if (*walk == 'd') {
+			double d = va_arg(vlist, double);
+			stream.write(&ilen, ilen);
+			stream.write((&d, dlen);
+		} else if (*walk == 's') {
+			char *s = va_arg(vlist, char *);
+			slen = strlen(s) + 1;
+			stream.write(&ilen, ilen);
+			stream.write(s, slen);
+			ERROR("%s", s);
 		}
 		++walk;
 	}

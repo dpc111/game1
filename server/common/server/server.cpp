@@ -119,6 +119,8 @@ void server_t::send_func(tcp_connection_t *conn, const char *funcname, const cha
 		case 's' :
 			len += sizeof(int);
 			len += strlen((char *)vlist) + 1;
+			ERROR("%d", strlen((char *)vlist));
+			ERROR("%s", (char *)vlist);
 			va_arg(vlist, char *);
 			break;
 		default :

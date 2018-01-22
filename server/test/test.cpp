@@ -22,7 +22,7 @@ class test_timer : public timer_handler_t {
 	//	ERROR("");
 		// test
 		for (int i = 1; i < 10; i++) 
-			server.send_func(conn, "msg_func", "iis", 11, 22, "dpc");
+			server.send_func(conn, "msg_func", "iis", 1, 8, "dpc");
 	//	ERROR("");
 		assert(ok);
 	}

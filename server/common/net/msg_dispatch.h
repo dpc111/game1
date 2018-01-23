@@ -75,10 +75,10 @@ public:
 	~msg_dispatch_t();
 
 	template<typename T>
-	void register_message(const cbT_t<T>::msg_cb_t& cb) { msg_map_[T::descriptor()] = new cbT_t<T>(cb); }
+	void register_message(const typename cbT_t<T>::msg_cb_t& cb) { msg_map_[T::descriptor()] = new cbT_t<T>(cb); }
 
 	template<typename T>
-	void register_net_message(const cb_netT_t<T>::msg_cb_t& cb) { msg_net_map_[T::descriptor()] = new cb_netT_t<T>(cb); }
+	void register_net_message(const typename cb_netT_t<T>::msg_cb_t& cb) { msg_net_map_[T::descriptor()] = new cb_netT_t<T>(cb); }
 
 	void set_on_script_func(on_script_func_t *func) { on_script_func_ = func; }
 

@@ -64,7 +64,7 @@ void msg_operate_t::send(tcp_connection_t *conn, google::protobuf::Message& msg)
 }
 
  void msg_operate_t::send_func(tcp_connection_t *conn, const char *funcname, const char *fmt, va_list vlist, int len1) {
- 	va_list vtemp = vlist;
+ 	va_list& vtemp = vlist;
  	int len = 0;
 	len += sizeof(int);
 	len += strlen(fmt) + 1;

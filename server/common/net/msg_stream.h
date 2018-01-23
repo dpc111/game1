@@ -17,6 +17,7 @@ public:
 		if (size_ <= 0) {
 			return false;
 		}
+		*size = size_;
 		if (stream_.next(data, size)) {
 			size_ -= *size;
 			offset_ += *size;

@@ -128,21 +128,28 @@ bool msg_operate_t::on_message(tcp_connection_t *conn) {
 		msg_name_[header.name_len] = '\0';
 		ERROR("%s", msg_name_);
 		if (header.msg_type == MSG_TYPE_PB) {
+				ERROR("");
 			google::protobuf::Message *msg = gen_message(msg_name_);
+				ERROR("");
 			if (msg == NULL) {
 				ERROR("");
 				stream.reset();
 				return false;
 			}
+				ERROR("");
 			msg_input_stream_t is(stream, header.len);
+				ERROR("");
 			if (!msg->ParseFromZeroCopyStream(&is)) {
 				ERROR("");
 				stream.reset();
 				free_message(msg);
 				return false;
 			}
+				ERROR("");
 			network->get_msg_dispatch()->on_message(conn, msg);
+				ERROR("");
 			free_message(msg);
+				ERROR("");
 		} else if (header.msg_type == MSG_TYPE_SCRIPT) {
 			bool ok = network->get_msg_dispatch()->on_script_func(conn, msg_name_);
 			if (!ok) {

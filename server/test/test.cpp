@@ -30,7 +30,7 @@ public:
 	}
 
 	void test_msg(tcp_connection_t *conn, battle::s2c_join *msg) {
-		ERROR("%d", msg->sid());
+		ERROR("%d", msg->uid());
 		ERROR("%s", msg->name());
 		ERROR("%s", msg->icon());
 	}

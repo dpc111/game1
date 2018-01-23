@@ -29,10 +29,10 @@ public:
 		assert(ok);
 	}
 
-	void test_msg(tcp_connection_t *conn, battle::s2c_join *msg) {
-		ERROR("%d", msg->uid());
-		ERROR("%s", msg->name());
-		ERROR("%s", msg->icon());
+	void test_msg(tcp_connection_t *conn, const battle::s2c_join& msg) {
+		ERROR("%d", msg.uid());
+		ERROR("%s", msg.name());
+		ERROR("%s", msg.icon());
 	}
 
 	void register_msg(server_t *server) {

@@ -30,7 +30,7 @@ public:
 
 		virtual void on_message(int sid, const google::protobuf::Message *msg) {
 			const T *tmsg = dynamic_cast<const T *> (msg);
-			cb_(sid, tmsg);
+			cb_(sid, *tmsg);
 		}
 
 	public:
@@ -56,7 +56,7 @@ public:
 
 		virtual void on_message(tcp_connection_t *conn, const google::protobuf::Message *msg) {
 			const T *tmsg = dynamic_cast<const T *> (msg);
-			cb_(conn, tmsg);
+			cb_(conn, *tmsg);
 		}
 
 	public:

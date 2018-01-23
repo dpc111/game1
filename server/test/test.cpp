@@ -9,6 +9,7 @@
 #include "timestamp.h"
 #include "server.h"
 #include "lua_frame.h"
+#include "message/messages.h"
 
 //server_t server("0.0.0.0", 7768);
 server_t server("0.0.0.0", 7769);

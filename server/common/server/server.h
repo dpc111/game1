@@ -36,10 +36,10 @@ public:
 	void register_timer(timer_handler_t *handler, void *user, timestamp start, timestamp interval);
 
 	template<typename T>
-	void register_message(const typename msg_dispatch_t::cbT_t<T>::msg_cb_t& cb) { network_->get_msg_dispatch()->register_message(cb); }
+	void register_message(const typename msg_dispatch_t::cbT_t<T>::msg_cb_t& cb) { network_->get_msg_dispatch()->register_message<T>(cb); }
 
 	template<typename T>
-	void register_net_message(const typename msg_dispatch_t::cb_netT_t<T>::msg_cb_t& cb) { network_->get_msg_dispatch()->register_net_message(cb); }
+	void register_net_message(const typename msg_dispatch_t::cb_netT_t<T>::msg_cb_t& cb) { network_->get_msg_dispatch()->register_net_message<T>(cb); }
 
 private:
 	tcp_network_t *network_;

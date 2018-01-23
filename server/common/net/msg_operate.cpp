@@ -63,7 +63,31 @@ void msg_operate_t::send(tcp_connection_t *conn, google::protobuf::Message& msg)
 	conn->add_event_write();
 }
 
- void msg_operate_t::send_func(tcp_connection_t *conn, const char *funcname, const char *fmt, va_list vlist, int len) {
+ void msg_operate_t::send_func(tcp_connection_t *conn, const char *funcname, const char *fmt, va_list vlist, int len1) {
+ 	int len = 0;
+	len += sizeof(int);
+	len += strlen(fmt) + 1;
+	const char *walk = fmt;
+	while (*walk != '\0') {
+		if (*walk == 'i') {
+			va_arg(vlist, int);
+			len += sizeof(int);
+			len += sizeof(int);
+		} else if (*walk == 'd') {
+			va_arg(vlist, double);
+			len += sizeof(int);
+			len += sizeof(double);
+		} else if (*walk == 's') {
+			char *s = va_arg(vlist, char *);
+			len += sizeof(int);
+			len += strlen((char *)vlist) + 1;
+		} else {
+			ERROR("");
+		}
+		++walk;
+	}
+	va_start(vlist, fmt);
+
 	net_output_stream_t& stream = conn->get_output_stream();
 	msg_header_t header;
 	header.len = len;

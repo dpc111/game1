@@ -47,7 +47,7 @@ int main() {
 	server.start();
 	test_timer timer;
 	server.register_timer(&timer, NULL, 10000, 2000);
-	server.register_msg(&server);
+	timer.register_msg(&server);
 
 	// test
 	 conn = server.connect_to("127.0.0.1", 7768);

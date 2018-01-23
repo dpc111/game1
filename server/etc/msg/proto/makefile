@@ -1,3 +1,5 @@
+PROTOC = ../../../3rd/protobuf/bin/protoc
+
 BUILD = ../proto_pb
 	
 PROTOSRCS = common.proto \
@@ -11,7 +13,7 @@ define PROTO_temp
   	PROTO := $(PROTO) $$(TAR).pb
   	$$(TAR).pb : | $(BUILD)
   	$$(TAR).pb : $(1)
-		protoc -o$$@ $$<
+		$(PROTOC) -o$$@ $$<
 endef
 
 $(foreach s,$(PROTOSRCS),$(eval $(call PROTO_temp,$(s))))
@@ -19,4 +21,4 @@ $(foreach s,$(PROTOSRCS),$(eval $(call PROTO_temp,$(s))))
 all : $(PROTO) proto
 
 proto:
-	protoc --cpp_out=../proto_cpp *.proto
+	$(PROTOC) --cpp_out=../proto_cpp *.proto

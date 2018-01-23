@@ -34,6 +34,8 @@ public:
 
 	void register_timer(timer_handler_t *handler, void *user, timestamp start, timestamp interval);
 
+	void register_msg();
+
 private:
 	tcp_network_t *network_;
 

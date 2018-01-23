@@ -94,19 +94,31 @@ int net_input_stream_t::read_fd(void *ud, int fd) {
 }
 
 bool net_input_stream_t::next(const void **data, int *size) {
+	ERROR("%d  %d  %d", *size, buff_.size(), size_);
 	if (size_ == 0) {
 		return false;
 	}
+	ERROR("");
 	for (input_queue_t::iterator it = buff_.begin(); it != buff_.end(); ++it) {
+	ERROR("");
 		input_chunk_t *chunk = *it;
+	ERROR("");
 		if (chunk->read_size() > 0)	{
+	ERROR("");
 			*data = chunk->read_ptr();
+	ERROR("");
 			*size = *size <= chunk->read_size() ? *size : chunk->read_size();
+	ERROR("");
 			chunk->read_offset_ += *size;
+	ERROR("");
 			size_ -= *size;
+	ERROR("");
 			return true;
+	ERROR("");
 		}
+	ERROR("");
 	}
+	ERROR("");
 	return false;
 }
 

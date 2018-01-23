@@ -17,6 +17,7 @@ void msg_dispatch_t::on_message(tcp_connection_t *conn, google::protobuf::Messag
 	std::string name = msg->GetDescriptor()->full_name();
 	const google::protobuf::Descriptor* des = google::protobuf::DescriptorPool::generated_pool()->FindMessageTypeByName(name.c_str());
 	msg_map_t::iterator it = msg_map_.find(des);
+	bool find = false;
 	if (it != msg_map_.end()) {
 		if (conn->get_sid() > 0) {
 			cb_t *cb = it->second;
@@ -24,13 +25,17 @@ void msg_dispatch_t::on_message(tcp_connection_t *conn, google::protobuf::Messag
 		} else {
 			ERROR("connection not verify");
 		}
+		find = true;
 	}
 	msg_net_map_t::iterator it1 = msg_net_map_.find(des);
 	if (it1 != msg_net_map_.end()) {
 		cb_net_t *cb = it1->second;
 		cb->on_message(conn, msg);
+		find = true;
 	}
-	ERROR("msg call back not found");
+	if (find) {
+		ERROR("msg callback do not found: %s", name.c_str());
+	}
 }
 
 bool msg_dispatch_t::on_script_func(tcp_connection_t *conn, const char *name) {

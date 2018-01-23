@@ -80,7 +80,7 @@ public:
 	template<typename T>
 	void register_net_message(const typename cb_netT_t<T>::msg_cb_t& cb) { msg_net_map_[T::descriptor()] = new cb_netT_t<T>(cb); }
 
-	void set_on_script_func(on_script_func_t *func) { on_script_func_ = func; }
+	void set_on_script_func(const on_script_func_t& func) { on_script_func_ = func; }
 
 	void on_message(tcp_connection_t *conn, google::protobuf::Message *msg);
 
@@ -93,7 +93,7 @@ private:
 
 	msg_net_map_t msg_net_map_;
 
-	on_script_func_t *on_script_func_;
+	on_script_func_t on_script_func_;
 };
 
 #endif

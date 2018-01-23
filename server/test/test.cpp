@@ -24,7 +24,7 @@ public:
 	virtual void handle_timeout(timer_handle_t handle, void *user) {
 		int res;
 		bool ok = server.get_lua_frame()->call_func("test_add", "ii:i", 1, 2, &res);
-		for (int i = 1; i < 2; i++) 
+		for (int i = 1; i < 200; i++) 
 			server.send_func(conn, "msg_func", "iis", 1, 8, "dpc");
 		battle::s2c_join msg;
 		msg.set_uid(11111);

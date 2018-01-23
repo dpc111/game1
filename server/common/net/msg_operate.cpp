@@ -150,6 +150,10 @@ bool msg_operate_t::on_message(tcp_connection_t *conn) {
 				stream.reset();
 				return false;
 			}
+		} else {
+			ERROR("%d", header.msg_type);
+			stream.reset()
+			return
 		} 
 	}
 	stream.finish();

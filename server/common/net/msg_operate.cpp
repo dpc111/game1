@@ -126,6 +126,7 @@ bool msg_operate_t::on_message(tcp_connection_t *conn) {
 		}
 		walk += stream.read(msg_name_, header.name_len);
 		msg_name_[header.name_len] = '\0';
+		ERROR("%d", msg_name_);
 		if (header.msg_type == MSG_TYPE_PB) {
 			google::protobuf::Message *msg = gen_message(msg_name_);
 			if (msg == NULL) {

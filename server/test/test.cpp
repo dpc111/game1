@@ -24,8 +24,8 @@ public:
 			server.send_func(conn, "msg_func", "iis", 1, 8, "dpc");
 		battle::s2c_join msg;
 		msg.set_uid(11111);
-		msg.set_name("dpc ddy");
-		msg.set_icon("icon url");
+		msg.set_name("dpcddy");
+		msg.set_icon("iconurl");
 		server.send(conn, msg);
 		assert(ok);
 	}

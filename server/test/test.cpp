@@ -36,7 +36,7 @@ public:
 	}
 
 	void register_msg(server_t *server) {
-		server->register_net_message<battle::s2c_join>(std::tr1::bind(test_timer::test_msg, &timer, std::tr1::placeholders::_1, std::tr1::placeholders::_2));
+		server->register_net_message<battle::s2c_join>(std::tr1::bind(test_timer::test_msg, this, std::tr1::placeholders::_1, std::tr1::placeholders::_2));
 	}
 
 };

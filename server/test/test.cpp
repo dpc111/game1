@@ -35,6 +35,10 @@ public:
 		ERROR("%s", msg->icon());
 	}
 
+	void register_msg(server_t *server) {
+		server.register_net_message<battle::s2c_join>(std::tr1::bind(test_timer::test_msg, &timer, std::tr1::placeholders::_1, std::tr1::placeholders::_2));
+	}
+
 };
 
 int main() {
@@ -43,7 +47,7 @@ int main() {
 	server.start();
 	test_timer timer;
 	server.register_timer(&timer, NULL, 10000, 2000);
-	server.register_net_message<battle::s2c_join>(std::tr1::bind(test_timer::test_msg, &timer, std::tr1::placeholders::_1, std::tr1::placeholders::_2));
+	server.register_msg(&server);
 
 	// test
 	 conn = server.connect_to("127.0.0.1", 7768);

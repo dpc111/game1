@@ -1,6 +1,7 @@
 #ifndef SERVER_H
 #define SERVER_H
 
+#include "msg_dispatch.h"
 #include "tcp_network.h"
 #include "conn_mgr.h"
 #include "timer.h"
@@ -34,10 +35,14 @@ public:
 
 	void register_timer(timer_handler_t *handler, void *user, timestamp start, timestamp interval);
 
-	void register_msg();
+	template<typename T>
+	void register_message(const typename msg_dispatch_t::cbT_t<T>::msg_cb_t& cb) { tcp_network_t->get_msg_dispatch()->register_message(cb); }
+
+	template<typename T>
+	void register_net_message(const typename msg_dispatch_t::cb_netT_t<T>::msg_cb_t& cb) { tcp_network_t->get_msg_dispatch()->register_net_message(cb); }
 
 private:
-	tcp_network_t *network_;
+	tcp_network_t *tcp_network_t;
 
 	conn_mgr_t *conn_mgr_;
 

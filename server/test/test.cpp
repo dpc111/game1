@@ -15,6 +15,7 @@ server_t server("0.0.0.0", 7769);
 tcp_connection_t *conn;
 
 class test_timer : public timer_handler_t {
+public:
 	virtual void handle_timeout(timer_handle_t handle, void *user) {
 		int res;
 		bool ok = server.get_lua_frame()->call_func("test_add", "ii:i", 1, 2, &res);
@@ -26,6 +27,13 @@ class test_timer : public timer_handler_t {
 	//	ERROR("");
 		assert(ok);
 	}
+
+	void test_msg(tcp_connection_t *conn, battle::s2c_join *msg) {
+		ERROR("%d", msg->get_sid());
+		ERROR("%s", msg->get_name());
+		ERROR("%s", msg->get_icon());
+	}
+
 };
 
 int main() {
@@ -34,6 +42,7 @@ int main() {
 	server.start();
 	test_timer timer;
 	server.register_timer(&timer, NULL, 10000, 2000);
+	server.register_net_message<battle::s2c_join>(std::tr1::bind(test_timer::test_msg, &timer));
 
 	// test
 	 conn = server.connect_to("127.0.0.1", 7768);

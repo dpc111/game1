@@ -104,7 +104,7 @@ void msg_operate_t::send(tcp_connection_t *conn, google::protobuf::Message& msg)
 	slen = strlen(fmt) + 1;
 	stream.write(&slen, ilen);
 	stream.write(fmt, slen);
-	const char *walk = fmt;
+	walk = fmt;
 	while (*walk != '\0') {
 		if (*walk == 'i') {
 			int i = va_arg(vlist, int);

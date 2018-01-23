@@ -30,9 +30,9 @@ public:
 	}
 
 	void test_msg(tcp_connection_t *conn, battle::s2c_join *msg) {
-		ERROR("%d", msg->get_sid());
-		ERROR("%s", msg->get_name());
-		ERROR("%s", msg->get_icon());
+		ERROR("%d", msg->sid());
+		ERROR("%s", msg->name());
+		ERROR("%s", msg->icon());
 	}
 
 };
@@ -43,7 +43,7 @@ int main() {
 	server.start();
 	test_timer timer;
 	server.register_timer(&timer, NULL, 10000, 2000);
-	server.register_net_message<battle::s2c_join>(std::tr1::bind(test_timer::test_msg, &timer));
+	server.register_net_message<battle::s2c_join>(std::tr1::bind(test_timer::test_msg, &timer, std::tr1::placeholders::_1, std::tr1::placeholders::_2));
 
 	// test
 	 conn = server.connect_to("127.0.0.1", 7768);

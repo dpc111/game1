@@ -64,6 +64,7 @@ server_t server("0.0.0.0", 7768);
 tcp_connection_t *conn;
 
 class test_timer : public timer_handler_t {
+public:
 	virtual void handle_timeout(timer_handle_t handle, void *user) {
 		int res;
 		bool ok = server.get_lua_frame()->call_func("test_add", "ii:i", 1, 2, &res);

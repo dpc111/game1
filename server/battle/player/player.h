@@ -1,6 +1,8 @@
 #ifndef PLAYER_H
 #define PLAYER_H
 
+#include "stdio.h"
+
 class player_t{
 public:
 	player_t();

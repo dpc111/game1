@@ -1,4 +1,4 @@
-#include "stddef.h"
+#include "stdafx.h"
 #include "player_mgr.h"
 
 player_mgr_t::player_mgr_t() {

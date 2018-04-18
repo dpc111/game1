@@ -1,4 +1,4 @@
-#include "stdio.h"
+#include "stdafx.h"
 #include "log.h"
 #include "thread.h"
 #include "net_address.h"
@@ -13,7 +13,8 @@
 #include "service.h"
 
 int main() {
-	service_t *service;
+	service_t *service = new service();
+	service->start("0.0.0.0", 7769);
 	service->process();
 	return 1;
 }

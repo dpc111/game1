@@ -1,7 +1,7 @@
 #ifndef PLAYER_H
 #define PLAYER_H
 
-#include "stddef.h"
+#include "stdafx.h"
 
 class player_t{
 public:

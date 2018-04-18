@@ -15,7 +15,7 @@ SRC_DIR := ../battle \
 			../battle/msg \
 			../battle/player \
 			../battle/room \
-			../battle/service \
+			../battle/service
 
 ##########################################################################################
 #  七、 定义生成程序的名称

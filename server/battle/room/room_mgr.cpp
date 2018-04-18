@@ -1,3 +1,4 @@
+#include "stddef.h"
 #include "room_mgr.h"
 
 room_mgr_t::room_mgr_t() {

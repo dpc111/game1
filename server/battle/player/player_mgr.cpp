@@ -1,3 +1,4 @@
+#include "stddef.h"
 #include "player_mgr.h"
 
 player_mgr_t::player_mgr_t() {
@@ -34,7 +35,7 @@ void player_mgr_t::add_player(int uid, player_t *player) {
 void player_mgr_t::del_player(int uid) {
 	player_map_t::iterator it = players_.find(uid);
 	if (it == players_.end()) {
-		return NULL;
+		return;
 	}
 	player_t *player = it->second;
 	players_.erase(it);

@@ -1,6 +1,7 @@
 #ifndef SERVICE_H
 #define SERVICE_H
 
+class server_t;
 class player_mgr_t;
 class room_mgr_t;
 

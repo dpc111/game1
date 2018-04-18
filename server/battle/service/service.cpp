@@ -1,4 +1,6 @@
 #include "service.h"
+#include "player_mgr.h"
+#include "room_mgr.h"
 
 service_t::service_t() {
 	player_mgr_ = new player_mgr_t();

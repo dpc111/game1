@@ -32,7 +32,7 @@ void server_t::init() {
 	conn_mgr_->init();
 }
 
-void start(const char *ip, int port) {
+void server_t::start(const char *ip, int port) {
 	if (!network_) {
 		network_ = new tcp_network_t(ip, port);
 	}

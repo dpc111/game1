@@ -19,7 +19,7 @@ public:
 
 	void del_room(int rid);
 
-	void room_num() { return room_num_; }
+	int room_num() { return room_num_; }
 
 private:
 	room_map_t rooms_;

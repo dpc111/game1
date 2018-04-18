@@ -8,7 +8,7 @@ room_mgr_t::~room_mgr_t() {
 
 }
 
-room_t* room_t::get_room(int rid) {
+room_t* room_mgr_t::get_room(int rid) {
 	room_map_t::iterator it = rooms_.find(rid);
 	if (it == rooms_.end()) {
 		return NULL;
@@ -16,7 +16,7 @@ room_t* room_t::get_room(int rid) {
 	return it->second;
 }
 
-void room_t::add_room(int rid, room_t *room) {
+void room_mgr_t::add_room(int rid, room_t *room) {
 	if (this->get_room(rid)) {
 		return;
 	}
@@ -24,7 +24,7 @@ void room_t::add_room(int rid, room_t *room) {
 	++room_num_;
 }
 
-void del_room(int rid) {
+void room_mgr_t::del_room(int rid) {
 	room_map_t::iterator it = rooms_.find(rid);
 	if (it == rooms_.end()) {
 		return;

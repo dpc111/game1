@@ -5,7 +5,7 @@ player_mgr_t::player_mgr_t() {
 	player_num_ = 0;
 }
 
-~player_mgr_t::player_mgr_t() {
+player_mgr_t::~player_mgr_t() {
 	while (!players_.empty()) {
 		player_map_t::iterator it = players_.begin();
 		player_t *player = it->second;
@@ -15,7 +15,7 @@ player_mgr_t::player_mgr_t() {
 	}
 }
 
-player_t* get_mgr::get_player(int uid) {
+player_t* player_mgr_t::get_player(int uid) {
 	player_map_t::iterator it = players_.find(uid);
 	if (it == players_.end()) {
 		return null;
@@ -23,7 +23,7 @@ player_t* get_mgr::get_player(int uid) {
 	return it->second;
 }
 
-void add_player(int uid, player_t *player) {
+void player_mgr_t::add_player(int uid, player_t *player) {
 	if (this->get_player(uid)) {
 		return;
 	}

@@ -7,6 +7,8 @@ public:
 
 	~service_t();
 
+	void init();
+
 	player_mgr_t* get_player_mgr() { return player_mgr_; }
 
 	room_mgr_t* get_room_mgr() { return room_mgr_; }

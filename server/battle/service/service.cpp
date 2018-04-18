@@ -6,5 +6,6 @@ service_t::service_t() {
 }
 	
 service_t::~service_t() {
-
+	delete player_mgr_;
+	delete room_mgr_;
 }

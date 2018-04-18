@@ -1,6 +1,9 @@
 #ifndef SERVICE_H
 #define SERVICE_H
 
+class player_mgr_t;
+class room_mgr_t;
+
 class service_t : public server_t {
 public:
 	service_t();

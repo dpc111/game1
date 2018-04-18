@@ -3,15 +3,15 @@
 #include "timestamp.h"
 #include "msg_operate.h"
 
-server_t::server_t(const char *ip, int port) {
-	network_ = new tcp_network_t(ip, port);
-	conn_mgr_ = new conn_mgr_t(this);
-	times_ = new timers_t();
-	lua_frame_ = new lua_frame_t(this);
-}
+// server_t::server_t(const char *ip, int port) {
+// 	network_ = new tcp_network_t(ip, port);
+// 	conn_mgr_ = new conn_mgr_t(this);
+// 	times_ = new timers_t();
+// 	lua_frame_ = new lua_frame_t(this);
+// }
 
 server_t::server_t() {
-	network_ = NULL;
+	network_ = new tcp_network_t();
 	conn_mgr_ = new conn_mgr_t(this);
 	times_ = new timers_t();
 	lua_frame_ = new lua_frame_t(this);
@@ -33,15 +33,15 @@ void server_t::init() {
 }
 
 void server_t::start(const char *ip, int port) {
-	if (!network_) {
-		network_ = new tcp_network_t(ip, port);
-	}
-	network_->start();
+	// if (!network_) {
+	// 	network_ = new tcp_network_t(ip, port);
+	// }
+	network_->start(ip, port);
 }
 
-void server_t::start() {
-	network_->start();
-}
+// void server_t::start() {
+// 	network_->start();
+// }
 
 void server_t::process() {
 	while (true) {

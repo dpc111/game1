@@ -16,11 +16,13 @@ public:
 	typedef std::map<int, tcp_connection_t *> conn_map_t;
 
 public:
-	tcp_network_t(const char *ip, int port);
+	// tcp_network_t(const char *ip, int port);
+	tcp_network_t();
 
 	~tcp_network_t();
 
-	void start();
+	// void start();
+	void start(const char *ip, int port);
 
 	void shutdown();
  

@@ -2,6 +2,7 @@
 #define PLAYER_H
 
 #include "stdio.h"
+#include <string>
 
 class player_t{
 public:

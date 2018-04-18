@@ -10,6 +10,13 @@ server_t::server_t(const char *ip, int port) {
 	lua_frame_ = new lua_frame_t(this);
 }
 
+server_t::server_t() {
+	network_ = NULL;
+	conn_mgr_ = new conn_mgr_t(this);
+	times_ = new timers_t();
+	lua_frame_ = new lua_frame_t(this);
+}
+
 server_t::~server_t() {
 	delete network_;
 	delete conn_mgr_;
@@ -23,6 +30,13 @@ server_t::~server_t() {
 
 void server_t::init() {
 	conn_mgr_->init();
+}
+
+void start(const char *ip, int port) {
+	if (!network_) {
+		network_ = new tcp_network_t(ip, port);
+	}
+	network_->start();
 }
 
 void server_t::start() {

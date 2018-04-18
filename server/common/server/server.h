@@ -11,9 +11,13 @@ class server_t {
 public:
 	server_t(const char *ip, int port);
 
+	server_t();
+
 	~server_t();
 
 	void init();
+
+	void start(const char *ip, int port);
 
 	void start();
 

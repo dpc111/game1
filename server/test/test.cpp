@@ -15,7 +15,6 @@
 #include "lua_frame.h"
 #include "message/messages.h"
 
-//server_t server("0.0.0.0", 7768);
 server_t server("0.0.0.0", 7769);
 tcp_connection_t *conn;
 
@@ -33,7 +32,6 @@ public:
 		server.send(conn, msg);
 		assert(ok);
 	}
-
 };
 
 int main() {
@@ -68,7 +66,6 @@ int main() {
 #include "message/messages.h"
 
 server_t server("0.0.0.0", 7768);
-tcp_connection_t *conn;
 
 class test_timer : public timer_handler_t {
 public:

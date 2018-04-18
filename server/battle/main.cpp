@@ -14,6 +14,7 @@
 
 int main() {
 	service_t *service = new service_t();
+	service->init();
 	service->start("0.0.0.0", 7769);
 	service->process();
 	return 1;

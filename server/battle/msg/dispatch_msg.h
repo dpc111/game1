@@ -1,15 +1,15 @@
-#ifndef REGISTER_MSG
-#define REGISTER_MSG
+#ifndef DISPATCH_MSG
+#define DISPATCH_MSG
 
 class service_t;
 class client_msg_t;
 class server_msg_t;
 
-class register_msg_t {
+class dispatch_msg_t {
 public:
-	register_msg_t();
+	dispatch_msg_t(service_t service);
 
-	~register_msg_t();
+	~dispatch_msg_t();
 
 	void register_client_msg();
 

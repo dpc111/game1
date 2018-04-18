@@ -8,7 +8,7 @@ all:
 	@make -f libmsg.mk
 	@make install -f libmsg.mk
 	@make -f test.mk
-	# @make -f battle.mk
+	@make -f battle.mk
 	# @make install -f test.mk
 
 install:

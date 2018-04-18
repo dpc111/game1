@@ -3,6 +3,8 @@
 
 #include <map>
 
+class room_t;
+
 class room_mgr_t {
 public:
 	typedef std::map<int, room_t*> room_map_t;

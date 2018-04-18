@@ -1,6 +1,10 @@
 #ifndef REGISTER_MSG
 #define REGISTER_MSG
 
+class service_t;
+class client_msg_t;
+class server_msg_t;
+
 class register_msg_t {
 public:
 	register_msg_t();
@@ -17,6 +21,6 @@ private:
 	client_msg_t *client_msg_;
 
 	server_msg_t *server_msg_;
-}
+};
 
 #endif

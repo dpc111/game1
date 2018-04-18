@@ -3,6 +3,8 @@
 
 #include <map>
 
+class player_t;
+
 class player_mgr_t {
 public:
 	std::map<int, player_t*> player_map_t;

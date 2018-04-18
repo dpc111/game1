@@ -6,6 +6,6 @@ public:
 	server_msg_t();
 
 	~server_msg_t();
-}
+};
 
 #endif

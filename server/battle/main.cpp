@@ -13,7 +13,7 @@
 #include "service.h"
 
 int main() {
-	service_t *service = new service();
+	service_t *service = new service_t();
 	service->start("0.0.0.0", 7769);
 	service->process();
 	return 1;

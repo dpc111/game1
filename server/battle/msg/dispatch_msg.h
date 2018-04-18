@@ -7,7 +7,7 @@ class server_msg_t;
 
 class dispatch_msg_t {
 public:
-	dispatch_msg_t(service_t service);
+	dispatch_msg_t(service_t *service);
 
 	~dispatch_msg_t();
 

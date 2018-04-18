@@ -3,14 +3,6 @@
 #include "net_pool.h"
 #include "msg_dispatch.h"
 
-// tcp_network_t::tcp_network_t(const char *ip, int port)
-// 	: addr_(ip, port) {
-// 	msg_operate_ = new msg_operate_t(this);
-// 	msg_dispatch_ = new msg_dispatch_t(this);
-// 	ev_base_ = NULL;
-// 	ev_listen_ = NULL;
-// 	sid_ = 0;
-// }
 tcp_network_t::tcp_network_t() {
 	msg_operate_ = new msg_operate_t(this);
 	msg_dispatch_ = new msg_dispatch_t(this);
@@ -24,9 +16,6 @@ tcp_network_t::~tcp_network_t() {
 	sid_ = 0;
 }
 
-// void tcp_network_t::start() {
-// 	this->ev_start();
-// }
  void tcp_network_t::start(const char *ip, int port) {
  	addr_ = net_address_t(ip, port);
 	this->ev_start();

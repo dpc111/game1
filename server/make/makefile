@@ -7,7 +7,7 @@ all:
 	@make install -f libserver.mk
 	@make -f libmsg.mk
 	@make install -f libmsg.mk
-	@make -f test.mk
+	# @make -f test.mk
 	@make -f battle.mk
 	# @make install -f test.mk
 

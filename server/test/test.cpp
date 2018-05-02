@@ -1,4 +1,4 @@
-#define CLIENT
+// #define CLIENT
 //////////////////////////////////////////////////////////////////////////////////////////////////
 #ifdef CLIENT
 
@@ -88,7 +88,7 @@ int main() {
 	server.get_lua_frame()->run_script();
 	server.start();
 	test_timer timer;
-	server.register_timer(&timer, NULL, 10000, 10000);
+	// server.register_timer(&timer, NULL, 10000, 10000);
 	server.register_net_message<battle::s2c_join>(std::tr1::bind(&test_timer::test_msg, &timer, std::tr1::placeholders::_1, std::tr1::placeholders::_2));
 
 	server.process();

@@ -116,7 +116,6 @@ void tcp_network_t::ev_close() {
 }
 
 void tcp_network_t::ev_listen_cb(evconnlistener *listener, evutil_socket_t fd, sockaddr *sa, int socklen, void *ud) {
-	ERROR("connect fd %d", fd);
 	tcp_network_t *network = (tcp_network_t *)ud;
 	assert(sa->sa_family == AF_INET);
 	tcp_connection_t *conn = connection_alloc();
@@ -126,6 +125,7 @@ void tcp_network_t::ev_listen_cb(evconnlistener *listener, evutil_socket_t fd, s
 	conn->set_events(network->get_ev_base(), ev_read_cb, ev_write_cb);
 	conn->set_state(CNT_STATE_CONNECTED);
 	network->add_connection(conn);
+	ERROR("connect fd %d addr %s", fd, conn->get_peer_addr().to_ip_port());
 }
 
 void tcp_network_t::ev_read_cb(evutil_socket_t fd, const short which, void *arg) {

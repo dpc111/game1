@@ -29,17 +29,18 @@ public:
 	}
 
 	net_address_t() {
+		
 	}
 
 	std::string to_ip() const {
 		char buf[32];
-		sprintf(buf, "%s:%d", inet_ntoa(addr_.sin_addr), ntohs(addr_.sin_port));
+		sprintf(buf, "%s", inet_ntoa(addr_.sin_addr));
 		return buf;
 	}
 
 	std::string to_ip_port() const {
 		char buf[32];
-		sprintf(buf, "%s", inet_ntoa(addr_.sin_addr));
+		sprintf(buf, "%s:%d", inet_ntoa(addr_.sin_addr), ntohs(addr_.sin_port));
 		return buf;
 	}
 

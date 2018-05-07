@@ -15,7 +15,7 @@ service_t::~service_t() {
 	delete room_mgr_;
 }
 
-static service_t* service_t::get_service() {
+service_t* service_t::get_service() {
 	if (!service_) {
 		service_ = new service_t();
 	}

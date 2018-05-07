@@ -37,6 +37,8 @@ google::protobuf::Message *msg_operate_t::gen_message(const char *name) {
  		} else {
  			ERROR("%s", name);
  		}
+ 	} else {
+ 		ERROR("%s", name);
 	}
 	return msg;
 }

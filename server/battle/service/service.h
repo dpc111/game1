@@ -13,7 +13,12 @@ public:
 
 	~service_t();
 
-	static service_t* get_service();
+	static service_t* get_service() {
+		if (!service_) {
+			service_ = new service_t();
+		}
+		return service_;
+	}
 
 	void init();
 

@@ -19,6 +19,6 @@ void client_msg_t::c2s_join(tcp_connection_t *conn, const battle::c2s_join& msg)
 	res.set_uid(100001);
 	res.set_name("dpc");
 	res.set_icon("null");
-	get_service()->send(conn, res);
+	service_t::get_service()->send(conn, res);
 }
 

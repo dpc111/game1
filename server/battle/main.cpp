@@ -13,6 +13,7 @@
 #include "service.h"
 
 int main() {
+	service_t service = service_t::get_service();
 	service->init();
 	service->start("0.0.0.0", 7769);
 	service->process();

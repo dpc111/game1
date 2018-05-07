@@ -13,6 +13,8 @@ public:
 
 	~service_t();
 
+	static service_t* get_service();
+
 	void init();
 
 	player_mgr_t* get_player_mgr() { return player_mgr_; }
@@ -20,6 +22,8 @@ public:
 	room_mgr_t* get_room_mgr() { return room_mgr_; }
 
 private:
+	static service_t* service_;
+
 	player_mgr_t *player_mgr_;
 	
 	room_mgr_t *room_mgr_;

@@ -12,14 +12,7 @@
 #include "message/messages.h"
 #include "service.h"
 
-service_t *service;
-
-service_t *get_service() {
-	return service;
-}
-
 int main() {
-	service = new service_t();
 	service->init();
 	service->start("0.0.0.0", 7769);
 	service->process();

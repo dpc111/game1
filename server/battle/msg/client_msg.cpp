@@ -1,4 +1,5 @@
 #include "client_msg.h"
+#include "service.h"
 
 client_msg_t::client_msg_t() {
 

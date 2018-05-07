@@ -12,7 +12,7 @@ public:
 
 	void s2c_join(tcp_connection_t *conn, const battle::s2c_join& msg);
 
-	void c2s_join(tcp_connection_t *conn, const battle::s2c_join& msg);
+	void c2s_join(tcp_connection_t *conn, const battle::c2s_join& msg);
 
 };
 

@@ -34,6 +34,8 @@ google::protobuf::Message *msg_operate_t::gen_message(const char *name) {
 		const google::protobuf::Message *tmsg = google::protobuf::MessageFactory::generated_factory()->GetPrototype(des);
  		if (tmsg) {
  			msg = tmsg->New(); 
+ 		} else {
+ 			ERROR("%s", name);
  		}
 	}
 	return msg;

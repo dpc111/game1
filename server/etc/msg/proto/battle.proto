@@ -1,6 +1,6 @@
-syntax = "proto2";
+syntax="proto2";
 
-package battle;
+package ProtoMsg;
 
 message c2s_join {
 }
@@ -10,3 +10,4 @@ message s2c_join {
 	required string name = 2;
 	required string icon = 3;
 }
+

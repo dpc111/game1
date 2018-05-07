@@ -16,12 +16,7 @@ public:
 
 	~service_t();
 
-	static service_t* get_service() {
-		if (!service_t::service_) {
-			service_t::service_ = new service_t();
-		}
-		return service_t::service_;
-	}
+	static service_t* get_service();
 
 	void init();
 

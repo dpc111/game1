@@ -33,7 +33,7 @@ void msg_dispatch_t::on_message(tcp_connection_t *conn, google::protobuf::Messag
 		cb->on_message(conn, msg);
 		find = true;
 	}
-	if (find) {
+	if (!find) {
 		ERROR("msg callback do not found: %s", name.c_str());
 	}
 }

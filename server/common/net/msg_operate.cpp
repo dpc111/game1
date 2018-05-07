@@ -49,6 +49,7 @@ void msg_operate_t::free_message(google::protobuf::Message *msg) {
 
 void msg_operate_t::send(tcp_connection_t *conn, google::protobuf::Message& msg) {
 	std::string name = msg.GetDescriptor()->full_name();
+	ERROR("%s", name.c_str());
 	net_output_stream_t& stream = conn->get_output_stream();
 	msg_header_t header;
 	header.name_len = strlen(name.c_str()) + 1;

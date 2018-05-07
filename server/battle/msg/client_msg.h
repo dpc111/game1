@@ -11,6 +11,9 @@ public:
 	~client_msg_t();
 
 	void s2c_join(tcp_connection_t *conn, const battle::s2c_join& msg);
+
+	void c2s_join(tcp_connection_t *conn, const battle::s2c_join& msg);
+
 };
 
 #endif

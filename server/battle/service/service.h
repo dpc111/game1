@@ -9,9 +9,6 @@ class dispatch_msg_t;
 
 class service_t : public server_t {
 public:
-	static service_t* service_;
-
-public:
 	service_t();
 
 	~service_t();
@@ -25,6 +22,8 @@ public:
 	room_mgr_t* get_room_mgr() { return room_mgr_; }
 
 private:
+	static service_t* service_;
+	
 	player_mgr_t *player_mgr_;
 	
 	room_mgr_t *room_mgr_;

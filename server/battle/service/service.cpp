@@ -3,7 +3,9 @@
 #include "room_mgr.h"
 #include "dispatch_msg.h"
 
-service_t::service_t() 
+service_t *service_t::service_ = NULL;
+
+service_t::service_t()
 	: server_t() {
 	player_mgr_ = new player_mgr_t();
 	room_mgr_ = new room_mgr_t();

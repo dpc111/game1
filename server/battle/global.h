@@ -9,6 +9,6 @@ player_mgr_t* get_player_mgr();
 
 room_mgr_t* get_room_mgr();
 
-service* get_service();
+service_t* get_service();
 
 #endif

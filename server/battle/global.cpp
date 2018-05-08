@@ -1,3 +1,4 @@
+#include "global.h"
 #include "player_mgr.h"
 #include "room_mgr.h"
 #include "service.h"
@@ -12,6 +13,6 @@ room_mgr_t* get_room_mgr() {
 	return get_service()->get_room_mgr();
 }
 
-service* get_service() {
+service_t* get_service() {
 	return g_service_;
 }

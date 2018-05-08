@@ -1,6 +1,7 @@
 #ifndef PLAYER_MGR_H
 #define PLAYER_MGR_H
 
+#include "stdafx.h"
 #include <map>
 
 class player_t;

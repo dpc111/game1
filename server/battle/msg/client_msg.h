@@ -1,6 +1,7 @@
 #ifndef CLIENT_MSG
 #define CLIENT_MSG
 
+#include "stdafx.h"
 #include "message/messages.h"
 #include "tcp_connection.h"
 

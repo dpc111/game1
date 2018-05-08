@@ -11,9 +11,10 @@
 #include "lua_frame.h"
 #include "message/messages.h"
 #include "service.h"
+#include "global.h"
 
 int main() {
-	service_t *service = service_t::get_service();
+	service_t *service = get_service();
 	service->init();
 	service->start("0.0.0.0", 7769);
 	service->process();

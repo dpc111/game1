@@ -5,16 +5,20 @@
 
 class player_t{
 public:
-	player_t();
+	player_t(int64 uid, std::string name, int32 level, std::string icon);
 
 	~player_t();
 
-private:
-	int uid_;
+public:
+	int64 uid_;
 
 	std::string name_;
 
-	int level_;
+	int32 level_;
+
+	std::string icon_;
+
+	bool is_online_;
 };
 
 #endif

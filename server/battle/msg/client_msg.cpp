@@ -1,7 +1,8 @@
 #include "client_msg.h"
 #include "service.h"
 #include "global.h"
-#include "stdafx.h"
+#include "player_mgr.h"
+#include "player.h"
 
 client_msg_t::client_msg_t() {
 
@@ -16,7 +17,7 @@ void client_msg_t::s2c_join(tcp_connection_t *conn, const battle::s2c_join& msg)
 }
 
 void client_msg_t::c2s_join(tcp_connection_t *conn, const battle::c2s_join& msg) {
-	int64 uid = msg.uid();
+	int64 uid = 1111;//msg.uid();
 	player_t *player = get_player_mgr()->get_player(uid);
 	if (player) {
 		return;

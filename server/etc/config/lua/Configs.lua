@@ -1,24 +1,17 @@
-require("Assformat")
-require("Battle")
-require("Fixedformat")
-require("MatchAward")
-require("Outformat")
-require("Switformat")
+require("battle")
 
-
-GlobalCfg = {
-   ["Assformat"] = cfg_Assformat,
-   ["Battle"] = cfg_Battle,
-   ["Fixedformat"] = cfg_Fixedformat,
-   ["MatchAward"] = cfg_MatchAward,
-   ["Outformat"] = cfg_Outformat,
-   ["Switformat"] = cfg_Switformat,
+g_cfgs = {
+   ["battle"] = cfg_battle,
 }
 
-function cfg_getCfg(name)
-    return GlobalCfg[name]
+function cfg_get(name)
+    return g_cfgs[name]
 end
 
-function cfg_getCfgLine(name, index)
-    return GlobalCfg[name][index]
+function cfg_get_line(name, index)
+    return g_cfgs[name][index]
+end
+
+function cfg_get_value(name, index, key)
+    return g_cfgs[name][index][key]
 end

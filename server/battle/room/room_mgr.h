@@ -1,6 +1,7 @@
 #ifndef ROOM_MGR_H
 #define ROOM_MGR_H
 
+#include "stdafx.h"
 #include <map>
 
 class room_t;

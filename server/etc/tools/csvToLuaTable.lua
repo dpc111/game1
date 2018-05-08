@@ -96,7 +96,7 @@ end
 
 function GenLuaTable()
     print("csv to lua table---------------------------begin")
-    local initLuaFile = io.open("lua\\Configs.lua", "w")
+    local initLuaFile = io.open("lua\\configs.lua", "w")
     local files = {}
     local filenames = {}
     getpathes("csv\\", files)
@@ -109,19 +109,23 @@ function GenLuaTable()
         CsvToluaTable(name)
         table.insert(filenames, name)
     end
-    initLuaFile:write("\n\n")
-    initLuaFile:write("GlobalCfg = {\n")
+    initLuaFile:write("\n")
+    initLuaFile:write("g_cfgs = {\n")
     for k, v in pairs(filenames) do
         initLuaFile:write("   [\"" .. v .. "\"] = cfg_" .. v .. ",\n")
     end
     initLuaFile:write("}\n\n")
     initLuaFile:write([[
-function cfg_getCfg(name)
-    return GlobalCfg[name]
+function cfg_get(name)
+    return g_cfgs[name]
 end
 
-function cfg_getCfgLine(name, index)
-    return GlobalCfg[name][index]
+function cfg_get_line(name, index)
+    return g_cfgs[name][index]
+end
+
+function cfg_get_value(name, index, key)
+    return g_cfgs[name][index][key]
 end
 ]]
     )

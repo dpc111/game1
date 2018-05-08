@@ -1,9 +1,0 @@
-Id(2000 - 3000),初始人数,初始积分,淘汰策略,总要要打的轮数,一轮要打的局数,每轮要淘汰的类别（weedOutMeathod = 2）,每轮要淘汰的值（weedOutMeathod = 2）,初始淘汰分数（weedOutMeathod = 1）,淘汰分数增长策略（weedOutMeathod = 1）,淘汰分数增长的单位值变化（weedOutMeathod = 1）,最终晋级的玩家人数
-index,int,int,int,int,int,int,int,int,int,int,int
-id,initPlayerCount,initScore,weedOutMeathod,roundNum,gameNum,obsoletedType,obsoletedValue,outScore,outMeathod,outUp,victoryNum
-2001,36,1000,1,0,1,0,0,500,1,200,18
-2002,36,1000,1,0,1,0,0,500,1,200,12
-2003,6000,2000,1,0,1,0,0,500,1,200,3000
-2501,18,1000,2,2,1,2,6,0,0,0,6
-2502,12,1000,2,3,1,2,3,0,0,0,3
-2503,6,1000,2,1,2,2,3,0,0,0,3

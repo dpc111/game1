@@ -1,4 +1,0 @@
-id（1-1000）,初始人数,初始积分,总要要打的轮数,一轮要打的局数,每轮要淘汰的类别,每轮要淘汰的值,最终晋级人数
-index,int,int,int,int,int,int,int
-id,initPlayerCount,initScore,roundNum,gameNum,obsoletedType,obsoletedValue,victoryNum
-1,30,2000,3,2,2,9,3

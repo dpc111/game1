@@ -1,4 +1,4 @@
-cfg_Battle = {
+cfg_battle = {
 [1] = {id=1,open=1,roomName=[[swit match room 1]],beganType=1,applyTime=[[""]],began=36,maxPlayerCount=0,minPlayerCount=0,registerCost=0,num=0,reward=[[1-1:2/2-3:1]],gameInfo=[[普通比赛]],format=[[1:2001/2:2501/3:2503]],},
 [2] = {id=2,open=0,roomName=[[swit match room 2]],beganType=1,applyTime=[[""]],began=36,maxPlayerCount=0,minPlayerCount=0,registerCost=0,num=0,reward=[[1-1:3/2-3:2/4-6:1]],gameInfo=[[普通比赛]],format=[[1:2002/3:6002]],},
 [1001] = {id=1001,open=1,roomName=[[swit match room 1]],beganType=2,applyTime=[[d/11:0:0]],began=30,maxPlayerCount=120,minPlayerCount=60,registerCost=0,num=0,reward=[[1-1:2/2-3:1]],gameInfo=[[普通比赛]],format=[[1:2001/2:2501/3:2503]],},

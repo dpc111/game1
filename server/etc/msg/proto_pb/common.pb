@@ -1,7 +1,7 @@
 
-A
-common.proto"1
-player
-uid (
-name (	
-icon (	
+R
+common.proto"B
+player
+uid (Ruid
+name (	Rname
+icon (	Ricon

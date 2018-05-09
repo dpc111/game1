@@ -1,9 +1,9 @@
 
-W
+h
 battle.protobattle"
 
-c2s_join"3
-s2c_join
-uid (
-name (	
-icon (	
+c2s_join"D
+s2c_join
+uid (Ruid
+name (	Rname
+icon (	Ricon

@@ -34,7 +34,7 @@ int cfg_json_mgr_t::get_int(std::string file_name, const char *key1) {
 	return json->get_int(key1);
 }
 
-int cfg_json_mgr_t::get_int(std::string file_name, int *key1) {
+int cfg_json_mgr_t::get_int(std::string file_name, int key1) {
 	cfg_json_t *json = this->get_json(file_name);
 	if (!json) {
 		return JSON_ERROR_INT;
@@ -58,7 +58,7 @@ int cfg_json_mgr_t::get_int(std::string file_name, const char *key1, int key2) {
 	return json->get_int(key1, key2);
 }
 
-int cfg_json_mgr_t::get_int(std::string file_name, int *key1, const char* key2) {
+int cfg_json_mgr_t::get_int(std::string file_name, int key1, const char* key2) {
 	cfg_json_t *json = this->get_json(file_name);
 	if (!json) {
 		return JSON_ERROR_INT;
@@ -66,7 +66,7 @@ int cfg_json_mgr_t::get_int(std::string file_name, int *key1, const char* key2) 
 	return json->get_int(key1, key2);
 }
 
-int cfg_json_mgr_t::get_int(std::string file_name, int *key1, int key2) {
+int cfg_json_mgr_t::get_int(std::string file_name, int key1, int key2) {
 	cfg_json_t *json = this->get_json(file_name);
 	if (!json) {
 		return JSON_ERROR_INT;
@@ -82,7 +82,7 @@ std::string cfg_json_mgr_t::get_string(std::string file_name, const char *key1) 
 	return json->get_string(key1);
 }
 
-std::string cfg_json_mgr_t::get_string(std::string file_name, int *key1) {
+std::string cfg_json_mgr_t::get_string(std::string file_name, int key1) {
 	cfg_json_t *json = this->get_json(file_name);
 	if (!json) {
 		return JSON_ERROR_STRING;
@@ -106,7 +106,7 @@ std::string cfg_json_mgr_t::get_string(std::string file_name, const char *key1, 
 	return json->get_string(key1, key2);
 }
 
-std::string cfg_json_mgr_t::get_string(std::string file_name, int *key1, const char* key2) {
+std::string cfg_json_mgr_t::get_string(std::string file_name, int key1, const char* key2) {
 	cfg_json_t *json = this->get_json(file_name);
 	if (!json) {
 		return JSON_ERROR_STRING;
@@ -114,7 +114,7 @@ std::string cfg_json_mgr_t::get_string(std::string file_name, int *key1, const c
 	return json->get_string(key1);
 }
 
-std::string cfg_json_mgr_t::get_string(std::string file_name, int *key1, int key2) {
+std::string cfg_json_mgr_t::get_string(std::string file_name, int key1, int key2) {
 	cfg_json_t *json = this->get_json(file_name);
 	if (!json) {
 		return JSON_ERROR_STRING;

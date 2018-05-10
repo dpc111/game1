@@ -14,7 +14,7 @@ bool cfg_json_t::init(const char *file_name) {
 	file_name_ = file_name;
 	std::ifstream ifs;
 	ifs.open(file_name, std::ios::binary);
-	if (!reader.parse(ifs, json_value_, false))
+	if (!mgr_->get_json_reader()->parse(ifs, json_value_, false))
 	{
 		ifs.close();
 		return false;
@@ -27,7 +27,7 @@ int cfg_json_t::get_int(const char *key1) {
 	return json_value_[key1].asInt();
 }
 
-int cfg_json_t::get_int(int *key1) {
+int cfg_json_t::get_int(int key1) {
 	return json_value_[key1].asInt();
 }
 
@@ -39,11 +39,11 @@ int cfg_json_t::get_int(const char *key1, int key2) {
 	return json_value_[key1][key2].asInt();
 }
 
-int cfg_json_t::get_int(int *key1, const char* key2) {
+int cfg_json_t::get_int(int key1, const char* key2) {
 	return json_value_[key1][key2].asInt();
 }
 
-int cfg_json_t::get_int(int *key1, int key2) {
+int cfg_json_t::get_int(int key1, int key2) {
 	return json_value_[key1][key2].asInt();
 }
 
@@ -51,7 +51,7 @@ std::string cfg_json_t::get_string(const char *key1) {
 	return json_value_[key1].asString();
 }
 
-std::string cfg_json_t::get_string(int *key1) {
+std::string cfg_json_t::get_string(int key1) {
 	return json_value_[key1].asString();
 }
 
@@ -63,11 +63,11 @@ std::string cfg_json_t::get_string(const char *key1, int key2) {
 	return json_value_[key1][key2].asString();
 }
 
-std::string cfg_json_t::get_string(int *key1, const char* key2) {
+std::string cfg_json_t::get_string(int key1, const char* key2) {
 	return json_value_[key1][key2].asString();
 }
 
-std::string cfg_json_t::get_string(int *key1, int key2) {
+std::string cfg_json_t::get_string(int key1, int key2) {
 	return json_value_[key1][key2].asString();
 }
 

@@ -2,7 +2,7 @@
 #include "cfg_json.h"
 
 cfg_json_mgr_t::cfg_json_mgr_t() {
-	reader_ = new JsonReader();	
+	reader_ = new Json::Reader();	
 }
 
 cfg_json_mgr_t::~cfg_json_mgr_t() {
@@ -11,7 +11,7 @@ cfg_json_mgr_t::~cfg_json_mgr_t() {
 
 void cfg_json_mgr_t::load(std::string file_name) {
 	cfg_json_t *json = new cfg_json_t(this);
-	if (json->init(file_name.c_str());) {
+	if (json->init(file_name.c_str())) {
 		jsons_[file_name] = json;
 	} else {
 		delete json;

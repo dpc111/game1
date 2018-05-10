@@ -8,7 +8,7 @@ server_t::server_t() {
 	conn_mgr_ = new conn_mgr_t(this);
 	times_ = new timers_t();
 	lua_frame_ = new lua_frame_t(this);
-	json_mgr_ = new json_mgr_t();	
+	json_mgr_ = new cfg_json_mgr_t();	
 }
 
 server_t::~server_t() {
@@ -23,7 +23,7 @@ server_t::~server_t() {
 }
 
 void server_t::init() {
-	json_mgr_.load("battle.json");
+	json_mgr_->load("battle.json");
 	ERROR("%d", json_mgr_->get_int("battle.json", 3, "id"));
 	ERROR("%s", json_mgr_->get_int("battle.json", 3, "roomName"));
 	conn_mgr_->init();

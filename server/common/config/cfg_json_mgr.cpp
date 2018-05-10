@@ -13,10 +13,10 @@ cfg_json_mgr_t::~cfg_json_mgr_t() {
 void cfg_json_mgr_t::load(std::string file_name) {
 	cfg_json_t *json = new cfg_json_t(this);
 	if (json->init(file_name.c_str())) {
-		ERROR("load json file: %s", file_name);
+		ERROR("load json file: %s", file_name.c_str());
 		jsons_[file_name] = json;
 	} else {
-		ERROR("load json file: %s failed", file_name);
+		ERROR("load json file: %s failed", file_name.c_str());
 		delete json;
 	}
 }

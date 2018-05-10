@@ -16,6 +16,7 @@ service_t::~service_t() {
 }
 
 void service_t::init() {
+	server_t::init();
 	dispatch_->register_client_msg();
 	dispatch_->register_server_msg();
 }

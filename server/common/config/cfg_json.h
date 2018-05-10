@@ -13,21 +13,21 @@ public:
 
 	bool init(const char *file_name);
 
-	int32 get_int(const char *key1);
+	int get_int(const char *key1);
 
-	int32 get_int(int32 *key1);
+	int get_int(int *key1);
 
-	int32 get_int(const char *key1, const char *key2);
+	int get_int(const char *key1, const char *key2);
 
-	int32 get_int(const char *key1, int key2);
+	int get_int(const char *key1, int key2);
 
-	int32 get_int(int *key1, const char* key2);
+	int get_int(int *key1, const char* key2);
 
-	int32 get_int(int *key1, int key2);
+	int get_int(int *key1, int key2);
 
 	std::string get_string(const char *key1);
 
-	std::string get_string(int32 *key1);
+	std::string get_string(int *key1);
 
 	std::string get_string(const char *key1, const char *key2);
 

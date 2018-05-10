@@ -23,27 +23,27 @@ bool cfg_json_t::init(const char *file_name) {
 	return true;
 }
 
-int32 cfg_json_t::get_int(const char *key1) {
+int cfg_json_t::get_int(const char *key1) {
 	return json_value_[key1].asInt();
 }
 
-int32 cfg_json_t::get_int(int32 *key1) {
+int cfg_json_t::get_int(int *key1) {
 	return json_value_[key1].asInt();
 }
 
-int32 cfg_json_t::get_int(const char *key1, const char *key2) {
+int cfg_json_t::get_int(const char *key1, const char *key2) {
 	return json_value_[key1][key2].asInt();
 }
 
-int32 cfg_json_t::get_int(const char *key1, int key2) {
+int cfg_json_t::get_int(const char *key1, int key2) {
 	return json_value_[key1][key2].asInt();
 }
 
-int32 cfg_json_t::get_int(int *key1, const char* key2) {
+int cfg_json_t::get_int(int *key1, const char* key2) {
 	return json_value_[key1][key2].asInt();
 }
 
-int32 cfg_json_t::get_int(int *key1, int key2) {
+int cfg_json_t::get_int(int *key1, int key2) {
 	return json_value_[key1][key2].asInt();
 }
 
@@ -51,7 +51,7 @@ std::string cfg_json_t::get_string(const char *key1) {
 	return json_value_[key1].asString();
 }
 
-std::string cfg_json_t::get_string(int32 *key1) {
+std::string cfg_json_t::get_string(int *key1) {
 	return json_value_[key1].asString();
 }
 

@@ -21,12 +21,12 @@ void cfg_json_mgr_t::load(std::string file_name) {
 cfg_json_t* cfg_json_mgr_t::get_json(std::string file_name) {
 	cfg_json_map_t::iterator it = jsons_.find(file_name);
 	if (it == jsons_.end()) {
-		return nil;
+		return NULL;
 	}
 	return it->second;
 }
 
-int32 cfg_json_mgr_t::get_int(std::string file_name, const char *key1) {
+int cfg_json_mgr_t::get_int(std::string file_name, const char *key1) {
 	cfg_json_t *json = this->get_json(file_name);
 	if (!json) {
 		return JSON_ERROR_INT;
@@ -34,7 +34,7 @@ int32 cfg_json_mgr_t::get_int(std::string file_name, const char *key1) {
 	return json->get_int(key1);
 }
 
-int32 cfg_json_mgr_t::get_int(std::string file_name, int32 *key1) {
+int cfg_json_mgr_t::get_int(std::string file_name, int *key1) {
 	cfg_json_t *json = this->get_json(file_name);
 	if (!json) {
 		return JSON_ERROR_INT;
@@ -42,7 +42,7 @@ int32 cfg_json_mgr_t::get_int(std::string file_name, int32 *key1) {
 	return json->get_int(key1);
 }
 
-int32 cfg_json_mgr_t::get_int(std::string file_name, const char *key1, const char *key2) {
+int cfg_json_mgr_t::get_int(std::string file_name, const char *key1, const char *key2) {
 	cfg_json_t *json = this->get_json(file_name);
 	if (!json) {
 		return JSON_ERROR_INT;
@@ -50,7 +50,7 @@ int32 cfg_json_mgr_t::get_int(std::string file_name, const char *key1, const cha
 	return json->get_int(key1, key2);
 }
 
-int32 cfg_json_mgr_t::get_int(std::string file_name, const char *key1, int key2) {
+int cfg_json_mgr_t::get_int(std::string file_name, const char *key1, int key2) {
 	cfg_json_t *json = this->get_json(file_name);
 	if (!json) {
 		return JSON_ERROR_INT;
@@ -58,7 +58,7 @@ int32 cfg_json_mgr_t::get_int(std::string file_name, const char *key1, int key2)
 	return json->get_int(key1, key2);
 }
 
-int32 cfg_json_mgr_t::get_int(std::string file_name, int *key1, const char* key2) {
+int cfg_json_mgr_t::get_int(std::string file_name, int *key1, const char* key2) {
 	cfg_json_t *json = this->get_json(file_name);
 	if (!json) {
 		return JSON_ERROR_INT;
@@ -66,7 +66,7 @@ int32 cfg_json_mgr_t::get_int(std::string file_name, int *key1, const char* key2
 	return json->get_int(key1, key2);
 }
 
-int32 cfg_json_mgr_t::get_int(std::string file_name, int *key1, int key2) {
+int cfg_json_mgr_t::get_int(std::string file_name, int *key1, int key2) {
 	cfg_json_t *json = this->get_json(file_name);
 	if (!json) {
 		return JSON_ERROR_INT;
@@ -82,7 +82,7 @@ std::string cfg_json_mgr_t::get_string(std::string file_name, const char *key1) 
 	return json->get_string(key1);
 }
 
-std::string cfg_json_mgr_t::get_string(std::string file_name, int32 *key1) {
+std::string cfg_json_mgr_t::get_string(std::string file_name, int *key1) {
 	cfg_json_t *json = this->get_json(file_name);
 	if (!json) {
 		return JSON_ERROR_STRING;

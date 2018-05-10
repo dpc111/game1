@@ -1,5 +1,8 @@
 #ifndef CFG_JSON_MGR_H
-#ifndef CFG_JSON_MGR_H
+#define CFG_JSON_MGR_H
+
+#define JSON_ERROR_INT 0xFFFFFFFF
+#define JSON_ERROR_STRING "json_error_string"
 
 #include "json/json.h"
 

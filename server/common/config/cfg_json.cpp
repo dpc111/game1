@@ -1,3 +1,4 @@
+#include <fstream> 
 #include "cfg_json.h"
 
 cfg_json_t::cfg_json_t(cfg_json_mgr_t *mgr) {

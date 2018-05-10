@@ -1,5 +1,6 @@
 #include "cfg_json_mgr.h"
 #include "cfg_json.h"
+#include "log.h"
 
 cfg_json_mgr_t::cfg_json_mgr_t() {
 	reader_ = new Json::Reader();	

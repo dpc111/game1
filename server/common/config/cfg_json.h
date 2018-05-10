@@ -41,7 +41,7 @@ private:
 
 	const char *file_name_;
 
-	JsonValue json_value_;
+	Json::Value json_value_;
 };
 
 #endif

@@ -19,7 +19,7 @@ public:
 
 	void load(std::string file_name);
 
-	JsonReader* get_json_reader() { return reader_; }
+	Json::Reader* get_json_reader() { return reader_; }
 
 	cfg_json_t* get_json(std::string file_name);
 
@@ -48,7 +48,7 @@ public:
 	std::string get_string(std::string file_name, int *key1, int key2);
 
 private:
-	JsonReader *reader_;
+	Json::Reader *reader_;
 
 	cfg_json_map_t jsons_;
 };

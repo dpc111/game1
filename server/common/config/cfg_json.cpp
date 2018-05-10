@@ -14,7 +14,7 @@ bool cfg_json_t::init(const char *file_name) {
 	file_name_ = file_name;
 	std::ifstream ifs;
 	ifs.open(file_name, std::ios::binary);
-	if (!reader.parse(ifs, root, false))
+	if (!reader.parse(ifs, json_value_, false))
 	{
 		ifs.close();
 		return false;

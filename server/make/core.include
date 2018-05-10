@@ -55,6 +55,7 @@ INCLUDES := -I../common \
 	-I../common/script \
 	-I../common/timer \
 	-I../common/server \
+	-I../common/config \
 	-I../3rd/libevent/include \
 	-I../3rd/protobuf/include \
 	-I../3rd/lua-5.3.4/src \

@@ -2,6 +2,7 @@
 #define CFG_JSON_H
 
 #include "json/json.h"
+#include "cfg_json_mgr.h"
 
 class cfg_json_t
 {
@@ -10,7 +11,7 @@ public:
 
 	~cfg_json_t();
 
-	void init(const char *file_name);
+	bool init(const char *file_name);
 
 	int32 get_int(const char *key1);
 

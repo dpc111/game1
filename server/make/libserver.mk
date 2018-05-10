@@ -14,7 +14,7 @@ MODULEFLAGS := -fPIC -shared -o
 SRC_DIR := ../common/server \
 			../common/script \
 			../common/timer \
-			../common/json \
+			../common/config \
 
 ##########################################################################################
 #  七、 定义生成程序的名称

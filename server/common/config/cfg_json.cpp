@@ -1,3 +1,5 @@
+#include "cfg_json.h"
+
 cfg_json_t::cfg_json_t(cfg_json_mgr_t *mgr) {
 	mgr_ = mgr;
 	file_name_ = NULL;
@@ -8,7 +10,7 @@ cfg_json_t::~cfg_json_t() {
 	file_name_ = NULL;
 }
 
-void cfg_json_t::init(const char *file_name) {
+bool cfg_json_t::init(const char *file_name) {
 	file_name_ = file_name;
 	std::ifstream ifs;
 	ifs.open(file_name, std::ios::binary);

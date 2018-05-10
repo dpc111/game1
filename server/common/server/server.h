@@ -6,6 +6,7 @@
 #include "conn_mgr.h"
 #include "timer.h"
 #include "lua_frame.h"
+#include "cfg_json_mgr.h"
 
 class server_t {
 public:
@@ -53,6 +54,8 @@ private:
 	timers_t *times_;
 
 	lua_frame_t *lua_frame_;
+
+	cfg_json_mgr_t *json_mgr_;
 };
 
 #endif

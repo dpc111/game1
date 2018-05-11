@@ -23,7 +23,7 @@ bool cfg_json_t::init(const char *file_name) {
 	}
 	Json::Reader reader;
 	Json::Value value;
-	if (!reader.parse(ifs, value)) {
+	if (!reader.parse("{\"uploadid\": \"UP000000\",\"code\": 100,\"msg\": \"\",\"files\": \"\"}", value)) {
 		ERROR("parse failed %s", file_name);
 	}
 	if (!mgr_->get_json_reader()->parse(ifs, json_value_))

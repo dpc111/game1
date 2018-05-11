@@ -14,17 +14,10 @@ cfg_json_t::~cfg_json_t() {
 
 bool cfg_json_t::init(const char *file_name) {
 	file_name_ = file_name;
-	// std::ifstream ifs;
-	// ifs.open(file_name, std::ios::binary);
 	std::ifstream ifs(file_name);
 	if (!ifs.is_open()) {
 		ERROR("open failed %d", file_name);
 		return false;
-	}
-	Json::Reader reader;
-	Json::Value value;
-	if (!reader.parse("{\"uploadid\": \"UP000000\",\"code\": 100,\"msg\": \"\",\"files\": \"\"}", value)) {
-		ERROR("parse failed %s", file_name);
 	}
 	if (!mgr_->get_json_reader()->parse(ifs, json_value_))
 	{

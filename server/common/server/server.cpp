@@ -23,9 +23,9 @@ server_t::~server_t() {
 }
 
 void server_t::init() {
-	json_mgr_->load("battle.json");
-	ERROR("%d", json_mgr_->get_int("battle.json", "aa", "bb"));
-	ERROR("%d", json_mgr_->get_int("battle.json", "aa", "cc"));
+	json_mgr_->load("battle.json", "battle");
+	ERROR("%d", json_mgr_->get_int("battle", "aa", "bb"));
+	ERROR("%d", json_mgr_->get_int("battle", "aa", "cc"));
 	conn_mgr_->init();
 }
 

@@ -50,6 +50,9 @@ int cfg_json_t::get_int(int key1) {
 }
 
 int cfg_json_t::get_int(const char *key1, const char *key2) {
+	if (!json_value_.isObject()) {
+		return JSON_ERROR_INT;
+	}
 	if (json_value_[key1].isNull() ||
 		json_value_[key1].type() != Json::arrayValue ||
 		json_value_[key1].type() != Json::objectValue) {

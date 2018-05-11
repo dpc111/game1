@@ -57,7 +57,7 @@ int cfg_json_t::get_int(int key1) {
 
 int cfg_json_t::get_int(const char *key1, const char *key2) {
 	if (!json_value_.isObject() ||
-		json_value_[key1].isObject()) { 
+		!json_value_[key1].isObject()) { 
 		return JSON_ERROR_INT;
 	}
 	Json::Value value = json_value_[key1][key2];
@@ -71,7 +71,7 @@ int cfg_json_t::get_int(const char *key1, const char *key2) {
 
 int cfg_json_t::get_int(const char *key1, int key2) {
 	if (!json_value_.isObject() ||
-		json_value_[key1].isArray()) { 
+		!json_value_[key1].isArray()) { 
 		return JSON_ERROR_INT;
 	}
 	Json::Value value = json_value_[key1][key2];
@@ -85,7 +85,7 @@ int cfg_json_t::get_int(const char *key1, int key2) {
 
 int cfg_json_t::get_int(int key1, const char* key2) {
 	if (!json_value_.isArray() ||
-		json_value_[key1].isObject()) { 
+		!json_value_[key1].isObject()) { 
 		return JSON_ERROR_INT;
 	}
 	Json::Value value = json_value_[key1][key2];
@@ -99,7 +99,7 @@ int cfg_json_t::get_int(int key1, const char* key2) {
 
 int cfg_json_t::get_int(int key1, int key2) {
 	if (!json_value_.isArray() ||
-		json_value_[key1].isArray()) { 
+		!json_value_[key1].isArray()) { 
 		return JSON_ERROR_INT;
 	}
 	Json::Value value = json_value_[key1][key2];
@@ -137,7 +137,7 @@ std::string cfg_json_t::get_string(int key1) {
 
 std::string cfg_json_t::get_string(const char *key1, const char *key2) {
 	if (!json_value_.isObject() ||
-		json_value_[key1].isObject()) { 
+		!json_value_[key1].isObject()) { 
 		return JSON_ERROR_STRING;
 	}
 	Json::Value value = json_value_[key1][key2];
@@ -150,7 +150,7 @@ std::string cfg_json_t::get_string(const char *key1, const char *key2) {
 
 std::string cfg_json_t::get_string(const char *key1, int key2) {
 	if (!json_value_.isObject() ||
-		json_value_[key1].isArray()) { 
+		!json_value_[key1].isArray()) { 
 		return JSON_ERROR_STRING;
 	}
 	Json::Value value = json_value_[key1][key2];
@@ -163,7 +163,7 @@ std::string cfg_json_t::get_string(const char *key1, int key2) {
 
 std::string cfg_json_t::get_string(int key1, const char* key2) {
 	if (!json_value_.isArray() ||
-		json_value_[key1].isObject()) { 
+		!json_value_[key1].isObject()) { 
 		return JSON_ERROR_STRING;
 	}
 	Json::Value value = json_value_[key1][key2];
@@ -176,7 +176,7 @@ std::string cfg_json_t::get_string(int key1, const char* key2) {
 
 std::string cfg_json_t::get_string(int key1, int key2) {
 	if (!json_value_.isArray() ||
-		json_value_[key1].isArray()) { 
+		!json_value_[key1].isArray()) { 
 		return JSON_ERROR_STRING;
 	}
 	Json::Value value = json_value_[key1][key2];

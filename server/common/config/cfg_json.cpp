@@ -32,8 +32,8 @@ bool cfg_json_t::init(const char *file_name) {
 int cfg_json_t::get_int(const char *key1) {
 	Json::Value value = json_value_[key1];
 	if (value.isNull() || 
-		value.type() != Json::Value::intValue || 
-		value.type() != Json::Value::uintValue) {
+		value.type() != Json::intValue || 
+		value.type() != Json::uintValue) {
 		return JSON_ERROR_INT;
 	}
 	return value.asInt();

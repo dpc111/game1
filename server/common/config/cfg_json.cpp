@@ -21,9 +21,14 @@ bool cfg_json_t::init(const char *file_name) {
 		ERROR("open failed %d", file_name);
 		return false;
 	}
-	if (!mgr_->get_json_reader()->parse(ifs, json_value_, false))
+	Json::Reader reader;
+	Json::Value value;
+	if (!reader.parse(ifs, value)) {
+		ERROR("parse failed %s", file_name);
+	}
+	if (!mgr_->get_json_reader()->parse(ifs, json_value_))
 	{
-		ERROR("parse failed %d", file_name);
+		ERROR("parse failed %s", file_name);
 		ifs.close();
 		return false;
 	}

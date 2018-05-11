@@ -1,5 +1,6 @@
 #include <fstream> 
 #include "cfg_json.h"
+#include "log.h"
 
 cfg_json_t::cfg_json_t(cfg_json_mgr_t *mgr) {
 	mgr_ = mgr;
@@ -22,6 +23,7 @@ bool cfg_json_t::init(const char *file_name) {
 	}
 	if (!mgr_->get_json_reader()->parse(ifs, json_value_, false))
 	{
+		ERROR("parse failed %d", file_name);
 		ifs.close();
 		return false;
 	}

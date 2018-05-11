@@ -40,45 +40,105 @@ int cfg_json_t::get_int(const char *key1) {
 }
 
 int cfg_json_t::get_int(int key1) {
-	return json_value_[key1].asInt();
+	Json::Value value = json_value_[key1];
+	if (value.isNull() || 
+		value.type() != Json::intValue || 
+		value.type() != Json::uintValue) {
+		return JSON_ERROR_INT;
+	}
+	return value.asInt();
 }
 
 int cfg_json_t::get_int(const char *key1, const char *key2) {
-	return json_value_[key1][key2].asInt();
+	Json::Value value = json_value_[key1][key2];
+	if (value.isNull() || 
+		value.type() != Json::intValue || 
+		value.type() != Json::uintValue) {
+		return JSON_ERROR_INT;
+	}
+	return value.asInt();
 }
 
 int cfg_json_t::get_int(const char *key1, int key2) {
-	return json_value_[key1][key2].asInt();
+	Json::Value value = json_value_[key1][key2];
+	if (value.isNull() || 
+		value.type() != Json::intValue || 
+		value.type() != Json::uintValue) {
+		return JSON_ERROR_INT;
+	}
+	return value.asInt();
 }
 
 int cfg_json_t::get_int(int key1, const char* key2) {
-	return json_value_[key1][key2].asInt();
+	Json::Value value = json_value_[key1][key2];
+	if (value.isNull() || 
+		value.type() != Json::intValue || 
+		value.type() != Json::uintValue) {
+		return JSON_ERROR_INT;
+	}
+	return value.asInt();
 }
 
 int cfg_json_t::get_int(int key1, int key2) {
-	return json_value_[key1][key2].asInt();
+	Json::Value value = json_value_[key1][key2];
+	if (value.isNull() || 
+		value.type() != Json::intValue || 
+		value.type() != Json::uintValue) {
+		return JSON_ERROR_INT;
+	}
+	return value.asInt();
 }
 
 std::string cfg_json_t::get_string(const char *key1) {
-	return json_value_[key1].asString();
+	Json::Value value = json_value_[key1];
+	if (value.isNull() || 
+		value.type() != Json::stringValue) {
+		return JSON_ERROR_STRING;
+	}
+	return value.asString();
 }
 
 std::string cfg_json_t::get_string(int key1) {
-	return json_value_[key1].asString();
+	Json::Value value = json_value_[key1];
+	if (value.isNull() || 
+		value.type() != Json::stringValue) {
+		return JSON_ERROR_STRING;
+	}
+	return value.asString();
 }
 
 std::string cfg_json_t::get_string(const char *key1, const char *key2) {
-	return json_value_[key1][key2].asString();
+	Json::Value value = json_value_[key1][key2];
+	if (value.isNull() || 
+		value.type() != Json::stringValue) {
+		return JSON_ERROR_STRING;
+	}
+	return value.asString();
 }
 
 std::string cfg_json_t::get_string(const char *key1, int key2) {
-	return json_value_[key1][key2].asString();
+	Json::Value value = json_value_[key1][key2];
+	if (value.isNull() || 
+		value.type() != Json::stringValue) {
+		return JSON_ERROR_STRING;
+	}
+	return value.asString();
 }
 
 std::string cfg_json_t::get_string(int key1, const char* key2) {
-	return json_value_[key1][key2].asString();
+	Json::Value value = json_value_[key1][key2];
+	if (value.isNull() || 
+		value.type() != Json::stringValue) {
+		return JSON_ERROR_STRING;
+	}
+	return value.asString();
 }
 
 std::string cfg_json_t::get_string(int key1, int key2) {
-	return json_value_[key1][key2].asString();
+	Json::Value value = json_value_[key1][key2];
+	if (value.isNull() || 
+		value.type() != Json::stringValue) {
+		return JSON_ERROR_STRING;
+	}
+	return value.asString();
 }

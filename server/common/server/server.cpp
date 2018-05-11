@@ -24,8 +24,8 @@ server_t::~server_t() {
 
 void server_t::init() {
 	json_mgr_->load("battle.json", "battle");
-	ERROR("%d", json_mgr_->get_int("battle", 1, "bega"));
-	ERROR("%s", json_mgr_->get_string("battle", 1, "roomName"));
+	ERROR("%d", json_mgr_->get_int("battle", 1, "began"));
+	ERROR("%s", json_mgr_->get_string("battle", 1, "roomName").c_str());
 	conn_mgr_->init();
 }
 

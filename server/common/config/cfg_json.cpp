@@ -34,7 +34,7 @@ int cfg_json_t::get_int(const char *key1) {
 	if (value.isNull() || 
 		value.type() != ValueType.intValue || 
 		value.type() != ValueType.uintValue) {
-		return JSON_ERROR_INT
+		return JSON_ERROR_INT;
 	}
 	return value.asInt();
 }

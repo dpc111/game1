@@ -17,7 +17,7 @@ bool cfg_json_t::init(const char *file_name) {
 	// std::ifstream ifs;
 	// ifs.open(file_name, std::ios::binary);
 	std::ifstream ifs(file_name);
-	if (!ifs) {
+	if (!ifs.is_open()) {
 		ERROR("open failed %d", file_name);
 		return false;
 	}

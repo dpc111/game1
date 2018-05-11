@@ -115,7 +115,7 @@ std::string cfg_json_mgr_t::get_string(std::string json_name, int key1, const ch
 	if (!json) {
 		return JSON_ERROR_STRING;
 	}
-	return json->get_string(key1);
+	return json->get_string(key1, key2);
 }
 
 std::string cfg_json_mgr_t::get_string(std::string json_name, int key1, int key2) {

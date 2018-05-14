@@ -11,6 +11,7 @@ function csvToJson(preName)
     local types = {}
     
     jsonFile:write("[" .. lineBreak())
+    local has_data_1 = false
     for csvFileLine in csvFile:lines() do
         index = index + 1
         if index > 1 then
@@ -20,30 +21,39 @@ function csvToJson(preName)
                 types = splitString(csvFileLine, ",")
             else
                 local elementData = splitString(csvFileLine, ",")
+                if has_data_1 then
+                    jsonFile:write("," .. lineBreak())
+                end
                 jsonFile:write(tab(1) .. "{" .. lineBreak())
-                for k, v in pairs(elementData) do   
+                local has_data_2 = false
+                for k, v in pairs(elementData) do 
+                    if has_data_2 then
+                        jsonFile:write("," .. lineBreak()) 
+                    end  
                     if types[k] == "index" then
                         if v == "\"\"" then
                             print("key wrong")
                             break
                         end
-                        jsonFile:write(tab(2) .. "\"" .. names[k] .. "\"" .. ": " .. v .. "," .. lineBreak())
+                        jsonFile:write(tab(2) .. "\"" .. names[k] .. "\"" .. ": " .. v)
                     elseif types[k] == "int" then
                         if v == "" then
                             v = 0
                         end
-                        jsonFile:write(tab(2) .. "\"" .. names[k] .. "\"" .. ": " .. v .. "," .. lineBreak())
+                        jsonFile:write(tab(2) .. "\"" .. names[k] .. "\"" .. ": " .. v)
                     elseif types[k] == "string" then
-                        jsonFile:write(tab(2) .. "\"" .. names[k] .. "\"" .. ": \"" ..  v .. "\"," .. lineBreak())
+                        jsonFile:write(tab(2) .. "\"" .. names[k] .. "\"" .. ": \"" ..  v .. "\"")
                     else
                         print("type wrong")    
                     end
+                    has_data_2 = true
                 end
-                jsonFile:write(tab(1) .. "}," .. lineBreak())
+                jsonFile:write("\n" .. tab(1) .. "}")
+                has_data_1 = true
             end
         end
     end
-    jsonFile:write("]")
+    jsonFile:write(.. "\n" .. "]")
     
     csvFile:close()
     jsonFile:close()

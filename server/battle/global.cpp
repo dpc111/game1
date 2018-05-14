@@ -13,6 +13,10 @@ room_mgr_t* get_room_mgr() {
 	return get_service()->get_room_mgr();
 }
 
+cfg_json_mgr_t* get_json_mgr() {
+	return get_service()->get_json_mgr();
+}
+
 service_t* get_service() {
 	return g_service_;
 }

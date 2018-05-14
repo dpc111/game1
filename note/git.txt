@@ -1,1 +1,9 @@
+server:
+[json]
 https://github.com/open-source-parsers/jsoncpp.git
+
+
+client :
+[json]
+http://www.onlinedown.net/soft/1149358.htm
+version 20

@@ -27,7 +27,7 @@ void client_msg_t::c2s_join(tcp_connection_t *conn, const battle::c2s_join& msg)
 
 	battle::s2c_join res;
 	res.set_uid(uid);
-	res.set_name("dpc");
+	res.set_name(get_json_mgr()->get_string("battle", 5, "roomName"));
 	res.set_icon("null");
 	get_service()->send(conn, res);
 }

@@ -20,3 +20,8 @@ void service_t::init() {
 	dispatch_->register_client_msg();
 	dispatch_->register_server_msg();
 }
+
+void service_t::init_json_mgr() {
+	server_t::init_json_mgr();
+	get_json_mgr()->load("battle.json", "json");
+}

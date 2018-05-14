@@ -13,7 +13,9 @@ public:
 
 	~service_t();
 
-	void init();
+	virtual void init();
+
+	virtual void init_json_mgr();
 
 	player_mgr_t* get_player_mgr() { return player_mgr_; }
 

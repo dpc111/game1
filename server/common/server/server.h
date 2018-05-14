@@ -16,7 +16,9 @@ public:
 
 	~server_t();
 
-	void init();
+	virtual void init();
+
+	virtual void init_json_mgr();
 
 	void start(const char *ip, int port);
 
@@ -27,6 +29,8 @@ public:
 	tcp_network_t *get_network() { return network_; }
 
 	lua_frame_t *get_lua_frame() { return lua_frame_; }
+
+	cfg_json_mgr_t* get_json_mgr() { return json_mgr_; }
 
 	tcp_connection_t *connect_to(const char *ip, int port, void *context = NULL);
 

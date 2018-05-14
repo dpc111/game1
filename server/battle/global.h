@@ -11,4 +11,6 @@ room_mgr_t* get_room_mgr();
 
 service_t* get_service();
 
+cfg_json_mgr_t* get_json_mgr();
+
 #endif

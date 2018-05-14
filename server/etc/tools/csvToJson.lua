@@ -35,25 +35,29 @@ function csvToJson(preName)
                             print("key wrong")
                             break
                         end
-                        jsonFile:write(tab(2) .. "\"" .. names[k] .. "\"" .. ": " .. v)
+                        jsonFile:write(tab(2) .. "\"" .. names[k] .. "\"" .. " : " .. v)
                     elseif types[k] == "int" then
                         if v == "" then
                             v = 0
                         end
-                        jsonFile:write(tab(2) .. "\"" .. names[k] .. "\"" .. ": " .. v)
+                        jsonFile:write(tab(2) .. "\"" .. names[k] .. "\"" .. " : " .. v)
                     elseif types[k] == "string" then
-                        jsonFile:write(tab(2) .. "\"" .. names[k] .. "\"" .. ": \"" ..  v .. "\"")
+                        if v == "\"\"" then
+                            jsonFile:write(tab(2) .. "\"" .. names[k] .. "\"" .. " : " ..  v)
+                        else
+                            jsonFile:write(tab(2) .. "\"" .. names[k] .. "\"" .. " : \"" ..  v .. "\"")
+                        end
                     else
                         print("type wrong")    
                     end
                     has_data_2 = true
                 end
-                jsonFile:write("\n" .. tab(1) .. "}")
+                jsonFile:write(lineBreak() .. tab(1) .. "}")
                 has_data_1 = true
             end
         end
     end
-    jsonFile:write(.. "\n" .. "]")
+    jsonFile:write(lineBreak() .. "]")
     
     csvFile:close()
     jsonFile:close()

@@ -25,8 +25,9 @@ server_t::~server_t() {
 void server_t::init() {
 	json_mgr_->load("battle.json", "battle");
 	ERROR("%d", json_mgr_->get_int("battle", 1, "began"));
-	ERROR("%s", json_mgr_->get_string("battle", 2, "roomName").c_str());
-	ERROR("%s", json_mgr_->get_string("battle", 3, "gameInfo").c_str());
+	ERROR("%s", json_mgr_->get_string("battle", 3, "roomName").c_str());
+	ERROR("%s", json_mgr_->get_string("battle", 6, "format").c_str());
+	ERROR("%s", json_mgr_->get_string("battle", 30, "format").c_str());
 	conn_mgr_->init();
 }
 

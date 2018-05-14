@@ -24,10 +24,11 @@ server_t::~server_t() {
 
 void server_t::init() {
 	conn_mgr_->init();
+	this->init_json_mgr();
 }
 
 void server_t::init_json_mgr() {
-	
+
 }
 
 void server_t::start(const char *ip, int port) {

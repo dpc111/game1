@@ -2,6 +2,7 @@
 #define CFG_JSON_MGR_H
 
 #define JSON_ERROR_INT 0xFFFFFFFF
+#define JSON_ERROR_FLOAT 0
 #define JSON_ERROR_STRING "json_error_string"
 
 #include "stdafx.h"
@@ -24,6 +25,8 @@ public:
 
 	cfg_json_t* get_json(std::string json_name);
 
+	bool exist(std::string json_name, const char *key1);
+
 	int get_int(std::string json_name, const char *key1);
 
 	int get_int(std::string json_name, int key1);
@@ -35,6 +38,18 @@ public:
 	int get_int(std::string json_name, int key1, const char* key2);
 
 	int get_int(std::string json_name, int key1, int key2);
+
+	float get_float(std::string json_name, const char *key1);
+
+	float get_float(std::string json_name, int key1);
+
+	float get_float(std::string json_name, const char *key1, const char *key2);
+
+	float get_float(std::string json_name, const char *key1, int key2);
+
+	float get_float(std::string json_name, int key1, const char* key2);
+
+	float get_float(std::string json_name, int key1, int key2);
 
 	std::string get_string(std::string json_name, const char *key1);
 

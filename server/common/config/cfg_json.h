@@ -13,6 +13,8 @@ public:
 
 	bool init(const char *file_name);
 
+	bool exist(int key1);
+
 	int get_int(const char *key1);
 
 	int get_int(int key1);
@@ -25,6 +27,18 @@ public:
 
 	int get_int(int key1, int key2);
 
+	float get_float(const char *key1);
+
+	float get_float(int key1);
+
+	float get_float(const char *key1, const char *key2);
+
+	float get_float(const char *key1, int key2);
+
+	float get_float(int key1, const char* key2);
+
+	float get_float(int key1, int key2);
+
 	std::string get_string(const char *key1);
 
 	std::string get_string(int key1);
@@ -36,6 +50,7 @@ public:
 	std::string get_string(int key1, const char* key2);
 
 	std::string get_string(int key1, int key2);
+
 private:
 	cfg_json_mgr_t *mgr_;
 

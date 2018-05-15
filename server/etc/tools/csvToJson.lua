@@ -41,6 +41,11 @@ function csvToJson(preName)
                             v = 0
                         end
                         jsonFile:write(tab(2) .. "\"" .. names[k] .. "\"" .. " : " .. v)
+                    elseif types[k] == "float" then
+                        if v == "" then
+                            v = 0.0
+                        end
+                        jsonFile:write(tab(2) .. "\"" .. names[k] .. "\"" .. " : " .. v)
                     elseif types[k] == "string" then
                         if v == "\"\"" then
                             jsonFile:write(tab(2) .. "\"" .. names[k] .. "\"" .. " : " ..  v)

@@ -30,6 +30,14 @@ cfg_json_t* cfg_json_mgr_t::get_json(std::string json_name) {
 	return it->second;
 }
 
+bool cfg_json_mgr_t::exist(std::string json_name, const char *key1) {
+	cfg_json_t *json = this->get_json(json_name);
+	if (!json) {
+		return false;
+	}
+	return json->exist(key1);
+}
+
 int cfg_json_mgr_t::get_int(std::string json_name, const char *key1) {
 	cfg_json_t *json = this->get_json(json_name);
 	if (!json) {
@@ -76,6 +84,54 @@ int cfg_json_mgr_t::get_int(std::string json_name, int key1, int key2) {
 		return JSON_ERROR_INT;
 	}
 	return json->get_int(key1, key2);
+}
+
+float cfg_json_mgr_t::get_float(std::string json_name, const char *key1) {
+	cfg_json_t *json = this->get_json(json_name);
+	if (!json) {
+		return JSON_ERROR_FLOAT;
+	}
+	return json->get_float(key1);
+}
+
+float cfg_json_mgr_t::get_float(std::string json_name, int key1) {
+	cfg_json_t *json = this->get_json(json_name);
+	if (!json) {
+		return JSON_ERROR_FLOAT;
+	}
+	return json->get_float(key1);
+}
+
+float cfg_json_mgr_t::get_float(std::string json_name, const char *key1, const char *key2) {
+	cfg_json_t *json = this->get_json(json_name);
+	if (!json) {
+		return JSON_ERROR_FLOAT;
+	}
+	return json->get_float(key1, key2);
+}
+
+float cfg_json_mgr_t::get_float(std::string json_name, const char *key1, int key2) {
+	cfg_json_t *json = this->get_json(json_name);
+	if (!json) {
+		return JSON_ERROR_FLOAT;
+	}
+	return json->get_float(key1, key2);
+}
+
+float cfg_json_mgr_t::get_float(std::string json_name, int key1, const char* key2) {
+	cfg_json_t *json = this->get_json(json_name);
+	if (!json) {
+		return JSON_ERROR_FLOAT;
+	}
+	return json->get_float(key1, key2);
+}
+
+float cfg_json_mgr_t::get_float(std::string json_name, int key1, int key2) {
+	cfg_json_t *json = this->get_json(json_name);
+	if (!json) {
+		return JSON_ERROR_FLOAT;
+	}
+	return json->get_float(key1, key2);
 }
 
 std::string cfg_json_mgr_t::get_string(std::string json_name, const char *key1) {

@@ -29,6 +29,17 @@ bool cfg_json_t::init(const char *file_name) {
 	return true;
 }
 
+bool cfg_json_t::exist(int key1) {
+	if (!json_value_.isArray()) {
+		return false;
+	}
+	Json::Value value = json_value_[key1];
+	if (value.isNull()) {
+		return false;
+	}
+	return true;
+}
+
 int cfg_json_t::get_int(const char *key1) {
 	if (!json_value_.isObject()) { 
 		return JSON_ERROR_INT;
@@ -109,6 +120,77 @@ int cfg_json_t::get_int(int key1, int key2) {
 		return JSON_ERROR_INT;
 	}
 	return value.asInt();
+}
+
+float cfg_json_t::get_float(const char *key1) {
+	if (!json_value_.isObject()) {
+		return JSON_ERROR_FLOAT;
+	}
+	Json::Value value = json_value_[key1];
+	if (!value.isDouble()) {
+		return JSON_ERROR_FLOAT;
+	}
+	return (float)value.asDouble();
+
+}
+
+float cfg_json_t::get_float(int key1) {
+	if (!json_value_.isArray()) {
+		return JSON_ERROR_FLOAT;
+	}
+	Json::Value value = json_value_[key1];
+	if (!value.isDouble()) {
+		return JSON_ERROR_FLOAT;
+	}
+	return (float)value.asDouble();
+}
+
+float cfg_json_t::get_float(const char *key1, const char *key2) {
+	if (!json_value_.isObject() ||
+		!json_value_[key1].isObject()) {
+		return JSON_ERROR_FLOAT;
+	}
+	Json::Value value = json_value_[key1][key2];
+	if (!value.isDouble()) {
+		return JSON_ERROR_FLOAT;
+	}
+	return (float)value.asDouble();
+}
+
+float cfg_json_t::get_float(const char *key1, int key2) {
+	if (!json_value_.isObject() ||
+		!json_value_[key1].isArray()) {
+		return JSON_ERROR_FLOAT;
+	}
+	Json::Value value = json_value_[key1][key2];
+	if (!value.isDouble()) {
+		return JSON_ERROR_FLOAT;
+	}
+	return (float)value.asDouble();
+}
+
+float cfg_json_t::get_float(int key1, const char* key2) {
+	if (!json_value_.isArray() ||
+		!json_value_[key1].isObject()) {
+		return JSON_ERROR_FLOAT;
+	}
+	Json::Value value = json_value_[key1][key2];
+	if (!value.isDouble()) {
+		return JSON_ERROR_FLOAT;
+	}
+	return (float)value.asDouble();
+}
+
+float cfg_json_t::get_float(int key1, int key2) {
+	if (!json_value_.isArray() ||
+		!json_value_[key1].isArray()) {
+		return JSON_ERROR_FLOAT;
+	}
+	Json::Value value = json_value_[key1][key2];
+	if (!value.isDouble()) {
+		return JSON_ERROR_FLOAT;
+	}
+	return (float)value.asDouble();
 }
 
 std::string cfg_json_t::get_string(const char *key1) {

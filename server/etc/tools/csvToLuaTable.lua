@@ -51,6 +51,11 @@ function CsvToluaTable(preName)
                             v = 0
                         end
                         luaFile:write(name[k] .. "=" .. v .. ",")
+                    elseif elementType[k] == "float" then
+                        if v == "" then
+                            v = 0
+                        end
+                        luaFile:write(name[k] .. "=" .. v .. ",")
                     elseif elementType[k] == "byte[]" then
                         local intData = splitString(v, "|", tonumber)
                         luaFile:write(name[k] .. "= {")

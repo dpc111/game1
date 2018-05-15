@@ -1,7 +1,9 @@
 require("battle")
+require("entity")
 
 g_cfgs = {
    ["battle"] = cfg_battle,
+   ["entity"] = cfg_entity,
 }
 
 function cfg_get(name)

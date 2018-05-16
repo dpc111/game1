@@ -6,11 +6,10 @@
 #include "id_generate.h"
 
 class object_base_t;
-class id_generate_t;
 
 class object_mgr_base_t {
 public:
-	typedef std::map<int32, object_base_t> object_map_t;
+	typedef std::map<int32, object_base_t *> object_map_t;
 
 public:
 	object_mgr_base_t();

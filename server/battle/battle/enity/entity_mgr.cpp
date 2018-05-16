@@ -1,5 +1,6 @@
 #include "entity_mgr.h"
 #include "entity.h"
+#include "global.h"
 
 entity_mgr_t::entity_mgr_t() :
 	object_mgr_base_t() {

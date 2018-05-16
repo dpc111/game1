@@ -3,7 +3,7 @@
 
 #include "object_base.h"
 
-class bullet_t : object_base_t {
+class bullet_t : public object_base_t {
 public:
 	bullet_t(int32 bullet_id, int32 type_id);
 

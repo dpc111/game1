@@ -1,9 +1,10 @@
 #ifndef GLOBAL_H
 #define GLOBAL_H
 
+#include "cfg_json_mgr.h"
+
 class player_mgr_t;
 class room_mgr_t;
-class cfg_json_mgr_t;
 class service_t;
 
 player_mgr_t* get_player_mgr();

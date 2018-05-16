@@ -6,7 +6,7 @@
 
 class bullet_t;
 
-class bullet_mgr_t : object_mgr_base_t {
+class bullet_mgr_t : public object_mgr_base_t {
 public:
 	bullet_mgr_t();
 

@@ -3,7 +3,7 @@
 
 #include "object_base.h"
 
-class entity_t : object_base_t {
+class entity_t : public object_base_t {
 public:
 	entity_t(int32 entity_id, int32 type_id);
 

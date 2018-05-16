@@ -1,6 +1,7 @@
 #include "bullet_mgr.h"
 #include "bullet.h"
 #include "global.h"
+#include "cfg_json_mgr.h"
 
 bullet_mgr_t::bullet_mgr_t() :
 	object_mgr_base_t() {

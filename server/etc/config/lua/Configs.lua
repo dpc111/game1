@@ -1,8 +1,8 @@
-require("battle")
+require("bullet")
 require("entity")
 
 g_cfgs = {
-   ["battle"] = cfg_battle,
+   ["bullet"] = cfg_bullet,
    ["entity"] = cfg_entity,
 }
 

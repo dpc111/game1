@@ -1,16 +1,37 @@
 #include "entity_mgr.h"
 #include "entity.h"
-#include "id_generate.h"
 
-entity_mgr_t::entity_mgr_t() {
-	entitys.clear();
-	id_generate_ = id_generate_t();
+entity_mgr_t::entity_mgr_t() :
+	object_mgr_base_t() {
+
 }
 
 entity_mgr_t::~entity_mgr_t() {
-	
+
 }
 
-void entity_mgr_t::create_entity(int32 type_id, int32 grid_id) {
+entity_t *entity_mgr_t::create_entity(int32 type_id, int32 grid_id) {
+	int32 entity_id = gen_id();
+	if (get_object(entity_id)) {
+		return NULL;
+	}
+	if (!get_json_mgr()->exist("entity"), type_id - 1) {
+		return NULL;
+	}
+	entity_t *entity = new entity_t(entity_id, type_id);
+	entity->set_level(1);
+	entity->set_cd(get_json_mgr()->get_float("entity", type_id - 1, "cd"));
+	entity->set_blood(get_json_mgr()->get_int("entity", type_id - 1, "blood"));
+	entity->set_damage(get_json_mgr()->get_float("entity", type_id - 1, "damage"));
+	add_object(entity_id, entity);
+	return entity;
+}
 
+void entity_mgr_t::delete_entity(int32 entity_id) {
+	entity_t *entity = get_object(entity_id);
+	if (!entity) {
+		return;
+	}
+	delete entity;
+	del_object(entity_id);
 }

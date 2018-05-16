@@ -1,20 +1,48 @@
 #ifndef ENTITY_H
 #define ENTITY_H
 
-class entity_t {
-public:
-	entity_t();
+#include "object_base.h"
 
-	~entity_t();
+class entity_t : object_base_t {
+public:
+	entity_t(int32 entity_id, int32 type_id);
+
+	virtual ~entity_t();
+
+	int32 get_level() { return level_; }
+
+	float get_cd() { return cd_; }
+
+	int32 get_blood() { return blood_; }
+
+	int32 get_damage() { return damage_; }
+
+	int32 get_frozen() { return frozen_; }
+
+	grid_t *get_grid() { return grid_; }
+
+	void set_level(int32 level) { level_ = level; }
+
+	void set_cd(float cd) { cd_ = cd; }
+
+	void set_blood(int32 blood) { blood_ = blood; }
+
+	void set_damage(int32 damage) { damage_ = damage; }
+
+	void set_frozen(float frozen) { frozen_ = frozen; }
+
+	void set_grid(grid_t *grid) { grid_ = grid; }
 
 private:
-	int32 type_id_;
-
 	int32 level_;
 
-	int32 cd_;
+	float cd_;
 
 	int32 blood_;
+
+	int32 damage_;
+
+	float froze_;
 
 	grid_t *grid_;
 };

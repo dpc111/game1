@@ -30,7 +30,7 @@ cfg_json_t* cfg_json_mgr_t::get_json(std::string json_name) {
 	return it->second;
 }
 
-bool cfg_json_mgr_t::exist(std::string json_name, int32 *key1) {
+bool cfg_json_mgr_t::exist(std::string json_name, int32 key1) {
 	cfg_json_t *json = this->get_json(json_name);
 	if (!json) {
 		return false;

@@ -1,5 +1,5 @@
 #include "object_mgr.h"
-#include "object.h"
+#include "object_base.h"
 #include "id_generate.h"
 
 object_mgr_base_t::object_mgr_base_t() {

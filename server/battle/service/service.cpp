@@ -23,6 +23,6 @@ void service_t::init() {
 
 void service_t::init_json_mgr() {
 	server_t::init_json_mgr();
-	get_json_mgr()->load("battle.json", "battle");
 	get_json_mgr()->load("entiy.json", "entiy");
+	get_json_mgr()->load("bullet.json", "bullet");
 }

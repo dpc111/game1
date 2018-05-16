@@ -9,6 +9,10 @@ public:
 
 	~bullet_t();
 
+	int32 get_speed() { return speed_; }
+
+	void set_speed() { speed_ = speed; }
+
 private:
 	int32 speed_;
 

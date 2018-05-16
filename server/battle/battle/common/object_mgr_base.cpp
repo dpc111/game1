@@ -1,4 +1,4 @@
-#include "object_mgr.h"
+#include "object_mgr_base.h"
 #include "object_base.h"
 #include "id_generate.h"
 

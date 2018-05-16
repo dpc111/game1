@@ -25,7 +25,7 @@ public:
 
 	cfg_json_t* get_json(std::string json_name);
 
-	bool exist(std::string json_name, const char *key1);
+	bool exist(std::string json_name, int32 *key1);
 
 	int get_int(std::string json_name, const char *key1);
 

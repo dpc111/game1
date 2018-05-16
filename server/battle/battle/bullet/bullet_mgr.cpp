@@ -1,7 +1,6 @@
 #include "bullet_mgr.h"
 #include "bullet.h"
 #include "global.h"
-#include "cfg_json_mgr.h"
 
 bullet_mgr_t::bullet_mgr_t() :
 	object_mgr_base_t() {
@@ -26,7 +25,7 @@ bullet_t *bullet_mgr_t::create_bullet(int32 type_id) {
 }
 
 void bullet_mgr_t::delete_bullet(int32 bullet_id) {
-	bullet_t *bullet = get_object(bullet_id);
+	bullet_t *bullet = (bullet_t *)get_object(bullet_id);
 	if (!bullet) {
 		return;
 	}

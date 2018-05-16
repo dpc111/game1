@@ -29,7 +29,7 @@ entity_t *entity_mgr_t::create_entity(int32 type_id, int32 grid_id) {
 }
 
 void entity_mgr_t::delete_entity(int32 entity_id) {
-	entity_t *entity = get_object(entity_id);
+	entity_t *entity = (entity_t *)get_object(entity_id);
 	if (!entity) {
 		return;
 	}

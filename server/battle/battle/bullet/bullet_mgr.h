@@ -4,11 +4,13 @@
 #include "stdafx.h"
 #include "object_mgr_base.h"
 
+class bullet_t;
+
 class bullet_mgr_t : object_mgr_base_t {
 public:
 	bullet_mgr_t();
 
-	virtual ~bullet_map_t();
+	virtual ~bullet_mgr_t();
 
 	bullet_t *create_bullet(int32 type_id);
 

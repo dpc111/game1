@@ -3,6 +3,7 @@
 
 #include <map>
 #include "stdafx.h"
+#include "id_generate.h"
 
 class object_base_t;
 class id_generate_t;

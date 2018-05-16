@@ -3,15 +3,15 @@
 
 #include "object_base.h"
 
-class Bullet_t {
+class bullet_t : object_base_t {
 public:
 	bullet_t(int32 bullet_id, int32 type_id);
 
-	~bullet_t();
+	virtual ~bullet_t();
 
 	int32 get_speed() { return speed_; }
 
-	void set_speed() { speed_ = speed; }
+	void set_speed(int32 speed) { speed_ = speed; }
 
 private:
 	int32 speed_;

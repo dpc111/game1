@@ -6,7 +6,7 @@ bullet_mgr_t::bullet_mgr_t() :
 
 }
 
-bullet_mgr_t::~bullet_map_t() {
+bullet_mgr_t::~bullet_mgr_t() {
 
 }
 

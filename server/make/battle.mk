@@ -12,10 +12,16 @@ MODULEFLAGS := -fPIC -g3 -o
 ##########################################################################################
 # 指定SRC_DIR 源代码文件路径./src  ./src2   src2/src3
 SRC_DIR := ../battle \
+			../battle/battle \
+			../battle/battle/bullet \
+			../battle/battle/common \
+			../battle/battle/entity \
+			../battle/battle/grid \
+			../battle/math \
 			../battle/msg \
 			../battle/player \
 			../battle/room \
-			../battle/service
+			../battle/service \
 
 ##########################################################################################
 #  七、 定义生成程序的名称

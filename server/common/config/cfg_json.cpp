@@ -16,7 +16,7 @@ bool cfg_json_t::init(const char *file_name) {
 	file_name_ = file_name;
 	std::ifstream ifs(file_name);
 	if (!ifs.is_open()) {
-		ERROR("open failed %d", file_name);
+		ERROR("open failed %s", file_name);
 		return false;
 	}
 	if (!mgr_->get_json_reader()->parse(ifs, json_value_))

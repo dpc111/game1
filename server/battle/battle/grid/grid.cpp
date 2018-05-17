@@ -41,7 +41,7 @@ entity_t* grid_t::get_entity(int32 row, int32 col) {
 	if (row < 1 || row > ROW_NUM || col < 1 || col > COL_NUM) {
 		return NULL;
 	}
-	return grids_[row - 1][col - 1]
+	return grids_[row - 1][col - 1];
 }
 
 bool grid_t::exist(int32 row, int32 col) {

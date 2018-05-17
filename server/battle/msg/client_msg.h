@@ -11,11 +11,11 @@ public:
 
 	~client_msg_t();
 
-	void s2c_join(tcp_connection_t *conn, const battle::s2c_join& msg);
+	void s2c_join(tcp_connection_t *conn, const battle_msg::s2c_join& msg);
 
-	void c2s_join(tcp_connection_t *conn, const battle::c2s_join& msg);
+	void c2s_join(tcp_connection_t *conn, const battle_msg::c2s_join& msg);
 
-	void c_login(tcp_connection_t *conn, const battle::c_login& msg);
+	void c_login(tcp_connection_t *conn, const battle_msg::c_login& msg);
 };
 
 #endif

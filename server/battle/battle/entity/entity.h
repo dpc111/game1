@@ -17,7 +17,7 @@ public:
 
 	int32 get_damage() { return damage_; }
 
-	int32 get_frozen() { return frozen_; }
+	float get_frozen() { return frozen_; }
 
 	void set_level(int32 level) { level_ = level; }
 
@@ -40,7 +40,7 @@ private:
 
 	int32 damage_;
 
-	float froze_;
+	float frozen_;
 
 	int32 row_;
 

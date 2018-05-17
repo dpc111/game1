@@ -18,7 +18,7 @@ public:
 
 	void del_entity(int32 row, int32 col);
 
-	entity* get_entity(int32 row, int32 col);
+	entity_t* get_entity(int32 row, int32 col);
 
 	bool exist(int32 row, int32 col);
 

@@ -1,5 +1,6 @@
 #include "room.h"
 #include "entity_mgr.h"
+#include "bullet_mgr.h"
 #include "entity.h"
 #include "grid.h"
 

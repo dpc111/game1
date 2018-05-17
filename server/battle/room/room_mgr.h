@@ -2,10 +2,10 @@
 #define ROOM_MGR_H
 
 #include "stdafx.h"
+#include "id_generate.h"
 #include <map>
 
 class room_t;
-class id_generate_t;
 
 class room_mgr_t {
 public:

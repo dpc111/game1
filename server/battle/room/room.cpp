@@ -6,9 +6,9 @@
 
 room_t::room_t(int32 rid) {
 	rid_ = rid;
-	entity_mgr_ = new entity_mgr_t();
-	bullet_mgr_ = new bullet_mgr_t();
-	grid_ = new grid_t();
+	entity_mgr_ = new entity_mgr_t(this);
+	bullet_mgr_ = new bullet_mgr_t(this);
+	grid_ = new grid_t(this);
 	for (int32 k = 0; k < 2; k++) {
 		camps_[k] = 0;
 	}

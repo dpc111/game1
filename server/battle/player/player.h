@@ -22,7 +22,7 @@ public:
 
 	void set_room(room_t *room) { room_ = room; }
 
-	int32 get_camp() { return camp; }
+	int32 get_camp() { return camp_; }
 
 	void set_camp(int32 camp) { camp_ = camp; }
 

@@ -10,19 +10,19 @@ public:
 
 	~player_t();
 
-	int64* get_uid() { return uid_; }
+	int64 get_uid() { return uid_; }
 
-	const char* get_name() { return name_; }
+	const char* get_name() { return name_.c_str(); }
 
-	int32* get_level() { return level_; }
+	int32 get_level() { return level_; }
 
-	const char* get_icon() { return icon_; }
+	const char* get_icon() { return icon_.c_str(); }
 
-	void get_room() { return room_; }
+	room_t* get_room() { return room_; }
 
 	void set_room(room_t *room) { room_ = room; }
 
-	void get_camp() { return camp; }
+	int32 get_camp() { return camp; }
 
 	void set_camp(int32 camp) { camp_ = camp; }
 

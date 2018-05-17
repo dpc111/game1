@@ -3,6 +3,8 @@
 #include "global.h"
 #include "player_mgr.h"
 #include "player.h"
+#include "room_mgr_t.h"
+#include "room_t.h"
 
 client_msg_t::client_msg_t() {
 
@@ -34,8 +36,8 @@ void client_msg_t::c2s_join(tcp_connection_t *conn, const battle_msg::c2s_join& 
 
 void client_msg_t::c_login(tcp_connection_t *conn, const battle_msg::c_login& msg) {
 	battle_msg::s_login res;
-	int64 uid = msg.uid;
-	player_t *player = get_player_mgr()->get_player(uid)
+	int64 uid = msg.uid();
+	player_t *player = get_player_mgr()->get_player(uid);
 	if (player) {
 		res.set_res("ok");
 		res.set_uid(player->get_uid());
@@ -55,7 +57,7 @@ void client_msg_t::c_login(tcp_connection_t *conn, const battle_msg::c_login& ms
 	if (!room) {
 		return;
 	}
-	palyer->set_room(room);
+	player->set_room(room);
 	int32 camp = room->set_random_camp(player->get_uid());
 	player->set_camp(camp);
 	res.set_res("ok");
@@ -68,5 +70,5 @@ void client_msg_t::c_login(tcp_connection_t *conn, const battle_msg::c_login& ms
 }
 
 void client_msg_t::c_create_entity(int32 uid, const battle_msg::c_create_entity& msg) {
-	
+
 }

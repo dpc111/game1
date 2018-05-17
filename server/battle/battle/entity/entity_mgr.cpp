@@ -16,7 +16,7 @@ entity_t *entity_mgr_t::create_entity(int32 type_id, int32 row, int32 col) {
 	if (get_object(entity_id)) {
 		return NULL;
 	}
-	if (!get_json_mgr()->exist("entity"), type_id - 1) {
+	if (!get_json_mgr()->exist("entity", type_id - 1)) {
 		return NULL;
 	}
 	entity_t *entity = new entity_t(entity_id, type_id);

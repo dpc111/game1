@@ -14,7 +14,7 @@ public:
 
 	entity_t *create_entity(int32 type_id, int32 row, int32 col);
 
-	void *delete_entity(int32 entity_id);
+	void delete_entity(int32 entity_id);
 
 private:
 	

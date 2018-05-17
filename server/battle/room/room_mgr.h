@@ -26,7 +26,7 @@ public:
 	int room_num() { return room_num_; }
 
 private:
-	id_generate_t *id_generate_;
+	id_generate_t id_generate_;
 
 	room_map_t rooms_;
 

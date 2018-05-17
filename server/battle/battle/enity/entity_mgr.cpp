@@ -11,7 +11,7 @@ entity_mgr_t::~entity_mgr_t() {
 
 }
 
-entity_t *entity_mgr_t::create_entity(int32 type_id, int32 grid_id) {
+entity_t *entity_mgr_t::create_entity(int32 type_id, int32 row, int32 col) {
 	int32 entity_id = gen_id();
 	if (get_object(entity_id)) {
 		return NULL;
@@ -24,6 +24,7 @@ entity_t *entity_mgr_t::create_entity(int32 type_id, int32 grid_id) {
 	entity->set_cd(get_json_mgr()->get_float("entity", type_id - 1, "cd"));
 	entity->set_blood(get_json_mgr()->get_int("entity", type_id - 1, "blood"));
 	entity->set_damage(get_json_mgr()->get_float("entity", type_id - 1, "damage"));
+	entity->set_grid(row, col);
 	add_object(entity_id, entity);
 	return entity;
 }

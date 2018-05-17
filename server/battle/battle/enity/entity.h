@@ -19,8 +19,6 @@ public:
 
 	int32 get_frozen() { return frozen_; }
 
-	grid_t *get_grid() { return grid_; }
-
 	void set_level(int32 level) { level_ = level; }
 
 	void set_cd(float cd) { cd_ = cd; }
@@ -31,7 +29,7 @@ public:
 
 	void set_frozen(float frozen) { frozen_ = frozen; }
 
-	void set_grid(grid_t *grid) { grid_ = grid; }
+	void set_grid(int32 row, int32 col) { row_ = row; col_ = col; }
 
 private:
 	int32 level_;
@@ -44,7 +42,9 @@ private:
 
 	float froze_;
 
-	grid_t *grid_;
+	int32 row_;
+
+	int32 col_;
 };
 
 #endif

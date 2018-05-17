@@ -12,7 +12,7 @@ public:
 
 	virtual ~entity_mgr_t();
 
-	entity_t *create_entity(int32 type_id, int32 grid_id);
+	entity_t *create_entity(int32 type_id, int32 row, int32 col);
 
 	void *delete_entity(int32 entity_id);
 

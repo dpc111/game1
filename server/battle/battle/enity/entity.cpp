@@ -7,7 +7,8 @@ entity_t::entity_t(int32 entity_id, int32 type_id) :
 	blood_ = 0;
 	damage_ = 0;
 	frozen_ = 0;
-	grid_ = NULL;
+	row_ = 0;
+	col_ = 0;
 }
 
 entity_t::~entity_t() {

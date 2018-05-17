@@ -19,7 +19,7 @@ public:
 
 	grid_t* get_grid() { return grid_; }
 
-	int32 set_random_camp(int32 camp, int64 uid);
+	int32 set_random_camp(int64 uid);
 
 private:
 	int32 rid_;

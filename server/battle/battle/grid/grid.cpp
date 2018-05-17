@@ -1,7 +1,9 @@
 #include "grid.h"
 #include "entity.h"
+#include "room.h"
 
-grid_t::grid_t() {
+grid_t::grid_t(room_t *room) :
+	room_(room) {
 	for (int i = 0; i < ROW_NUM; i++) {
 		for (int j = 0; j < COL_NUM; i++) {
 			grids_[i][j] = NULL;

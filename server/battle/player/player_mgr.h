@@ -21,6 +21,8 @@ public:
 
 	void del_player(int64 uid);
 
+	player_t* create_player(int64 uid);
+
 	int32 player_num() { return player_num_; }
 
 private:

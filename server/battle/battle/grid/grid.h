@@ -7,10 +7,11 @@
 #include "stdafx.h"
 
 class entity_t;
+class room_t;
 
 class grid_t {
 public:
-	grid_t();
+	grid_t(room_t *room);
 
 	~grid_t();
 
@@ -24,6 +25,7 @@ public:
 
 public:
 	entity_t* grids_[ROW_NUM][COL_NUM];
+	room_t* room_;
 };
 
 #endif

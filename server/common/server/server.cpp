@@ -51,6 +51,10 @@ tcp_connection_t *server_t::connect_to(int sid) {
 	return conn_mgr_->connect_to(sid);
 }
 
+void server_t::verify(int32 sid, tcp_connection_t *conn) {
+	conn_mgr_->verify(sid, conn);
+}
+
 void server_t::send(int sid, google::protobuf::Message& msg) {
 	tcp_connection_t *conn = conn_mgr_->get_conn(sid);
 	if (!conn) {

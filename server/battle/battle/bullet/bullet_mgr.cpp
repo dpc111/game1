@@ -1,9 +1,11 @@
 #include "bullet_mgr.h"
 #include "bullet.h"
 #include "global.h"
+#include "room.h"
 
-bullet_mgr_t::bullet_mgr_t() :
-	object_mgr_base_t() {
+bullet_mgr_t::bullet_mgr_t(room_t *room) :
+	object_mgr_base_t(),
+	room_(room) {
 
 }
 

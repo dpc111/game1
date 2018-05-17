@@ -1,6 +1,6 @@
 syntax="proto2";
 
-package ProtoMsg;
+package battle_msg;
 
 message c2s_join {
 }
@@ -11,3 +11,29 @@ message s2c_join {
 	required string icon = 3;
 }
 
+message c_login {
+	required int64 uid = 1;
+}
+
+message s_login {
+	required string res = 1;
+	optional int64 uid = 2;
+	optional string name = 3;
+	optional string icon = 4;
+	optional int32 camp = 5;
+}
+
+message c_create_entity {
+	required int32 type_id = 1;
+	required int32 row = 2;
+	required int32 col = 3;
+}
+
+////////////////////////////////////////////////////////////////////////////////////////
+message s_create_entity {
+	required int32 camp = 1;
+	required int32 add_gold = 2;
+	required int32 gold = 3;
+	required int32 row = 4;
+	required int32 col = 5;
+}

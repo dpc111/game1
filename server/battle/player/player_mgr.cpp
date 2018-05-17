@@ -42,3 +42,12 @@ void player_mgr_t::del_player(int64 uid) {
 	--player_num_;
 	delete player;
 }
+
+player_t* player_mgr::create_player(int64 uid) {
+	if (this->get_player(uid)) {
+		return NULL;
+	}
+	player_t *player = new player_t(uid, "...", 1, ".....");
+	this->add_player(uid, player);
+	return player;
+}

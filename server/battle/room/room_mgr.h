@@ -5,6 +5,7 @@
 #include <map>
 
 class room_t;
+class id_generate_t;
 
 class room_mgr_t {
 public:
@@ -20,9 +21,13 @@ public:
 
 	void del_room(int rid);
 
+	room_t* create_room();
+
 	int room_num() { return room_num_; }
 
 private:
+	id_generate_t *id_generate_;
+
 	room_map_t rooms_;
 
 	int room_num_;

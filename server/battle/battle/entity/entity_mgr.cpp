@@ -2,8 +2,9 @@
 #include "entity.h"
 #include "global.h"
 
-entity_mgr_t::entity_mgr_t() :
-	object_mgr_base_t() {
+entity_mgr_t::entity_mgr_t(room_t *room) :
+	object_mgr_base_t(),
+	room_(room) {
 
 }
 

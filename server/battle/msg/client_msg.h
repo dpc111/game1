@@ -15,6 +15,7 @@ public:
 
 	void c2s_join(tcp_connection_t *conn, const battle::c2s_join& msg);
 
+	void c_login(tcp_connection_t *conn, const battle::c_login& msg);
 };
 
 #endif

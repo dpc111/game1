@@ -5,10 +5,11 @@
 #include "object_mgr_base.h"
 
 class bullet_t;
+class room_t;
 
 class bullet_mgr_t : public object_mgr_base_t {
 public:
-	bullet_mgr_t();
+	bullet_mgr_t(room_t *room);
 
 	virtual ~bullet_mgr_t();
 
@@ -17,6 +18,7 @@ public:
 	void delete_bullet(int32 bullet_id);
 
 private:
+	room_t *room_;
 
 };
 

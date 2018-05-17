@@ -36,6 +36,8 @@ public:
 
 	tcp_connection_t *connect_to(int sid);
 
+	void verify(int32 sid, tcp_connection_t *conn);
+
 	void send(int sid, google::protobuf::Message& msg);
 
 	void send(tcp_connection_t *conn, google::protobuf::Message& msg);

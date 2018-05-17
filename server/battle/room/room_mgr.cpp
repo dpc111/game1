@@ -1,7 +1,8 @@
 #include "stdafx.h"
 #include "room_mgr.h"
 
-room_mgr_t::room_mgr_t() {
+room_mgr_t::room_mgr_t() :
+	id_generate_() {
 
 }
 
@@ -34,4 +35,13 @@ void room_mgr_t::del_room(int rid) {
 	rooms_.erase(it);
 	--room_num_;
 	delete room;
+}
+
+room_t* room_mgr_t::create_room() {
+	int32 rid = id_generate_.gen();
+	if (get_room(rid)) {
+		return NULL;
+	}
+	room_t *room = new room_t(rid);
+	add_room(rid, room);
 }

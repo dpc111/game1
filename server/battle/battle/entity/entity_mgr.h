@@ -5,10 +5,11 @@
 #include "object_mgr_base.h"
 
 class entity_t;
+class room_t;
 
-class entity_mgr_t : object_mgr_base_t {
+class entity_mgr_t : public object_mgr_base_t {
 public:
-	entity_mgr_t();
+	entity_mgr_t(room_t *room);
 
 	virtual ~entity_mgr_t();
 
@@ -17,6 +18,7 @@ public:
 	void delete_entity(int32 entity_id);
 
 private:
+	room_t *room_;
 	
 };
 

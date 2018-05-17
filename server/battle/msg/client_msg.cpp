@@ -3,8 +3,8 @@
 #include "global.h"
 #include "player_mgr.h"
 #include "player.h"
-#include "room_mgr_t.h"
-#include "room_t.h"
+#include "room_mgr.h"
+#include "room.h"
 
 client_msg_t::client_msg_t() {
 

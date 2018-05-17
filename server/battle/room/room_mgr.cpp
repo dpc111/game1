@@ -1,5 +1,6 @@
 #include "stdafx.h"
 #include "room_mgr.h"
+#include "room.h"
 
 room_mgr_t::room_mgr_t() :
 	id_generate_() {

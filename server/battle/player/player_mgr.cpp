@@ -1,5 +1,6 @@
 #include "stdafx.h"
 #include "player_mgr.h"
+#include "player.h"
 
 player_mgr_t::player_mgr_t() {
 	players_.clear();
@@ -43,7 +44,7 @@ void player_mgr_t::del_player(int64 uid) {
 	delete player;
 }
 
-player_t* player_mgr::create_player(int64 uid) {
+player_t* player_mgr_t::create_player(int64 uid) {
 	if (this->get_player(uid)) {
 		return NULL;
 	}

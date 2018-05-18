@@ -29,8 +29,6 @@ dispatch_msg_t::~dispatch_msg_t() {
 
 void dispatch_msg_t::register_client_msg() {
 	service_->register_default_message(REGISTER_DEFAULT_BIND(client_msg_t::default_message, client_msg_));	
-	service_->register_net_message<battle_msg::s2c_join>(REGISTER_BIND(client_msg_t::s2c_join, client_msg_));	
-	service_->register_net_message<battle_msg::c2s_join>(REGISTER_BIND(client_msg_t::c2s_join, client_msg_));	
 	service_->register_net_message<battle_msg::c_login>(REGISTER_BIND(client_msg_t::c_login, client_msg_));	
 }
 

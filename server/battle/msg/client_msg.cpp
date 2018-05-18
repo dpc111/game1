@@ -14,26 +14,6 @@ client_msg_t::~client_msg_t() {
 	
 }
 
-void client_msg_t::s2c_join(tcp_connection_t *conn, const battle_msg::s2c_join& msg) {
-	
-}
-
-void client_msg_t::c2s_join(tcp_connection_t *conn, const battle_msg::c2s_join& msg) {
-	int64 uid = 1111;
-	player_t *player = get_player_mgr()->get_player(uid);
-	if (player) {
-		return;
-	}
-	player = new player_t(uid, "dpc", 1, "null");
-	get_player_mgr()->add_player(uid, player);
-
-	battle_msg::s2c_join res;
-	res.set_uid(uid);
-	res.set_name(get_json_mgr()->get_string("battle", 5, "roomName"));
-	res.set_icon("null");
-	get_service()->send(conn, res);
-}
-
 void client_msg_t::c_login(tcp_connection_t *conn, const battle_msg::c_login& msg) {
 	battle_msg::s_login res;
 	int64 uid = msg.uid();

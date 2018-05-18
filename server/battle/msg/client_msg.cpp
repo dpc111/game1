@@ -84,5 +84,5 @@ void client_msg_t::default_message(int32 uid, const google::protobuf::Descriptor
 		ERROR("");
 		return;
 	}
-	room:on_message(player, des, msg);
+	room->on_message(player, des, msg);
 }

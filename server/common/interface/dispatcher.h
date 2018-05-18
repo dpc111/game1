@@ -46,7 +46,7 @@ public:
 	template<typename T>
 	void register_message(const typename cbT_t<T>::msg_cb_t& cb) { msg_map_[T::descriptor()] = new cbT_t<T>(cb); }
 
-	void on_message(void *p, const google::protobuf::Descriptor* des, google::protobuf::Message *msg);
+	void on_message(void *p, const google::protobuf::Descriptor* des, const google::protobuf::Message *msg);
 
 	virtual void register_callback() {}
 

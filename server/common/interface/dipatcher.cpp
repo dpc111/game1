@@ -12,7 +12,7 @@ dispatcher_t::~dispatcher_t() {
 	msg_map_.clear();
 }
 
-void dispatcher_t::on_message(void *p, const google::protobuf::Descriptor* des, google::protobuf::Message *msg) {
+void dispatcher_t::on_message(void *p, const google::protobuf::Descriptor* des, const google::protobuf::Message *msg) {
 	msg_map_t::iterator it = msg_map_.find(des);
 	if (it != msg_map_.end()) {
 		cb_t *cb = it->second;

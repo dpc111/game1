@@ -73,7 +73,7 @@ void client_msg_t::c_create_entity(int32 uid, const battle_msg::c_create_entity&
 
 }
 
-void client_msg_t::default_message(int32 uid, const google::protobuf::Descriptor* des, google::protobuf::Message *msg) {
+void client_msg_t::default_message(int32 uid, const google::protobuf::Descriptor* des, const google::protobuf::Message *msg) {
 	player_t *player = get_player_mgr()->get_player(uid);
 	if (!player) {
 		ERROR("");

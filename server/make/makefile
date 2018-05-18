@@ -16,3 +16,4 @@ clean:
 	-${RM} *.o
 	-${RM} *.d
 	-${RM} battle
+	-${RM} core

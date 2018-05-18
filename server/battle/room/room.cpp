@@ -5,6 +5,12 @@
 #include "grid.h"
 #include "player.h"
 
+#define REGISTER_ROOM_BIND(func) \
+	std::tr1::bind(&func, \
+	this, \
+	std::tr1::placeholders::_1, \
+	std::tr1::placeholders::_2)
+
 room_t::room_t(int32 rid) :
 	dispatcher_t() {
 	rid_ = rid;
@@ -40,5 +46,5 @@ void room_t::c_create_entity(void *player, const battle_msg::c_create_entity& ms
 }
 
 void room_t::register_callback() {
-	this->register_message<battle_msg::c_create_entity>(std::tr1::bind(&room_t::c_create_entity, this, std::tr1::placeholders::_1, std::tr1::placeholders::_2));
+	register_message<battle_msg::c_create_entity>(REGISTER_ROOM_BIND(room_t::c_create_entity));
 }

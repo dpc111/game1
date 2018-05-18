@@ -2,14 +2,14 @@
 #define ROOM_H
 
 #include "stdafx.h"
-#include "msg_dispatch.h"
+#include "dispatcher.h"
 #include "message/messages.h"
 
 class entity_mgr_t;
 class bullet_mgr_t;
 class grid_t;
 
-class room_t : public msg_dispatch_t {
+class room_t : public dispatcher_t {
 public:
 	room_t(int32 rid);
 

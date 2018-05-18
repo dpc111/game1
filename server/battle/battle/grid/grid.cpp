@@ -5,7 +5,7 @@
 grid_t::grid_t(room_t *room) :
 	room_(room) {
 	for (int i = 0; i < ROW_NUM; i++) {
-		for (int j = 0; j < COL_NUM; i++) {
+		for (int j = 0; j < COL_NUM; j++) {
 			grids_[i][j] = NULL;
 		}
 	}
@@ -13,7 +13,7 @@ grid_t::grid_t(room_t *room) :
 
 grid_t::~grid_t() {
 	for (int i = 0; i < ROW_NUM; i++) {
-		for (int j = 0; j < COL_NUM; i++) {
+		for (int j = 0; j < COL_NUM; j++) {
 			grids_[i][j] = NULL;
 		}
 	}

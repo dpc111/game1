@@ -8,7 +8,7 @@
 
 class tcp_connection_t;
 
-class msg_dispatch_t {
+class dispatcher_t {
 public:
 	class cb_t {
 	public:
@@ -39,9 +39,9 @@ public:
 	typedef std::map<const google::protobuf::Descriptor *, cb_t *> msg_map_t;
 
 public:
-	msg_dispatch_t();
+	dispatcher_t();
 
-	~msg_dispatch_t();
+	~dispatcher_t();
 
 	template<typename T>
 	void register_message(const typename cbT_t<T>::msg_cb_t& cb) { msg_map_[T::descriptor()] = new cbT_t<T>(cb); }

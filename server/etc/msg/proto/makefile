@@ -2,9 +2,7 @@ PROTOC = ../../../3rd/protobuf/bin/protoc
 
 BUILD = ../proto_pb
 	
-PROTOSRCS = common.proto \
-			hall.proto \
- 			battle.proto \
+PROTOSRCS = battle.proto 
 
 PROTO :=
 

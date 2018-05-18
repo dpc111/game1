@@ -1,7 +1,0 @@
-syntax = "proto2";
-
-message player {
-	required int32 uid = 1;
-	required string name = 2;
-	required string icon = 3;
-}

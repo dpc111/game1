@@ -2,15 +2,6 @@ syntax="proto2";
 
 package battle_msg;
 
-message c2s_join {
-}
-
-message s2c_join {
-	required int32 uid = 1;
-	required string name = 2;
-	required string icon = 3;
-}
-
 message c_login {
 	required int64 uid = 1;
 }

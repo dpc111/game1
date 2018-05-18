@@ -52,7 +52,7 @@ public:
 	template<typename T>
 	void register_net_message(const typename msg_dispatch_t::cb_netT_t<T>::msg_cb_t& cb) { network_->get_msg_dispatch()->register_net_message<T>(cb); }
 
-	void register_default_message(const msg_default_cb_t& func) { network_->get_msg_dispatch()->register_default_message(cb); }
+	void register_default_message(const msg_dispatch_t::msg_default_cb_t& cb) { network_->get_msg_dispatch()->register_default_message(cb); }
 
 private:
 	tcp_network_t *network_;

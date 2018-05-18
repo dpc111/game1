@@ -20,16 +20,6 @@
 #endif
 // @@protoc_insertion_point(includes)
 namespace battle_msg {
-class c2s_joinDefaultTypeInternal {
- public:
-  ::google::protobuf::internal::ExplicitlyConstructed<c2s_join>
-      _instance;
-} _c2s_join_default_instance_;
-class s2c_joinDefaultTypeInternal {
- public:
-  ::google::protobuf::internal::ExplicitlyConstructed<s2c_join>
-      _instance;
-} _s2c_join_default_instance_;
 class c_loginDefaultTypeInternal {
  public:
   ::google::protobuf::internal::ExplicitlyConstructed<c_login>
@@ -52,48 +42,6 @@ class s_create_entityDefaultTypeInternal {
 } _s_create_entity_default_instance_;
 }  // namespace battle_msg
 namespace protobuf_battle_2eproto {
-void InitDefaultsc2s_joinImpl() {
-  GOOGLE_PROTOBUF_VERIFY_VERSION;
-
-#ifdef GOOGLE_PROTOBUF_ENFORCE_UNIQUENESS
-  ::google::protobuf::internal::InitProtobufDefaultsForceUnique();
-#else
-  ::google::protobuf::internal::InitProtobufDefaults();
-#endif  // GOOGLE_PROTOBUF_ENFORCE_UNIQUENESS
-  {
-    void* ptr = &::battle_msg::_c2s_join_default_instance_;
-    new (ptr) ::battle_msg::c2s_join();
-    ::google::protobuf::internal::OnShutdownDestroyMessage(ptr);
-  }
-  ::battle_msg::c2s_join::InitAsDefaultInstance();
-}
-
-void InitDefaultsc2s_join() {
-  static GOOGLE_PROTOBUF_DECLARE_ONCE(once);
-  ::google::protobuf::GoogleOnceInit(&once, &InitDefaultsc2s_joinImpl);
-}
-
-void InitDefaultss2c_joinImpl() {
-  GOOGLE_PROTOBUF_VERIFY_VERSION;
-
-#ifdef GOOGLE_PROTOBUF_ENFORCE_UNIQUENESS
-  ::google::protobuf::internal::InitProtobufDefaultsForceUnique();
-#else
-  ::google::protobuf::internal::InitProtobufDefaults();
-#endif  // GOOGLE_PROTOBUF_ENFORCE_UNIQUENESS
-  {
-    void* ptr = &::battle_msg::_s2c_join_default_instance_;
-    new (ptr) ::battle_msg::s2c_join();
-    ::google::protobuf::internal::OnShutdownDestroyMessage(ptr);
-  }
-  ::battle_msg::s2c_join::InitAsDefaultInstance();
-}
-
-void InitDefaultss2c_join() {
-  static GOOGLE_PROTOBUF_DECLARE_ONCE(once);
-  ::google::protobuf::GoogleOnceInit(&once, &InitDefaultss2c_joinImpl);
-}
-
 void InitDefaultsc_loginImpl() {
   GOOGLE_PROTOBUF_VERIFY_VERSION;
 
@@ -178,25 +126,9 @@ void InitDefaultss_create_entity() {
   ::google::protobuf::GoogleOnceInit(&once, &InitDefaultss_create_entityImpl);
 }
 
-::google::protobuf::Metadata file_level_metadata[6];
+::google::protobuf::Metadata file_level_metadata[4];
 
 const ::google::protobuf::uint32 TableStruct::offsets[] GOOGLE_PROTOBUF_ATTRIBUTE_SECTION_VARIABLE(protodesc_cold) = {
-  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::battle_msg::c2s_join, _has_bits_),
-  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::battle_msg::c2s_join, _internal_metadata_),
-  ~0u,  // no _extensions_
-  ~0u,  // no _oneof_case_
-  ~0u,  // no _weak_field_map_
-  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::battle_msg::s2c_join, _has_bits_),
-  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::battle_msg::s2c_join, _internal_metadata_),
-  ~0u,  // no _extensions_
-  ~0u,  // no _oneof_case_
-  ~0u,  // no _weak_field_map_
-  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::battle_msg::s2c_join, uid_),
-  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::battle_msg::s2c_join, name_),
-  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::battle_msg::s2c_join, icon_),
-  2,
-  0,
-  1,
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::battle_msg::c_login, _has_bits_),
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::battle_msg::c_login, _internal_metadata_),
   ~0u,  // no _extensions_
@@ -247,17 +179,13 @@ const ::google::protobuf::uint32 TableStruct::offsets[] GOOGLE_PROTOBUF_ATTRIBUT
   4,
 };
 static const ::google::protobuf::internal::MigrationSchema schemas[] GOOGLE_PROTOBUF_ATTRIBUTE_SECTION_VARIABLE(protodesc_cold) = {
-  { 0, 5, sizeof(::battle_msg::c2s_join)},
-  { 5, 13, sizeof(::battle_msg::s2c_join)},
-  { 16, 22, sizeof(::battle_msg::c_login)},
-  { 23, 33, sizeof(::battle_msg::s_login)},
-  { 38, 46, sizeof(::battle_msg::c_create_entity)},
-  { 49, 59, sizeof(::battle_msg::s_create_entity)},
+  { 0, 6, sizeof(::battle_msg::c_login)},
+  { 7, 17, sizeof(::battle_msg::s_login)},
+  { 22, 30, sizeof(::battle_msg::c_create_entity)},
+  { 33, 43, sizeof(::battle_msg::s_create_entity)},
 };
 
 static ::google::protobuf::Message const * const file_default_instances[] = {
-  reinterpret_cast<const ::google::protobuf::Message*>(&::battle_msg::_c2s_join_default_instance_),
-  reinterpret_cast<const ::google::protobuf::Message*>(&::battle_msg::_s2c_join_default_instance_),
   reinterpret_cast<const ::google::protobuf::Message*>(&::battle_msg::_c_login_default_instance_),
   reinterpret_cast<const ::google::protobuf::Message*>(&::battle_msg::_s_login_default_instance_),
   reinterpret_cast<const ::google::protobuf::Message*>(&::battle_msg::_c_create_entity_default_instance_),
@@ -280,24 +208,23 @@ void protobuf_AssignDescriptorsOnce() {
 void protobuf_RegisterTypes(const ::std::string&) GOOGLE_PROTOBUF_ATTRIBUTE_COLD;
 void protobuf_RegisterTypes(const ::std::string&) {
   protobuf_AssignDescriptorsOnce();
-  ::google::protobuf::internal::RegisterAllTypes(file_level_metadata, 6);
+  ::google::protobuf::internal::RegisterAllTypes(file_level_metadata, 4);
 }
 
 void AddDescriptorsImpl() {
   InitDefaults();
   static const char descriptor[] GOOGLE_PROTOBUF_ATTRIBUTE_SECTION_VARIABLE(protodesc_cold) = {
-      "\n\014battle.proto\022\nbattle_msg\"\n\n\010c2s_join\"3"
-      "\n\010s2c_join\022\013\n\003uid\030\001 \002(\005\022\014\n\004name\030\002 \002(\t\022\014\n"
-      "\004icon\030\003 \002(\t\"\026\n\007c_login\022\013\n\003uid\030\001 \002(\003\"M\n\007s"
-      "_login\022\013\n\003res\030\001 \002(\t\022\013\n\003uid\030\002 \001(\003\022\014\n\004name"
-      "\030\003 \001(\t\022\014\n\004icon\030\004 \001(\t\022\014\n\004camp\030\005 \001(\005\"<\n\017c_"
-      "create_entity\022\017\n\007type_id\030\001 \002(\005\022\013\n\003row\030\002 "
-      "\002(\005\022\013\n\003col\030\003 \002(\005\"Y\n\017s_create_entity\022\014\n\004c"
-      "amp\030\001 \002(\005\022\020\n\010add_gold\030\002 \002(\005\022\014\n\004gold\030\003 \002("
-      "\005\022\013\n\003row\030\004 \002(\005\022\013\n\003col\030\005 \002(\005"
+      "\n\014battle.proto\022\nbattle_msg\"\026\n\007c_login\022\013\n"
+      "\003uid\030\001 \002(\003\"M\n\007s_login\022\013\n\003res\030\001 \002(\t\022\013\n\003ui"
+      "d\030\002 \001(\003\022\014\n\004name\030\003 \001(\t\022\014\n\004icon\030\004 \001(\t\022\014\n\004c"
+      "amp\030\005 \001(\005\"<\n\017c_create_entity\022\017\n\007type_id\030"
+      "\001 \002(\005\022\013\n\003row\030\002 \002(\005\022\013\n\003col\030\003 \002(\005\"Y\n\017s_cre"
+      "ate_entity\022\014\n\004camp\030\001 \002(\005\022\020\n\010add_gold\030\002 \002"
+      "(\005\022\014\n\004gold\030\003 \002(\005\022\013\n\003row\030\004 \002(\005\022\013\n\003col\030\005 \002"
+      "(\005"
   };
   ::google::protobuf::DescriptorPool::InternalAddGeneratedFile(
-      descriptor, 347);
+      descriptor, 282);
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedFile(
     "battle.proto", &protobuf_RegisterTypes);
 }
@@ -314,585 +241,6 @@ struct StaticDescriptorInitializer {
 } static_descriptor_initializer;
 }  // namespace protobuf_battle_2eproto
 namespace battle_msg {
-
-// ===================================================================
-
-void c2s_join::InitAsDefaultInstance() {
-}
-#if !defined(_MSC_VER) || _MSC_VER >= 1900
-#endif  // !defined(_MSC_VER) || _MSC_VER >= 1900
-
-c2s_join::c2s_join()
-  : ::google::protobuf::Message(), _internal_metadata_(NULL) {
-  if (GOOGLE_PREDICT_TRUE(this != internal_default_instance())) {
-    ::protobuf_battle_2eproto::InitDefaultsc2s_join();
-  }
-  SharedCtor();
-  // @@protoc_insertion_point(constructor:battle_msg.c2s_join)
-}
-c2s_join::c2s_join(const c2s_join& from)
-  : ::google::protobuf::Message(),
-      _internal_metadata_(NULL),
-      _has_bits_(from._has_bits_),
-      _cached_size_(0) {
-  _internal_metadata_.MergeFrom(from._internal_metadata_);
-  // @@protoc_insertion_point(copy_constructor:battle_msg.c2s_join)
-}
-
-void c2s_join::SharedCtor() {
-  _cached_size_ = 0;
-}
-
-c2s_join::~c2s_join() {
-  // @@protoc_insertion_point(destructor:battle_msg.c2s_join)
-  SharedDtor();
-}
-
-void c2s_join::SharedDtor() {
-}
-
-void c2s_join::SetCachedSize(int size) const {
-  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
-  _cached_size_ = size;
-  GOOGLE_SAFE_CONCURRENT_WRITES_END();
-}
-const ::google::protobuf::Descriptor* c2s_join::descriptor() {
-  ::protobuf_battle_2eproto::protobuf_AssignDescriptorsOnce();
-  return ::protobuf_battle_2eproto::file_level_metadata[kIndexInFileMessages].descriptor;
-}
-
-const c2s_join& c2s_join::default_instance() {
-  ::protobuf_battle_2eproto::InitDefaultsc2s_join();
-  return *internal_default_instance();
-}
-
-
-void c2s_join::Clear() {
-// @@protoc_insertion_point(message_clear_start:battle_msg.c2s_join)
-  ::google::protobuf::uint32 cached_has_bits = 0;
-  // Prevent compiler warnings about cached_has_bits being unused
-  (void) cached_has_bits;
-
-  _has_bits_.Clear();
-  _internal_metadata_.Clear();
-}
-
-bool c2s_join::MergePartialFromCodedStream(
-    ::google::protobuf::io::CodedInputStream* input) {
-#define DO_(EXPRESSION) if (!GOOGLE_PREDICT_TRUE(EXPRESSION)) goto failure
-  ::google::protobuf::uint32 tag;
-  // @@protoc_insertion_point(parse_start:battle_msg.c2s_join)
-  for (;;) {
-    ::std::pair< ::google::protobuf::uint32, bool> p = input->ReadTagWithCutoffNoLastTag(127u);
-    tag = p.first;
-    if (!p.second) goto handle_unusual;
-  handle_unusual:
-    if (tag == 0) {
-      goto success;
-    }
-    DO_(::google::protobuf::internal::WireFormat::SkipField(
-          input, tag, _internal_metadata_.mutable_unknown_fields()));
-  }
-success:
-  // @@protoc_insertion_point(parse_success:battle_msg.c2s_join)
-  return true;
-failure:
-  // @@protoc_insertion_point(parse_failure:battle_msg.c2s_join)
-  return false;
-#undef DO_
-}
-
-void c2s_join::SerializeWithCachedSizes(
-    ::google::protobuf::io::CodedOutputStream* output) const {
-  // @@protoc_insertion_point(serialize_start:battle_msg.c2s_join)
-  ::google::protobuf::uint32 cached_has_bits = 0;
-  (void) cached_has_bits;
-
-  if (_internal_metadata_.have_unknown_fields()) {
-    ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
-        _internal_metadata_.unknown_fields(), output);
-  }
-  // @@protoc_insertion_point(serialize_end:battle_msg.c2s_join)
-}
-
-::google::protobuf::uint8* c2s_join::InternalSerializeWithCachedSizesToArray(
-    bool deterministic, ::google::protobuf::uint8* target) const {
-  (void)deterministic; // Unused
-  // @@protoc_insertion_point(serialize_to_array_start:battle_msg.c2s_join)
-  ::google::protobuf::uint32 cached_has_bits = 0;
-  (void) cached_has_bits;
-
-  if (_internal_metadata_.have_unknown_fields()) {
-    target = ::google::protobuf::internal::WireFormat::SerializeUnknownFieldsToArray(
-        _internal_metadata_.unknown_fields(), target);
-  }
-  // @@protoc_insertion_point(serialize_to_array_end:battle_msg.c2s_join)
-  return target;
-}
-
-size_t c2s_join::ByteSizeLong() const {
-// @@protoc_insertion_point(message_byte_size_start:battle_msg.c2s_join)
-  size_t total_size = 0;
-
-  if (_internal_metadata_.have_unknown_fields()) {
-    total_size +=
-      ::google::protobuf::internal::WireFormat::ComputeUnknownFieldsSize(
-        _internal_metadata_.unknown_fields());
-  }
-  int cached_size = ::google::protobuf::internal::ToCachedSize(total_size);
-  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
-  _cached_size_ = cached_size;
-  GOOGLE_SAFE_CONCURRENT_WRITES_END();
-  return total_size;
-}
-
-void c2s_join::MergeFrom(const ::google::protobuf::Message& from) {
-// @@protoc_insertion_point(generalized_merge_from_start:battle_msg.c2s_join)
-  GOOGLE_DCHECK_NE(&from, this);
-  const c2s_join* source =
-      ::google::protobuf::internal::DynamicCastToGenerated<const c2s_join>(
-          &from);
-  if (source == NULL) {
-  // @@protoc_insertion_point(generalized_merge_from_cast_fail:battle_msg.c2s_join)
-    ::google::protobuf::internal::ReflectionOps::Merge(from, this);
-  } else {
-  // @@protoc_insertion_point(generalized_merge_from_cast_success:battle_msg.c2s_join)
-    MergeFrom(*source);
-  }
-}
-
-void c2s_join::MergeFrom(const c2s_join& from) {
-// @@protoc_insertion_point(class_specific_merge_from_start:battle_msg.c2s_join)
-  GOOGLE_DCHECK_NE(&from, this);
-  _internal_metadata_.MergeFrom(from._internal_metadata_);
-  ::google::protobuf::uint32 cached_has_bits = 0;
-  (void) cached_has_bits;
-
-}
-
-void c2s_join::CopyFrom(const ::google::protobuf::Message& from) {
-// @@protoc_insertion_point(generalized_copy_from_start:battle_msg.c2s_join)
-  if (&from == this) return;
-  Clear();
-  MergeFrom(from);
-}
-
-void c2s_join::CopyFrom(const c2s_join& from) {
-// @@protoc_insertion_point(class_specific_copy_from_start:battle_msg.c2s_join)
-  if (&from == this) return;
-  Clear();
-  MergeFrom(from);
-}
-
-bool c2s_join::IsInitialized() const {
-  return true;
-}
-
-void c2s_join::Swap(c2s_join* other) {
-  if (other == this) return;
-  InternalSwap(other);
-}
-void c2s_join::InternalSwap(c2s_join* other) {
-  using std::swap;
-  swap(_has_bits_[0], other->_has_bits_[0]);
-  _internal_metadata_.Swap(&other->_internal_metadata_);
-  swap(_cached_size_, other->_cached_size_);
-}
-
-::google::protobuf::Metadata c2s_join::GetMetadata() const {
-  protobuf_battle_2eproto::protobuf_AssignDescriptorsOnce();
-  return ::protobuf_battle_2eproto::file_level_metadata[kIndexInFileMessages];
-}
-
-
-// ===================================================================
-
-void s2c_join::InitAsDefaultInstance() {
-}
-#if !defined(_MSC_VER) || _MSC_VER >= 1900
-const int s2c_join::kUidFieldNumber;
-const int s2c_join::kNameFieldNumber;
-const int s2c_join::kIconFieldNumber;
-#endif  // !defined(_MSC_VER) || _MSC_VER >= 1900
-
-s2c_join::s2c_join()
-  : ::google::protobuf::Message(), _internal_metadata_(NULL) {
-  if (GOOGLE_PREDICT_TRUE(this != internal_default_instance())) {
-    ::protobuf_battle_2eproto::InitDefaultss2c_join();
-  }
-  SharedCtor();
-  // @@protoc_insertion_point(constructor:battle_msg.s2c_join)
-}
-s2c_join::s2c_join(const s2c_join& from)
-  : ::google::protobuf::Message(),
-      _internal_metadata_(NULL),
-      _has_bits_(from._has_bits_),
-      _cached_size_(0) {
-  _internal_metadata_.MergeFrom(from._internal_metadata_);
-  name_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-  if (from.has_name()) {
-    name_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.name_);
-  }
-  icon_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-  if (from.has_icon()) {
-    icon_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.icon_);
-  }
-  uid_ = from.uid_;
-  // @@protoc_insertion_point(copy_constructor:battle_msg.s2c_join)
-}
-
-void s2c_join::SharedCtor() {
-  _cached_size_ = 0;
-  name_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-  icon_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-  uid_ = 0;
-}
-
-s2c_join::~s2c_join() {
-  // @@protoc_insertion_point(destructor:battle_msg.s2c_join)
-  SharedDtor();
-}
-
-void s2c_join::SharedDtor() {
-  name_.DestroyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-  icon_.DestroyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-}
-
-void s2c_join::SetCachedSize(int size) const {
-  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
-  _cached_size_ = size;
-  GOOGLE_SAFE_CONCURRENT_WRITES_END();
-}
-const ::google::protobuf::Descriptor* s2c_join::descriptor() {
-  ::protobuf_battle_2eproto::protobuf_AssignDescriptorsOnce();
-  return ::protobuf_battle_2eproto::file_level_metadata[kIndexInFileMessages].descriptor;
-}
-
-const s2c_join& s2c_join::default_instance() {
-  ::protobuf_battle_2eproto::InitDefaultss2c_join();
-  return *internal_default_instance();
-}
-
-
-void s2c_join::Clear() {
-// @@protoc_insertion_point(message_clear_start:battle_msg.s2c_join)
-  ::google::protobuf::uint32 cached_has_bits = 0;
-  // Prevent compiler warnings about cached_has_bits being unused
-  (void) cached_has_bits;
-
-  cached_has_bits = _has_bits_[0];
-  if (cached_has_bits & 3u) {
-    if (cached_has_bits & 0x00000001u) {
-      GOOGLE_DCHECK(!name_.IsDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited()));
-      name_.UnsafeMutablePointer()->clear();
-    }
-    if (cached_has_bits & 0x00000002u) {
-      GOOGLE_DCHECK(!icon_.IsDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited()));
-      icon_.UnsafeMutablePointer()->clear();
-    }
-  }
-  uid_ = 0;
-  _has_bits_.Clear();
-  _internal_metadata_.Clear();
-}
-
-bool s2c_join::MergePartialFromCodedStream(
-    ::google::protobuf::io::CodedInputStream* input) {
-#define DO_(EXPRESSION) if (!GOOGLE_PREDICT_TRUE(EXPRESSION)) goto failure
-  ::google::protobuf::uint32 tag;
-  // @@protoc_insertion_point(parse_start:battle_msg.s2c_join)
-  for (;;) {
-    ::std::pair< ::google::protobuf::uint32, bool> p = input->ReadTagWithCutoffNoLastTag(127u);
-    tag = p.first;
-    if (!p.second) goto handle_unusual;
-    switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
-      // required int32 uid = 1;
-      case 1: {
-        if (static_cast< ::google::protobuf::uint8>(tag) ==
-            static_cast< ::google::protobuf::uint8>(8u /* 8 & 0xFF */)) {
-          set_has_uid();
-          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
-                   ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
-                 input, &uid_)));
-        } else {
-          goto handle_unusual;
-        }
-        break;
-      }
-
-      // required string name = 2;
-      case 2: {
-        if (static_cast< ::google::protobuf::uint8>(tag) ==
-            static_cast< ::google::protobuf::uint8>(18u /* 18 & 0xFF */)) {
-          DO_(::google::protobuf::internal::WireFormatLite::ReadString(
-                input, this->mutable_name()));
-          ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
-            this->name().data(), static_cast<int>(this->name().length()),
-            ::google::protobuf::internal::WireFormat::PARSE,
-            "battle_msg.s2c_join.name");
-        } else {
-          goto handle_unusual;
-        }
-        break;
-      }
-
-      // required string icon = 3;
-      case 3: {
-        if (static_cast< ::google::protobuf::uint8>(tag) ==
-            static_cast< ::google::protobuf::uint8>(26u /* 26 & 0xFF */)) {
-          DO_(::google::protobuf::internal::WireFormatLite::ReadString(
-                input, this->mutable_icon()));
-          ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
-            this->icon().data(), static_cast<int>(this->icon().length()),
-            ::google::protobuf::internal::WireFormat::PARSE,
-            "battle_msg.s2c_join.icon");
-        } else {
-          goto handle_unusual;
-        }
-        break;
-      }
-
-      default: {
-      handle_unusual:
-        if (tag == 0) {
-          goto success;
-        }
-        DO_(::google::protobuf::internal::WireFormat::SkipField(
-              input, tag, _internal_metadata_.mutable_unknown_fields()));
-        break;
-      }
-    }
-  }
-success:
-  // @@protoc_insertion_point(parse_success:battle_msg.s2c_join)
-  return true;
-failure:
-  // @@protoc_insertion_point(parse_failure:battle_msg.s2c_join)
-  return false;
-#undef DO_
-}
-
-void s2c_join::SerializeWithCachedSizes(
-    ::google::protobuf::io::CodedOutputStream* output) const {
-  // @@protoc_insertion_point(serialize_start:battle_msg.s2c_join)
-  ::google::protobuf::uint32 cached_has_bits = 0;
-  (void) cached_has_bits;
-
-  cached_has_bits = _has_bits_[0];
-  // required int32 uid = 1;
-  if (cached_has_bits & 0x00000004u) {
-    ::google::protobuf::internal::WireFormatLite::WriteInt32(1, this->uid(), output);
-  }
-
-  // required string name = 2;
-  if (cached_has_bits & 0x00000001u) {
-    ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
-      this->name().data(), static_cast<int>(this->name().length()),
-      ::google::protobuf::internal::WireFormat::SERIALIZE,
-      "battle_msg.s2c_join.name");
-    ::google::protobuf::internal::WireFormatLite::WriteStringMaybeAliased(
-      2, this->name(), output);
-  }
-
-  // required string icon = 3;
-  if (cached_has_bits & 0x00000002u) {
-    ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
-      this->icon().data(), static_cast<int>(this->icon().length()),
-      ::google::protobuf::internal::WireFormat::SERIALIZE,
-      "battle_msg.s2c_join.icon");
-    ::google::protobuf::internal::WireFormatLite::WriteStringMaybeAliased(
-      3, this->icon(), output);
-  }
-
-  if (_internal_metadata_.have_unknown_fields()) {
-    ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
-        _internal_metadata_.unknown_fields(), output);
-  }
-  // @@protoc_insertion_point(serialize_end:battle_msg.s2c_join)
-}
-
-::google::protobuf::uint8* s2c_join::InternalSerializeWithCachedSizesToArray(
-    bool deterministic, ::google::protobuf::uint8* target) const {
-  (void)deterministic; // Unused
-  // @@protoc_insertion_point(serialize_to_array_start:battle_msg.s2c_join)
-  ::google::protobuf::uint32 cached_has_bits = 0;
-  (void) cached_has_bits;
-
-  cached_has_bits = _has_bits_[0];
-  // required int32 uid = 1;
-  if (cached_has_bits & 0x00000004u) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(1, this->uid(), target);
-  }
-
-  // required string name = 2;
-  if (cached_has_bits & 0x00000001u) {
-    ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
-      this->name().data(), static_cast<int>(this->name().length()),
-      ::google::protobuf::internal::WireFormat::SERIALIZE,
-      "battle_msg.s2c_join.name");
-    target =
-      ::google::protobuf::internal::WireFormatLite::WriteStringToArray(
-        2, this->name(), target);
-  }
-
-  // required string icon = 3;
-  if (cached_has_bits & 0x00000002u) {
-    ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
-      this->icon().data(), static_cast<int>(this->icon().length()),
-      ::google::protobuf::internal::WireFormat::SERIALIZE,
-      "battle_msg.s2c_join.icon");
-    target =
-      ::google::protobuf::internal::WireFormatLite::WriteStringToArray(
-        3, this->icon(), target);
-  }
-
-  if (_internal_metadata_.have_unknown_fields()) {
-    target = ::google::protobuf::internal::WireFormat::SerializeUnknownFieldsToArray(
-        _internal_metadata_.unknown_fields(), target);
-  }
-  // @@protoc_insertion_point(serialize_to_array_end:battle_msg.s2c_join)
-  return target;
-}
-
-size_t s2c_join::RequiredFieldsByteSizeFallback() const {
-// @@protoc_insertion_point(required_fields_byte_size_fallback_start:battle_msg.s2c_join)
-  size_t total_size = 0;
-
-  if (has_name()) {
-    // required string name = 2;
-    total_size += 1 +
-      ::google::protobuf::internal::WireFormatLite::StringSize(
-        this->name());
-  }
-
-  if (has_icon()) {
-    // required string icon = 3;
-    total_size += 1 +
-      ::google::protobuf::internal::WireFormatLite::StringSize(
-        this->icon());
-  }
-
-  if (has_uid()) {
-    // required int32 uid = 1;
-    total_size += 1 +
-      ::google::protobuf::internal::WireFormatLite::Int32Size(
-        this->uid());
-  }
-
-  return total_size;
-}
-size_t s2c_join::ByteSizeLong() const {
-// @@protoc_insertion_point(message_byte_size_start:battle_msg.s2c_join)
-  size_t total_size = 0;
-
-  if (_internal_metadata_.have_unknown_fields()) {
-    total_size +=
-      ::google::protobuf::internal::WireFormat::ComputeUnknownFieldsSize(
-        _internal_metadata_.unknown_fields());
-  }
-  if (((_has_bits_[0] & 0x00000007) ^ 0x00000007) == 0) {  // All required fields are present.
-    // required string name = 2;
-    total_size += 1 +
-      ::google::protobuf::internal::WireFormatLite::StringSize(
-        this->name());
-
-    // required string icon = 3;
-    total_size += 1 +
-      ::google::protobuf::internal::WireFormatLite::StringSize(
-        this->icon());
-
-    // required int32 uid = 1;
-    total_size += 1 +
-      ::google::protobuf::internal::WireFormatLite::Int32Size(
-        this->uid());
-
-  } else {
-    total_size += RequiredFieldsByteSizeFallback();
-  }
-  int cached_size = ::google::protobuf::internal::ToCachedSize(total_size);
-  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
-  _cached_size_ = cached_size;
-  GOOGLE_SAFE_CONCURRENT_WRITES_END();
-  return total_size;
-}
-
-void s2c_join::MergeFrom(const ::google::protobuf::Message& from) {
-// @@protoc_insertion_point(generalized_merge_from_start:battle_msg.s2c_join)
-  GOOGLE_DCHECK_NE(&from, this);
-  const s2c_join* source =
-      ::google::protobuf::internal::DynamicCastToGenerated<const s2c_join>(
-          &from);
-  if (source == NULL) {
-  // @@protoc_insertion_point(generalized_merge_from_cast_fail:battle_msg.s2c_join)
-    ::google::protobuf::internal::ReflectionOps::Merge(from, this);
-  } else {
-  // @@protoc_insertion_point(generalized_merge_from_cast_success:battle_msg.s2c_join)
-    MergeFrom(*source);
-  }
-}
-
-void s2c_join::MergeFrom(const s2c_join& from) {
-// @@protoc_insertion_point(class_specific_merge_from_start:battle_msg.s2c_join)
-  GOOGLE_DCHECK_NE(&from, this);
-  _internal_metadata_.MergeFrom(from._internal_metadata_);
-  ::google::protobuf::uint32 cached_has_bits = 0;
-  (void) cached_has_bits;
-
-  cached_has_bits = from._has_bits_[0];
-  if (cached_has_bits & 7u) {
-    if (cached_has_bits & 0x00000001u) {
-      set_has_name();
-      name_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.name_);
-    }
-    if (cached_has_bits & 0x00000002u) {
-      set_has_icon();
-      icon_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.icon_);
-    }
-    if (cached_has_bits & 0x00000004u) {
-      uid_ = from.uid_;
-    }
-    _has_bits_[0] |= cached_has_bits;
-  }
-}
-
-void s2c_join::CopyFrom(const ::google::protobuf::Message& from) {
-// @@protoc_insertion_point(generalized_copy_from_start:battle_msg.s2c_join)
-  if (&from == this) return;
-  Clear();
-  MergeFrom(from);
-}
-
-void s2c_join::CopyFrom(const s2c_join& from) {
-// @@protoc_insertion_point(class_specific_copy_from_start:battle_msg.s2c_join)
-  if (&from == this) return;
-  Clear();
-  MergeFrom(from);
-}
-
-bool s2c_join::IsInitialized() const {
-  if ((_has_bits_[0] & 0x00000007) != 0x00000007) return false;
-  return true;
-}
-
-void s2c_join::Swap(s2c_join* other) {
-  if (other == this) return;
-  InternalSwap(other);
-}
-void s2c_join::InternalSwap(s2c_join* other) {
-  using std::swap;
-  name_.Swap(&other->name_);
-  icon_.Swap(&other->icon_);
-  swap(uid_, other->uid_);
-  swap(_has_bits_[0], other->_has_bits_[0]);
-  _internal_metadata_.Swap(&other->_internal_metadata_);
-  swap(_cached_size_, other->_cached_size_);
-}
-
-::google::protobuf::Metadata s2c_join::GetMetadata() const {
-  protobuf_battle_2eproto::protobuf_AssignDescriptorsOnce();
-  return ::protobuf_battle_2eproto::file_level_metadata[kIndexInFileMessages];
-}
-
 
 // ===================================================================
 
@@ -2379,12 +1727,6 @@ void s_create_entity::InternalSwap(s_create_entity* other) {
 }  // namespace battle_msg
 namespace google {
 namespace protobuf {
-template<> GOOGLE_PROTOBUF_ATTRIBUTE_NOINLINE ::battle_msg::c2s_join* Arena::Create< ::battle_msg::c2s_join >(Arena* arena) {
-  return Arena::CreateInternal< ::battle_msg::c2s_join >(arena);
-}
-template<> GOOGLE_PROTOBUF_ATTRIBUTE_NOINLINE ::battle_msg::s2c_join* Arena::Create< ::battle_msg::s2c_join >(Arena* arena) {
-  return Arena::CreateInternal< ::battle_msg::s2c_join >(arena);
-}
 template<> GOOGLE_PROTOBUF_ATTRIBUTE_NOINLINE ::battle_msg::c_login* Arena::Create< ::battle_msg::c_login >(Arena* arena) {
   return Arena::CreateInternal< ::battle_msg::c_login >(arena);
 }

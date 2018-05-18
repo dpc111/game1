@@ -1,13 +1,7 @@
 
-¾
+ì
 battle.proto
-battle_msg"
-
-c2s_join"D
-s2c_join
-uid (Ruid
-name (	Rname
-icon (	Ricon"
+battle_msg"
 c_login
 uid (Ruid"i
 s_login

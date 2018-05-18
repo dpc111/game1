@@ -36,16 +36,12 @@ namespace protobuf_battle_2eproto {
 struct TableStruct {
   static const ::google::protobuf::internal::ParseTableField entries[];
   static const ::google::protobuf::internal::AuxillaryParseTableField aux[];
-  static const ::google::protobuf::internal::ParseTable schema[6];
+  static const ::google::protobuf::internal::ParseTable schema[4];
   static const ::google::protobuf::internal::FieldMetadata field_metadata[];
   static const ::google::protobuf::internal::SerializationTable serialization_table[];
   static const ::google::protobuf::uint32 offsets[];
 };
 void AddDescriptors();
-void InitDefaultsc2s_joinImpl();
-void InitDefaultsc2s_join();
-void InitDefaultss2c_joinImpl();
-void InitDefaultss2c_join();
 void InitDefaultsc_loginImpl();
 void InitDefaultsc_login();
 void InitDefaultss_loginImpl();
@@ -55,8 +51,6 @@ void InitDefaultsc_create_entity();
 void InitDefaultss_create_entityImpl();
 void InitDefaultss_create_entity();
 inline void InitDefaults() {
-  InitDefaultsc2s_join();
-  InitDefaultss2c_join();
   InitDefaultsc_login();
   InitDefaultss_login();
   InitDefaultsc_create_entity();
@@ -64,18 +58,12 @@ inline void InitDefaults() {
 }
 }  // namespace protobuf_battle_2eproto
 namespace battle_msg {
-class c2s_join;
-class c2s_joinDefaultTypeInternal;
-extern c2s_joinDefaultTypeInternal _c2s_join_default_instance_;
 class c_create_entity;
 class c_create_entityDefaultTypeInternal;
 extern c_create_entityDefaultTypeInternal _c_create_entity_default_instance_;
 class c_login;
 class c_loginDefaultTypeInternal;
 extern c_loginDefaultTypeInternal _c_login_default_instance_;
-class s2c_join;
-class s2c_joinDefaultTypeInternal;
-extern s2c_joinDefaultTypeInternal _s2c_join_default_instance_;
 class s_create_entity;
 class s_create_entityDefaultTypeInternal;
 extern s_create_entityDefaultTypeInternal _s_create_entity_default_instance_;
@@ -85,10 +73,8 @@ extern s_loginDefaultTypeInternal _s_login_default_instance_;
 }  // namespace battle_msg
 namespace google {
 namespace protobuf {
-template<> ::battle_msg::c2s_join* Arena::Create< ::battle_msg::c2s_join>(Arena*);
 template<> ::battle_msg::c_create_entity* Arena::Create< ::battle_msg::c_create_entity>(Arena*);
 template<> ::battle_msg::c_login* Arena::Create< ::battle_msg::c_login>(Arena*);
-template<> ::battle_msg::s2c_join* Arena::Create< ::battle_msg::s2c_join>(Arena*);
 template<> ::battle_msg::s_create_entity* Arena::Create< ::battle_msg::s_create_entity>(Arena*);
 template<> ::battle_msg::s_login* Arena::Create< ::battle_msg::s_login>(Arena*);
 }  // namespace protobuf
@@ -96,263 +82,6 @@ template<> ::battle_msg::s_login* Arena::Create< ::battle_msg::s_login>(Arena*);
 namespace battle_msg {
 
 // ===================================================================
-
-class c2s_join : public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:battle_msg.c2s_join) */ {
- public:
-  c2s_join();
-  virtual ~c2s_join();
-
-  c2s_join(const c2s_join& from);
-
-  inline c2s_join& operator=(const c2s_join& from) {
-    CopyFrom(from);
-    return *this;
-  }
-  #if LANG_CXX11
-  c2s_join(c2s_join&& from) noexcept
-    : c2s_join() {
-    *this = ::std::move(from);
-  }
-
-  inline c2s_join& operator=(c2s_join&& from) noexcept {
-    if (GetArenaNoVirtual() == from.GetArenaNoVirtual()) {
-      if (this != &from) InternalSwap(&from);
-    } else {
-      CopyFrom(from);
-    }
-    return *this;
-  }
-  #endif
-  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const {
-    return _internal_metadata_.unknown_fields();
-  }
-  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields() {
-    return _internal_metadata_.mutable_unknown_fields();
-  }
-
-  static const ::google::protobuf::Descriptor* descriptor();
-  static const c2s_join& default_instance();
-
-  static void InitAsDefaultInstance();  // FOR INTERNAL USE ONLY
-  static inline const c2s_join* internal_default_instance() {
-    return reinterpret_cast<const c2s_join*>(
-               &_c2s_join_default_instance_);
-  }
-  static PROTOBUF_CONSTEXPR int const kIndexInFileMessages =
-    0;
-
-  void Swap(c2s_join* other);
-  friend void swap(c2s_join& a, c2s_join& b) {
-    a.Swap(&b);
-  }
-
-  // implements Message ----------------------------------------------
-
-  inline c2s_join* New() const PROTOBUF_FINAL {
-    return ::google::protobuf::Arena::Create<c2s_join>(NULL);
-  }
-
-  c2s_join* New(::google::protobuf::Arena* arena) const PROTOBUF_FINAL {
-    return ::google::protobuf::Arena::Create<c2s_join>(arena);
-  }
-  void CopyFrom(const ::google::protobuf::Message& from) PROTOBUF_FINAL;
-  void MergeFrom(const ::google::protobuf::Message& from) PROTOBUF_FINAL;
-  void CopyFrom(const c2s_join& from);
-  void MergeFrom(const c2s_join& from);
-  void Clear() PROTOBUF_FINAL;
-  bool IsInitialized() const PROTOBUF_FINAL;
-
-  size_t ByteSizeLong() const PROTOBUF_FINAL;
-  bool MergePartialFromCodedStream(
-      ::google::protobuf::io::CodedInputStream* input) PROTOBUF_FINAL;
-  void SerializeWithCachedSizes(
-      ::google::protobuf::io::CodedOutputStream* output) const PROTOBUF_FINAL;
-  ::google::protobuf::uint8* InternalSerializeWithCachedSizesToArray(
-      bool deterministic, ::google::protobuf::uint8* target) const PROTOBUF_FINAL;
-  int GetCachedSize() const PROTOBUF_FINAL { return _cached_size_; }
-  private:
-  void SharedCtor();
-  void SharedDtor();
-  void SetCachedSize(int size) const PROTOBUF_FINAL;
-  void InternalSwap(c2s_join* other);
-  private:
-  inline ::google::protobuf::Arena* GetArenaNoVirtual() const {
-    return NULL;
-  }
-  inline void* MaybeArenaPtr() const {
-    return NULL;
-  }
-  public:
-
-  ::google::protobuf::Metadata GetMetadata() const PROTOBUF_FINAL;
-
-  // nested types ----------------------------------------------------
-
-  // accessors -------------------------------------------------------
-
-  // @@protoc_insertion_point(class_scope:battle_msg.c2s_join)
- private:
-
-  ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
-  ::google::protobuf::internal::HasBits<1> _has_bits_;
-  mutable int _cached_size_;
-  friend struct ::protobuf_battle_2eproto::TableStruct;
-  friend void ::protobuf_battle_2eproto::InitDefaultsc2s_joinImpl();
-};
-// -------------------------------------------------------------------
-
-class s2c_join : public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:battle_msg.s2c_join) */ {
- public:
-  s2c_join();
-  virtual ~s2c_join();
-
-  s2c_join(const s2c_join& from);
-
-  inline s2c_join& operator=(const s2c_join& from) {
-    CopyFrom(from);
-    return *this;
-  }
-  #if LANG_CXX11
-  s2c_join(s2c_join&& from) noexcept
-    : s2c_join() {
-    *this = ::std::move(from);
-  }
-
-  inline s2c_join& operator=(s2c_join&& from) noexcept {
-    if (GetArenaNoVirtual() == from.GetArenaNoVirtual()) {
-      if (this != &from) InternalSwap(&from);
-    } else {
-      CopyFrom(from);
-    }
-    return *this;
-  }
-  #endif
-  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const {
-    return _internal_metadata_.unknown_fields();
-  }
-  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields() {
-    return _internal_metadata_.mutable_unknown_fields();
-  }
-
-  static const ::google::protobuf::Descriptor* descriptor();
-  static const s2c_join& default_instance();
-
-  static void InitAsDefaultInstance();  // FOR INTERNAL USE ONLY
-  static inline const s2c_join* internal_default_instance() {
-    return reinterpret_cast<const s2c_join*>(
-               &_s2c_join_default_instance_);
-  }
-  static PROTOBUF_CONSTEXPR int const kIndexInFileMessages =
-    1;
-
-  void Swap(s2c_join* other);
-  friend void swap(s2c_join& a, s2c_join& b) {
-    a.Swap(&b);
-  }
-
-  // implements Message ----------------------------------------------
-
-  inline s2c_join* New() const PROTOBUF_FINAL {
-    return ::google::protobuf::Arena::Create<s2c_join>(NULL);
-  }
-
-  s2c_join* New(::google::protobuf::Arena* arena) const PROTOBUF_FINAL {
-    return ::google::protobuf::Arena::Create<s2c_join>(arena);
-  }
-  void CopyFrom(const ::google::protobuf::Message& from) PROTOBUF_FINAL;
-  void MergeFrom(const ::google::protobuf::Message& from) PROTOBUF_FINAL;
-  void CopyFrom(const s2c_join& from);
-  void MergeFrom(const s2c_join& from);
-  void Clear() PROTOBUF_FINAL;
-  bool IsInitialized() const PROTOBUF_FINAL;
-
-  size_t ByteSizeLong() const PROTOBUF_FINAL;
-  bool MergePartialFromCodedStream(
-      ::google::protobuf::io::CodedInputStream* input) PROTOBUF_FINAL;
-  void SerializeWithCachedSizes(
-      ::google::protobuf::io::CodedOutputStream* output) const PROTOBUF_FINAL;
-  ::google::protobuf::uint8* InternalSerializeWithCachedSizesToArray(
-      bool deterministic, ::google::protobuf::uint8* target) const PROTOBUF_FINAL;
-  int GetCachedSize() const PROTOBUF_FINAL { return _cached_size_; }
-  private:
-  void SharedCtor();
-  void SharedDtor();
-  void SetCachedSize(int size) const PROTOBUF_FINAL;
-  void InternalSwap(s2c_join* other);
-  private:
-  inline ::google::protobuf::Arena* GetArenaNoVirtual() const {
-    return NULL;
-  }
-  inline void* MaybeArenaPtr() const {
-    return NULL;
-  }
-  public:
-
-  ::google::protobuf::Metadata GetMetadata() const PROTOBUF_FINAL;
-
-  // nested types ----------------------------------------------------
-
-  // accessors -------------------------------------------------------
-
-  // required string name = 2;
-  bool has_name() const;
-  void clear_name();
-  static const int kNameFieldNumber = 2;
-  const ::std::string& name() const;
-  void set_name(const ::std::string& value);
-  #if LANG_CXX11
-  void set_name(::std::string&& value);
-  #endif
-  void set_name(const char* value);
-  void set_name(const char* value, size_t size);
-  ::std::string* mutable_name();
-  ::std::string* release_name();
-  void set_allocated_name(::std::string* name);
-
-  // required string icon = 3;
-  bool has_icon() const;
-  void clear_icon();
-  static const int kIconFieldNumber = 3;
-  const ::std::string& icon() const;
-  void set_icon(const ::std::string& value);
-  #if LANG_CXX11
-  void set_icon(::std::string&& value);
-  #endif
-  void set_icon(const char* value);
-  void set_icon(const char* value, size_t size);
-  ::std::string* mutable_icon();
-  ::std::string* release_icon();
-  void set_allocated_icon(::std::string* icon);
-
-  // required int32 uid = 1;
-  bool has_uid() const;
-  void clear_uid();
-  static const int kUidFieldNumber = 1;
-  ::google::protobuf::int32 uid() const;
-  void set_uid(::google::protobuf::int32 value);
-
-  // @@protoc_insertion_point(class_scope:battle_msg.s2c_join)
- private:
-  void set_has_uid();
-  void clear_has_uid();
-  void set_has_name();
-  void clear_has_name();
-  void set_has_icon();
-  void clear_has_icon();
-
-  // helper for ByteSizeLong()
-  size_t RequiredFieldsByteSizeFallback() const;
-
-  ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
-  ::google::protobuf::internal::HasBits<1> _has_bits_;
-  mutable int _cached_size_;
-  ::google::protobuf::internal::ArenaStringPtr name_;
-  ::google::protobuf::internal::ArenaStringPtr icon_;
-  ::google::protobuf::int32 uid_;
-  friend struct ::protobuf_battle_2eproto::TableStruct;
-  friend void ::protobuf_battle_2eproto::InitDefaultss2c_joinImpl();
-};
-// -------------------------------------------------------------------
 
 class c_login : public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:battle_msg.c_login) */ {
  public:
@@ -396,7 +125,7 @@ class c_login : public ::google::protobuf::Message /* @@protoc_insertion_point(c
                &_c_login_default_instance_);
   }
   static PROTOBUF_CONSTEXPR int const kIndexInFileMessages =
-    2;
+    0;
 
   void Swap(c_login* other);
   friend void swap(c_login& a, c_login& b) {
@@ -510,7 +239,7 @@ class s_login : public ::google::protobuf::Message /* @@protoc_insertion_point(c
                &_s_login_default_instance_);
   }
   static PROTOBUF_CONSTEXPR int const kIndexInFileMessages =
-    3;
+    1;
 
   void Swap(s_login* other);
   friend void swap(s_login& a, s_login& b) {
@@ -688,7 +417,7 @@ class c_create_entity : public ::google::protobuf::Message /* @@protoc_insertion
                &_c_create_entity_default_instance_);
   }
   static PROTOBUF_CONSTEXPR int const kIndexInFileMessages =
-    4;
+    2;
 
   void Swap(c_create_entity* other);
   friend void swap(c_create_entity& a, c_create_entity& b) {
@@ -825,7 +554,7 @@ class s_create_entity : public ::google::protobuf::Message /* @@protoc_insertion
                &_s_create_entity_default_instance_);
   }
   static PROTOBUF_CONSTEXPR int const kIndexInFileMessages =
-    5;
+    3;
 
   void Swap(s_create_entity* other);
   friend void swap(s_create_entity& a, s_create_entity& b) {
@@ -947,164 +676,6 @@ class s_create_entity : public ::google::protobuf::Message /* @@protoc_insertion
   #pragma GCC diagnostic push
   #pragma GCC diagnostic ignored "-Wstrict-aliasing"
 #endif  // __GNUC__
-// c2s_join
-
-// -------------------------------------------------------------------
-
-// s2c_join
-
-// required int32 uid = 1;
-inline bool s2c_join::has_uid() const {
-  return (_has_bits_[0] & 0x00000004u) != 0;
-}
-inline void s2c_join::set_has_uid() {
-  _has_bits_[0] |= 0x00000004u;
-}
-inline void s2c_join::clear_has_uid() {
-  _has_bits_[0] &= ~0x00000004u;
-}
-inline void s2c_join::clear_uid() {
-  uid_ = 0;
-  clear_has_uid();
-}
-inline ::google::protobuf::int32 s2c_join::uid() const {
-  // @@protoc_insertion_point(field_get:battle_msg.s2c_join.uid)
-  return uid_;
-}
-inline void s2c_join::set_uid(::google::protobuf::int32 value) {
-  set_has_uid();
-  uid_ = value;
-  // @@protoc_insertion_point(field_set:battle_msg.s2c_join.uid)
-}
-
-// required string name = 2;
-inline bool s2c_join::has_name() const {
-  return (_has_bits_[0] & 0x00000001u) != 0;
-}
-inline void s2c_join::set_has_name() {
-  _has_bits_[0] |= 0x00000001u;
-}
-inline void s2c_join::clear_has_name() {
-  _has_bits_[0] &= ~0x00000001u;
-}
-inline void s2c_join::clear_name() {
-  name_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-  clear_has_name();
-}
-inline const ::std::string& s2c_join::name() const {
-  // @@protoc_insertion_point(field_get:battle_msg.s2c_join.name)
-  return name_.GetNoArena();
-}
-inline void s2c_join::set_name(const ::std::string& value) {
-  set_has_name();
-  name_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
-  // @@protoc_insertion_point(field_set:battle_msg.s2c_join.name)
-}
-#if LANG_CXX11
-inline void s2c_join::set_name(::std::string&& value) {
-  set_has_name();
-  name_.SetNoArena(
-    &::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::move(value));
-  // @@protoc_insertion_point(field_set_rvalue:battle_msg.s2c_join.name)
-}
-#endif
-inline void s2c_join::set_name(const char* value) {
-  GOOGLE_DCHECK(value != NULL);
-  set_has_name();
-  name_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
-  // @@protoc_insertion_point(field_set_char:battle_msg.s2c_join.name)
-}
-inline void s2c_join::set_name(const char* value, size_t size) {
-  set_has_name();
-  name_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
-      ::std::string(reinterpret_cast<const char*>(value), size));
-  // @@protoc_insertion_point(field_set_pointer:battle_msg.s2c_join.name)
-}
-inline ::std::string* s2c_join::mutable_name() {
-  set_has_name();
-  // @@protoc_insertion_point(field_mutable:battle_msg.s2c_join.name)
-  return name_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-}
-inline ::std::string* s2c_join::release_name() {
-  // @@protoc_insertion_point(field_release:battle_msg.s2c_join.name)
-  clear_has_name();
-  return name_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-}
-inline void s2c_join::set_allocated_name(::std::string* name) {
-  if (name != NULL) {
-    set_has_name();
-  } else {
-    clear_has_name();
-  }
-  name_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), name);
-  // @@protoc_insertion_point(field_set_allocated:battle_msg.s2c_join.name)
-}
-
-// required string icon = 3;
-inline bool s2c_join::has_icon() const {
-  return (_has_bits_[0] & 0x00000002u) != 0;
-}
-inline void s2c_join::set_has_icon() {
-  _has_bits_[0] |= 0x00000002u;
-}
-inline void s2c_join::clear_has_icon() {
-  _has_bits_[0] &= ~0x00000002u;
-}
-inline void s2c_join::clear_icon() {
-  icon_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-  clear_has_icon();
-}
-inline const ::std::string& s2c_join::icon() const {
-  // @@protoc_insertion_point(field_get:battle_msg.s2c_join.icon)
-  return icon_.GetNoArena();
-}
-inline void s2c_join::set_icon(const ::std::string& value) {
-  set_has_icon();
-  icon_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
-  // @@protoc_insertion_point(field_set:battle_msg.s2c_join.icon)
-}
-#if LANG_CXX11
-inline void s2c_join::set_icon(::std::string&& value) {
-  set_has_icon();
-  icon_.SetNoArena(
-    &::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::move(value));
-  // @@protoc_insertion_point(field_set_rvalue:battle_msg.s2c_join.icon)
-}
-#endif
-inline void s2c_join::set_icon(const char* value) {
-  GOOGLE_DCHECK(value != NULL);
-  set_has_icon();
-  icon_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
-  // @@protoc_insertion_point(field_set_char:battle_msg.s2c_join.icon)
-}
-inline void s2c_join::set_icon(const char* value, size_t size) {
-  set_has_icon();
-  icon_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
-      ::std::string(reinterpret_cast<const char*>(value), size));
-  // @@protoc_insertion_point(field_set_pointer:battle_msg.s2c_join.icon)
-}
-inline ::std::string* s2c_join::mutable_icon() {
-  set_has_icon();
-  // @@protoc_insertion_point(field_mutable:battle_msg.s2c_join.icon)
-  return icon_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-}
-inline ::std::string* s2c_join::release_icon() {
-  // @@protoc_insertion_point(field_release:battle_msg.s2c_join.icon)
-  clear_has_icon();
-  return icon_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-}
-inline void s2c_join::set_allocated_icon(::std::string* icon) {
-  if (icon != NULL) {
-    set_has_icon();
-  } else {
-    clear_has_icon();
-  }
-  icon_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), icon);
-  // @@protoc_insertion_point(field_set_allocated:battle_msg.s2c_join.icon)
-}
-
-// -------------------------------------------------------------------
-
 // c_login
 
 // required int64 uid = 1;
@@ -1575,10 +1146,6 @@ inline void s_create_entity::set_col(::google::protobuf::int32 value) {
 #ifdef __GNUC__
   #pragma GCC diagnostic pop
 #endif  // __GNUC__
-// -------------------------------------------------------------------
-
-// -------------------------------------------------------------------
-
 // -------------------------------------------------------------------
 
 // -------------------------------------------------------------------

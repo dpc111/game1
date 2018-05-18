@@ -4,7 +4,7 @@
 #include "client_msg.h"
 #include "server_msg.h"
 
-#define REGISTER_CLIENT_BIND(func, caller) \
+#define REGISTER_BIND(func, caller) \
 	std::tr1::bind(&func, \
 	caller, \
 	std::tr1::placeholders::_1, \

@@ -23,7 +23,7 @@ public:
 
 	int32 set_random_camp(int64 uid);
 
-	void c_create_entity(void *player, battle_msg::c_create_entity& msg);
+	void c_create_entity(void *player, const battle_msg::c_create_entity& msg);
 
 	virtual void register_callback();
 

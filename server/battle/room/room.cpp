@@ -3,6 +3,7 @@
 #include "bullet_mgr.h"
 #include "entity.h"
 #include "grid.h"
+#include "player.h"
 
 room_t::room_t(int32 rid) :
 	dispatcher_t() {
@@ -34,7 +35,7 @@ int32 room_t::set_random_camp(int64 uid) {
 	return 0;
 }
 
-void room_t::c_create_entity(void *player, battle_msg::c_create_entity& msg) {
+void room_t::c_create_entity(void *player, const battle_msg::c_create_entity& msg) {
 	player_t *p = (player_t *)player;
 }
 

@@ -2,12 +2,14 @@
 #define ROOM_H
 
 #include "stdafx.h"
+#include "msg_dispatch.h"
+#include "message/messages.h"
 
 class entity_mgr_t;
 class bullet_mgr_t;
 class grid_t;
 
-class room_t {
+class room_t : public msg_dispatch_t {
 public:
 	room_t(int32 rid);
 
@@ -20,6 +22,10 @@ public:
 	grid_t* get_grid() { return grid_; }
 
 	int32 set_random_camp(int64 uid);
+
+	void c_create_entity(void *player, battle_msg::c_create_entity& msg);
+
+	virtual void register_callback();
 
 private:
 	int32 rid_;

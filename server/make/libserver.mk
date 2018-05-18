@@ -15,6 +15,7 @@ SRC_DIR := ../common/server \
 			../common/script \
 			../common/timer \
 			../common/config \
+			../common/interface \
 
 ##########################################################################################
 #  七、 定义生成程序的名称

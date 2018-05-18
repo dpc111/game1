@@ -67,6 +67,8 @@ public:
 
 	typedef std::map<const google::protobuf::Descriptor *, cb_net_t *> msg_net_map_t;
 
+	typedef std::tr1::function<void (int, const google::protobuf::Descriptor *, const google::protobuf::Message *)> msg_default_cb_t;
+
 	typedef std::tr1::function<bool (tcp_connection_t *, const char *)> on_script_func_t;
 
 public:
@@ -80,6 +82,8 @@ public:
 	template<typename T>
 	void register_net_message(const typename cb_netT_t<T>::msg_cb_t& cb) { msg_net_map_[T::descriptor()] = new cb_netT_t<T>(cb); }
 
+	void register_default_message(const msg_default_cb_t& func) { msg_default_cb_ = func; }
+
 	void set_on_script_func(const on_script_func_t& func) { on_script_func_ = func; }
 
 	void on_message(tcp_connection_t *conn, google::protobuf::Message *msg);
@@ -92,6 +96,8 @@ private:
 	msg_map_t msg_map_;
 
 	msg_net_map_t msg_net_map_;
+
+	msg_default_cb_t msg_default_cb_;
 
 	on_script_func_t on_script_func_;
 };

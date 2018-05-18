@@ -5,11 +5,21 @@
 
 msg_dispatch_t::msg_dispatch_t(tcp_network_t *network)
 	: network_(network)
+	, msg_default_cb_(NULL)
 	, on_script_func_(NULL) {
 }
 
 msg_dispatch_t::~msg_dispatch_t() {
+	for (msg_map_t::iterator it = msg_map_.begin(); it != msg_map_.end(); it++) {
+		delete it->second;
+	}
+	msg_map_.clear();
+	for (msg_net_map_t::iterator it = msg_net_map_.begin(); it != msg_net_map_.end(); it++) {
+		delete it->second;
+	}
+	msg_net_map_.clear();
 	network_ = NULL;
+	msg_default_cb_ = NULL;
 	on_script_func_ = NULL;
 }
 
@@ -33,8 +43,13 @@ void msg_dispatch_t::on_message(tcp_connection_t *conn, google::protobuf::Messag
 		cb->on_message(conn, msg);
 		find = true;
 	}
-	if (!find) {
-		ERROR("msg callback do not found: %s", name.c_str());
+	// if (!find) {
+	// 	ERROR("msg callback do not found: %s", name.c_str());
+	// }
+	if (!find &&
+		msg_default_cb_ &&
+		conn->get_sid() > 0) {
+		msg_default_cb_(conn->get_sid(), des, msg);
 	}
 }
 

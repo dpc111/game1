@@ -50,6 +50,7 @@ CXXFLAGS := -fPIC -c -g -W -Wall
 #指定搜索路径, 也可用include指定具体文件路径,编译时使用
 INCLUDES := -I../common \
     -I../common/common \
+	-I../common/interface \
 	-I../common/net \
 	-I../common/test \
 	-I../common/script \

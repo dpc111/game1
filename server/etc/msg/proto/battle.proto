@@ -4,6 +4,7 @@ package battle_msg;
 
 message c_login {
 	required int64 uid = 1;
+	required string password = 2;
 }
 
 message s_login {

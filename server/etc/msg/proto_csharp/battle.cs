@@ -22,6 +22,13 @@ namespace battle_msg
       get { return _uid; }
       set { _uid = value; }
     }
+    private string _password;
+    [global::ProtoBuf.ProtoMember(2, IsRequired = true, Name=@"password", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    public string password
+    {
+      get { return _password; }
+      set { _password = value; }
+    }
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }

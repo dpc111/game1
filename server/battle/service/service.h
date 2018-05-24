@@ -2,6 +2,7 @@
 #define SERVICE_H
 
 #include "server.h"
+#include "stdafx.h"
 
 class player_mgr_t;
 class room_mgr_t;
@@ -16,6 +17,8 @@ public:
 	virtual void init();
 
 	virtual void init_json_mgr();
+
+	virtual void update(int64 tm);
 
 	player_mgr_t* get_player_mgr() { return player_mgr_; }
 

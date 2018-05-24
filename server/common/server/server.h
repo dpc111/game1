@@ -7,6 +7,7 @@
 #include "timer.h"
 #include "lua_frame.h"
 #include "cfg_json_mgr.h"
+#include "type.h"
 
 class server_t {
 public:
@@ -20,11 +21,15 @@ public:
 
 	virtual void init_json_mgr();
 
+	virtual void update(int64 tm) = 0;
+
 	void start(const char *ip, int port);
 
 	void start();
 
 	void process();
+
+	void set_frame_interval(int64 interval);
 
 	tcp_network_t *get_network() { return network_; }
 
@@ -64,6 +69,10 @@ private:
 	lua_frame_t *lua_frame_;
 
 	cfg_json_mgr_t *json_mgr_;
+
+	int64 frame_last_tm_;
+
+	int64 frame_interval_;
 };
 
 #endif

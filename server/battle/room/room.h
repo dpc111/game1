@@ -5,6 +5,9 @@
 #include "dispatcher.h"
 #include "message/messages.h"
 
+#define ROOM_STATE_WAIT 1
+#define ROOM_STATE_ING 2
+
 class entity_mgr_t;
 class bullet_mgr_t;
 class grid_t;
@@ -23,6 +26,8 @@ public:
 
 	int32 set_random_camp(int64 uid);
 
+	void update(int64 tm);
+
 	void c_create_entity(void *player, const battle_msg::c_create_entity& msg);
 
 	virtual void register_callback();
@@ -37,6 +42,8 @@ private:
 	grid_t *grid_;
 	
 	int64 camps_[2];
+
+	int32 room_state_;
 };
 
 #endif

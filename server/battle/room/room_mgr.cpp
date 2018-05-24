@@ -47,3 +47,10 @@ room_t* room_mgr_t::create_room() {
 	room_t *room = new room_t(rid);
 	add_room(rid, room);
 }
+
+void room_mgr_t::update(int64 tm) {
+	for (room_map_t::iterator it = rooms_.begin(); it != rooms_.end(); it++) {
+		room_t *room;
+		room->update(tm);
+	}
+}

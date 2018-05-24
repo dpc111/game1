@@ -13,6 +13,8 @@ public:
 
 	void set_speed(int32 speed) { speed_ = speed; }
 
+	void update(int64 tm);
+
 private:
 	int32 speed_;
 

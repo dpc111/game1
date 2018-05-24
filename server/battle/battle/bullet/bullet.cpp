@@ -8,3 +8,7 @@ bullet_t::bullet_t(int32 bullet_id, int32 type_id) :
 bullet_t::~bullet_t() {
 	speed_ = 0;
 }
+
+void bullet_t::update(int64 tm) {
+
+}

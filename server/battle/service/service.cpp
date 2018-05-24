@@ -19,10 +19,15 @@ void service_t::init() {
 	server_t::init();
 	dispatch_->register_client_msg();
 	dispatch_->register_server_msg();
+	set_frame_interval(20);
 }
 
 void service_t::init_json_mgr() {
 	server_t::init_json_mgr();
 	get_json_mgr()->load("../etc/config/json/entity.json", "entiy");
 	get_json_mgr()->load("../etc/config/json/bullet.json", "bullet");
+}
+
+void service_t::update(int64 tm) {
+	room_mgr_->update(tm);
 }

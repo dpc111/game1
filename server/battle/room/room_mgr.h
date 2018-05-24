@@ -25,6 +25,8 @@ public:
 
 	int room_num() { return room_num_; }
 
+	void update(int64 tm);
+
 private:
 	id_generate_t id_generate_;
 

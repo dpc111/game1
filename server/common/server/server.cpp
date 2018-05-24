@@ -9,6 +9,8 @@ server_t::server_t() {
 	times_ = new timers_t();
 	lua_frame_ = new lua_frame_t(this);
 	json_mgr_ = new cfg_json_mgr_t();	
+	frame_last_tm_ = 0;
+	frame_interval_ = 0;
 }
 
 server_t::~server_t() {
@@ -37,10 +39,19 @@ void server_t::start(const char *ip, int port) {
 
 void server_t::process() {
 	while (true) {
+		int64 tm = getms();
 		network_->process();
-		times_->process(getms());
+		times_->process(tm);
+		if (frame_interval_ > 0 && tm - frame_last_tm_ > frame_interval_) {
+			frame_last_tm_ = tm;
+			this->update(tm);
+		}
 		sleepms(1);
 	}
+}
+
+void server_t::set_frame_interval(int64 interval) {
+	frame_interval_ = interval;
 }
 
 tcp_connection_t *server_t::connect_to(const char *ip, int port, void *context) {

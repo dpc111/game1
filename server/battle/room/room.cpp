@@ -17,6 +17,7 @@ room_t::room_t(int32 rid) :
 	entity_mgr_ = new entity_mgr_t(this);
 	bullet_mgr_ = new bullet_mgr_t(this);
 	grid_ = new grid_t(this);
+	room_state_ = ROOM_STATE_WAIT;
 	for (int32 k = 0; k < 2; k++) {
 		camps_[k] = 0;
 	}
@@ -39,6 +40,10 @@ int32 room_t::set_random_camp(int64 uid) {
 		}
 	}
 	return 0;
+}
+
+void room_t::update(int64 tm) {
+	bullet_mgr_->update(tm);
 }
 
 void room_t::c_create_entity(void *player, const battle_msg::c_create_entity& msg) {

@@ -38,6 +38,6 @@ void bullet_mgr_t::delete_bullet(int32 bullet_id) {
 void bullet_mgr_t::update(int64 tm) {
 	for (object_map_t::iterator it = objects_.begin(); it != objects_.end(); it++) {
 		bullet_t *bullet = (bullet_t *)it->second;
-		bullet->update;
+		bullet->update();
 	}
 }

@@ -26,11 +26,11 @@ public:
 
 	int32 set_random_camp(int64 uid);
 
-	void update(int64 tm);
-
 	void c_create_entity(void *player, const battle_msg::c_create_entity& msg);
 
 	virtual void register_callback();
+
+	void update(int64 tm);
 
 private:
 	int32 rid_;

@@ -20,10 +20,11 @@ entity_t *entity_mgr_t::create_entity(int32 type_id, int32 row, int32 col) {
 	if (!get_json_mgr()->exist("entity", type_id - 1)) {
 		return NULL;
 	}
-	entity_t *entity = new entity_t(entity_id, type_id);
+	entity_t *entity = new entity_t(room_, entity_id, type_id);
 	entity->set_level(1);
 	entity->set_cd(get_json_mgr()->get_float("entity", type_id - 1, "cd"));
 	entity->set_blood(get_json_mgr()->get_int("entity", type_id - 1, "blood"));
+	entity->set_bullet(get_json_mgr()->get_int("entity", type_id - 1, "bullet"));
 	entity->set_damage(get_json_mgr()->get_float("entity", type_id - 1, "damage"));
 	entity->set_grid(row, col);
 	add_object(entity_id, entity);
@@ -37,4 +38,18 @@ void entity_mgr_t::delete_entity(int32 entity_id) {
 	}
 	delete entity;
 	del_object(entity_id);
+}
+
+void entity_mgr_t::update(int64 tm) {
+	float ftm = (float) tm / 1000;
+	for (object_map_t::iterator it = objects_.begin(); it != objects_.end(); ) {
+		entity_t *entity = (entity_t *)it->second;
+		if (entity->get_del()) {
+			++it;
+			delete_entity(entity->get_id());
+			continue;
+		}
+		entity->update(ftm);
+		++it;
+	}
 }

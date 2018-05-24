@@ -28,6 +28,10 @@ int64 getms() {
 	return getus() / 1000;
 }
 
+float getfs() {
+	return (float) getus() / 1000000;
+}
+
 void sleepms(int64 ms) {
 	struct timeval tv;
 	tv.tv_sec = ms / 1000;

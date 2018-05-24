@@ -42,10 +42,6 @@ int32 room_t::set_random_camp(int64 uid) {
 	return 0;
 }
 
-void room_t::update(int64 tm) {
-	bullet_mgr_->update(tm);
-}
-
 void room_t::c_create_entity(void *player, const battle_msg::c_create_entity& msg) {
 	player_t *p = (player_t *)player;
 }
@@ -53,3 +49,9 @@ void room_t::c_create_entity(void *player, const battle_msg::c_create_entity& ms
 void room_t::register_callback() {
 	register_message<battle_msg::c_create_entity>(REGISTER_ROOM_BIND(room_t::c_create_entity));
 }
+
+void room_t::update(int64 tm) {
+	entity_mgr_->update(tm);
+	bullet_mgr_->update(tm);
+}
+

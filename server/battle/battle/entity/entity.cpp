@@ -20,7 +20,7 @@ entity_t::~entity_t() {
 }
 
 void entity_t::fire() {
-	room->get_bullet_mgr()->create_bullet(bullet_id_);
+	room_->get_bullet_mgr()->create_bullet(bullet_id_);
 }
 
 void entity_t::update(float tm) {

@@ -1,4 +1,5 @@
 #include "entity.h"
+#include "room.h"
 
 entity_t::entity_t(room_t *room, int32 entity_id, int32 type_id) :
 	object_base_t(entity_id, type_id) {

@@ -11,6 +11,8 @@ public:
 
 	~client_msg_t();
 
+	void c_login_hall(tcp_connection_t *conn, const battle_msg::c_login_hall& msg);
+
 	void c_login(tcp_connection_t *conn, const battle_msg::c_login& msg);
 
 	void c_create_entity(int32 uid, const battle_msg::c_create_entity& msg);

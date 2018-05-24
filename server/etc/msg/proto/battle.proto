@@ -2,9 +2,20 @@ syntax="proto2";
 
 package battle_msg;
 
-message c_login {
+message c_login_hall {
 	required int64 uid = 1;
 	required string password = 2;
+}
+
+message s_login_hall {
+	required string res = 1;
+	optional int64 uid = 2;
+	optional string name = 3;
+	optional string icon = 4;
+}
+
+message c_login {
+	required int64 uid = 1;
 }
 
 message s_login {

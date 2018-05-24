@@ -10,10 +10,10 @@
 // Generated from: proto/battle.proto
 namespace battle_msg
 {
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"c_login")]
-  public partial class c_login : global::ProtoBuf.IExtensible
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"c_login_hall")]
+  public partial class c_login_hall : global::ProtoBuf.IExtensible
   {
-    public c_login() {}
+    public c_login_hall() {}
     
     private long _uid;
     [global::ProtoBuf.ProtoMember(1, IsRequired = true, Name=@"uid", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
@@ -28,6 +28,64 @@ namespace battle_msg
     {
       get { return _password; }
       set { _password = value; }
+    }
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"s_login_hall")]
+  public partial class s_login_hall : global::ProtoBuf.IExtensible
+  {
+    public s_login_hall() {}
+    
+    private string _res;
+    [global::ProtoBuf.ProtoMember(1, IsRequired = true, Name=@"res", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    public string res
+    {
+      get { return _res; }
+      set { _res = value; }
+    }
+    private long _uid = default(long);
+    [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"uid", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(long))]
+    public long uid
+    {
+      get { return _uid; }
+      set { _uid = value; }
+    }
+    private string _name = "";
+    [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"name", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::System.ComponentModel.DefaultValue("")]
+    public string name
+    {
+      get { return _name; }
+      set { _name = value; }
+    }
+    private string _icon = "";
+    [global::ProtoBuf.ProtoMember(4, IsRequired = false, Name=@"icon", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::System.ComponentModel.DefaultValue("")]
+    public string icon
+    {
+      get { return _icon; }
+      set { _icon = value; }
+    }
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"c_login")]
+  public partial class c_login : global::ProtoBuf.IExtensible
+  {
+    public c_login() {}
+    
+    private long _uid;
+    [global::ProtoBuf.ProtoMember(1, IsRequired = true, Name=@"uid", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public long uid
+    {
+      get { return _uid; }
+      set { _uid = value; }
     }
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)

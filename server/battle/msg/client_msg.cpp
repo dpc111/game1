@@ -14,6 +14,15 @@ client_msg_t::~client_msg_t() {
 	
 }
 
+void client_msg_t::c_login_hall(tcp_connection_t *conn, const battle_msg::c_login& msg) {
+	battle_msg::s_login_hall res;
+	res.set_res("ok");
+	res.set_uid(msg.uid());
+	res.set_name("name");
+	res.set_icon("icon");
+	get_service()->send(conn, res);
+}
+
 void client_msg_t::c_login(tcp_connection_t *conn, const battle_msg::c_login& msg) {
 	battle_msg::s_login res;
 	int64 uid = msg.uid();

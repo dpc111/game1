@@ -14,7 +14,7 @@ client_msg_t::~client_msg_t() {
 	
 }
 
-void client_msg_t::c_login_hall(tcp_connection_t *conn, const battle_msg::c_login& msg) {
+void client_msg_t::c_login_hall(tcp_connection_t *conn, const battle_msg::c_login_hall& msg) {
 	battle_msg::s_login_hall res;
 	res.set_res("ok");
 	res.set_uid(msg.uid());

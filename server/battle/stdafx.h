@@ -2,3 +2,4 @@
 #include <stdio.h>
 #include <string>
 #include "type.h"
+#include "log.h"

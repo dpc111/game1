@@ -12,5 +12,5 @@ bullet_horizontal_t::~bullet_horizontal_t() {
 void bullet_horizontal_t::update(float stm) {
 	bullet_t::update(stm);
 	float interval = stm - begin_tm_;
-	pos_ = begin_pos_ + v_speed_ * interval;
+	pos_ = begin_pos_ + interval * v_speed_;
 }

@@ -1,4 +1,4 @@
-#include "bull_parabola.h"
+#include "bullet_parabola.h"
 
 bullet_parabola_t::bullet_parabola_t(int32 bullet_id, int32 type_id) 
 	: bullet_t(bullet_id, type_id) {

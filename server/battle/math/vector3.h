@@ -105,15 +105,15 @@ public:
         return *this;
     }
 
-    float square_length() const {
+    float square_length() {
         return x * x + y * y + z * z;
     }
 
-    float length() const {
+    float length() {
         return sqrtf(x * x + y * y + z * z);
     }
 
-    vector3_t direction() const {
+    vector3_t direction() {
         float square_len = x * x + y * y + z * z;
         if (square_len != 1.0f) {
             return *this / sqrtf(square_len);

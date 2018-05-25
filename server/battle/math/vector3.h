@@ -38,35 +38,35 @@ public:
         return *this;
     }
 
-    bool operator== (const vector3_t& v) {
+    bool operator== (const vector3_t& v) const {
         return (x == v.x && y == v.y && z == v.z);
     }
 
-    bool operator!= (const vector3_t& v) {
+    bool operator!= (const vector3_t& v) const {
         return (x != v.x || y != v.y || z != v.z);
     }
 
-    vector3_t operator+ (const vector3_t& v) {
+    vector3_t operator+ (const vector3_t& v) const {
         return vector3_t(x + v.x, y + v.y, z + v.z);
     }
 
-    vector3_t operator- (const vector3_t& v) {
+    vector3_t operator- (const vector3_t& v) const {
         return vector3_t(x - v.x, y - v.y, z - v.z);
     }
 
-    vector3_t operator* (const vector3_t& v) {
+    vector3_t operator* (const vector3_t& v) const {
         return vector3_t(x * v.x, y * v.y, z * v.z);
     }
 
-    vector3_t operator* (float f) {
+    vector3_t operator* (float f) const {
         return vector3_t(x * f, y * f, z * f);
     }
 
-    vector3_t operator/ (float f) {
+    vector3_t operator/ (float f) const {
         return vector3_t(x / f, y / f, z / f);
     }
 
-    vector3_t operator- () {
+    vector3_t operator- () const {
         return vector3_t(-x, -y, -z);
     }
 
@@ -105,15 +105,15 @@ public:
         return *this;
     }
 
-    float square_length() {
+    float square_length() const {
         return x * x + y * y + z * z;
     }
 
-    float length() {
+    float length() const {
         return sqrtf(x * x + y * y + z * z);
     }
 
-    vector3_t direction() {
+    vector3_t direction() const {
         float square_len = x * x + y * y + z * z;
         if (square_len != 1.0f) {
             return *this / sqrtf(square_len);
@@ -122,7 +122,7 @@ public:
         }
     }
 
-    float dot(const vector3_t& v) {
+    float dot(const vector3_t& v) const {
         return x * v.x + y * v.y + z * v.z;
     }
 

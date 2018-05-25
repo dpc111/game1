@@ -34,35 +34,35 @@ public:
         return *this;
     }
 
-    bool operator== (const vector2_t& v) {
+    bool operator== (const vector2_t& v) const {
         return (x == v.x && y == v.y);
     }
 
-    bool operator!= (const vector2_t& v) {
+    bool operator!= (const vector2_t& v) const {
         return (x != v.x || y != v.y);
     }
 
-    vector2_t operator+ (const vector2_t& v) {
+    vector2_t operator+ (const vector2_t& v) const {
         return vector2_t(x + v.x, y + v.y);
     }
 
-    vector2_t operator- (const vector2_t& v) {
+    vector2_t operator- (const vector2_t& v) const {
         return vector2_t(x - v.x, y - v.y);
     }
 
-    vector2_t operator* (const vector2_t& v) {
+    vector2_t operator* (const vector2_t& v) const {
         return vector2_t(x * v.x, y * v.y);
     }
 
-    vector2_t operator* (float f) {
+    vector2_t operator* (float f) const {
         return vector2_t(x * f, y * f);
     }
 
-    vector2_t operator/ (float f) {
+    vector2_t operator/ (float f) const {
         return vector2_t(x / f, y / f);
     }
 
-    vector2_t operator- () {
+    vector2_t operator- () const {
         return vector2_t(-x, -y);
     }
 
@@ -113,7 +113,7 @@ public:
         }
     }
 
-    float dot(const vector2_t& v) {
+    float dot(const vector2_t& v) const {
         return x * v.x + y * v.y;
     }
 

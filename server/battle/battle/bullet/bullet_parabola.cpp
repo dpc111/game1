@@ -13,5 +13,5 @@ void bullet_parabola_t::update(float stm) {
 	bullet_t::update(stm);
 	float interval = stm - begin_tm_;
 	pos_.x = begin_pos_.x + v_speed_.x * interval;
-	pos_.y = pos_.y + v * interval + 0.5 * GRAVITY * interval * interval;
+	pos_.y = pos_.y + v_speed_.y * interval + 0.5 * GRAVITY * interval * interval;
 }

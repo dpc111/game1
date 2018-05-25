@@ -50,7 +50,7 @@ room_t* room_mgr_t::create_room() {
 
 void room_mgr_t::update(int64 tm) {
 	for (room_map_t::iterator it = rooms_.begin(); it != rooms_.end(); it++) {
-		room_t *room;
+		room_t *room = it->second;
 		room->update(tm);
 	}
 }

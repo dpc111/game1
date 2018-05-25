@@ -20,7 +20,7 @@ public:
 
 	void set_speed(int32 speed) { speed_ = speed; }
 
-private:
+protected:
 	int32 speed_;
 
 	bool del_;

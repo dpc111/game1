@@ -62,6 +62,10 @@ public:
         return vector3_t(x * f, y * f, z * f);
     }
 
+    vector3_t operator/ (float f) {
+        return vector3_t(x / f, y / f, z / f);
+    }
+
     vector3_t operator- () {
         return vector3_t(-x, -y, -z);
     }

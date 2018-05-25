@@ -58,6 +58,10 @@ public:
         return vector2_t(x * f, y * f);
     }
 
+    vector2_t operator/ (float f) {
+        return vector2_t(x / f, y / f);
+    }
+
     vector2_t operator- () {
         return vector2_t(-x, -y);
     }

@@ -139,4 +139,5 @@ vector3_t operator*(int s, const vector3_t& v);
 vector3_t operator*(float s, const vector3_t& v);
 
 vector3_t operator*(double s, const vector3_t& v);
+
 #endif

@@ -2,7 +2,7 @@
 #define BULLET_H
 
 #include "object_base.h"
-#include "math.h"
+#include "gmath.h"
 
 #define MAX_LIFE_TM 10
 

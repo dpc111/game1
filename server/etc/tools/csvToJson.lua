@@ -52,6 +52,11 @@ function csvToJson(preName)
                         else
                             jsonFile:write(tab(2) .. "\"" .. names[k] .. "\"" .. " : \"" ..  v .. "\"")
                         end
+                    elseif types[k] == "list" then
+                        jsonFile:write(tab(2) .. "\"" .. names[k] .. "\" : [")
+                        local v1 = string.gsub(v, "|", ",")
+                        jsonFile:write(v1)
+                        jsonFile:write("]")
                     else
                         print("type wrong")    
                     end

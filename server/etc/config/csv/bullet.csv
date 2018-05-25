@@ -1,7 +1,7 @@
-ID,速度
-index,int
-id,speed
-1,10
-2,15
-3,20
-4,10
+ID,速度,弹道,粒子效果,命中粒子效果
+index,int,int,int,int
+id,speed,path,particle,hit_particle
+1,10,1,1,1
+2,15,1,2,2
+3,20,2,3,3
+4,10,2,4,4

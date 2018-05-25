@@ -72,10 +72,14 @@ function CsvToluaTable(preName)
                         luaFile:write("},")
                     elseif elementType[k] == "int[]" then
                         local intData = splitString(v, "|", tonumber)
-                        luaFile:write(name[k] .. "= {")
                         for k1, v1 in pairs(intData) do
                            luaFile:write(v1 .. ",") 
                         end
+                        luaFile:write("},")
+                    elseif elementType[k] == "list" then
+                        luaFile:write(name[k] .. "={")
+                        local v1 = string.gsub(v, "|", ",")
+                        luaFile:write(v1)
                         luaFile:write("},")
                     elseif elementType[k] == "string" then
                         luaFile:write(name[k] .. "=[[" .. v .. "]],")

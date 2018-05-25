@@ -1,6 +1,8 @@
 #ifndef VECTOR3_H
 #define VECTOR3_H
 
+#include <math.h>
+
 class vector3_t {
 public:
     vector3_t() {
@@ -37,7 +39,7 @@ public:
     }
 
     bool operator== (const vector3_t& v) {
-        return (x = v.x && y = v.y && z == v.z);
+        return (x == v.x && y == v.y && z == v.z);
     }
 
     bool operator!= (const vector3_t& v) {
@@ -52,7 +54,7 @@ public:
         return vector3_t(x - v.x, y - v.y, z - v.z);
     }
 
-    vector3_t operator* (const vector3_t* v) {
+    vector3_t operator* (const vector3_t& v) {
         return vector3_t(x * v.x, y * v.y, z * v.z);
     }
 
@@ -116,7 +118,7 @@ public:
         }
     }
 
-    vector3_t dot(const vector3_t& v) {
+    float dot(const vector3_t& v) {
         return x * v.x + y * v.y + z * v.z;
     }
 

@@ -1,6 +1,8 @@
 #ifndef VECTOR2_H
 #define VECTOR2_H
 
+#include <math.h>
+
 class vector2_t {
 public:
     vector2_t() {
@@ -33,7 +35,7 @@ public:
     }
 
     bool operator== (const vector2_t& v) {
-        return (x = v.x && y = v.y);
+        return (x == v.x && y == v.y);
     }
 
     bool operator!= (const vector2_t& v) {
@@ -48,7 +50,7 @@ public:
         return vector2_t(x - v.x, y - v.y);
     }
 
-    vector2_t operator* (const vector2_t* v) {
+    vector2_t operator* (const vector2_t& v) {
         return vector2_t(x * v.x, y * v.y);
     }
 
@@ -107,7 +109,7 @@ public:
         }
     }
 
-    vector2_t dot(const vector2_t& v) {
+    float dot(const vector2_t& v) {
         return x * v.x + y * v.y;
     }
 

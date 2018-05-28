@@ -17,8 +17,8 @@ private:
 	float x2;
 
 	float y1;
-	
+
 	float y2;
-}
+};
 
 #endif

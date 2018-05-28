@@ -1,7 +1,7 @@
 #include "bullet_horizontal.h"
 
-bullet_horizontal_t::bullet_horizontal_t(int32 bullet_id, int32 type_id) 
-	: bullet_t(bullet_id, type_id) {
+bullet_horizontal_t::bullet_horizontal_t(room_t	*room, int32 bullet_id, int32 type_id) 
+	: bullet_t(room, bullet_id, type_id) {
 
 }
 

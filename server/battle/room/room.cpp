@@ -5,6 +5,7 @@
 #include "grid.h"
 #include "player.h"
 #include "service.h"
+#include "global.h"
 
 #define REGISTER_ROOM_BIND(func) \
 	std::tr1::bind(&func, \

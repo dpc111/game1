@@ -1,6 +1,7 @@
 #include "entity_mgr.h"
 #include "entity.h"
 #include "global.h"
+#include "room.h"
 #include "grid.h"
 
 entity_mgr_t::entity_mgr_t(room_t *room) :

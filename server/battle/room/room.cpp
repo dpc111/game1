@@ -4,6 +4,7 @@
 #include "entity.h"
 #include "grid.h"
 #include "player.h"
+#include "service.h"
 
 #define REGISTER_ROOM_BIND(func) \
 	std::tr1::bind(&func, \

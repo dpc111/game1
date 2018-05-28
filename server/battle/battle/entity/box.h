@@ -11,7 +11,7 @@ public:
 
 	void set_box(float x1_, float x2_, float y1_, float y2_);
 
-	bool collision(vector2_t& pos);
+	bool collision(const vector2_t& pos);
 
 private:
 	float x1;

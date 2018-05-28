@@ -37,9 +37,9 @@ public:
 
 	int32 get_col() { return col_; }
 
-	void set_pos(vector2_t& pos) { pos_ = pos; }
+	void set_pos(const vector2_t& pos) { pos_ = pos; }
 
-	void set_gun_pos(vector2_t& pos) { gun_pos_ = pos; }
+	void set_gun_pos(const vector2_t& pos) { gun_pos_ = pos; }
 
 	void set_camp(int32 camp) { camp_ = camp; } 
 

@@ -3,6 +3,7 @@
 #include "global.h"
 #include "room.h"
 #include "entity.h"
+#include "grid.h"
 
 bullet_mgr_t::bullet_mgr_t(room_t *room) :
 	object_mgr_base_t(),

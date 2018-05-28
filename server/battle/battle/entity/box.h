@@ -1,6 +1,8 @@
 #ifndef	BOX_H
 #define BOX_H
 
+#include "gmath.h"
+
 class box_t {
 public:
 	box_t();

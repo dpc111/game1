@@ -19,7 +19,7 @@ void box_t::set_box(float x1_, float x2_, float y1_, float y2_) {
 	y2 = y2_;
 }
 
-bool box_t::collision(vector2_t& pos) {
+bool box_t::collision(const vector2_t& pos) {
 	if (pos.x > x1 
 		and pos.x < x2
 		and pos.y > y1

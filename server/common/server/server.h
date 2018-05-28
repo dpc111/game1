@@ -51,6 +51,10 @@ public:
 
 	void register_timer(timer_handler_t *handler, void *user, timestamp start, timestamp interval);
 
+	void register_delay_stimer(timer_handler_t *handler, void *user, timestamp delay, timestamp interval);
+
+	void register_delay_mstimer(timer_handler_t *handler, void *user, timestamp delay, timestamp interval);
+
 	template<typename T>
 	void register_message(const typename msg_dispatch_t::cbT_t<T>::msg_cb_t& cb) { network_->get_msg_dispatch()->register_message<T>(cb); }
 

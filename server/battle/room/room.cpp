@@ -17,6 +17,7 @@ room_t::room_t(int32 rid) :
 	entity_mgr_ = new entity_mgr_t(this);
 	bullet_mgr_ = new bullet_mgr_t(this);
 	grid_ = new grid_t(this);
+	del_ = false;
 	room_state_ = ROOM_STATE_WAIT;
 	for (int32 k = 0; k < 2; k++) {
 		camps_[k] = 0;
@@ -50,7 +51,37 @@ void room_t::register_callback() {
 	register_message<battle_msg::c_create_entity>(REGISTER_ROOM_BIND(room_t::c_create_entity));
 }
 
+void room_t::start_wait() {
+	room_state_ = ROOM_STATE_WAIT;
+	get_service()->register_delay_stimer(this, NULL, ROOM_WAIT_TIME, 0);
+}
+
+void room_t::start_ing() {
+	room_state_ = ROOM_STATE_ING;
+	get_service()->register_delay_stimer(this, NULL, ROOM_ING_TIME, 0);
+}
+
+void room_t::start_end() {
+	room_state_ = ROOM_STATE_END;
+	get_service()->register_delay_stimer(this, NULL, ROOM_END_TIME, 0);
+}
+
+void room_t::handle_timeout(timer_handle_t handle, void *user) {
+	if (room_state_ == ROOM_STATE_WAIT) {
+		start_ing();
+	}
+	if (room_state_ == ROOM_STATE_ING) {
+		start_end();
+	}
+	if (room_state_ == ROOM_STATE_END) {
+		set_del(true);
+	}
+}
+
 void room_t::update(int64 tm) {
+	if (del_ || room_state_ != ROOM_STATE_ING) {
+		return;
+	}
 	entity_mgr_->update(tm);
 	bullet_mgr_->update(tm);
 }

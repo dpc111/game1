@@ -46,11 +46,18 @@ room_t* room_mgr_t::create_room() {
 	}
 	room_t *room = new room_t(rid);
 	add_room(rid, room);
+	room->start_wait();
 }
 
 void room_mgr_t::update(int64 tm) {
-	for (room_map_t::iterator it = rooms_.begin(); it != rooms_.end(); it++) {
+	for (room_map_t::iterator it = rooms_.begin(); it != rooms_.end(); ) {
 		room_t *room = it->second;
+		if (room->get_del()) {
+			++it;
+			del_room(room->get_rid());
+			continue;
+		}
 		room->update(tm);
+		++it;
 	}
 }

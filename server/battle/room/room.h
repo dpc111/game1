@@ -7,16 +7,22 @@
 
 #define ROOM_STATE_WAIT 1
 #define ROOM_STATE_ING 2
+#define ROOM_STATE_END 3
+#define ROOM_WAIT_TIME 5 
+#define ROOM_ING_TIME 60 * 60 
+#define ROOM_END_TIME 10 
 
 class entity_mgr_t;
 class bullet_mgr_t;
 class grid_t;
 
-class room_t : public dispatcher_t {
+class room_t : public dispatcher_t, public timer_handler_t {
 public:
 	room_t(int32 rid);
 
 	~room_t();
+
+	int32 get_rid() { return rid_; }
 
 	entity_mgr_t* get_entity_mgr() { return entity_mgr_; }
 
@@ -24,11 +30,23 @@ public:
 
 	grid_t* get_grid() { return grid_; }
 
+	bool get_del() { return del_; }
+
 	int32 set_random_camp(int64 uid);
+
+	void set_del(bool del) { del_ = del; }
 
 	void c_create_entity(void *player, const battle_msg::c_create_entity& msg);
 
 	virtual void register_callback();
+
+	void start_wait();
+
+	void start_ing();
+
+	void start_end();
+
+	virtual void handle_timeout(timer_handle_t handle, void *user);
 
 	void update(int64 tm);
 
@@ -42,6 +60,8 @@ private:
 	grid_t *grid_;
 	
 	int64 camps_[2];
+
+	bool del_;
 
 	int32 room_state_;
 };

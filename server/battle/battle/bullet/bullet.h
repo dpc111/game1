@@ -4,10 +4,10 @@
 #include "object_base.h"
 #include "gmath.h"
 
+#define MAX_LIFE_TM 10
+
 class room_t;
 class entity_t;
-
-#define MAX_LIFE_TM 10
 
 class bullet_t : public object_base_t {
 public:

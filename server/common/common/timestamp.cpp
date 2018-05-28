@@ -1,4 +1,8 @@
 #include "timestamp.h"
+#include <sys/time.h>
+#include <time.h>
+#include <asm/unistd.h>
+#include "type.h"
 
 int64 gettime() {
 	int64 tm;

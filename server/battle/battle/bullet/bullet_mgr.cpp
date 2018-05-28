@@ -33,6 +33,7 @@ bullet_t *bullet_mgr_t::create_bullet(entity_t *entity, int32 type_id) {
 	} else {
 		bullet->set_v_speed(vector2_t(0, -bullet->get_speed()));
 	}
+	bullet->set_line(entity->get_col());
 	add_object(bullet_id, bullet);
 	return bullet;
 }

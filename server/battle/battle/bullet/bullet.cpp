@@ -7,7 +7,7 @@ bullet_t::bullet_t(room_t *room, int32 bullet_id, int32 type_id) :
 	room_(room),
 	speed_(0),
 	del_(false),
-	begin_tm_(0),
+	begin_tm_(getfs()),
 	v_speed_(0, 0),
 	begin_pos_(0, 0),
 	pos_(0, 0),

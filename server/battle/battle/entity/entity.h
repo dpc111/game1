@@ -33,6 +33,10 @@ public:
 
 	float get_frozen() { return frozen_; }
 
+	int32 get_row() { return row_; }
+
+	int32 get_col() { return col_; }
+
 	void set_pos(vector2_t& pos) { pos_ = pos; }
 
 	void set_gun_pos(vector2_t& pos) { gun_pos_ = pos; }

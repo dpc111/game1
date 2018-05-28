@@ -43,6 +43,8 @@ public:
 
 	void set_damage(int32 damage) { damage_ = damage; }
 
+	void set_line(int32 line) { line_ = line; }
+
 	void on_collision(entity_t *entity);
 
 	void on_bullet_out();

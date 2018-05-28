@@ -4,7 +4,7 @@
 
 bullet_t::bullet_t(room_t *room, int32 bullet_id, int32 type_id) :
 	object_base_t(bullet_id, type_id),
-	room_(room);
+	room_(room),
 	speed_(0),
 	del_(false),
 	begin_tm_(0),

@@ -3,6 +3,7 @@
 #include "bullet.h"
 #include "bullet_mgr.h"
 #include "bullet.h"
+#include "grid.h"
 
 entity_t::entity_t(room_t *room, int32 entity_id, int32 type_id) :
 	object_base_t(entity_id, type_id),
@@ -27,7 +28,7 @@ entity_t::~entity_t() {
 
 void entity_t::set_box(float boxx, float boxy) {
 	vector2_t& pos = room_->get_grid()->get_pos(row_, col_);
-	box_->set_box(pos_.x - boxx, pos_.x + boxx, pos_.y - boxy, pos_.y + boxy);
+	box_.set_box(pos_.x - boxx, pos_.x + boxx, pos_.y - boxy, pos_.y + boxy);
 }
 
 void entity_t::update(float tm) {

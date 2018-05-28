@@ -13,6 +13,8 @@ public:
 
 	virtual ~entity_t();
 
+	vector2_t& get_pos() { return pos_; }
+
 	int32 get_camp() { return camp_; }
 
 	bool get_del() { return del_; }
@@ -26,6 +28,8 @@ public:
 	int32 get_damage() { return damage_; }
 
 	float get_frozen() { return frozen_; }
+
+	void set_pos(vector2_t& pos) { pos_ = pos; }
 
 	void set_camp(int32 camp) { camp_ = camp; } 
 
@@ -57,6 +61,8 @@ private:
 	room_t *room_;
 
 	box_t box_;
+
+	vector2_t pos_;
 
 	int32 camp_;
 

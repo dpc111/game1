@@ -1,6 +1,7 @@
 #include "entity_mgr.h"
 #include "entity.h"
 #include "global.h"
+#include "grid.h"
 
 entity_mgr_t::entity_mgr_t(room_t *room) :
 	object_mgr_base_t(),
@@ -21,6 +22,7 @@ entity_t *entity_mgr_t::create_entity(int32 camp, int32 type_id, int32 row, int3
 		return NULL;
 	}
 	entity_t *entity = new entity_t(room_, entity_id, type_id);
+	entity->set_pos(room_->get_grid()->get_pos(row, col));
 	entity->set_camp(camp);
 	entity->set_level(1);
 	entity->set_cd(get_json_mgr()->get_float("entity", type_id - 1, "cd"));

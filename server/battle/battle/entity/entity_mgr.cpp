@@ -12,7 +12,7 @@ entity_mgr_t::~entity_mgr_t() {
 
 }
 
-entity_t *entity_mgr_t::create_entity(int32 type_id, int32 row, int32 col) {
+entity_t *entity_mgr_t::create_entity(int32 camp, int32 type_id, int32 row, int32 col) {
 	int32 entity_id = gen_id();
 	if (get_object(entity_id)) {
 		return NULL;
@@ -21,12 +21,16 @@ entity_t *entity_mgr_t::create_entity(int32 type_id, int32 row, int32 col) {
 		return NULL;
 	}
 	entity_t *entity = new entity_t(room_, entity_id, type_id);
+	entity->set_camp(camp);
 	entity->set_level(1);
 	entity->set_cd(get_json_mgr()->get_float("entity", type_id - 1, "cd"));
 	entity->set_blood(get_json_mgr()->get_int("entity", type_id - 1, "blood"));
 	entity->set_bullet(get_json_mgr()->get_int("entity", type_id - 1, "bullet"));
 	entity->set_damage(get_json_mgr()->get_float("entity", type_id - 1, "damage"));
 	entity->set_grid(row, col);
+	float boxx = get_json_mgr()->get_float("entity", type_id - 1, "box", 0);
+	float boxy = get_json_mgr()->get_float("entity", type_id - 1, "box", 1);
+	entity->set_box(boxx, boxy);
 	add_object(entity_id, entity);
 	return entity;
 }

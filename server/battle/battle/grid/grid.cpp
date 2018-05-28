@@ -1,12 +1,20 @@
 #include "grid.h"
-#include "entity.h"
 #include "room.h"
+#include "entity.h"
+#include "bullet.h"
 
 grid_t::grid_t(room_t *room) :
 	room_(room) {
 	for (int i = 0; i < ROW_NUM; i++) {
 		for (int j = 0; j < COL_NUM; j++) {
 			grids_[i][j] = NULL;
+		}
+	}
+	for (int i = 0; i < ROW_NUM; i++) {
+		for (int j = 0; j < COL_NUM; j++) {
+			int x = (i - 1) * ROW_LENGTH + (ROW_LENGTH / 2)
+			int y = (j - 1) * COL_LENGTH + (COL_LENGTH / 2)
+			pos_[i][j] = vector2_t(x, y);	
 		}
 	}
 }
@@ -54,4 +62,30 @@ bool grid_t::exist(int32 row, int32 col) {
 		return true;
 	}
 	return false;
+}
+
+vector2_t& grids_t::get_pos(int32 row, int32 col) {
+	asset(pos_[row][col]);
+	return pos_[row][col];
+}
+
+void grids_t::process_collision(bullet_t *bullet) {
+	int32 camp = bullet->get_camp();
+	int32 line = bullet->get_line();
+	vector2_t& pos = bullet->get_pos();
+	if (pos.x < BULLET_OUT_MIN_X ||
+		pos.x > BULLET_OUT_MAX_X ||
+		pos.y < BULLET_OUT_MIN_Y ||
+		pos.y > BULLET_OUT_MAX_Y) {
+		bullet->on_bullet_out();
+	}
+	for (int32 k = 0; k < ROW_NUM; k++) {
+		entity_t* entity = grids_[k][line_];
+		if (camp != entity->get_camp() &&
+			entity->get_box().collision(pos)) {
+			entity->on_collision(bullet);
+			bullet->on_collision(entity);
+			return;
+		}
+	}
 }

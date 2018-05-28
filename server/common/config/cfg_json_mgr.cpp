@@ -86,6 +86,14 @@ int cfg_json_mgr_t::get_int(std::string json_name, int key1, int key2) {
 	return json->get_int(key1, key2);
 }
 
+int cfg_json_mgr_t::get_int(std::string json_name, int key1, const char *key2, int key3) {
+	cfg_json_t *json = this->get_json(json_name);
+	if (!json) {
+		return JSON_ERROR_INT;
+	}
+	return json->get_int(key1, key2, key3);
+}
+
 float cfg_json_mgr_t::get_float(std::string json_name, const char *key1) {
 	cfg_json_t *json = this->get_json(json_name);
 	if (!json) {
@@ -132,6 +140,14 @@ float cfg_json_mgr_t::get_float(std::string json_name, int key1, int key2) {
 		return JSON_ERROR_FLOAT;
 	}
 	return json->get_float(key1, key2);
+}
+
+float cfg_json_mgr_t::get_float(std::string json_name, int key1, const char *key2, int key3) {
+	cfg_json_t *json = this->get_json(json_name);
+	if (!json) {
+		return JSON_ERROR_INT;
+	}
+	return json->get_float(key1, key2, key3);
 }
 
 std::string cfg_json_mgr_t::get_string(std::string json_name, const char *key1) {

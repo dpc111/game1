@@ -2,6 +2,7 @@
 #include "bullet.h"
 #include "global.h"
 #include "room.h"
+#include "entity.h"
 
 bullet_mgr_t::bullet_mgr_t(room_t *room) :
 	object_mgr_base_t(),
@@ -13,7 +14,7 @@ bullet_mgr_t::~bullet_mgr_t() {
 
 }
 
-bullet_t *bullet_mgr_t::create_bullet(int32 type_id) {
+bullet_t *bullet_mgr_t::create_bullet(entity_t *entity, int32 type_id) {
 	int32 bullet_id = gen_id();
 	if (get_object(bullet_id)) {
 		return NULL;
@@ -22,8 +23,10 @@ bullet_t *bullet_mgr_t::create_bullet(int32 type_id) {
 		return NULL;
 	}
 	bullet_t *bullet = new bullet_t(bullet_id, type_id);
+	bullet->set_camp(entity->get_camp());
+	bullet->set_damage(entity->get_damage());
 	bullet->set_speed(get_json_mgr()->get_int("bullet", type_id - 1, "speed"));
-	add_object(bullet_id, bullet);
+	add_object(room_, bullet_id, bullet);
 }
 
 void bullet_mgr_t::delete_bullet(int32 bullet_id) {

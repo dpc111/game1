@@ -4,12 +4,16 @@
 #include "object_base.h"
 
 class room_t;
+class box_t;
+class bullet_t;
 
 class entity_t : public object_base_t {
 public:
 	entity_t(room_t *room, int32 entity_id, int32 type_id);
 
 	virtual ~entity_t();
+
+	int32 get_camp() { return camp_; }
 
 	bool get_del() { return del_; }
 
@@ -22,6 +26,10 @@ public:
 	int32 get_damage() { return damage_; }
 
 	float get_frozen() { return frozen_; }
+
+	void set_camp(int32 camp) { camp_ = camp; } 
+
+	void set_del(bool del) { del_ = del; }
 
 	void set_level(int32 level) { level_ = level; }
 
@@ -37,12 +45,20 @@ public:
 
 	void set_grid(int32 row, int32 col) { row_ = row; col_ = col; }
 
-	void fire();
+	void set_box(float boxx, float boxy);
 
 	void update(float tm);
 
+	void fire();
+
+	void on_collision(bullet_t *bullet);
+
 private:
 	room_t *room_;
+
+	box_t box_;
+
+	int32 camp_;
 
 	bool del_;
 

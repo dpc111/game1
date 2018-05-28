@@ -3,11 +3,19 @@
 
 #define ROW_NUM 10
 #define COL_NUM 5
+#define ROW_LENGTH 10
+#define COL_LENGTH 10
+#define BULLET_OUT_MIN_X 0
+#define BULLET_OUT_MAX_X 100
+#define BULLET_OUT_MIN_Y 0
+#define BULLET_OUT_MAX_Y 50
 
 #include "stdafx.h"
+#include "gmath.h"
 
-class entity_t;
 class room_t;
+class entity_t;
+class bullet_t;
 
 class grid_t {
 public:
@@ -23,8 +31,15 @@ public:
 
 	bool exist(int32 row, int32 col);
 
+	vector2_t& get_pos(int32 row, int32 col);
+
+	void process_collision(bullet_t *bullet);
+
 public:
 	entity_t* grids_[ROW_NUM][COL_NUM];
+
+	vector2_t pos_[ROW_NUM][COL_NUM];
+
 	room_t* room_;
 };
 

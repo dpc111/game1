@@ -39,6 +39,8 @@ public:
 
 	int get_int(std::string json_name, int key1, int key2);
 
+	int get_int(std::string json_name, int key1, const char *key2, int key3);
+
 	float get_float(std::string json_name, const char *key1);
 
 	float get_float(std::string json_name, int key1);
@@ -50,6 +52,8 @@ public:
 	float get_float(std::string json_name, int key1, const char* key2);
 
 	float get_float(std::string json_name, int key1, int key2);
+
+	float get_float(std::string json_name, int key1, const char *key2, int key3);
 
 	std::string get_string(std::string json_name, const char *key1);
 

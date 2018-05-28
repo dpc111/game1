@@ -27,6 +27,8 @@ public:
 
 	int get_int(int key1, int key2);
 
+	int get_int(int key1, const char *key2, int key3);
+
 	float get_float(const char *key1);
 
 	float get_float(int key1);
@@ -38,6 +40,8 @@ public:
 	float get_float(int key1, const char* key2);
 
 	float get_float(int key1, int key2);
+
+	float get_float(int key1, const char *key2, int key3);
 
 	std::string get_string(const char *key1);
 

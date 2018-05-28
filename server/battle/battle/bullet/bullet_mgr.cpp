@@ -4,6 +4,7 @@
 #include "room.h"
 #include "entity.h"
 #include "grid.h"
+#include "bullet_horizontal.h"
 
 bullet_mgr_t::bullet_mgr_t(room_t *room) :
 	object_mgr_base_t(),
@@ -23,7 +24,8 @@ bullet_t *bullet_mgr_t::create_bullet(entity_t *entity, int32 type_id) {
 	if (!get_json_mgr()->exist("bullet", type_id - 1)) {
 		return NULL;
 	}
-	bullet_t *bullet = new bullet_t(room_, bullet_id, type_id);
+	// bullet_t *bullet = new bullet_t(room_, bullet_id, type_id);
+	bullet_t *bullet = new bullet_horizontal_t(room_, bullet_id, type_id);
 	bullet->set_camp(entity->get_camp());
 	bullet->set_begin_pos(entity->get_gun_pos());
 	bullet->set_pos(entity->get_gun_pos());

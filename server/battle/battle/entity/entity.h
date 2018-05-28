@@ -13,6 +13,8 @@ public:
 
 	virtual ~entity_t();
 
+	box_t& get_box() { return box_; }
+
 	vector2_t& get_pos() { return pos_; }
 
 	int32 get_camp() { return camp_; }

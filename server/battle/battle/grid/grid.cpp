@@ -12,8 +12,8 @@ grid_t::grid_t(room_t *room) :
 	}
 	for (int i = 0; i < ROW_NUM; i++) {
 		for (int j = 0; j < COL_NUM; j++) {
-			int x = (i - 1) * ROW_LENGTH + (ROW_LENGTH / 2)
-			int y = (j - 1) * COL_LENGTH + (COL_LENGTH / 2)
+			int x = (i - 1) * ROW_LENGTH + (ROW_LENGTH / 2);
+			int y = (j - 1) * COL_LENGTH + (COL_LENGTH / 2);
 			pos_[i][j] = vector2_t(x, y);	
 		}
 	}
@@ -64,12 +64,12 @@ bool grid_t::exist(int32 row, int32 col) {
 	return false;
 }
 
-vector2_t& grids_t::get_pos(int32 row, int32 col) {
-	asset(pos_[row][col]);
+vector2_t& grid_t::get_pos(int32 row, int32 col) {
+	assert(pos_[row][col]);
 	return pos_[row][col];
 }
 
-void grids_t::process_collision(bullet_t *bullet) {
+void grid_t::process_collision(bullet_t *bullet) {
 	int32 camp = bullet->get_camp();
 	int32 line = bullet->get_line();
 	vector2_t& pos = bullet->get_pos();
@@ -78,6 +78,7 @@ void grids_t::process_collision(bullet_t *bullet) {
 		pos.y < BULLET_OUT_MIN_Y ||
 		pos.y > BULLET_OUT_MAX_Y) {
 		bullet->on_bullet_out();
+		return;
 	}
 	for (int32 k = 0; k < ROW_NUM; k++) {
 		entity_t* entity = grids_[k][line_];

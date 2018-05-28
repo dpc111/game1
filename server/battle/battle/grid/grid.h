@@ -9,6 +9,10 @@
 #define BULLET_OUT_MAX_X 100
 #define BULLET_OUT_MIN_Y 0
 #define BULLET_OUT_MAX_Y 50
+#define LEFT_CAMP 0
+#define RIGHT_CAMP 1
+#define IS_LEFT_CAMP(camp) (camp == LEFT_CAMP)
+#define IS_RIGHT_CAMP(camp) (camp == RIGHT_CAMP)
 
 #include "stdafx.h"
 #include "gmath.h"

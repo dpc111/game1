@@ -24,6 +24,16 @@ entity_t *entity_mgr_t::create_entity(int32 camp, int32 type_id, int32 row, int3
 	}
 	entity_t *entity = new entity_t(room_, entity_id, type_id);
 	entity->set_pos(room_->get_grid()->get_pos(row, col));
+	float gun_posx = get_json_mgr()->get_float("entity", type - 1, "gun_pos", 0);
+	float gun_posy = get_json_mgr()->get_float("entity", type - 1, "gun_pos", 1);
+	if (IS_LEFT_CAMP(camp)) {
+		gun_posx = gun_posx;
+		gun_posy = gun_posy;
+	} else {
+		gun_posx = -gun_posx;
+		gun_posy = gun_posy;
+	}
+	entity->set_gun_pos(vector2_t(gun_posx, gun_posy));
 	entity->set_camp(camp);
 	entity->set_level(1);
 	entity->set_cd(get_json_mgr()->get_float("entity", type_id - 1, "cd"));

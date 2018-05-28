@@ -17,6 +17,8 @@ public:
 
 	vector2_t& get_pos() { return pos_; }
 
+	vector2_t& get_gun_pos() { return gun_pos_; }
+
 	int32 get_camp() { return camp_; }
 
 	bool get_del() { return del_; }
@@ -32,6 +34,8 @@ public:
 	float get_frozen() { return frozen_; }
 
 	void set_pos(vector2_t& pos) { pos_ = pos; }
+
+	void set_gun_pos(vector2_t& pos) { gun_pos_ = pos; }
 
 	void set_camp(int32 camp) { camp_ = camp; } 
 
@@ -65,6 +69,8 @@ private:
 	box_t box_;
 
 	vector2_t pos_;
+
+	vector2_t gun_pos_;
 
 	int32 camp_;
 

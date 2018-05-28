@@ -35,6 +35,12 @@ public:
 
 	void set_del(bool del) { del_ = del; }
 
+	void set_v_speed_(vector2_t& speed) { v_speed_ = speed; }
+
+	void set_begin_pos(vector2_t& pos) { begin_pos_ = pos; }
+
+	void set_pos(vector2_t& pos) { pos_ = pos; }
+
 	void set_damage(int32 damage) { damage_ = damage; }
 
 	void on_collision(entity_t *entity);

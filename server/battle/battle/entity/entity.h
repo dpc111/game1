@@ -2,9 +2,9 @@
 #define ENTITY_H
 
 #include "object_base.h"
+#include "box.h"
 
 class room_t;
-class box_t;
 class bullet_t;
 
 class entity_t : public object_base_t {

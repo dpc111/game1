@@ -1,6 +1,8 @@
 #ifndef TIEMSTAMP_H
 #define TIEMSTAMP_H
 
+#include "type.h"
+
 // int64 timestamp_gettimeofday() {
 // 	timeval tv;
 // 	gettimeofday(&tv, NULL);

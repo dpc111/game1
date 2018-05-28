@@ -115,10 +115,10 @@ void server_t::register_timer(timer_handler_t *handler, void *user, timestamp st
 	times_->add(handler, user, start, interval);
 }
 
-void register_delay_stimer(timer_handler_t *handler, void *user, timestamp delay, timestamp interval) {
+void server_t::register_delay_stimer(timer_handler_t *handler, void *user, timestamp delay, timestamp interval) {
 	times_->add(handler, user, delay * 1000 + getms(), interval);
 }
 
-void register_delay_mstimer(timer_handler_t *handler, void *user, timestamp delay, timestamp interval) {
+void server_t::register_delay_mstimer(timer_handler_t *handler, void *user, timestamp delay, timestamp interval) {
 	times_->add(handler, user, delay + getms(), interval);
 }

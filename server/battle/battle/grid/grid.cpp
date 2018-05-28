@@ -81,7 +81,7 @@ void grid_t::process_collision(bullet_t *bullet) {
 		return;
 	}
 	for (int32 k = 0; k < ROW_NUM; k++) {
-		entity_t* entity = grids_[k][line_];
+		entity_t* entity = grids_[k][line];
 		if (camp != entity->get_camp() &&
 			entity->get_box().collision(pos)) {
 			entity->on_collision(bullet);

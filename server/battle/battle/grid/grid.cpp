@@ -86,6 +86,7 @@ void grid_t::process_collision(bullet_t *bullet) {
 			entity->get_box().collision(pos)) {
 			entity->on_collision(bullet);
 			bullet->on_collision(entity);
+			room_->on_collision(entity, bullet);
 			return;
 		}
 	}

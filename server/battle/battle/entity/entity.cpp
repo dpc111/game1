@@ -41,12 +41,14 @@ void entity_t::update(float tm) {
 }
 
 void entity_t::fire() {
-	room_->get_bullet_mgr()->create_bullet(this, bullet_id_);
+	bullet_t *bullet = room_->get_bullet_mgr()->create_bullet(this, bullet_id_);
+	room_->on_fire(this, bullet);
 }
 
 void entity_t::on_collision(bullet_t *bullet) {
 	int32 damage = bullet->get_damage();
 	blood_ = blood_ - damage;
+	room_->on_entity_damage(this, damage);
 	if (blood_ <= 0) {
 		blood_ = 0;
 		set_del(true);

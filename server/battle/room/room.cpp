@@ -45,25 +45,36 @@ int32 room_t::set_random_camp(int64 uid) {
 	return 0;
 }
 
-void room_t::c_create_entity(void *player, const battle_msg::c_create_entity& msg) {
-	player_t *p = (player_t *)player;
+void room_t::update(int64 tm) {
+	if (del_ || room_state_ != ROOM_STATE_ING) {
+		return;
+	}
+	entity_mgr_->update(tm);
+	bullet_mgr_->update(tm);
 }
 
 void room_t::register_callback() {
 	register_message<battle_msg::c_create_entity>(REGISTER_ROOM_BIND(room_t::c_create_entity));
 }
 
+void room_t::c_create_entity(void *player, const battle_msg::c_create_entity& msg) {
+	player_t *p = (player_t *)player;
+}
+
 void room_t::start_wait() {
+	ERROR("room wait");
 	room_state_ = ROOM_STATE_WAIT;
 	get_service()->register_delay_stimer(this, NULL, ROOM_WAIT_TIME, 0);
 }
 
 void room_t::start_ing() {
+	ERROR("room ing");
 	room_state_ = ROOM_STATE_ING;
 	get_service()->register_delay_stimer(this, NULL, ROOM_ING_TIME, 0);
 }
 
 void room_t::start_end() {
+	ERROR("room end");
 	room_state_ = ROOM_STATE_END;
 	get_service()->register_delay_stimer(this, NULL, ROOM_END_TIME, 0);
 }
@@ -80,11 +91,26 @@ void room_t::handle_timeout(timer_handle_t handle, void *user) {
 	}
 }
 
-void room_t::update(int64 tm) {
-	if (del_ || room_state_ != ROOM_STATE_ING) {
-		return;
-	}
-	entity_mgr_->update(tm);
-	bullet_mgr_->update(tm);
+void room_t::on_create_entity(entity_t *entity) {
+
 }
 
+void room_t::on_del_entity(entity_t *entity) {
+
+}
+
+void room_t::on_create_bullet(entity_t *entity, bullet_t *bullet) {
+
+}
+
+void room_t::on_del_bullet(bullet_t *bullet) {
+
+}
+
+void room_t::on_fire(entity_t *entity, bullet_t *bullet) {
+
+}
+
+void room_t::on_entity_damage(entity_t *entity, int32 damage) {
+
+}

@@ -16,6 +16,8 @@
 class entity_mgr_t;
 class bullet_mgr_t;
 class grid_t;
+class entity_t;
+class bullet_t;
 
 class room_t : public dispatcher_t, public timer_handler_t {
 public:
@@ -37,10 +39,16 @@ public:
 
 	void set_del(bool del) { del_ = del; }
 
-	void c_create_entity(void *player, const battle_msg::c_create_entity& msg);
+	void update(int64 tm);
 
 	virtual void register_callback();
 
+	/////////////////////////////////////////////////////////////////////////////////////////////////////////
+	// message
+	void c_create_entity(void *player, const battle_msg::c_create_entity& msg);
+
+	/////////////////////////////////////////////////////////////////////////////////////////////////////////
+	// timer
 	void start_wait();
 
 	void start_ing();
@@ -49,7 +57,21 @@ public:
 
 	virtual void handle_timeout(timer_handle_t handle, void *user);
 
-	void update(int64 tm);
+	/////////////////////////////////////////////////////////////////////////////////////////////////////////
+	// event
+	void on_create_entity(entity_t *entity);
+
+	void on_del_entity(entity_t *entity);
+
+	void on_create_bullet(entity_t *entity, bullet_t *bullet);
+
+	void on_del_bullet(bullet_t *bullet);
+
+	void on_entity_damage(entity_t *entity, int32 damage);
+
+	void on_fire(entity_t *entity, bullet_t *bullet);
+
+	void on_collision(entity_t *entity, bullet *bullet);
 
 private:
 	int32 rid_;

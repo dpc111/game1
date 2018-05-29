@@ -19,6 +19,9 @@ bullet_t::~bullet_t() {
 }
 
 void bullet_t::update(float stm) {
+	if (del_) {
+		return;
+	}
 	if (stm - begin_tm_ > MAX_LIFE_TM) {
 		ERROR("");
 		set_del(true);

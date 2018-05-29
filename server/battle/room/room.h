@@ -71,7 +71,7 @@ public:
 
 	void on_fire(entity_t *entity, bullet_t *bullet);
 
-	void on_collision(entity_t *entity, bullet *bullet);
+	void on_collision(entity_t *entity, bullet_t *bullet);
 
 private:
 	int32 rid_;

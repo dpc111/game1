@@ -2,6 +2,7 @@
 #include "entity_mgr.h"
 #include "bullet_mgr.h"
 #include "entity.h"
+#include "bullet.h"
 #include "grid.h"
 #include "player.h"
 #include "service.h"
@@ -107,10 +108,14 @@ void room_t::on_del_bullet(bullet_t *bullet) {
 
 }
 
+void room_t::on_entity_damage(entity_t *entity, int32 damage) {
+
+}
+
 void room_t::on_fire(entity_t *entity, bullet_t *bullet) {
 
 }
 
-void room_t::on_entity_damage(entity_t *entity, int32 damage) {
+void room_t::on_collision(entity_t *entity, bullet_t *bullet) {
 
 }

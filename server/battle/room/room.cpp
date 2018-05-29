@@ -58,6 +58,15 @@ void room_t::register_callback() {
 	register_message<battle_msg::c_create_entity>(REGISTER_ROOM_BIND(room_t::c_create_entity));
 }
 
+void room_t::broadcast(google::protobuf::Message& msg) {
+	for (int32 k = 0; k < 2; k++) {
+		int64 uid = camps_[k];
+		if (uid > 0) {
+			get_service()->send(uid, msg);
+		}
+	}
+}
+
 void room_t::c_create_entity(void *player, const battle_msg::c_create_entity& msg) {
 	player_t *p = (player_t *)player;
 }
@@ -93,7 +102,15 @@ void room_t::handle_timeout(timer_handle_t handle, void *user) {
 }
 
 void room_t::on_create_entity(entity_t *entity) {
-
+	battle_msg::s_create_entity msg;
+	msg.set_entity_id(entity->get_id());
+	msg.set_type_id(entity->get_type_id());
+	msg.set_camp(entity->get_camp());
+	msg.set_use_gold(0);
+	msg.set_gold(0);
+	msg.set_row(entity->get_row());
+	msg.set_col(entity->get_col());
+	broadcast(msg);
 }
 
 void room_t::on_del_entity(entity_t *entity) {

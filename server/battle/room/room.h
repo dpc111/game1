@@ -43,6 +43,8 @@ public:
 
 	virtual void register_callback();
 
+	void broadcast(google::protobuf::Message& msg);
+
 	/////////////////////////////////////////////////////////////////////////////////////////////////////////
 	// message
 	void c_create_entity(void *player, const battle_msg::c_create_entity& msg);

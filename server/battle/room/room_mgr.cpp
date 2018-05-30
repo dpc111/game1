@@ -47,6 +47,7 @@ room_t* room_mgr_t::create_room() {
 	room_t *room = new room_t(rid);
 	add_room(rid, room);
 	room->start_wait();
+	return room;
 }
 
 void room_mgr_t::update(int64 tm) {

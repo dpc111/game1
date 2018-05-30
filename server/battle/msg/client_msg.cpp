@@ -44,6 +44,7 @@ void client_msg_t::c_login(tcp_connection_t *conn, const battle_msg::c_login& ms
 	}
 	room_t *room = get_room_mgr()->create_room();
 	if (!room) {
+		ERROR("");
 		return;
 	}
 	player->set_room(room);

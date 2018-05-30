@@ -80,22 +80,22 @@ void room_t::c_create_entity(void *player, const battle_msg::c_create_entity& ms
 void room_t::start_wait() {
 	ERROR("room wait");
 	room_state_ = ROOM_STATE_WAIT;
-	wait_timer_ = this->on_room_state_change(room_state_);
-	get_service()->register_delay_stimer(this, NULL, ROOM_WAIT_TIME, 0);
+	this->on_room_state_change(room_state_);
+	wait_timer_ = get_service()->register_delay_stimer(this, NULL, ROOM_WAIT_TIME, 0);
 }
 
 void room_t::start_ing() {
 	ERROR("room ing");
 	room_state_ = ROOM_STATE_ING;
-	ing_timer_ = this->on_room_state_change(room_state_);
-	get_service()->register_delay_stimer(this, NULL, ROOM_ING_TIME, 0);
+	this->on_room_state_change(room_state_);
+	ing_timer_ = get_service()->register_delay_stimer(this, NULL, ROOM_ING_TIME, 0);
 }
 
 void room_t::start_end() {
 	ERROR("room end");
 	room_state_ = ROOM_STATE_END;
-	end_timer_ = this->on_room_state_change(room_state_);
-	get_service()->register_delay_stimer(this, NULL, ROOM_END_TIME, 0);
+	this->on_room_state_change(room_state_);
+	end_timer_ = get_service()->register_delay_stimer(this, NULL, ROOM_END_TIME, 0);
 }
 
 void room_t::handle_timeout(timer_handle_t handle, void *user) {

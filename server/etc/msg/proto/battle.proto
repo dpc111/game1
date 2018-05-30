@@ -40,6 +40,10 @@ message c_create_entity {
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////
+message s_room_state {
+	required int32 state = 1;
+}
+
 message s_create_entity {
 	required int32 entity_id = 1;
 	required int32 type_id = 2;

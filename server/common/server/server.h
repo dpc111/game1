@@ -49,7 +49,7 @@ public:
 
 	void send_func(tcp_connection_t *conn, const char *funcname, const char *fmt, ...);
 
-	timer_handle_t register_timer(timer_handler_t *handler, timer_handler_t *user, timestamp start, timestamp interval);
+	timer_handle_t register_timer(timer_handler_t *handler, void *user, timestamp start, timestamp interval);
 
 	timer_handle_t register_delay_stimer(timer_handler_t *handler, void *user, timestamp delay, timestamp interval);
 

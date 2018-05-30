@@ -91,6 +91,12 @@ private:
 	bool del_;
 
 	int32 room_state_;
+
+	timer_handle_t wait_timer_;
+
+	timer_handle_t ing_timer_;
+
+	timer_handle_t end_timer_;
 };
 
 #endif

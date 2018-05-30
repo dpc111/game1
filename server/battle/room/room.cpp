@@ -15,7 +15,10 @@
 	std::tr1::placeholders::_2)
 
 room_t::room_t(int32 rid) :
-	dispatcher_t() {
+	dispatcher_t(),
+	wait_timer_(),
+	ing_timer_(),
+	end_timer_() {
 	rid_ = rid;
 	entity_mgr_ = new entity_mgr_t(this);
 	bullet_mgr_ = new bullet_mgr_t(this);
@@ -34,6 +37,9 @@ room_t::~room_t() {
 	for (int32 k = 0; k < 2; k++) {
 		camps_[k] = 0;
 	}
+	wait_timer_.cancel();
+	ing_timer_.cancel();
+	end_timer_.cancel();
 }
 
 int32 room_t::set_random_camp(int64 uid) {
@@ -74,32 +80,32 @@ void room_t::c_create_entity(void *player, const battle_msg::c_create_entity& ms
 void room_t::start_wait() {
 	ERROR("room wait");
 	room_state_ = ROOM_STATE_WAIT;
-	this->on_room_state_change(room_state_);
+	wait_timer_ = this->on_room_state_change(room_state_);
 	get_service()->register_delay_stimer(this, NULL, ROOM_WAIT_TIME, 0);
 }
 
 void room_t::start_ing() {
 	ERROR("room ing");
 	room_state_ = ROOM_STATE_ING;
-	this->on_room_state_change(room_state_);
+	ing_timer_ = this->on_room_state_change(room_state_);
 	get_service()->register_delay_stimer(this, NULL, ROOM_ING_TIME, 0);
 }
 
 void room_t::start_end() {
 	ERROR("room end");
 	room_state_ = ROOM_STATE_END;
-	this->on_room_state_change(room_state_);
+	end_timer_ = this->on_room_state_change(room_state_);
 	get_service()->register_delay_stimer(this, NULL, ROOM_END_TIME, 0);
 }
 
 void room_t::handle_timeout(timer_handle_t handle, void *user) {
-	if (room_state_ == ROOM_STATE_WAIT) {
+	if (handle == wait_timer_ && room_state_ == ROOM_STATE_WAIT) {
 		start_ing();
 	}
-	if (room_state_ == ROOM_STATE_ING) {
+	if (handle == ing_timer_ && room_state_ == ROOM_STATE_ING) {
 		start_end();
 	}
-	if (room_state_ == ROOM_STATE_END) {
+	if (handle == end_timer_ && room_state_ == ROOM_STATE_END) {
 		set_del(true);
 	}
 }

@@ -24,6 +24,8 @@ public:
 
 	friend bool operator==(timer_handle_t h1, timer_handle_t h2);
 
+	timer_handle_t& operator=(const timer_handle_t& h) { timer_ = h.timer(); return *this; }
+
 	ctimer_t *timer() const { return timer_; }
 
 private:

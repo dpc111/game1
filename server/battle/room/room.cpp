@@ -99,13 +99,22 @@ void room_t::start_end() {
 }
 
 void room_t::handle_timeout(timer_handle_t handle, void *user) {
-	if (handle == wait_timer_ && room_state_ == ROOM_STATE_WAIT) {
+	// if (handle == wait_timer_ && room_state_ == ROOM_STATE_WAIT) {
+	// 	start_ing();
+	// }
+	// if (handle == ing_timer_ && room_state_ == ROOM_STATE_ING) {
+	// 	start_end();
+	// }
+	// if (handle == end_timer_ && room_state_ == ROOM_STATE_END) {
+	// 	set_del(true);
+	// }
+	if (handle == wait_timer_) {
 		start_ing();
 	}
-	if (handle == ing_timer_ && room_state_ == ROOM_STATE_ING) {
+	if (handle == ing_timer_) {
 		start_end();
 	}
-	if (handle == end_timer_ && room_state_ == ROOM_STATE_END) {
+	if (handle == end_timer_) {
 		set_del(true);
 	}
 }

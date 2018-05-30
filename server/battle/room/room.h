@@ -61,6 +61,8 @@ public:
 
 	/////////////////////////////////////////////////////////////////////////////////////////////////////////
 	// event
+	void on_room_state_change(int32 state);
+
 	void on_create_entity(entity_t *entity);
 
 	void on_del_entity(entity_t *entity);

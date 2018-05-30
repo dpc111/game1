@@ -74,18 +74,21 @@ void room_t::c_create_entity(void *player, const battle_msg::c_create_entity& ms
 void room_t::start_wait() {
 	ERROR("room wait");
 	room_state_ = ROOM_STATE_WAIT;
+	this->on_room_state_change(room_state_);
 	get_service()->register_delay_stimer(this, NULL, ROOM_WAIT_TIME, 0);
 }
 
 void room_t::start_ing() {
 	ERROR("room ing");
 	room_state_ = ROOM_STATE_ING;
+	this->on_room_state_change(room_state_);
 	get_service()->register_delay_stimer(this, NULL, ROOM_ING_TIME, 0);
 }
 
 void room_t::start_end() {
 	ERROR("room end");
 	room_state_ = ROOM_STATE_END;
+	this->on_room_state_change(room_state_);
 	get_service()->register_delay_stimer(this, NULL, ROOM_END_TIME, 0);
 }
 
@@ -99,6 +102,12 @@ void room_t::handle_timeout(timer_handle_t handle, void *user) {
 	if (room_state_ == ROOM_STATE_END) {
 		set_del(true);
 	}
+}
+
+void room_t::on_room_state_change(int32 state) {
+	battle_msg::s_room_state msg;
+	msg.set_state(state);
+	broadcast(msg);
 }
 
 void room_t::on_create_entity(entity_t *entity) {
@@ -130,9 +139,24 @@ void room_t::on_entity_damage(entity_t *entity, int32 damage) {
 }
 
 void room_t::on_fire(entity_t *entity, bullet_t *bullet) {
-
+	battle_msg::s_fire msg;
+	msg.set_entity_id(entity->get_id());
+	msg.set_bullet_id(bullet->get_id());
+	msg.set_type_id(bullet->get_type_id());
+	battle_msg::vector *pos = msg.mutable_pos();
+	pos->set_x(bullet->get_pos().x);
+	pos->set_y(bullet->get_pos().y);
+	battle_msg::vector *speed = msg.mutable_speed();
+	speed->set_x(bullet->get_v_speed().x);
+	speed->set_y(bullet->get_v_speed().y);
+	broadcast(msg);
 }
 
 void room_t::on_collision(entity_t *entity, bullet_t *bullet) {
-
+	battle_msg::s_collision msg;
+	msg.set_entity_id(entity->get_id());
+	msg.set_bullet_id(entity->get_id());
+	msg.set_damage(bullet->get_damage());
+	msg.set_blood(entity->get_blood());
+	broadcast(msg);
 }

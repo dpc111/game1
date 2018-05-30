@@ -25,6 +25,8 @@ public:
 
 	vector2_t& get_pos() { return pos_; }
 
+	vector2_t& get_v_speed() { return v_speed_; }
+
 	int get_damage() { return damage_; }
 
 	int32 get_line() { return line_; }

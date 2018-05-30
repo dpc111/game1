@@ -49,11 +49,11 @@ public:
 
 	void send_func(tcp_connection_t *conn, const char *funcname, const char *fmt, ...);
 
-	timer_handler_t register_timer(timer_handler_t *handler, timer_handler_t *user, timestamp start, timestamp interval);
+	timer_handle_t register_timer(timer_handler_t *handler, timer_handler_t *user, timestamp start, timestamp interval);
 
-	timer_handler_t register_delay_stimer(timer_handler_t *handler, void *user, timestamp delay, timestamp interval);
+	timer_handle_t register_delay_stimer(timer_handler_t *handler, void *user, timestamp delay, timestamp interval);
 
-	timer_handler_t register_delay_mstimer(timer_handler_t *handler, void *user, timestamp delay, timestamp interval);
+	timer_handle_t register_delay_mstimer(timer_handler_t *handler, void *user, timestamp delay, timestamp interval);
 
 	template<typename T>
 	void register_message(const typename msg_dispatch_t::cbT_t<T>::msg_cb_t& cb) { network_->get_msg_dispatch()->register_message<T>(cb); }

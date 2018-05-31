@@ -29,6 +29,131 @@ namespace battle_msg
       get { return _y; }
       set { _y = value; }
     }
+    private float _z;
+    [global::ProtoBuf.ProtoMember(3, IsRequired = true, Name=@"z", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
+    public float z
+    {
+      get { return _z; }
+      set { _z = value; }
+    }
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"entity_info")]
+  public partial class entity_info : global::ProtoBuf.IExtensible
+  {
+    public entity_info() {}
+    
+    private int _id;
+    [global::ProtoBuf.ProtoMember(1, IsRequired = true, Name=@"id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public int id
+    {
+      get { return _id; }
+      set { _id = value; }
+    }
+    private int _type_id;
+    [global::ProtoBuf.ProtoMember(2, IsRequired = true, Name=@"type_id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public int type_id
+    {
+      get { return _type_id; }
+      set { _type_id = value; }
+    }
+    private int _camp;
+    [global::ProtoBuf.ProtoMember(3, IsRequired = true, Name=@"camp", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public int camp
+    {
+      get { return _camp; }
+      set { _camp = value; }
+    }
+    private int _blood;
+    [global::ProtoBuf.ProtoMember(4, IsRequired = true, Name=@"blood", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public int blood
+    {
+      get { return _blood; }
+      set { _blood = value; }
+    }
+    private float _cd;
+    [global::ProtoBuf.ProtoMember(5, IsRequired = true, Name=@"cd", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
+    public float cd
+    {
+      get { return _cd; }
+      set { _cd = value; }
+    }
+    private int _row;
+    [global::ProtoBuf.ProtoMember(6, IsRequired = true, Name=@"row", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public int row
+    {
+      get { return _row; }
+      set { _row = value; }
+    }
+    private int _col;
+    [global::ProtoBuf.ProtoMember(7, IsRequired = true, Name=@"col", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public int col
+    {
+      get { return _col; }
+      set { _col = value; }
+    }
+    private battle_msg.vector _pos;
+    [global::ProtoBuf.ProtoMember(8, IsRequired = true, Name=@"pos", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    public battle_msg.vector pos
+    {
+      get { return _pos; }
+      set { _pos = value; }
+    }
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"bullet_info")]
+  public partial class bullet_info : global::ProtoBuf.IExtensible
+  {
+    public bullet_info() {}
+    
+    private int _id;
+    [global::ProtoBuf.ProtoMember(1, IsRequired = true, Name=@"id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public int id
+    {
+      get { return _id; }
+      set { _id = value; }
+    }
+    private int _type_id;
+    [global::ProtoBuf.ProtoMember(2, IsRequired = true, Name=@"type_id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public int type_id
+    {
+      get { return _type_id; }
+      set { _type_id = value; }
+    }
+    private int _camp;
+    [global::ProtoBuf.ProtoMember(3, IsRequired = true, Name=@"camp", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public int camp
+    {
+      get { return _camp; }
+      set { _camp = value; }
+    }
+    private int _damage;
+    [global::ProtoBuf.ProtoMember(4, IsRequired = true, Name=@"damage", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public int damage
+    {
+      get { return _damage; }
+      set { _damage = value; }
+    }
+    private battle_msg.vector _pos;
+    [global::ProtoBuf.ProtoMember(5, IsRequired = true, Name=@"pos", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    public battle_msg.vector pos
+    {
+      get { return _pos; }
+      set { _pos = value; }
+    }
+    private battle_msg.vector _speed;
+    [global::ProtoBuf.ProtoMember(6, IsRequired = true, Name=@"speed", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    public battle_msg.vector speed
+    {
+      get { return _speed; }
+      set { _speed = value; }
+    }
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
@@ -218,54 +343,43 @@ namespace battle_msg
   {
     public s_create_entity() {}
     
-    private int _entity_id;
-    [global::ProtoBuf.ProtoMember(1, IsRequired = true, Name=@"entity_id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    public int entity_id
+    private battle_msg.entity_info _einfo;
+    [global::ProtoBuf.ProtoMember(1, IsRequired = true, Name=@"einfo", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    public battle_msg.entity_info einfo
     {
-      get { return _entity_id; }
-      set { _entity_id = value; }
-    }
-    private int _type_id;
-    [global::ProtoBuf.ProtoMember(2, IsRequired = true, Name=@"type_id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    public int type_id
-    {
-      get { return _type_id; }
-      set { _type_id = value; }
-    }
-    private int _camp;
-    [global::ProtoBuf.ProtoMember(3, IsRequired = true, Name=@"camp", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    public int camp
-    {
-      get { return _camp; }
-      set { _camp = value; }
+      get { return _einfo; }
+      set { _einfo = value; }
     }
     private int _use_gold;
-    [global::ProtoBuf.ProtoMember(4, IsRequired = true, Name=@"use_gold", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::ProtoBuf.ProtoMember(2, IsRequired = true, Name=@"use_gold", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
     public int use_gold
     {
       get { return _use_gold; }
       set { _use_gold = value; }
     }
-    private int _gold;
-    [global::ProtoBuf.ProtoMember(5, IsRequired = true, Name=@"gold", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    public int gold
+    private int _cur_gold;
+    [global::ProtoBuf.ProtoMember(3, IsRequired = true, Name=@"cur_gold", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public int cur_gold
     {
-      get { return _gold; }
-      set { _gold = value; }
+      get { return _cur_gold; }
+      set { _cur_gold = value; }
     }
-    private int _row;
-    [global::ProtoBuf.ProtoMember(6, IsRequired = true, Name=@"row", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    public int row
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"s_destroy_entity")]
+  public partial class s_destroy_entity : global::ProtoBuf.IExtensible
+  {
+    public s_destroy_entity() {}
+    
+    private int _eid;
+    [global::ProtoBuf.ProtoMember(1, IsRequired = true, Name=@"eid", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public int eid
     {
-      get { return _row; }
-      set { _row = value; }
-    }
-    private int _col;
-    [global::ProtoBuf.ProtoMember(7, IsRequired = true, Name=@"col", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    public int col
-    {
-      get { return _col; }
-      set { _col = value; }
+      get { return _eid; }
+      set { _eid = value; }
     }
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
@@ -277,40 +391,19 @@ namespace battle_msg
   {
     public s_fire() {}
     
-    private int _entity_id;
-    [global::ProtoBuf.ProtoMember(1, IsRequired = true, Name=@"entity_id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    public int entity_id
+    private int _eid;
+    [global::ProtoBuf.ProtoMember(1, IsRequired = true, Name=@"eid", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public int eid
     {
-      get { return _entity_id; }
-      set { _entity_id = value; }
+      get { return _eid; }
+      set { _eid = value; }
     }
-    private int _bullet_id;
-    [global::ProtoBuf.ProtoMember(2, IsRequired = true, Name=@"bullet_id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    public int bullet_id
+    private battle_msg.bullet_info _binfo;
+    [global::ProtoBuf.ProtoMember(2, IsRequired = true, Name=@"binfo", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    public battle_msg.bullet_info binfo
     {
-      get { return _bullet_id; }
-      set { _bullet_id = value; }
-    }
-    private int _type_id;
-    [global::ProtoBuf.ProtoMember(3, IsRequired = true, Name=@"type_id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    public int type_id
-    {
-      get { return _type_id; }
-      set { _type_id = value; }
-    }
-    private battle_msg.vector _pos;
-    [global::ProtoBuf.ProtoMember(4, IsRequired = true, Name=@"pos", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    public battle_msg.vector pos
-    {
-      get { return _pos; }
-      set { _pos = value; }
-    }
-    private battle_msg.vector _speed;
-    [global::ProtoBuf.ProtoMember(5, IsRequired = true, Name=@"speed", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    public battle_msg.vector speed
-    {
-      get { return _speed; }
-      set { _speed = value; }
+      get { return _binfo; }
+      set { _binfo = value; }
     }
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
@@ -322,33 +415,26 @@ namespace battle_msg
   {
     public s_collision() {}
     
-    private int _entity_id;
-    [global::ProtoBuf.ProtoMember(1, IsRequired = true, Name=@"entity_id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    public int entity_id
+    private battle_msg.entity_info _einfo;
+    [global::ProtoBuf.ProtoMember(1, IsRequired = true, Name=@"einfo", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    public battle_msg.entity_info einfo
     {
-      get { return _entity_id; }
-      set { _entity_id = value; }
+      get { return _einfo; }
+      set { _einfo = value; }
     }
-    private int _bullet_id;
-    [global::ProtoBuf.ProtoMember(2, IsRequired = true, Name=@"bullet_id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    public int bullet_id
+    private battle_msg.bullet_info _binfo;
+    [global::ProtoBuf.ProtoMember(2, IsRequired = true, Name=@"binfo", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    public battle_msg.bullet_info binfo
     {
-      get { return _bullet_id; }
-      set { _bullet_id = value; }
+      get { return _binfo; }
+      set { _binfo = value; }
     }
-    private int _damage;
-    [global::ProtoBuf.ProtoMember(3, IsRequired = true, Name=@"damage", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    public int damage
+    private bool _bullet_destroy;
+    [global::ProtoBuf.ProtoMember(3, IsRequired = true, Name=@"bullet_destroy", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    public bool bullet_destroy
     {
-      get { return _damage; }
-      set { _damage = value; }
-    }
-    private int _blood;
-    [global::ProtoBuf.ProtoMember(4, IsRequired = true, Name=@"blood", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    public int blood
-    {
-      get { return _blood; }
-      set { _blood = value; }
+      get { return _bullet_destroy; }
+      set { _bullet_destroy = value; }
     }
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)

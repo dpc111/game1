@@ -6,6 +6,27 @@ package battle_msg;
 message vector {
 	required float x = 1;
 	required float y = 2;
+	required float z = 3;
+}
+
+message entity_info {
+	required int32 id = 1;
+	required int32 type_id = 2;
+	required int32 camp = 3;
+	required int32 blood = 4;
+	required float cd = 5;
+	required int32 row = 6;
+	required int32 col = 7;
+	required vector pos = 8;
+}
+
+message bullet_info {
+	required int32 id = 1;
+	required int32 type_id = 2;
+	required int32 camp = 3;
+	required int32 damage = 4;
+	required vector pos = 5;
+	required vector speed = 6;
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////
@@ -45,26 +66,22 @@ message s_room_state {
 }
 
 message s_create_entity {
-	required int32 entity_id = 1;
-	required int32 type_id = 2;
-	required int32 camp = 3;
-	required int32 use_gold = 4;
-	required int32 gold = 5;
-	required int32 row = 6;
-	required int32 col = 7;
+	required entity_info einfo = 1;
+	required int32 use_gold = 2;
+	required int32 cur_gold = 3;
+}
+
+message s_destroy_entity {
+	required int32 eid = 1;
 }
 
 message s_fire {
-	required int32 entity_id = 1;
-	required int32 bullet_id = 2;
-	required int32 type_id = 3;
-	required vector pos = 4;
-	required vector speed = 5;
+	required int32 eid = 1;
+	required bullet_info binfo = 2;
 }
 
 message s_collision {
-	required int32 entity_id = 1;
-	required int32 bullet_id = 2;
-	required int32 damage = 3;
-	required int32 blood = 4;
+	required entity_info einfo = 1;
+	required bullet_info binfo = 2;
+	required bool bullet_destroy = 3;
 }

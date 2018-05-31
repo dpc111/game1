@@ -15,9 +15,9 @@ public:
 
 	box_t& get_box() { return box_; }
 
-	vector2_t& get_pos() { return pos_; }
+	vector3_t& get_pos() { return pos_; }
 
-	vector2_t& get_gun_pos() { return gun_pos_; }
+	vector3_t& get_gun_pos() { return gun_pos_; }
 
 	int32 get_camp() { return camp_; }
 
@@ -37,9 +37,9 @@ public:
 
 	int32 get_col() { return col_; }
 
-	void set_pos(const vector2_t& pos) { pos_ = pos; }
+	void set_pos(const vector3_t& pos) { pos_ = pos; }
 
-	void set_gun_pos(const vector2_t& pos) { gun_pos_ = pos; }
+	void set_gun_pos(const vector3_t& pos) { gun_pos_ = pos; }
 
 	void set_camp(int32 camp) { camp_ = camp; } 
 
@@ -59,7 +59,7 @@ public:
 
 	void set_grid(int32 row, int32 col) { row_ = row; col_ = col; }
 
-	void set_box(float boxx, float boxy);
+	void set_box(const vector3_t& box);
 
 	void update(float tm);
 
@@ -72,9 +72,9 @@ private:
 
 	box_t box_;
 
-	vector2_t pos_;
+	vector3_t pos_;
 
-	vector2_t gun_pos_;
+	vector3_t gun_pos_;
 
 	int32 camp_;
 

@@ -60,6 +60,12 @@ public:
 	virtual void handle_timeout(timer_handle_t handle, void *user);
 
 	/////////////////////////////////////////////////////////////////////////////////////////////////////////
+	// pack message
+	void pack_entity_info(entity_t *entity, battle_msg::entity_info *info);
+
+	void pack_bullet_info(entity_t *entity, battle_msg::bullet_info *info);
+
+	/////////////////////////////////////////////////////////////////////////////////////////////////////////
 	// event
 	void on_room_state_change(int32 state);
 

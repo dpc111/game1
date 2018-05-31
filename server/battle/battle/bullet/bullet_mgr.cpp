@@ -24,7 +24,6 @@ bullet_t *bullet_mgr_t::create_bullet(entity_t *entity, int32 type_id) {
 	if (!get_json_mgr()->exist("bullet", type_id - 1)) {
 		return NULL;
 	}
-	// bullet_t *bullet = new bullet_t(room_, bullet_id, type_id);
 	bullet_t *bullet = new bullet_horizontal_t(room_, bullet_id, type_id);
 	bullet->set_camp(entity->get_camp());
 	bullet->set_begin_pos(entity->get_gun_pos());
@@ -32,9 +31,9 @@ bullet_t *bullet_mgr_t::create_bullet(entity_t *entity, int32 type_id) {
 	bullet->set_damage(entity->get_damage());
 	bullet->set_speed(get_json_mgr()->get_int("bullet", type_id - 1, "speed"));
 	if (IS_LEFT_CAMP(entity->get_camp())) {
-		bullet->set_v_speed(vector2_t(0, bullet->get_speed()));
+		bullet->set_v_speed(vector3_t(bullet->get_speed(), 0, 0));
 	} else {
-		bullet->set_v_speed(vector2_t(0, -bullet->get_speed()));
+		bullet->set_v_speed(vector3_t(-bullet->get_speed(), 0, 0));
 	}
 	bullet->set_line(entity->get_col());
 	add_object(bullet_id, bullet);

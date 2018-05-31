@@ -119,6 +119,24 @@ void room_t::handle_timeout(timer_handle_t handle, void *user) {
 	}
 }
 
+void room_t::pack_entity_info(entity_t *entity, battle_msg::entity_info *info) {
+	info->set_id(entity->get_id());
+	info->set_type_id(entity->get_type_id());
+	info->set_camp(entity->get_camp());
+	info->set_blood(entity->get_blood());
+	info->set_cd(entity->get_cd());
+	info->set_row(entity->get_row());
+	info->set_col(entity->get_col());
+	battle_msg::vector *pos = info->mutable_pos();
+	pos->set_x(entity->get_pos().x);
+	pos->set_y(entity->get_pos().y);
+	pos->set_z(entity->get_pos().z);
+}
+
+void room_t::pack_bullet_info(entity_t *entity, battle_msg::bullet_info *info) {
+
+}
+
 void room_t::on_room_state_change(int32 state) {
 	battle_msg::s_room_state msg;
 	msg.set_state(state);
@@ -127,13 +145,10 @@ void room_t::on_room_state_change(int32 state) {
 
 void room_t::on_create_entity(entity_t *entity) {
 	battle_msg::s_create_entity msg;
-	msg.set_entity_id(entity->get_id());
-	msg.set_type_id(entity->get_type_id());
-	msg.set_camp(entity->get_camp());
+	battle_msg::entity_info *info = msg.mutable_einfo();
+	pack_entity_info(entity, info);
 	msg.set_use_gold(0);
 	msg.set_gold(0);
-	msg.set_row(entity->get_row());
-	msg.set_col(entity->get_col());
 	broadcast(msg);
 }
 
@@ -155,23 +170,18 @@ void room_t::on_entity_damage(entity_t *entity, int32 damage) {
 
 void room_t::on_fire(entity_t *entity, bullet_t *bullet) {
 	battle_msg::s_fire msg;
-	msg.set_entity_id(entity->get_id());
-	msg.set_bullet_id(bullet->get_id());
-	msg.set_type_id(bullet->get_type_id());
-	battle_msg::vector *pos = msg.mutable_pos();
-	pos->set_x(bullet->get_pos().x);
-	pos->set_y(bullet->get_pos().y);
-	battle_msg::vector *speed = msg.mutable_speed();
-	speed->set_x(bullet->get_v_speed().x);
-	speed->set_y(bullet->get_v_speed().y);
+	msg.set_entity_eid(entity->get_id());
+	battle_msg::bullet_info *info = msg.mutable_binfo();
+	pack_bullet_info(bullet, info);
 	broadcast(msg);
 }
 
 void room_t::on_collision(entity_t *entity, bullet_t *bullet) {
 	battle_msg::s_collision msg;
-	msg.set_entity_id(entity->get_id());
-	msg.set_bullet_id(entity->get_id());
-	msg.set_damage(bullet->get_damage());
-	msg.set_blood(entity->get_blood());
+	battle_msg::entity_info *einfo = msg.mutable_einfo();
+	pack_entity_info(entity, einfo);
+	battle_msg::bullet_info *binfo = msg.mutable_binfo();
+	pack_bullet_info(bullet, binfo);
+	msg.set_bullet_destroy(true);
 	broadcast(msg);
 }

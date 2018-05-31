@@ -9,9 +9,9 @@ public:
 
 	~box_t();
 
-	void set_box(float x1_, float x2_, float y1_, float y2_);
+	void set_box(float x1_, float x2_, float y1_, float y2_, float z1_, float z2_);
 
-	bool collision(const vector2_t& pos);
+	bool collision(const vector3_t& pos);
 
 private:
 	float x1;
@@ -21,6 +21,10 @@ private:
 	float y1;
 
 	float y2;
+
+	float z1;
+
+	float z2;
 };
 
 #endif

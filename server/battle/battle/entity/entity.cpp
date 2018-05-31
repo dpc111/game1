@@ -26,9 +26,9 @@ entity_t::~entity_t() {
 
 }
 
-void entity_t::set_box(float boxx, float boxy) {
-	vector2_t& pos = room_->get_grid()->get_pos(row_, col_);
-	box_.set_box(pos_.x - boxx, pos_.x + boxx, pos_.y - boxy, pos_.y + boxy);
+void entity_t::set_box(const vector3_t& box) {
+	vector3_t& pos = room_->get_grid()->get_pos(row_, col_);
+	box_.set_box(pos_.x - box.x, pos_.x + box.x, pos_.y - box.y, pos_.y + box.y, pox_.z - box.z, pos_.z + box.z);
 }
 
 void entity_t::update(float tm) {

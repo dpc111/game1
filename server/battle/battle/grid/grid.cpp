@@ -13,8 +13,8 @@ grid_t::grid_t(room_t *room) :
 	for (int i = 0; i < ROW_NUM; i++) {
 		for (int j = 0; j < COL_NUM; j++) {
 			int x = (i - 1) * ROW_LENGTH + (ROW_LENGTH / 2);
-			int y = (j - 1) * COL_LENGTH + (COL_LENGTH / 2);
-			pos_[i][j] = vector2_t(x, y);	
+			int z = (j - 1) * COL_LENGTH + (COL_LENGTH / 2);
+			pos_[i][j] = vector3_t(x, 0, z);	
 		}
 	}
 }
@@ -64,7 +64,7 @@ bool grid_t::exist(int32 row, int32 col) {
 	return false;
 }
 
-vector2_t& grid_t::get_pos(int32 row, int32 col) {
+vector3_t& grid_t::get_pos(int32 row, int32 col) {
 	assert(pos_[row][col]);
 	return pos_[row][col];
 }
@@ -72,11 +72,11 @@ vector2_t& grid_t::get_pos(int32 row, int32 col) {
 void grid_t::process_collision(bullet_t *bullet) {
 	int32 camp = bullet->get_camp();
 	int32 line = bullet->get_line();
-	vector2_t& pos = bullet->get_pos();
+	vector3_t& pos = bullet->get_pos();
 	if (pos.x < BULLET_OUT_MIN_X ||
 		pos.x > BULLET_OUT_MAX_X ||
-		pos.y < BULLET_OUT_MIN_Y ||
-		pos.y > BULLET_OUT_MAX_Y) {
+		pos.z < BULLET_OUT_MIN_Z ||
+		pos.z > BULLET_OUT_MAX_Z) {
 		bullet->on_bullet_out();
 		return;
 	}

@@ -23,9 +23,9 @@ public:
 
 	bool get_del() { return del_; }
 
-	vector2_t& get_pos() { return pos_; }
+	vector3_t& get_pos() { return pos_; }
 
-	vector2_t& get_v_speed() { return v_speed_; }
+	vector3_t& get_v_speed() { return v_speed_; }
 
 	int get_damage() { return damage_; }
 
@@ -37,11 +37,11 @@ public:
 
 	void set_del(bool del) { del_ = del; }
 
-	void set_v_speed(const vector2_t& speed) { v_speed_ = speed; }
+	void set_v_speed(const vector3_t& speed) { v_speed_ = speed; }
 
-	void set_begin_pos(const vector2_t& pos) { begin_pos_ = pos; }
+	void set_begin_pos(const vector3_t& pos) { begin_pos_ = pos; }
 
-	void set_pos(const vector2_t& pos) { pos_ = pos; }
+	void set_pos(const vector3_t& pos) { pos_ = pos; }
 
 	void set_damage(int32 damage) { damage_ = damage; }
 
@@ -62,11 +62,11 @@ protected:
 
 	float begin_tm_;
 
-	vector2_t v_speed_;
+	vector3_t v_speed_;
 
-	vector2_t begin_pos_;
+	vector3_t begin_pos_;
 
-	vector2_t pos_;
+	vector3_t pos_;
 
 	int32 damage_;
 

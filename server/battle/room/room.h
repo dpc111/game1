@@ -63,7 +63,7 @@ public:
 	// pack message
 	void pack_entity_info(entity_t *entity, battle_msg::entity_info *info);
 
-	void pack_bullet_info(entity_t *entity, battle_msg::bullet_info *info);
+	void pack_bullet_info(bullet_t *bullet, battle_msg::bullet_info *info);
 
 	/////////////////////////////////////////////////////////////////////////////////////////////////////////
 	// event

@@ -133,8 +133,19 @@ void room_t::pack_entity_info(entity_t *entity, battle_msg::entity_info *info) {
 	pos->set_z(entity->get_pos().z);
 }
 
-void room_t::pack_bullet_info(entity_t *entity, battle_msg::bullet_info *info) {
-
+void room_t::pack_bullet_info(bullet_t *bullet, battle_msg::bullet_info *info) {
+	info->set_id(bullet->get_id());
+	info->set_type_id(bullet->get_type_id());
+	info->set_camp(bullet->get_camp());
+	info->set_damage(bullet->get_damage());
+	battle_msg::vector *pos = info->mutable_pos();
+	pos->set_x(bullet->get_pos().x);
+	pos->set_y(bullet->get_pos().y);
+	pos->set_z(bullet->get_pos().z);
+	battle_msg::vector *speed = info->mutable_speed();
+	speed->set_x(bullet->get_v_speed().x);
+	speed->set_y(bullet->get_v_speed().y);
+	speed->set_z(bullet->get_v_speed().z);
 }
 
 void room_t::on_room_state_change(int32 state) {
@@ -170,7 +181,7 @@ void room_t::on_entity_damage(entity_t *entity, int32 damage) {
 
 void room_t::on_fire(entity_t *entity, bullet_t *bullet) {
 	battle_msg::s_fire msg;
-	msg.set_entity_eid(entity->get_id());
+	msg.set_eid(entity->get_id());
 	battle_msg::bullet_info *info = msg.mutable_binfo();
 	pack_bullet_info(bullet, info);
 	broadcast(msg);

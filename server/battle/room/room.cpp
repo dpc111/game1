@@ -159,7 +159,7 @@ void room_t::on_create_entity(entity_t *entity) {
 	battle_msg::entity_info *info = msg.mutable_einfo();
 	pack_entity_info(entity, info);
 	msg.set_use_gold(0);
-	msg.set_gold(0);
+	msg.set_cur_gold(0);
 	broadcast(msg);
 }
 

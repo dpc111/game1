@@ -78,7 +78,7 @@ void room_t::c_create_entity(void *player, const battle_msg::c_create_entity& ms
 	if (room_state_ != ROOM_STATE_ING) {
 		return;
 	}
-	entity_mgr_->create_entity(p->get_camp(), msg.type_id(), msg.row(), msg.col())
+	entity_mgr_->create_entity(p->get_camp(), msg.type_id(), msg.row(), msg.col());
 }
 
 void room_t::start_wait() {

@@ -59,10 +59,6 @@ void client_msg_t::c_login(tcp_connection_t *conn, const battle_msg::c_login& ms
 	get_service()->verify((int32)uid, conn);
 }
 
-void client_msg_t::c_create_entity(int32 uid, const battle_msg::c_create_entity& msg) {
-
-}
-
 void client_msg_t::default_message(int32 uid, const google::protobuf::Descriptor* des, const google::protobuf::Message *msg) {
 	player_t *player = get_player_mgr()->get_player(uid);
 	if (!player) {

@@ -15,8 +15,6 @@ public:
 
 	void c_login(tcp_connection_t *conn, const battle_msg::c_login& msg);
 
-	void c_create_entity(int32 uid, const battle_msg::c_create_entity& msg);
-
 	void default_message(int32 uid, const google::protobuf::Descriptor* des, const google::protobuf::Message *msg);
 };
 

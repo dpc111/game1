@@ -155,10 +155,10 @@ float cfg_json_t::get_float(const char *key1) {
 		return JSON_ERROR_FLOAT;
 	}
 	Json::Value value = json_value_[key1];
-	if (!value.isDouble()) {
-		ERROR("");
-		return JSON_ERROR_FLOAT;
-	}
+	// if (!value.isDouble()) {
+	// 	ERROR("");
+	// 	return JSON_ERROR_FLOAT;
+	// }
 	return (float)value.asDouble();
 
 }
@@ -169,10 +169,10 @@ float cfg_json_t::get_float(int key1) {
 		return JSON_ERROR_FLOAT;
 	}
 	Json::Value value = json_value_[key1];
-	if (!value.isDouble()) {
-		ERROR("");
-		return JSON_ERROR_FLOAT;
-	}
+	// if (!value.isDouble()) {
+	// 	ERROR("");
+	// 	return JSON_ERROR_FLOAT;
+	// }
 	return (float)value.asDouble();
 }
 
@@ -183,10 +183,10 @@ float cfg_json_t::get_float(const char *key1, const char *key2) {
 		return JSON_ERROR_FLOAT;
 	}
 	Json::Value value = json_value_[key1][key2];
-	if (!value.isDouble()) {
-		ERROR("");
-		return JSON_ERROR_FLOAT;
-	}
+	// if (!value.isDouble()) {
+	// 	ERROR("");
+	// 	return JSON_ERROR_FLOAT;
+	// }
 	return (float)value.asDouble();
 }
 
@@ -197,10 +197,10 @@ float cfg_json_t::get_float(const char *key1, int key2) {
 		return JSON_ERROR_FLOAT;
 	}
 	Json::Value value = json_value_[key1][key2];
-	if (!value.isDouble()) {
-		ERROR("");
-		return JSON_ERROR_FLOAT;
-	}
+	// if (!value.isDouble()) {
+	// 	ERROR("");
+	// 	return JSON_ERROR_FLOAT;
+	// }
 	return (float)value.asDouble();
 }
 
@@ -211,10 +211,10 @@ float cfg_json_t::get_float(int key1, const char* key2) {
 		return JSON_ERROR_FLOAT;
 	}
 	Json::Value value = json_value_[key1][key2];
-	if (!value.isDouble()) {
-		ERROR("");
-		return JSON_ERROR_FLOAT;
-	}
+	// if (!value.isDouble()) {
+	// 	ERROR("");
+	// 	return JSON_ERROR_FLOAT;
+	// }
 	return (float)value.asDouble();
 }
 
@@ -225,10 +225,10 @@ float cfg_json_t::get_float(int key1, int key2) {
 		return JSON_ERROR_FLOAT;
 	}
 	Json::Value value = json_value_[key1][key2];
-	if (!value.isDouble()) {
-		ERROR("");
-		return JSON_ERROR_FLOAT;
-	}
+	// if (!value.isDouble()) {
+	// 	ERROR("");
+	// 	return JSON_ERROR_FLOAT;
+	// }
 	return (float)value.asDouble();
 }
 
@@ -240,10 +240,10 @@ float cfg_json_t::get_float(int key1, const char *key2, int key3) {
 		return JSON_ERROR_FLOAT;
 	}
 	Json::Value value = json_value_[key1][key2][key3];
-	if (value.isNumeric()) {
-		ERROR("");
-		return JSON_ERROR_FLOAT;
-	}
+	// if (value.isNumeric()) {
+	// 	ERROR("");
+	// 	return JSON_ERROR_FLOAT;
+	// }
 	return value.asDouble();
 }
 

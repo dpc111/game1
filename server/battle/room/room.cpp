@@ -28,6 +28,7 @@ room_t::room_t(int32 rid) :
 	for (int32 k = 0; k < 2; k++) {
 		camps_[k] = 0;
 	}
+	register_callback();
 }
 
 room_t::~room_t() {

@@ -11,7 +11,8 @@
          "box" : [2,3],
          "gun_pos" : [1,2],
          "fire_begin_time" : 2,
-         "fire_end_time" : 1
+         "fire_end_time" : 1,
+         "entity_prefab" : "Entity/Entity1"
       },
       {
          "id" : 2,
@@ -25,7 +26,8 @@
          "box" : [2,3],
          "gun_pos" : [1,2],
          "fire_begin_time" : 1,
-         "fire_end_time" : 1
+         "fire_end_time" : 1,
+         "entity_prefab" : "Entity/Entity2"
       },
       {
          "id" : 3,
@@ -39,7 +41,8 @@
          "box" : [2,3],
          "gun_pos" : [1,2],
          "fire_begin_time" : 1,
-         "fire_end_time" : 1
+         "fire_end_time" : 1,
+         "entity_prefab" : "Entity/Entity3"
       },
       {
          "id" : 4,
@@ -53,6 +56,7 @@
          "box" : [2,3],
          "gun_pos" : [1,2],
          "fire_begin_time" : 2,
-         "fire_end_time" : 1
+         "fire_end_time" : 1,
+         "entity_prefab" : "Entity/Entity4"
       }
 ]

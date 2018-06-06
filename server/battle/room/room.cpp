@@ -75,6 +75,10 @@ void room_t::broadcast(google::protobuf::Message& msg) {
 
 void room_t::c_create_entity(void *player, const battle_msg::c_create_entity& msg) {
 	player_t *p = (player_t *)player;
+	if (room_state_ != ROOM_STATE_ING) {
+		return;
+	}
+	entity_mgr_->create_entity(p->get_camp(), msg.type_id(), msg.row(), msg.col())
 }
 
 void room_t::start_wait() {

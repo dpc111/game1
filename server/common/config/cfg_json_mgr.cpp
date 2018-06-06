@@ -22,9 +22,9 @@ void cfg_json_mgr_t::load(std::string file_name, std::string json_name) {
 }
 
 cfg_json_t* cfg_json_mgr_t::get_json(std::string json_name) {
-	ERROR("%s", json_name.c_str());
 	cfg_json_map_t::iterator it = jsons_.find(json_name);
 	if (it == jsons_.end()) {
+		ERROR("%s", json_name.c_str());
 		return NULL;
 	}
 	return it->second;

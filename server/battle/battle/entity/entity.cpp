@@ -37,6 +37,7 @@ void entity_t::update(float tm) {
 	}
 	if (tm - last_fire_tm_ > cd_) {
 		fire();
+		last_fire_tm_ = tm;
 	} 
 }
 

@@ -71,7 +71,7 @@ vector3_t& grid_t::get_pos(int32 row, int32 col) {
 
 void grid_t::process_collision(bullet_t *bullet) {
 	int32 camp = bullet->get_camp();
-	int32 line = bullet->get_line();
+	int32 line = bullet->get_line() - 1;
 	vector3_t& pos = bullet->get_pos();
 	if (pos.x < BULLET_OUT_MIN_X ||
 		pos.x > BULLET_OUT_MAX_X ||

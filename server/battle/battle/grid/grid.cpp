@@ -12,9 +12,9 @@ grid_t::grid_t(room_t *room) :
 	}
 	for (int i = 0; i < ROW_NUM; i++) {
 		for (int j = 0; j < COL_NUM; j++) {
-			int x = (i - 1) * ROW_LENGTH + (ROW_LENGTH / 2);
-			int z = (j - 1) * COL_LENGTH + (COL_LENGTH / 2);
-			pos_[i][j] = vector3_t(x, 0, z);	
+			int x = i * ROW_LENGTH + (ROW_LENGTH / 2);
+			int z = j * COL_LENGTH + (COL_LENGTH / 2);
+			pos_[i][j] = vector3_t(x, 3, z);	
 		}
 	}
 }
@@ -65,8 +65,8 @@ bool grid_t::exist(int32 row, int32 col) {
 }
 
 vector3_t& grid_t::get_pos(int32 row, int32 col) {
-	assert(pos_[row][col]);
-	return pos_[row][col];
+	assert(pos_[row - 1][col - 1]);
+	return pos_[row - 1][col - 1];
 }
 
 void grid_t::process_collision(bullet_t *bullet) {

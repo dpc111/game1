@@ -58,7 +58,7 @@ public:
 
 	int get_sid() { return sid_; }
 
-	void set_on_disconnect_cb(const on_disconnect_cb_t& cb) { disconnect_cb_ = cb; }
+	void set_on_disconnect_cb(on_disconnect_cb_t *cb) { disconnect_cb_ = cb; }
 
 private:
 	net_address_t addr_;
@@ -75,7 +75,7 @@ private:
 
 	int sid_;
 
-	on_disconnect_cb_t disconnect_cb_;
+	on_disconnect_cb_t *disconnect_cb_;
 };
 
 #endif

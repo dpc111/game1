@@ -11,7 +11,7 @@ server_t::server_t() {
 	json_mgr_ = new cfg_json_mgr_t();	
 	frame_last_tm_ = 0;
 	frame_interval_ = 0;
-	network_->set_on_disconnect_cb(std::tr1::bind(&on_disconnect, this, std::tr1::placeholders::_1));
+	network_->set_on_disconnect_cb(std::tr1::bind(server_t::on_disconnect, this, std::tr1::placeholders::_1));
 }
 
 server_t::~server_t() {

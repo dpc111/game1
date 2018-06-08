@@ -11,6 +11,7 @@ server_t::server_t() {
 	json_mgr_ = new cfg_json_mgr_t();	
 	frame_last_tm_ = 0;
 	frame_interval_ = 0;
+	network_->set_on_disconnect_cb(std::tr1::bind(&on_disconnect, this, std::tr1::placeholders::_1));
 }
 
 server_t::~server_t() {
@@ -121,4 +122,8 @@ timer_handle_t server_t::register_delay_stimer(timer_handler_t *handler, void *u
 
 timer_handle_t server_t::register_delay_mstimer(timer_handler_t *handler, void *user, timestamp delay, timestamp interval) {
 	return times_->add(handler, user, delay + getms(), interval);
+}
+
+void server_t::on_disconnect(tcp_connection_t *conn) {
+	conn_mgr_->on_disconnect(conn);
 }

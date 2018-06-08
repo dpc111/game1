@@ -63,6 +63,8 @@ public:
 
 	void register_default_message(const msg_dispatch_t::msg_default_cb_t& cb) { network_->get_msg_dispatch()->register_default_message(cb); }
 
+	void on_disconnect(tcp_connection_t *conn);
+
 private:
 	tcp_network_t *network_;
 

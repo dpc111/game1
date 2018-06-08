@@ -77,6 +77,9 @@ void tcp_network_t::remove_connection(int fd) {
 		return;
 	}
 	tcp_connection_t *conn = it->second;
+	if (disconnect_cb_) {
+		disconnect_cb_(conn);
+	}
 	conn->set_closed(true);
 	conn->unset_events();
 	conn->connect_destroy();

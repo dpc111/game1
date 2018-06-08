@@ -15,6 +15,8 @@ class tcp_network_t {
 public:
 	typedef std::map<int, tcp_connection_t *> conn_map_t;
 
+	typedef std::tr1::function<void (tcp_connection_t *)> on_disconnect_cb_t;
+
 public:
 	tcp_network_t();
 
@@ -56,6 +58,8 @@ public:
 
 	int get_sid() { return sid_; }
 
+	void set_on_disconnect_cb(const on_disconnect_cb_t& cb) { disconnect_cb_ = cb; }
+
 private:
 	net_address_t addr_;
 
@@ -70,6 +74,8 @@ private:
 	evconnlistener *ev_listen_;
 
 	int sid_;
+
+	on_disconnect_cb_t disconnect_cb_;
 };
 
 #endif

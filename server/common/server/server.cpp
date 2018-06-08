@@ -73,6 +73,7 @@ void server_t::send(int sid, google::protobuf::Message& msg) {
 		conn = conn_mgr_->connect_to(sid);
 	}
 	if (!conn) {
+		ERROR("send %s to %d : disconnect", msg.GetDescriptor()->full_name().c_str(), sid);
 		return;
 	}
 	network_->get_msg_operate()->send(conn, msg);

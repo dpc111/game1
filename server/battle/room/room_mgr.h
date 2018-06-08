@@ -25,6 +25,8 @@ public:
 
 	int room_num() { return room_num_; }
 
+	room_t* get_idle_room(bool bcreate = false);
+
 	void update(int64 tm);
 
 private:

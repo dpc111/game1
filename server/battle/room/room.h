@@ -39,6 +39,8 @@ public:
 
 	void set_del(bool del) { del_ = del; }
 
+	int32 get_player_num() { return player_num_; }
+
 	void update(int64 tm);
 
 	virtual void register_callback();
@@ -97,6 +99,8 @@ private:
 	bool del_;
 
 	int32 room_state_;
+
+	int32 player_num_;
 
 	timer_handle_t wait_timer_;
 

@@ -50,6 +50,19 @@ room_t* room_mgr_t::create_room() {
 	return room;
 }
 
+room_t* room_mgr_t::get_idle_room(bool bcreate) {
+	for (room_map_t::iterator it = rooms_.begin(); it != rooms_.end(); ) {
+		room_t *room = it->second;
+		if (room->get_player_num() < 2) {
+			return room;
+		}
+	}
+	if (bcreate) {
+		return this->create_room();
+	}
+	return NULL;
+}
+
 void room_mgr_t::update(int64 tm) {
 	for (room_map_t::iterator it = rooms_.begin(); it != rooms_.end(); ) {
 		room_t *room = it->second;

@@ -25,6 +25,7 @@ room_t::room_t(int32 rid) :
 	grid_ = new grid_t(this);
 	del_ = false;
 	room_state_ = ROOM_STATE_WAIT;
+	player_num_ = 0;
 	for (int32 k = 0; k < 2; k++) {
 		camps_[k] = 0;
 	}
@@ -47,6 +48,7 @@ int32 room_t::set_random_camp(int64 uid) {
 	for (int32 k = 0; k < 2; k++) {
 		if (camps_[k] == 0) {
 			camps_[k] = uid;
+			player_num_++;
 			return k + 1;
 		}
 	}

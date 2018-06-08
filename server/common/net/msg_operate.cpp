@@ -49,7 +49,7 @@ void msg_operate_t::free_message(google::protobuf::Message *msg) {
 
 void msg_operate_t::send(tcp_connection_t *conn, google::protobuf::Message& msg) {
 	std::string name = msg.GetDescriptor()->full_name();
-	ERROR("send msg %s", name.c_str());
+	LOG("send msg %s", name.c_str());
 	net_output_stream_t& stream = conn->get_output_stream();
 	msg_header_t header;
 	header.name_len = strlen(name.c_str()) + 1;
@@ -131,7 +131,7 @@ bool msg_operate_t::on_message(tcp_connection_t *conn) {
 		}
 		walk += stream.read(msg_name_, header.name_len);
 		msg_name_[header.name_len] = '\0';
-		ERROR("recv msg %s", msg_name_);
+		LOG("recv msg %s", msg_name_);
 		if (header.msg_type == MSG_TYPE_PB) {
 			google::protobuf::Message *msg = gen_message(msg_name_);
 			if (msg == NULL) {

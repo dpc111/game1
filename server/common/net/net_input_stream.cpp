@@ -63,9 +63,9 @@ int net_input_stream_t::read_fd(void *ud, int fd) {
 		}
 	}
 	int n = ::readv(fd, vecs, i);
-	ERROR("%d", n);
+	// ERROR("%d", n);
 	if (n <= 0) {
-		ERROR("");
+		ERROR("read fd error");
 		reset();
 		// conn->del_event_read();
 		return n;

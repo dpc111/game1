@@ -58,18 +58,18 @@ void tcp_connection_t::unset_events() {
 }
 
 void tcp_connection_t::add_event_write() {
-	ERROR("add event write");
+	// ERROR("add event write");
 	if (!ev_write_add_) {
-	ERROR("add event write");
+	// ERROR("add event write");
 		ev_write_add_ = true;
 		event_add(ev_write_, NULL);
 	}
 }
 
 void tcp_connection_t::del_event_write() {
-	ERROR("del event write");
+	// ERROR("del event write");
 	if (ev_write_add_) {
-	ERROR("del event write");
+	// ERROR("del event write");
 		ev_write_add_ = false;
 		event_del(ev_write_);
 	}

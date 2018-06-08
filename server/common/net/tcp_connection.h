@@ -50,7 +50,7 @@ public:
 
 	void set_closed(bool bclose) { closed_ = bclose; }
 
-	bool connected() { ERROR("%d", state_); ERROR("%d", CNT_STATE_CONNECTED); return state_ == CNT_STATE_CONNECTED; }
+	bool connected() { return state_ == CNT_STATE_CONNECTED; }
 
 	bool set_state(int state) { state_ = state; }
 

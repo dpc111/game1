@@ -65,7 +65,7 @@ int net_input_stream_t::read_fd(void *ud, int fd) {
 	int n = ::readv(fd, vecs, i);
 	// ERROR("%d", n);
 	if (n <= 0) {
-		ERROR("read fd error");
+		WARN("read fd error");
 		reset();
 		// conn->del_event_read();
 		return n;
@@ -77,7 +77,7 @@ int net_input_stream_t::read_fd(void *ud, int fd) {
 		}
 		input_chunk_t *chunk = read_fd_buff.front();
 		read_fd_buff.pop_front();
-		ERROR("%d", buff_.size());
+		// LOG("%d", buff_.size());
 		assert(chunk);
 		buff_.push_back(chunk);
 		if (read_size < chunk->total_size()) {

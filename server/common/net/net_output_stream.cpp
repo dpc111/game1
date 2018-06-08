@@ -60,7 +60,7 @@ int net_output_stream_t::write_fd(void *ud, int fd) {
 		}
 	}
 	int n = ::writev(fd, vecs, i);
-	ERROR("write fd size %d", n);
+	//LOG("write fd size %d", n);
 	if (n < 0) {
 		return n;
 	}

@@ -26,7 +26,7 @@ bullet_t *bullet_mgr_t::create_bullet(entity_t *entity, int32 type_id) {
 	}
 	bullet_t *bullet = new bullet_horizontal_t(room_, bullet_id, type_id);
 	bullet->set_camp(entity->get_camp());
-	bullet->set_begin_pos(entity->get_gun_pos());
+	bullet->set_begin_pos(entity->get_gun_pos() + entity->get_pos());
 	bullet->set_pos(entity->get_gun_pos());
 	bullet->set_damage(entity->get_damage());
 	bullet->set_speed(get_json_mgr()->get_int("bullet", type_id - 1, "speed"));

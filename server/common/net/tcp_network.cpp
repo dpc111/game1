@@ -80,6 +80,7 @@ void tcp_network_t::remove_connection(int fd) {
 	conn->set_closed(true);
 	conn->unset_events();
 	conn->connect_destroy();
+	connection_free(conn);
 	conns_.erase(it);
 }
 

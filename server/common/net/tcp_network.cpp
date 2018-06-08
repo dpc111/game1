@@ -9,6 +9,7 @@ tcp_network_t::tcp_network_t() {
 	ev_base_ = NULL;
 	ev_listen_ = NULL;
 	sid_ = 0;
+	disconnect_cb_ = NULL;
 }
 
 tcp_network_t::~tcp_network_t() {

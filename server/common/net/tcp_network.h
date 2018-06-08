@@ -8,6 +8,7 @@
 #include "net_address.h"
 #include "tcp_connection.h"
 #include "msg_operate.h"
+#include <tr1/functional>
 
 class msg_dispatch_t;
 

@@ -8,8 +8,8 @@
          "bullet" : 1,
          "damage" : 100,
          "frozen" : 0,
-         "box" : [2,3],
-         "gun_pos" : [1,2],
+         "box" : [2,0,3],
+         "gun_pos" : [1,2,0],
          "fire_begin_time" : 2,
          "fire_end_time" : 1,
          "entity_prefab" : "Entity/Entity1"
@@ -23,8 +23,8 @@
          "bullet" : 2,
          "damage" : 600,
          "frozen" : 0,
-         "box" : [2,3],
-         "gun_pos" : [1,2],
+         "box" : [2,0,3],
+         "gun_pos" : [1,2,0],
          "fire_begin_time" : 1,
          "fire_end_time" : 1,
          "entity_prefab" : "Entity/Entity2"
@@ -38,8 +38,8 @@
          "bullet" : 3,
          "damage" : 1000,
          "frozen" : 0.5,
-         "box" : [2,3],
-         "gun_pos" : [1,2],
+         "box" : [2,0,3],
+         "gun_pos" : [1,2,0],
          "fire_begin_time" : 1,
          "fire_end_time" : 1,
          "entity_prefab" : "Entity/Entity3"
@@ -53,8 +53,8 @@
          "bullet" : 4,
          "damage" : 1500,
          "frozen" : 0,
-         "box" : [2,3],
-         "gun_pos" : [1,2],
+         "box" : [2,0,3],
+         "gun_pos" : [1,2,0],
          "fire_begin_time" : 2,
          "fire_end_time" : 1,
          "entity_prefab" : "Entity/Entity3"

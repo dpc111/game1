@@ -172,7 +172,9 @@ void room_t::on_create_entity(entity_t *entity) {
 }
 
 void room_t::on_del_entity(entity_t *entity) {
-
+	battle_msg::s_destroy_entity msg;
+	msg.set_eid(entity->get_id());
+	broadcast(msg);
 }
 
 void room_t::on_create_bullet(entity_t *entity, bullet_t *bullet) {

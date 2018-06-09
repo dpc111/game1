@@ -37,6 +37,8 @@ public:
 
 	void set_del(bool del) { del_ = del; }
 
+	void set_begin_tm(float begin_tm) { begin_tm_ = begin_tm; }
+
 	void set_v_speed(const vector3_t& speed) { v_speed_ = speed; }
 
 	void set_begin_pos(const vector3_t& pos) { begin_pos_ = pos; }

@@ -22,7 +22,11 @@ int64 getms() {
 }
 
 float getfs() {
-	return (float) getus() / 1000000;
+	return (float) ((float)getus()) / ((float)1000000);
+}
+
+int64 getis() {
+	return getus() / 1000000;
 }
 
 void sleepms(int64 ms) {

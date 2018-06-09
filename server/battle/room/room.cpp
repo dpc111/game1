@@ -59,8 +59,9 @@ void room_t::update(int64 tm) {
 	if (del_ || room_state_ != ROOM_STATE_ING) {
 		return;
 	}
-	entity_mgr_->update(tm);
-	bullet_mgr_->update(tm);
+	float stm = (float)((float)tm) / ((float)1000)
+	entity_mgr_->update(stm);
+	bullet_mgr_->update(stm);
 }
 
 void room_t::register_callback() {

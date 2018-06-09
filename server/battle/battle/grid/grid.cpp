@@ -41,7 +41,7 @@ void grid_t::del_entity(int32 row, int32 col) {
 	if (row < 1 || row > ROW_NUM || col < 1 || col > COL_NUM) {
 		return;
 	}
-	if (exist(row, col)) {
+	if (!exist(row, col)) {
 		return;
 	}
 	grids_[row - 1][col - 1] = NULL;

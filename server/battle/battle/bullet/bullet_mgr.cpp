@@ -19,9 +19,11 @@ bullet_mgr_t::~bullet_mgr_t() {
 bullet_t *bullet_mgr_t::create_bullet(entity_t *entity, int32 type_id) {
 	int32 bullet_id = gen_id();
 	if (get_object(bullet_id)) {
+		ERROR("");
 		return NULL;
 	}
 	if (!get_json_mgr()->exist("bullet", type_id - 1)) {
+		ERROR("");
 		return NULL;
 	}
 	bullet_t *bullet = new bullet_horizontal_t(room_, bullet_id, type_id);

@@ -18,7 +18,7 @@ public:
 
 	void delete_bullet(int32 bullet_id);
 
-	void update(float stm);
+	void update(double stm);
 
 private:
 	room_t *room_;

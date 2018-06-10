@@ -17,7 +17,7 @@ public:
 
 	void delete_entity(int32 entity_id);
 
-	void update(float stm);
+	void update(double stm);
 
 private:
 	room_t *room_;

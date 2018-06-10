@@ -21,8 +21,8 @@ int64 getms() {
 	return getus() / 1000;
 }
 
-float getfs() {
-	return (float) ((float)getus()) / ((float)1000000);
+double getfs() {
+	return (double)getus() / 1000000;
 }
 
 int64 getis() {

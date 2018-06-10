@@ -54,7 +54,7 @@ void bullet_mgr_t::delete_bullet(int32 bullet_id) {
 	del_object(bullet_id);
 }
 
-void bullet_mgr_t::update(float stm) {
+void bullet_mgr_t::update(double stm) {
 	for (object_map_t::iterator it = objects_.begin(); it != objects_.end(); ) {
 		bullet_t *bullet = (bullet_t *)(it->second);
 		if (bullet->get_del()) {

@@ -10,7 +10,7 @@ public:
 
 	virtual ~bullet_horizontal_t();
 
-	virtual void update(float stm);
+	virtual void update(double stm);
 
 private:
 

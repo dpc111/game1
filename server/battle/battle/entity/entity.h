@@ -61,7 +61,7 @@ public:
 
 	void set_box(const vector3_t& box);
 
-	void update(float tm);
+	void update(double tm);
 
 	void fire();
 
@@ -84,7 +84,7 @@ private:
 
 	float cd_;
 
-	float last_fire_tm_;
+	double last_fire_tm_;
 
 	int32 blood_;
 

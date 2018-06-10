@@ -10,7 +10,7 @@ public:
 
 	virtual ~bullet_parabola_t();
 
-	virtual void update(float stm);
+	virtual void update(double stm);
 
 private:
 

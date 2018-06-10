@@ -66,7 +66,7 @@ void entity_mgr_t::delete_entity(int32 entity_id) {
 	del_object(entity_id);
 }
 
-void entity_mgr_t::update(float stm) {
+void entity_mgr_t::update(double stm) {
 	for (object_map_t::iterator it = objects_.begin(); it != objects_.end(); ) {
 		entity_t *entity = (entity_t *)(it->second);
 		if (entity->get_del()) {

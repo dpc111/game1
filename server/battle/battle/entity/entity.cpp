@@ -31,7 +31,7 @@ void entity_t::set_box(const vector3_t& box) {
 	box_.set_box(pos_.x - box.x, pos_.x + box.x, pos_.y - box.y, pos_.y + box.y, pos_.z - box.z, pos_.z + box.z);
 }
 
-void entity_t::update(float tm) {
+void entity_t::update(double tm) {
 	if (del_) {
 		return;
 	}

@@ -15,7 +15,7 @@ public:
 
 	virtual ~bullet_t();
 
-	virtual void update(float stm);
+	virtual void update(double stm);
 
 	int32 get_speed() { return speed_; }
 

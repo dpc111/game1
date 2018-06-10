@@ -15,7 +15,7 @@ int64 getus();
 
 int64 getms();
 
-float getfs();
+double getfs();
 
 void sleepms(int64 ms);
 

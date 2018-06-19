@@ -80,23 +80,23 @@ void room_t::broadcast(google::protobuf::Message& msg) {
 }
 
 void room_t::c_get_room_info(void *player, const battle_msg::c_get_room_info& msg) {
-	battle_msg::s_get_room_info msg;
-	msg->set_res("ok");
-	battle_msg::room_info *info = msg.mutable_info();
+	battle_msg::s_get_room_info res;
+	res.set_res("ok");
+	battle_msg::room_info *info = res.mutable_info();
 	pack_room_info(info);
 	battle_msg::entity_info *entity_info;
-	for (object_mgr_base_t::object_map_t::iterator it = entity_mgr_->begin(); it != entity_mgr_->end(); ) {
+	for (object_mgr_base_t::object_map_t::iterator it = entity_mgr_->objects_.begin(); it != entity_mgr_->objects_.end(); ) {
 		entity_t *entity = (entity_t *)(it->second);
-		entity_info = msg.entitys();
+		entity_info = res.add_entitys();
 		pack_entity_info(entity, entity_info);
 	}
 	battle_msg::bullet_info *bullet_info;
-	for (object_mgr_base_t::object_map_t::iterator it = bullet_mgr_->begin(); it != bullet_mgr_->end(); ) {
+	for (object_mgr_base_t::object_map_t::iterator it = bullet_mgr_->objects_.begin(); it != bullet_mgr_->objects_.end(); ) {
 		bullet_t *bullet = (bullet_t *)(it->second);
-		bullet_info = msg.bullets();
+		bullet_info = res.add_bullets();
 		pack_bullet_info(bullet, bullet_info);
 	}
-	get_service()->send(player->get_uid(), msg);
+	get_service()->send(player->get_uid(), res);
 }
 
 void room_t::c_create_entity(void *player, const battle_msg::c_create_entity& msg) {
@@ -184,7 +184,7 @@ void room_t::pack_bullet_info(bullet_t *bullet, battle_msg::bullet_info *info) {
 	speed->set_z(bullet->get_v_speed().z);
 }
 
-void pack_room_info(battle_msg::room_info *info) {
+void room_t::pack_room_info(battle_msg::room_info *info) {
 	info->set_state(room_state_);
 	info->set_begin_time(begin_time_);
 	info->set_now_time(getfs());

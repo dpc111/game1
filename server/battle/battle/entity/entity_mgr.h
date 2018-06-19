@@ -8,6 +8,8 @@ class entity_t;
 class room_t;
 
 class entity_mgr_t : public object_mgr_base_t {
+friend class room_t;
+	
 public:
 	entity_mgr_t(room_t *room);
 

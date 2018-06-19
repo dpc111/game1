@@ -8,8 +8,6 @@ class room_t;
 class bullet_t;
 
 class entity_t : public object_base_t {
-friend class room_t;
-
 public:
 	entity_t(room_t *room, int32 entity_id, int32 type_id);
 

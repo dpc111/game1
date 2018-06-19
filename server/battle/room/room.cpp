@@ -80,6 +80,7 @@ void room_t::broadcast(google::protobuf::Message& msg) {
 }
 
 void room_t::c_get_room_info(void *player, const battle_msg::c_get_room_info& msg) {
+	player_t *p = (player_t *)player;
 	battle_msg::s_get_room_info res;
 	res.set_res("ok");
 	battle_msg::room_info *info = res.mutable_info();
@@ -96,7 +97,7 @@ void room_t::c_get_room_info(void *player, const battle_msg::c_get_room_info& ms
 		bullet_info = res.add_bullets();
 		pack_bullet_info(bullet, bullet_info);
 	}
-	get_service()->send(player->get_uid(), res);
+	get_service()->send(p->get_uid(), res);
 }
 
 void room_t::c_create_entity(void *player, const battle_msg::c_create_entity& msg) {

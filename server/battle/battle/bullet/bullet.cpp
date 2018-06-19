@@ -7,7 +7,7 @@ bullet_t::bullet_t(room_t *room, int32 bullet_id, int32 type_id) :
 	room_(room),
 	speed_(0),
 	del_(false),
-	begin_tm_(0),
+	begin_time_(0),
 	v_speed_(0, 0, 0),
 	begin_pos_(0, 0, 0),
 	pos_(0, 0, 0),
@@ -22,7 +22,7 @@ void bullet_t::update(double stm) {
 	if (del_) {
 		return;
 	}
-	if (stm - begin_tm_ > MAX_LIFE_TM) {
+	if (stm - begin_time_ > MAX_LIFE_TM) {
 		ERROR("");
 		set_del(true);
 		return;

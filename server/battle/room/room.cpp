@@ -25,6 +25,7 @@ room_t::room_t(int32 rid) :
 	grid_ = new grid_t(this);
 	del_ = false;
 	room_state_ = ROOM_STATE_WAIT;
+	begin_time_ = getfs();
 	player_num_ = 0;
 	for (int32 k = 0; k < 2; k++) {
 		camps_[k] = 0;
@@ -65,6 +66,7 @@ void room_t::update(int64 tm) {
 }
 
 void room_t::register_callback() {
+	register_message<battle_msg::c_get_room_info>(REGISTER_ROOM_BIND(room_t::c_get_room_info));
 	register_message<battle_msg::c_create_entity>(REGISTER_ROOM_BIND(room_t::c_create_entity));
 }
 
@@ -75,6 +77,26 @@ void room_t::broadcast(google::protobuf::Message& msg) {
 			get_service()->send(uid, msg);
 		}
 	}
+}
+
+void room_t::c_get_room_info(void *player, const battle_msg::c_get_room_info& msg) {
+	battle_msg::s_get_room_info msg;
+	msg->set_res("ok");
+	battle_msg::room_info *info = msg.mutable_info();
+	pack_room_info(info);
+	battle_msg::entity_info *entity_info;
+	for (object_mgr_base_t::object_map_t::iterator it = entity_mgr_->begin(); it != entity_mgr_->end(); ) {
+		entity_t *entity = (entity_t *)(it->second);
+		entity_info = msg.entitys();
+		pack_entity_info(entity, entity_info);
+	}
+	battle_msg::bullet_info *bullet_info;
+	for (object_mgr_base_t::object_map_t::iterator it = bullet_mgr_->begin(); it != bullet_mgr_->end(); ) {
+		bullet_t *bullet = (bullet_t *)(it->second);
+		bullet_info = msg.bullets();
+		pack_bullet_info(bullet, bullet_info);
+	}
+	get_service()->send(player->get_uid(), msg);
 }
 
 void room_t::c_create_entity(void *player, const battle_msg::c_create_entity& msg) {
@@ -147,6 +169,11 @@ void room_t::pack_bullet_info(bullet_t *bullet, battle_msg::bullet_info *info) {
 	info->set_type_id(bullet->get_type_id());
 	info->set_camp(bullet->get_camp());
 	info->set_damage(bullet->get_damage());
+	info->set_begin_time(bullet->get_begin_time());
+	battle_msg::vector *begin_pos = info->mutable_begin_pos();
+	begin_pos->set_x(bullet->get_begin_pos().x);
+	begin_pos->set_y(bullet->get_begin_pos().y);
+	begin_pos->set_z(bullet->get_begin_pos().z);
 	battle_msg::vector *pos = info->mutable_pos();
 	pos->set_x(bullet->get_pos().x);
 	pos->set_y(bullet->get_pos().y);
@@ -157,9 +184,16 @@ void room_t::pack_bullet_info(bullet_t *bullet, battle_msg::bullet_info *info) {
 	speed->set_z(bullet->get_v_speed().z);
 }
 
+void pack_room_info(battle_msg::room_info *info) {
+	info->set_state(room_state_);
+	info->set_begin_time(begin_time_);
+	info->set_now_time(getfs());
+}
+
 void room_t::on_room_state_change(int32 state) {
 	battle_msg::s_room_state msg;
-	msg.set_state(state);
+	battle_msg::room_info *info = msg.mutable_info();
+	pack_room_info(info);
 	broadcast(msg);
 }
 

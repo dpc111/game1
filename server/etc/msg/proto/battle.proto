@@ -25,8 +25,16 @@ message bullet_info {
 	required int32 type_id = 2;
 	required int32 camp = 3;
 	required int32 damage = 4;
-	required vector pos = 5;
-	required vector speed = 6;
+	required vector begin_pos = 5;
+	required vector pos = 6;
+	required vector speed = 7;
+	required int32 begin_time = 8;
+}
+
+message room_info {
+	required int32 state = 1;
+	required int32 begin_time = 2;
+	required int32 now_time = 3;
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////
@@ -54,6 +62,17 @@ message s_login {
 	optional int32 camp = 5;
 }
 
+message c_get_room_info {
+	
+}
+
+message s_get_room_info {
+	required string res = 1;
+	required room_info info = 2;
+	repeated entity_info entitys = 3;
+	repeated bullet_info bullets = 4;
+}
+
 message c_create_entity {
 	required int32 type_id = 1;
 	required int32 row = 2;
@@ -62,7 +81,8 @@ message c_create_entity {
 
 ////////////////////////////////////////////////////////////////////////////////////////
 message s_room_state {
-	required int32 state = 1;
+	//required int32 state = 1;
+	required room_info info = 1;
 }
 
 message s_create_entity {

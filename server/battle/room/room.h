@@ -49,6 +49,8 @@ public:
 
 	/////////////////////////////////////////////////////////////////////////////////////////////////////////
 	// message
+	void c_get_room_info(void *player, const battle_msg::c_get_room_info& msg);
+	
 	void c_create_entity(void *player, const battle_msg::c_create_entity& msg);
 
 	/////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -66,6 +68,8 @@ public:
 	void pack_entity_info(entity_t *entity, battle_msg::entity_info *info);
 
 	void pack_bullet_info(bullet_t *bullet, battle_msg::bullet_info *info);
+
+	void pack_room_info(battle_msg::room_info *info);
 
 	/////////////////////////////////////////////////////////////////////////////////////////////////////////
 	// event
@@ -99,6 +103,8 @@ private:
 	bool del_;
 
 	int32 room_state_;
+
+	double begin_time_;
 
 	int32 player_num_;
 

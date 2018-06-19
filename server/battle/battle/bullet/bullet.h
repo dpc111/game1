@@ -23,6 +23,10 @@ public:
 
 	bool get_del() { return del_; }
 
+	double get_begin_time() { return begin_time_; }
+
+	vector3_t& get_begin_pos() { return begin_pos_; }
+
 	vector3_t& get_pos() { return pos_; }
 
 	vector3_t& get_v_speed() { return v_speed_; }
@@ -37,7 +41,7 @@ public:
 
 	void set_del(bool del) { del_ = del; }
 
-	void set_begin_tm(double begin_tm) { begin_tm_ = begin_tm; }
+	void set_begin_time(double begin_time) { begin_time_ = begin_time; }
 
 	void set_v_speed(const vector3_t& speed) { v_speed_ = speed; }
 
@@ -62,7 +66,7 @@ protected:
 
 	bool del_;
 
-	double begin_tm_;
+	double begin_time_;
 
 	vector3_t v_speed_;
 

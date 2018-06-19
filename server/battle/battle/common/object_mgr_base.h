@@ -24,6 +24,8 @@ public:
 
 	int32 get_object_num() { return object_num_; }
 
+	object_map_t& get_objects() { return objects_; }
+
 	int32 gen_id() { return id_generate_.gen(); }
 
 public:

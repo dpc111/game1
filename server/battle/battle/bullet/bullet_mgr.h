@@ -9,6 +9,8 @@ class room_t;
 class entity_t;
 
 class bullet_mgr_t : public object_mgr_base_t {
+friend class room_t;
+
 public:
 	bullet_mgr_t(room_t *room);
 

@@ -161,9 +161,9 @@ namespace battle_msg
       get { return _speed; }
       set { _speed = value; }
     }
-    private int _begin_time;
+    private double _begin_time;
     [global::ProtoBuf.ProtoMember(8, IsRequired = true, Name=@"begin_time", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    public int begin_time
+    public double begin_time
     {
       get { return _begin_time; }
       set { _begin_time = value; }
@@ -185,16 +185,16 @@ namespace battle_msg
       get { return _state; }
       set { _state = value; }
     }
-    private int _begin_time;
+    private double _begin_time;
     [global::ProtoBuf.ProtoMember(2, IsRequired = true, Name=@"begin_time", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    public int begin_time
+    public double begin_time
     {
       get { return _begin_time; }
       set { _begin_time = value; }
     }
-    private int _now_time;
+    private double _now_time;
     [global::ProtoBuf.ProtoMember(3, IsRequired = true, Name=@"now_time", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    public int now_time
+    public double now_time
     {
       get { return _now_time; }
       set { _now_time = value; }

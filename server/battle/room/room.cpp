@@ -196,6 +196,7 @@ void room_t::on_room_state_change(int32 state) {
 	battle_msg::room_info *info = msg.mutable_info();
 	pack_room_info(info);
 	broadcast(msg);
+	LOG("%s", msg.DebugString().c_str());
 }
 
 void room_t::on_create_entity(entity_t *entity) {

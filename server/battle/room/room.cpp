@@ -86,13 +86,13 @@ void room_t::c_get_room_info(void *player, const battle_msg::c_get_room_info& ms
 	battle_msg::room_info *info = res.mutable_info();
 	pack_room_info(info);
 	battle_msg::entity_info *entity_info;
-	for (object_mgr_base_t::object_map_t::iterator it = entity_mgr_->objects_.begin(); it != entity_mgr_->objects_.end(); ) {
+	for (object_mgr_base_t::object_map_t::iterator it = entity_mgr_->objects_.begin(); it != entity_mgr_->objects_.end(); it++) {
 		entity_t *entity = (entity_t *)(it->second);
 		entity_info = res.add_entitys();
 		pack_entity_info(entity, entity_info);
 	}
 	battle_msg::bullet_info *bullet_info;
-	for (object_mgr_base_t::object_map_t::iterator it = bullet_mgr_->objects_.begin(); it != bullet_mgr_->objects_.end(); ) {
+	for (object_mgr_base_t::object_map_t::iterator it = bullet_mgr_->objects_.begin(); it != bullet_mgr_->objects_.end(); it++) {
 		bullet_t *bullet = (bullet_t *)(it->second);
 		bullet_info = res.add_bullets();
 		pack_bullet_info(bullet, bullet_info);

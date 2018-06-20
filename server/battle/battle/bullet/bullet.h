@@ -4,7 +4,7 @@
 #include "object_base.h"
 #include "gmath.h"
 
-#define MAX_LIFE_TM 10
+#define MAX_LIFE_TM 20
 
 class room_t;
 class entity_t;

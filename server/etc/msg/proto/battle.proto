@@ -28,13 +28,13 @@ message bullet_info {
 	required vector begin_pos = 5;
 	required vector pos = 6;
 	required vector speed = 7;
-	required int32 begin_time = 8;
+	required double begin_time = 8;
 }
 
 message room_info {
 	required int32 state = 1;
-	required int32 begin_time = 2;
-	required int32 now_time = 3;
+	required double begin_time = 2;
+	required double now_time = 3;
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////

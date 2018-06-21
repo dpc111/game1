@@ -98,6 +98,7 @@ void room_t::c_get_room_info(void *player, const battle_msg::c_get_room_info& ms
 		pack_bullet_info(bullet, bullet_info);
 	}
 	get_service()->send(p->get_uid(), res);
+	LOG("%s", res.DebugString().c_str());
 }
 
 void room_t::c_create_entity(void *player, const battle_msg::c_create_entity& msg) {
@@ -196,7 +197,6 @@ void room_t::on_room_state_change(int32 state) {
 	battle_msg::room_info *info = msg.mutable_info();
 	pack_room_info(info);
 	broadcast(msg);
-	LOG("%s", msg.DebugString().c_str());
 }
 
 void room_t::on_create_entity(entity_t *entity) {

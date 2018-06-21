@@ -34,6 +34,7 @@ void client_msg_t::c_login(tcp_connection_t *conn, const battle_msg::c_login& ms
 		res.set_icon(player->get_icon());
 		res.set_camp(player->get_camp());
 		get_service()->send(conn, res);
+		get_service()->verify((int32)uid, conn);
 		return;
 	}
 	player = get_player_mgr()->create_player(uid);

@@ -7,6 +7,8 @@ struct collision_sphere_t {
 	vector3_t center;
 	float radius;
 
+	collision_sphere_t() {}
+
 	collision_sphere_t(const vector3_t& center_, float radius_) : 
 		center(center_), 
 		radius(radius_) {
@@ -31,6 +33,8 @@ struct collision_cube_simple_t {
 	float y2;
 	float z1;
 	float z2;
+
+	collision_cube_simple_t() {}
 
 	collision_cube_simple_t(float x1_, float x2_, float y1_, float y2_, float z1_, float z2_) : 
 		x1(x1_), 
@@ -65,6 +69,8 @@ struct collision_cylinder_simple_t {
 	vector3_t center;
 	float radius;
 	float high;
+
+	collision_cylinder_simple_t() {}
 
 	collision_cylinder_simple_t(const vector3_t& center_, float radius_, float high_) : 
 		center(center_), 

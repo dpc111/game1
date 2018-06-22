@@ -24,21 +24,22 @@ public:
 	void on_collision(bullet_t *bullet);
 
 private:
-	PROPERTY(room_t*, 				room)
-	PROPERTY_QUOTE(vector3_t, 		pos)
-	PROPERTY_QUOTE(vector3_t, 		gun_pos)
-	PROPERTY(int32,					camp)
-	PROPERTY(bool,					del)
-	PROPERTY(int32,					level)
-	PROPERTY(float,					cd)
-	PROPERTY(double,				last_fire_tm)
-	PROPERTY(int32,					blood)
-	PROPERTY(int32,					bullet_id)
-	PROPERTY(int32,					damage)
-	PROPERTY(float,					frozen)
-	PROPERTY(int32,					row)
-	PROPERTY(int32,					col)
-	box_t 							box_;
+	PROPERTY(room_t*, 							room)
+	PROPERTY_QUOTE(vector3_t, 					pos)
+	PROPERTY_QUOTE(vector3_t, 					gun_pos)
+	PROPERTY_QUOTE(collision_cube_simple_t,		collision)
+	PROPERTY(int32,								camp)
+	PROPERTY(bool,								del)
+	PROPERTY(int32,								level)
+	PROPERTY(float,								cd)
+	PROPERTY(double,							last_fire_tm)
+	PROPERTY(int32,								blood)
+	PROPERTY(int32,								bullet_id)
+	PROPERTY(int32,								damage)
+	PROPERTY(float,								frozen)
+	PROPERTY(int32,								row)
+	PROPERTY(int32,								col)
+	box_t 										box_;
 };
 
 #endif

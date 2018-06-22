@@ -1,6 +1,7 @@
 #ifndef BULLET_H
 #define BULLET_H
 
+#include "stdafx.h"
 #include "object_base.h"
 #include "grid.h"
 #include "gmath.h"

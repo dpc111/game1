@@ -5,11 +5,11 @@
 
 #define PROPERTY(type, property)\
 private:\
-	type property_;\
+	type property##_;\
 public:\
-	inline type get_##property() { return property_; }\
+	inline type get_##property() { return property##_; }\
 public:\
-	inline void set_##property(type value) { property_ = value; }\
+	inline void set_##property(type value) { property##_ = value; }\
 
 class object_base_t {
 public:

@@ -17,18 +17,6 @@ public:
 
 	virtual void update(double stm);
 
-	int32 get_speed() { return speed_; }
-
-	vector3_t& get_begin_pos() { return begin_pos_; }
-
-	vector3_t& get_pos() { return pos_; }
-
-	vector3_t& get_v_speed() { return v_speed_; }
-
-	void set_begin_pos(const vector3_t& pos) { begin_pos_ = pos; }
-
-	void set_pos(const vector3_t& pos) { pos_ = pos; }
-
 	void on_collision(entity_t *entity);
 
 	void on_bullet_out();
@@ -44,11 +32,11 @@ protected:
 
 	PROPERTY(double, begin_time)
 
-	vector3_t v_speed_;
+	PROPERTY_QUOTE(vector3_t, v_speed)
 
-	vector3_t begin_pos_;
+	PROPERTY_QUOTE(vector3_t, begin_pos)
 
-	vector3_t pos_;
+	PROPERTY_QUOTE(vector3_t, pos)
 
 	PROPERTY(int32, damage)
 

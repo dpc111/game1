@@ -1,3 +1,6 @@
+#ifndef COLLISION_H
+#define COLLISION_H
+
 #include "gmath.h"
 
 struct collision_sphere_t {
@@ -88,3 +91,5 @@ bool collision_check(const vector3_t& pos, const collision_sphere_t& sphere);
 bool collision_check(const vector3_t& pos, const collision_cube_simple_t& cube);
 
 bool collision_check(const vector3_t& pos, const collision_cylinder_simple_t& cylinder);
+
+#endif

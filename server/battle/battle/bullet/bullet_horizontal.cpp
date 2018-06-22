@@ -10,7 +10,7 @@ bullet_horizontal_t::~bullet_horizontal_t() {
 }
 
 void bullet_horizontal_t::init(entity_t * entity) {
-	bullet_t::init();
+	bullet_t::init(entity);
 	if (IS_LEFT_CAMP(entity->get_camp())) {
 		set_v_speed(vector3_t(get_speed(), 0, 0));
 	} else {

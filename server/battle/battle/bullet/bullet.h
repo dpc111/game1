@@ -2,10 +2,11 @@
 #define BULLET_H
 
 #include "object_base.h"
+#include "grid.h"
 #include "gmath.h"
+#include "entity.h"
 
 class room_t;
-class entity_t;
 
 class bullet_t : public object_base_t {
 public:

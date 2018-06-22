@@ -10,7 +10,7 @@ bullet_parabola_t::~bullet_parabola_t() {
 }
 
 void bullet_parabola_t::init(entity_t * entity) {
-	bullet_t::init();
+	bullet_t::init(entity);
 	set_v_speed(vector3_t(0, get_speed(), 0));
 	set_begin_v_speed(get_v_speed());
 }

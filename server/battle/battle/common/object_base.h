@@ -3,11 +3,11 @@
 
 #define DEF_PROPERTY(type, property)\
 private:\
-	#type #property_;\
+	type property_;\
 public:\
-	#type get_#property() { return #property_; }\
+	inline type get_##property() { return ##property_; }\
 public:\
-	void set_#property(#type value) { #property_ = value; }\
+	inline void set_##property(type value) { ##property_ = value; }\
 
 #include "stdafx.h"
 

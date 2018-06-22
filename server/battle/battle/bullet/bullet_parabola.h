@@ -14,6 +14,8 @@ public:
 
 	virtual void update(double stm);
 
+	virtual void update_speed();
+
 private:
 
 };

@@ -25,3 +25,7 @@ void bullet_parabola_t::update(double stm) {
 	pos_.z = pos_.z;
 	bullet_t::update(stm);
 }
+
+void bullet_horizontal_t::update_speed() {
+
+}

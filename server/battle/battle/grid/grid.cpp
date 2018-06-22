@@ -70,6 +70,19 @@ vector3_t& grid_t::get_pos(int32 row, int32 col) {
 	return pos_[row - 1][col - 1];
 }
 
+entity_t* grid_t::pick_enemy(int32 camp, int32 line) {
+	if (IS_LEFT_CAMP(camp)) {
+		for (int i = 0; i < ROW_NUM; i++) {
+			entity_t *entity = grids_[i][line];
+			if (entity->get_camp() != camp) {
+				return entity;
+			}
+		}
+	} else {
+		
+	}
+}
+
 void grid_t::process_collision(bullet_t *bullet) {
 	int32 camp = bullet->get_camp();
 	int32 line = bullet->get_line() - 1;

@@ -39,6 +39,8 @@ public:
 
 	vector3_t& get_pos(int32 row, int32 col);
 
+	entity_t* pick_enemy(int32 camp, int32 line);
+
 	void process_collision(bullet_t *bullet);
 
 public:

@@ -26,8 +26,8 @@ void box_t::set_box(float x1_, float x2_, float y1_, float y2_, float z1_, float
 bool box_t::collision(const vector3_t& pos) {
 	if (pos.x > x1 
 		and pos.x < x2
-		and pox.y > y1
-		and pox.y < y2
+		and pos.y > y1
+		and pos.y < y2
 		and pos.z > z1
 		and pos.z < z2) {
 		return true;

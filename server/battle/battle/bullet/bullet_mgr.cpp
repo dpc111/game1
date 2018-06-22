@@ -28,8 +28,8 @@ bullet_t *bullet_mgr_t::create_bullet(entity_t *entity, int32 type_id) {
 		return NULL;
 	}
 
-	bullet_t *bullet = NULL
-	int path = get_json_mgr()->get_int("bullet", type_id - 1, "path");
+	bullet_t *bullet = NULL;
+	int32 path = get_json_mgr()->get_int("bullet", type_id - 1, "path");
 	if (path == BULLET_PATCH_HORIZONTAL) {
 		bullet = new bullet_horizontal_t(room_, bullet_id, type_id);
 	} else if (path == BULLET_PATCH_PARABOLA) {

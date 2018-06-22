@@ -8,3 +8,4 @@
 #include "gmath.h"
 #include "collision.h"
 #include "const.h"
+#include "global.h"

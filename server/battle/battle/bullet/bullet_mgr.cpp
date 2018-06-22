@@ -5,6 +5,7 @@
 #include "entity.h"
 #include "grid.h"
 #include "bullet_horizontal.h"
+#include "bullet_parabola.h"
 
 bullet_mgr_t::bullet_mgr_t(room_t *room) :
 	object_mgr_base_t(),
@@ -26,19 +27,18 @@ bullet_t *bullet_mgr_t::create_bullet(entity_t *entity, int32 type_id) {
 		ERROR("");
 		return NULL;
 	}
-	bullet_t *bullet = new bullet_horizontal_t(room_, bullet_id, type_id);
-	bullet->set_camp(entity->get_camp());
-	bullet->set_begin_time(getfs());
-	bullet->set_begin_pos(entity->get_gun_pos() + entity->get_pos());
-	bullet->set_pos(entity->get_gun_pos() + entity->get_pos());
-	bullet->set_damage(entity->get_damage());
-	bullet->set_speed(get_json_mgr()->get_int("bullet", type_id - 1, "speed"));
-	if (IS_LEFT_CAMP(entity->get_camp())) {
-		bullet->set_v_speed(vector3_t(bullet->get_speed(), 0, 0));
+	
+	bullet_t *bullet = NULL
+	int path = get_json_mgr()->get_int("bullet", type_id - 1, "path")
+	if (path == BULLET_PATCH_HORIZONTAL) {
+		bullet = new bullet_horizontal_t(room_, bullet_id, type_id);
+	} else if (path == BULLET_PATCH_PARABOLA) {
+		bullet = new bullet_parabola_t(room_, bullet_id, type_id);
 	} else {
-		bullet->set_v_speed(vector3_t(-bullet->get_speed(), 0, 0));
+		return NULL;
 	}
-	bullet->set_line(entity->get_col());
+	bullet->init(entity);
+
 	add_object(bullet_id, bullet);
 	room_->on_create_bullet(entity, bullet);
 	return bullet;

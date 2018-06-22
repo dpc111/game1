@@ -47,6 +47,8 @@ public:
 	vector3_t pos_[ROW_NUM][COL_NUM];
 
 	room_t* room_;
+
+	collision_cube_simple_t collision_box_;
 };
 
 #endif

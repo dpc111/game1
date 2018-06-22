@@ -19,11 +19,21 @@ bullet_t::~bullet_t() {
 
 }
 
+void bullet_t::init(entity_t *entity) {
+	set_path(get_json_mgr()->get_int("bullet", get_type_id() - 1, "path"));
+	set_speed(get_json_mgr()->get_int("bullet", get_type_id() - 1, "speed"));
+	set_camp(entity->get_camp());
+	set_begin_time(getfs());
+	set_begin_pos(entity->get_gun_pos() + entity->get_pos());
+	set_damage(entity->get_damage());
+	set_line(entity->get_col());
+}
+
 void bullet_t::update(double stm) {
 	if (del_) {
 		return;
 	}
-	if (stm - begin_time_ > MAX_LIFE_TM) {
+	if (stm - begin_time_ > BULLET_MAX_LIFE_TM) {
 		ERROR("");
 		set_del(true);
 		return;

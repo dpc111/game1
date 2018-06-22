@@ -10,6 +10,8 @@ public:
 
 	virtual ~bullet_horizontal_t();
 
+	virtual void init(entity_t * entity);
+
 	virtual void update(double stm);
 
 private:

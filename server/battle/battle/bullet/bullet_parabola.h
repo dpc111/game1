@@ -10,6 +10,8 @@ public:
 
 	virtual ~bullet_parabola_t();
 
+	virtual void init(entity_t * entity);
+
 	virtual void update(double stm);
 
 private:

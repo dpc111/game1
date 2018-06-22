@@ -4,7 +4,8 @@
 #include "bullet.h"
 
 grid_t::grid_t(room_t *room) :
-	room_(room) {
+	room_(room),
+	collision_box_(BULLET_OUT_MIN_X, BULLET_OUT_MAX_X, BULLET_OUT_MIN_Y, BULLET_OUT_MAX_Y, BULLET_OUT_MIN_Z, BULLET_OUT_MAX_Z) {
 	for (int i = 0; i < ROW_NUM; i++) {
 		for (int j = 0; j < COL_NUM; j++) {
 			grids_[i][j] = NULL;
@@ -73,12 +74,7 @@ void grid_t::process_collision(bullet_t *bullet) {
 	int32 camp = bullet->get_camp();
 	int32 line = bullet->get_line() - 1;
 	vector3_t& pos = bullet->get_pos();
-	if (pos.x < BULLET_OUT_MIN_X ||
-		pos.x > BULLET_OUT_MAX_X ||
-		pos.z < BULLET_OUT_MIN_Z ||
-		pos.z > BULLET_OUT_MAX_Z ||
-		pos.y < BULLET_OUT_MIN_Y ||
-		pos.y > BULLET_OUT_MAX_Y) {
+	if (!collision_check(pos, collision_box_)) {
 		bullet->on_bullet_out();
 		return;
 	}

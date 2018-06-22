@@ -24,7 +24,7 @@ bool collision_check(const vector3_t& pos, const collision_cylinder_simple_t& cy
 		pos.y > cylinder.center.y + cylinder.high) {
 		return false;
 	}
-	if (SQUARE(pos.x - cylinder.center.x) + SQUARE(pos.z - cylinder.center.z) > SQUARE(cylinder.redius)) {
+	if (SQUARE(pos.x - cylinder.center.x) + SQUARE(pos.z - cylinder.center.z) > SQUARE(cylinder.radius)) {
 		return false;
 	}
 	return true;

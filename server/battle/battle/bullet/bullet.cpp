@@ -12,7 +12,7 @@ bullet_t::bullet_t(room_t *room, int32 bullet_id, int32 type_id) :
 	begin_pos_(0, 0, 0),
 	pos_(0, 0, 0),
 	line_(0),
-	damage_r_(4); {
+	damage_r_(4) {
 }
 
 bullet_t::~bullet_t() {

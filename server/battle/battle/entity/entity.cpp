@@ -7,8 +7,7 @@
 
 entity_t::entity_t(room_t *room, int32 entity_id, int32 type_id) :
 	object_base_t(entity_id, type_id),
-	room_(room),
-	box_() {
+	room_(room) {
 	camp_ = 1;
 	del_ = false;
 	level_ = 1;
@@ -24,11 +23,6 @@ entity_t::entity_t(room_t *room, int32 entity_id, int32 type_id) :
 
 entity_t::~entity_t() {
 
-}
-
-void entity_t::set_box(const vector3_t& box) {
-	vector3_t& pos = room_->get_grid()->get_pos(row_, col_);
-	box_.set_box(pos_.x - box.x, pos_.x + box.x, pos_.y - box.y, pos_.y + box.y, pos_.z - box.z, pos_.z + box.z);
 }
 
 void entity_t::update(double tm) {

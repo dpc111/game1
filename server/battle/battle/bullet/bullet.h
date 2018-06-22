@@ -31,7 +31,9 @@ public:
 
 	vector3_t& get_v_speed() { return v_speed_; }
 
-	int get_damage() { return damage_; }
+	int32 get_damage() { return damage_; }
+
+	float get_damage_r() { return damage_r_; }
 
 	int32 get_line() { return line_; }
 
@@ -75,6 +77,8 @@ protected:
 	vector3_t pos_;
 
 	int32 damage_;
+
+	float damage_r_;
 
 	int32 line_;
 };

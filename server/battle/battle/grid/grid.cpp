@@ -76,7 +76,9 @@ void grid_t::process_collision(bullet_t *bullet) {
 	if (pos.x < BULLET_OUT_MIN_X ||
 		pos.x > BULLET_OUT_MAX_X ||
 		pos.z < BULLET_OUT_MIN_Z ||
-		pos.z > BULLET_OUT_MAX_Z) {
+		pos.z > BULLET_OUT_MAX_Z ||
+		pos.y < BULLET_OUT_MIN_Y ||
+		pos.y > BULLET_OUT_MAX_Y) {
 		bullet->on_bullet_out();
 		return;
 	}

@@ -9,3 +9,4 @@
 #include "collision.h"
 #include "const.h"
 #include "global.h"
+#include "cfg_json_mgr.h"

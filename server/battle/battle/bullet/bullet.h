@@ -19,56 +19,30 @@ public:
 
 	int32 get_speed() { return speed_; }
 
-	int32 get_camp() { return camp_; }
-
-	bool get_del() { return del_; }
-
-	double get_begin_time() { return begin_time_; }
-
 	vector3_t& get_begin_pos() { return begin_pos_; }
 
 	vector3_t& get_pos() { return pos_; }
 
 	vector3_t& get_v_speed() { return v_speed_; }
 
-	int32 get_damage() { return damage_; }
-
-	float get_damage_r() { return damage_r_; }
-
-	int32 get_line() { return line_; }
-
-	void set_speed(int32 speed) { speed_ = speed; }
-
-	void set_camp(int32 camp) { camp_ = camp; }
-
-	void set_del(bool del) { del_ = del; }
-
-	void set_begin_time(double begin_time) { begin_time_ = begin_time; }
-
-	void set_v_speed(const vector3_t& speed) { v_speed_ = speed; }
-
 	void set_begin_pos(const vector3_t& pos) { begin_pos_ = pos; }
 
 	void set_pos(const vector3_t& pos) { pos_ = pos; }
-
-	void set_damage(int32 damage) { damage_ = damage; }
-
-	void set_line(int32 line) { line_ = line; }
 
 	void on_collision(entity_t *entity);
 
 	void on_bullet_out();
 
 protected:
-	int32 speed_;
+	PROPERTY(int32, speed)
 
-	room_t *room_;
+	PROPERTY(room_t*, room)
 
-	int32 camp_;
+	PROPERTY(int32, camp)
 
-	bool del_;
+	PROPERTY(bool, del)
 
-	double begin_time_;
+	PROPERTY(double, begin_time)
 
 	vector3_t v_speed_;
 
@@ -76,11 +50,11 @@ protected:
 
 	vector3_t pos_;
 
-	int32 damage_;
+	PROPERTY(int32, damage)
 
-	float damage_r_;
+	PROPERTY(float, damage_r)
 
-	int32 line_;
+	PROPERTY(int32, line)
 };
 
 #endif

@@ -42,9 +42,10 @@ entity_t *entity_mgr_t::create_entity(int32 camp, int32 type_id, int32 row, int3
 	entity->set_level(1);
 	entity->set_cd(get_json_mgr()->get_float("entity", type_id - 1, "cd"));
 	entity->set_blood(get_json_mgr()->get_int("entity", type_id - 1, "blood"));
-	entity->set_bullet(get_json_mgr()->get_int("entity", type_id - 1, "bullet"));
+	entity->set_bullet_id(get_json_mgr()->get_int("entity", type_id - 1, "bullet"));
 	entity->set_damage(get_json_mgr()->get_float("entity", type_id - 1, "damage"));
-	entity->set_grid(row, col);
+	entity->set_row(row);
+	entity->set_col(col);
 	float boxx = get_json_mgr()->get_float("entity", type_id - 1, "box", 0);
 	float boxy = get_json_mgr()->get_float("entity", type_id - 1, "box", 1);
 	float boxz = get_json_mgr()->get_float("entity", type_id - 1, "box", 2);

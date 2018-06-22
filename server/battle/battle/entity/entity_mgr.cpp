@@ -50,6 +50,7 @@ entity_t *entity_mgr_t::create_entity(int32 camp, int32 type_id, int32 row, int3
 	float boxy = get_json_mgr()->get_float("entity", type_id - 1, "box", 1);
 	float boxz = get_json_mgr()->get_float("entity", type_id - 1, "box", 2);
 	entity->set_box(vector3_t(boxx, boxy, boxz));
+	entity->set_collision_box(entity->get_pos(), boxx, boxy, boxz);
 	entity->set_del(false);
 	add_object(entity_id, entity);
 	room_->on_create_entity(entity);

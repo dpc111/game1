@@ -36,6 +36,15 @@ struct collision_cube_simple_t {
 
 	collision_cube_simple_t() {}
 
+	collision_cube_simple_t(const vector3_t& pos, float x, float y, float z) {
+		x1 = pos.x - x;		
+		x2 = pos.x + x;
+		y1 = pos.y - y;		
+		y2 = pos.y + y;	
+		z1 = pos.z - z;		
+		z2 = pos.z + z;			
+	}
+
 	collision_cube_simple_t(float x1_, float x2_, float y1_, float y2_, float z1_, float z2_) : 
 		x1(x1_), 
 		x2(x2_), 

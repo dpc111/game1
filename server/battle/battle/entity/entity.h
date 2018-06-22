@@ -27,7 +27,7 @@ private:
 	PROPERTY(room_t*, 							room)
 	PROPERTY_QUOTE(vector3_t, 					pos)
 	PROPERTY_QUOTE(vector3_t, 					gun_pos)
-	PROPERTY_QUOTE(collision_cube_simple_t,		collision)
+	PROPERTY_QUOTE(collision_cube_simple_t,		collision_box)
 	PROPERTY(int32,								camp)
 	PROPERTY(bool,								del)
 	PROPERTY(int32,								level)

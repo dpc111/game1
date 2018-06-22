@@ -2,6 +2,7 @@
 #include "player_mgr.h"
 #include "room_mgr.h"
 #include "service.h"
+#include "cfg_json_mgr.h"
 
 service_t *g_service_ = new service_t();
 

@@ -1,3 +1,5 @@
+#include "collision.h"
+
 bool collision_check(const vector3_t& pos, const collision_sphere_t& sphere) {
 	if (SQUARE_DISTANCE(pos, sphere.center) < SQUARE(sphere.radius)) {
 		return true;

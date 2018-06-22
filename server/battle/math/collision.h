@@ -1,3 +1,5 @@
+#include "gmath.h"
+
 struct collision_sphere_t {
 	vector3_t center;
 	float radius;
@@ -60,7 +62,7 @@ struct collision_cylinder_simple_t {
 	vector3_t center;
 	float radius;
 	float high;
-	
+
 	collision_cylinder_simple_t(const vector3_t& center_, float radius_, float high_) : 
 		center(center_), 
 		radius(radius_), 
@@ -79,7 +81,7 @@ struct collision_cylinder_simple_t {
 		high = v.high;
 		return *this;
 	}
-}
+};
 
 bool collision_check(const vector3_t& pos, const collision_sphere_t& sphere);
 

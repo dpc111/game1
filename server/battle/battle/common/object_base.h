@@ -5,9 +5,9 @@
 private:\
 	type property_;\
 public:\
-	inline type get_##property() { return ##property_; }\
+	inline type get_##property() { return property_; }\
 public:\
-	inline void set_##property(type value) { ##property_ = value; }\
+	inline void set_##property(type value) { property_ = value; }\
 
 #include "stdafx.h"
 

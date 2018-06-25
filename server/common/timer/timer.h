@@ -114,21 +114,14 @@ private:
 	time_state_t state_;
 };
 
-
-//////////////////////////////////////////////////////////////////////////////////////////////////
-class comparator_t {
-public:
-	bool operator()(const ctimer_t *a, const ctimer_t *b) {
-		return a->time() > b->time();
-	}
-};
-
 //////////////////////////////////////////////////////////////////////////////////////////////////
 class priority_queue_t {
 public:
 	typedef std::vector<ctimer_t *> container_t;
 
 public:
+	static bool compare(const ctimer_t *a, const ctimer_t *b) { return a->time() > b->time() }
+
 	bool empty() const { return container_.empty(); }
 
 	int size() const { return container_.size(); }
@@ -137,11 +130,11 @@ public:
 
 	void push(const container_t::value_type & x) {
 		container_.push_back(x);
-		std::push_heap(container_.begin(), container_.end(), comparator_t());
+		std::push_heap(container_.begin(), container_.end(), priority_queue_t::compare);
 	}
 
 	void pop() {
-		std::pop_heap(container_.begin(), container_.end(), comparator_t());
+		std::pop_heap(container_.begin(), container_.end(), priority_queue_t::compare);
 		container_.pop_back();
 	}
 
@@ -153,7 +146,7 @@ public:
 
 	container_t &container() { return container_; }
 
-	void make_heap() { std::make_heap(container_.begin(), container_.end(), comparator_t()); }
+	void make_heap() { std::make_heap(container_.begin(), container_.end(), priority_queue_t::compare); }
 
 private:
 	container_t container_;

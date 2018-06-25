@@ -44,8 +44,8 @@ void entity_t::update_gun_state() {
 	}
 	target_ = entity->get_id();
 	if (bullet_path_ == BULLET_PATCH_PARABOLA) {
-		vector3_t& entity_pos = entity->get_pos();
-		float vx = FABS(entity_pos.x - pos_.x) / bullet_life_time_;
+		vector3_t& pos = entity->get_pos();
+		float vx = FABS(pos.x - pos_.x) / bullet_life_time_;
 		if (IS_LEFT_CAMP(camp_)) {
 			vx = vx;
 		} else {

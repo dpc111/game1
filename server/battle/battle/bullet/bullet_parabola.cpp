@@ -22,7 +22,7 @@ void bullet_parabola_t::update(double stm) {
 	double interval = stm - begin_time_;
 	v_speed_.y = begin_v_speed_.y - GRAVITY * interval;
 	pos_.x = begin_pos_.x + v_speed_.x * interval;
-	pos_.y = pos_.y + v_speed_.y * interval - 0.5 * GRAVITY * interval * interval;
+	pos_.y = begin_pos_.y + v_speed_.y * interval - 0.5 * GRAVITY * interval * interval;
 	pos_.z = pos_.z;
 	bullet_t::update(stm);
 }

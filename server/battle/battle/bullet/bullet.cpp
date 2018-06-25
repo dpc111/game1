@@ -25,6 +25,7 @@ void bullet_t::init(entity_t *entity) {
 	set_camp(entity->get_camp());
 	set_begin_time(getfs());
 	set_begin_pos(entity->get_gun_pos() + entity->get_pos());
+	set_pos(entity->get_gun_pos() + entity->get_pos());
 	set_damage(entity->get_damage());
 	set_line(entity->get_col());
 }

@@ -1,8 +1,7 @@
 #include "bullet_parabola.h"
 
 bullet_parabola_t::bullet_parabola_t(room_t *room, int32 bullet_id, int32 type_id) : 
-	bullet_t(room, bullet_id, type_id),
-	target_(0) {
+	bullet_t(room, bullet_id, type_id) {
 
 }
 

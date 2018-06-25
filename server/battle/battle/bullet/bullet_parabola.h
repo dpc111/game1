@@ -15,7 +15,7 @@ public:
 	virtual void update(double stm);
 
 private:
-	PROPERTY(int32 target)
+	
 };
 
 #endif

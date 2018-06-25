@@ -48,7 +48,7 @@ entity_t *entity_mgr_t::create_entity(int32 camp, int32 type_id, int32 row, int3
 	entity->set_col(col);
 	entity->set_bullet_path(get_json_mgr()->get_float("bullet", entity->get_bullet_id() - 1, "path"));
 	float high = get_json_mgr()->get_float("bullet", entity->get_bullet_id() - 1, "high");
-	entity->set_bullet_life_time(sqrt(2 * high / GRAVITY));
+	entity->set_bullet_life_time(sqrt(2 * high / GRAVITY) * 2.0);
 	entity->set_bullet_begin_speed(vector3_t(0, entity->get_bullet_life_time() * GRAVITY, 0));
 	float boxx = get_json_mgr()->get_float("entity", type_id - 1, "box", 0);
 	float boxy = get_json_mgr()->get_float("entity", type_id - 1, "box", 1);

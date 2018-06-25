@@ -23,7 +23,7 @@ void ctimer_t::cancel() {
 	if (this->is_cancelled()) {
 		return;
 	}
-	// assert((state_ == TIME_PENDING) || (state_ == TIME_EXECUTING));
+	assert((state_ == TIME_PENDING) || (state_ == TIME_EXECUTING));
 	state_ = TIME_CANCELLED;
 	if (handler_) {
 		handler_->release(timer_handle_t(this), user_data_);

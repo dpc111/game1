@@ -26,7 +26,3 @@ void bullet_horizontal_t::update(double stm) {
 	pos_ = begin_pos_ + v_speed_ * interval;
 	bullet_t::update(stm);
 }
-
-void bullet_horizontal_t::update_speed() {
-
-}

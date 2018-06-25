@@ -74,13 +74,19 @@ entity_t* grid_t::pick_enemy(int32 camp, int32 line) {
 	if (IS_LEFT_CAMP(camp)) {
 		for (int i = 0; i < ROW_NUM; i++) {
 			entity_t *entity = grids_[i][line];
-			if (entity->get_camp() != camp) {
+			if (entity && entity->get_camp() != camp) {
 				return entity;
 			}
 		}
 	} else {
-		
+		for (int i = ROW_NUM - 1; i >= 0; i--) {
+			entity_t * entity = grids_[i][line];
+			if (entity && entity->get_camp() != camp) {
+				return entity;
+			}
+		}
 	}
+	return NULL;
 }
 
 void grid_t::process_collision(bullet_t *bullet) {

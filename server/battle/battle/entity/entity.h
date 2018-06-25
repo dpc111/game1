@@ -14,6 +14,8 @@ public:
 
 	void update(double tm);
 
+	void update_gun_state();
+
 	void fire();
 
 	void on_collision(bullet_t *bullet);
@@ -29,11 +31,16 @@ private:
 	PROPERTY(float,								cd)
 	PROPERTY(double,							last_fire_tm)
 	PROPERTY(int32,								blood)
+	PROPERTY(int32,								bullet_path)
 	PROPERTY(int32,								bullet_id)
 	PROPERTY(int32,								damage)
 	PROPERTY(float,								frozen)
 	PROPERTY(int32,								row)
 	PROPERTY(int32,								col)
+
+	PROPERTY(int32,								target)
+	PROPERTY(float,								bullet_life_time)
+	PROPERTY_QUOTE(vector3_t,					bullet_begin_speed)
 };
 
 #endif

@@ -30,12 +30,30 @@ void entity_t::update(double tm) {
 		return;
 	}
 	if (tm - last_fire_tm_ > cd_) {
+		update_gun_state();
 		fire();
 		last_fire_tm_ = tm;
 	} 
 }
 
+void entity_t::update_gun_state() {
+	entity_t *entity = room_->get_grid()->pick_enemy(camp_, col_);
+	if (! entity) {
+		target_ = 0;
+		return;
+	}
+	target_ = entity->get_id();
+	if (bullet_path_ == BULLET_PATCH_PARABOLA) {
+		vector3_t& entity_pos = entity->get_pos();
+		float vx = FABS(entity_pos.x - pos_.x) / bullet_life_time_;
+		bullet_begin_speed_.x = vx;
+	}
+}
+
 void entity_t::fire() {
+	if (target_ == 0) {
+		return;
+	}
 	bullet_t *bullet = room_->get_bullet_mgr()->create_bullet(this, bullet_id_);
 	room_->on_fire(this, bullet);
 }

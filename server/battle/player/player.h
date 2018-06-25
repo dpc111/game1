@@ -4,7 +4,7 @@
 #include "stdafx.h"
 #include "room.h"
 
-class player_t{
+class player_t {
 public:
 	player_t(int64 uid, std::string name, int32 level, std::string icon);
 

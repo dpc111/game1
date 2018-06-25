@@ -71,6 +71,7 @@ vector3_t& grid_t::get_pos(int32 row, int32 col) {
 }
 
 entity_t* grid_t::pick_enemy(int32 camp, int32 line) {
+	--line;
 	if (IS_LEFT_CAMP(camp)) {
 		for (int i = 0; i < ROW_NUM; i++) {
 			entity_t *entity = grids_[i][line];

@@ -9,7 +9,7 @@
 #define BULLET_OUT_MAX_X 100
 #define BULLET_OUT_MIN_Z 0
 #define BULLET_OUT_MAX_Z 50
-#define BULLET_OUT_MIN_Y 3
+#define BULLET_OUT_MIN_Y 0
 #define BULLET_OUT_MAX_Y 200
 #define LEFT_CAMP 1
 #define RIGHT_CAMP 2

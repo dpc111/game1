@@ -220,7 +220,7 @@ void room_t::on_del_entity(entity_t *entity) {
 }
 
 void room_t::on_create_bullet(entity_t *entity, bullet_t *bullet) {
-
+	ERROR("");
 }
 
 void room_t::on_del_bullet(bullet_t *bullet) {

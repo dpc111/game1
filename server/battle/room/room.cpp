@@ -172,6 +172,7 @@ void room_t::pack_bullet_info(bullet_t *bullet, battle_msg::bullet_info *info) {
 	info->set_camp(bullet->get_camp());
 	info->set_damage(bullet->get_damage());
 	info->set_begin_time(bullet->get_begin_time());
+	info->set_path(bullet->get_path());
 	battle_msg::vector *begin_pos = info->mutable_begin_pos();
 	begin_pos->set_x(bullet->get_begin_pos().x);
 	begin_pos->set_y(bullet->get_begin_pos().y);
@@ -180,6 +181,10 @@ void room_t::pack_bullet_info(bullet_t *bullet, battle_msg::bullet_info *info) {
 	pos->set_x(bullet->get_pos().x);
 	pos->set_y(bullet->get_pos().y);
 	pos->set_z(bullet->get_pos().z);
+	battle_msg::vector *begin_speed = info->mutable_begin_speed();
+	begin_speed->set_x(bullet->get_begin_v_speed().x);
+	begin_speed->set_y(bullet->get_begin_v_speed().y);
+	begin_speed->set_z(bullet->get_begin_v_speed().z);
 	battle_msg::vector *speed = info->mutable_speed();
 	speed->set_x(bullet->get_v_speed().x);
 	speed->set_y(bullet->get_v_speed().y);

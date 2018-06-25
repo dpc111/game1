@@ -26,7 +26,7 @@ public:
 protected:
 	PROPERTY_PRO(room_t*, 				room)
 	PROPERTY_PRO(int32, 				speed)
-	PROPERTY_PRO(float, 				path)
+	PROPERTY_PRO(int32, 				path)
 	PROPERTY_PRO(int32, 				damage)
 	PROPERTY_PRO(float, 				damage_r)
 	PROPERTY_PRO(int32, 				camp)

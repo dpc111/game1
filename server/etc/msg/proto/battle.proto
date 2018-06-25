@@ -25,10 +25,12 @@ message bullet_info {
 	required int32 type_id = 2;
 	required int32 camp = 3;
 	required int32 damage = 4;
-	required vector begin_pos = 5;
-	required vector pos = 6;
-	required vector speed = 7;
-	required double begin_time = 8;
+	required int32 path = 5;
+	required vector begin_pos = 6;
+	required vector pos = 7;
+	required vector begin_speed = 8;
+	required vector speed = 9;
+	required double begin_time = 10;
 }
 
 message room_info {

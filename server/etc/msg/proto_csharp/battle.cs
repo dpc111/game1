@@ -140,29 +140,43 @@ namespace battle_msg
       get { return _damage; }
       set { _damage = value; }
     }
+    private int _path;
+    [global::ProtoBuf.ProtoMember(5, IsRequired = true, Name=@"path", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public int path
+    {
+      get { return _path; }
+      set { _path = value; }
+    }
     private battle_msg.vector _begin_pos;
-    [global::ProtoBuf.ProtoMember(5, IsRequired = true, Name=@"begin_pos", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::ProtoBuf.ProtoMember(6, IsRequired = true, Name=@"begin_pos", DataFormat = global::ProtoBuf.DataFormat.Default)]
     public battle_msg.vector begin_pos
     {
       get { return _begin_pos; }
       set { _begin_pos = value; }
     }
     private battle_msg.vector _pos;
-    [global::ProtoBuf.ProtoMember(6, IsRequired = true, Name=@"pos", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::ProtoBuf.ProtoMember(7, IsRequired = true, Name=@"pos", DataFormat = global::ProtoBuf.DataFormat.Default)]
     public battle_msg.vector pos
     {
       get { return _pos; }
       set { _pos = value; }
     }
+    private battle_msg.vector _begin_speed;
+    [global::ProtoBuf.ProtoMember(8, IsRequired = true, Name=@"begin_speed", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    public battle_msg.vector begin_speed
+    {
+      get { return _begin_speed; }
+      set { _begin_speed = value; }
+    }
     private battle_msg.vector _speed;
-    [global::ProtoBuf.ProtoMember(7, IsRequired = true, Name=@"speed", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::ProtoBuf.ProtoMember(9, IsRequired = true, Name=@"speed", DataFormat = global::ProtoBuf.DataFormat.Default)]
     public battle_msg.vector speed
     {
       get { return _speed; }
       set { _speed = value; }
     }
     private double _begin_time;
-    [global::ProtoBuf.ProtoMember(8, IsRequired = true, Name=@"begin_time", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::ProtoBuf.ProtoMember(10, IsRequired = true, Name=@"begin_time", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
     public double begin_time
     {
       get { return _begin_time; }

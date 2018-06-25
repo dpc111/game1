@@ -9,16 +9,18 @@
 
 class ctimer_t;
 class timers_t;
-// typedef int timestamp;
 
 //////////////////////////////////////////////////////////////////////////////////////////////////
 class timer_handle_t {
 public:
 	timer_handle_t(ctimer_t *timer = NULL) : timer_(timer) {}
 
-	void cancel();
-
-	void clear_without_cancel() { timer_ = NULL; }
+	void cancel() {
+		if (timer_ != NULL) {
+			timer_->cancel();
+			timer_ = NULL;
+		}
+	}
 
 	bool is_set() const { return timer_ != NULL; }
 
@@ -159,15 +161,13 @@ public:
 
 	virtual ~timers_t();
 
+	static bool is_not_cancelled(const timer_t *timer) { return !timer->is_cancelled(); }
+
 	inline int size() const { return time_queue_.size(); }
 
 	inline bool empty() const { return time_queue_.empty(); }
 
 	int process(timestamp now);
-
-	bool legal(timer_handle_t handle) const;
-
-	timestamp next_exp(timestamp now) const;
 
 	void clear(bool should_call_cancel = true);
 

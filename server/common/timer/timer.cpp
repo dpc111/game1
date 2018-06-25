@@ -1,23 +1,6 @@
 #include "timer.h"
 
 //////////////////////////////////////////////////////////////////////////////////////////////////
-template <class T>
-class is_not_cancelled_t {
-public:
-	bool operator()(const T *time) {
-		return !time->is_cancelled();
-	}
-};
-
-//////////////////////////////////////////////////////////////////////////////////////////////////
-void timer_handle_t::cancel() {
-	if (timer_ != NULL) {
-		timer_->cancel();
-		timer_ = NULL;
-	}
-}
-
-//////////////////////////////////////////////////////////////////////////////////////////////////
 ctimer_t::ctimer_t(timers_t &owner, timer_handler_t *handler, void *user_data, timestamp time, timestamp interval)
 	: owner_(owner)
 	, handler_(handler)
@@ -70,9 +53,9 @@ timers_t::~timers_t() {
 
 int timers_t::process(timestamp now) {
 	int fired_num = 0;
-	while ((!time_queue_.empty()) 
-		&& (time_queue_.top()->time() <= now
-		|| time_queue_.top()->is_cancelled())) {
+	while ((!time_queue_.empty()) &&
+		(time_queue_.top()->time() <= now ||
+		time_queue_.top()->is_cancelled())) {
 		ctimer_t *timer = process_node_ = time_queue_.top();
 		time_queue_.pop();
 		if (!timer->is_cancelled()) {
@@ -90,32 +73,6 @@ int timers_t::process(timestamp now) {
 	process_node_ = NULL;
 	last_process_time_ = now;
 	return fired_num;
-}
-
-bool timers_t::legal(timer_handle_t handle) const {
-	typedef ctimer_t * const * timer_iter;
-	ctimer_t *time = handle.timer();
-	if (time == NULL) {
-		return false;
-	}
-	if (time == process_node_) {
-		return true;
-	}
-	timer_iter begin = &time_queue_.top();
-	timer_iter end = begin + time_queue_.size();
-	for (timer_iter it = begin; it != end; ++it) {
-		if (*it == time) {
-			return true;
-		}
-	}
-	return false;
-}
-
-timestamp timers_t::next_exp(timestamp now) const {
-	if (time_queue_.empty() || now > time_queue_.top()->time()) {
-		return 0;
-	}
-	return time_queue_.top()->time() - now;
 }
 
 void timers_t::clear(bool should_call_cancel) {
@@ -156,7 +113,7 @@ timer_handle_t timers_t::add(timer_handler_t *handler, void *user, timestamp tim
 
 void timers_t::purge_cancelled_times() {
 	priority_queue_t::container_t& container = time_queue_.container();
-	priority_queue_t::container_t::iterator new_end = std::partition(container.begin(), container.end(), is_not_cancelled_t<ctimer_t>());
+	priority_queue_t::container_t::iterator new_end = std::partition(container.begin(), container.end(), timers_t::is_not_cancelled);
 	for (priority_queue_t::container_t::iterator it = new_end; it != container.end(); ++it) {
 		delete *it;
 	} 

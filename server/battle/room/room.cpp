@@ -224,7 +224,7 @@ void room_t::on_create_bullet(entity_t *entity, bullet_t *bullet) {
 }
 
 void room_t::on_del_bullet(bullet_t *bullet) {
-	ERROR("");
+
 }
 
 void room_t::on_entity_damage(entity_t *entity, int32 damage) {

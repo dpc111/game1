@@ -120,7 +120,7 @@ public:
 	typedef std::vector<ctimer_t *> container_t;
 
 public:
-	static bool compare(const ctimer_t *a, const ctimer_t *b) { return a->time() > b->time() }
+	static bool compare(const ctimer_t *a, const ctimer_t *b) { return a->time() > b->time(); }
 
 	bool empty() const { return container_.empty(); }
 

@@ -21,7 +21,7 @@
          "id" : 3,
          "speed" : 8,
          "path" : 2,
-         "high" : 30,
+         "high" : 8,
          "particle" : 3,
          "hit_particle" : 3,
          "bullet_prefab" : "Bullet/Bullet1"
@@ -30,7 +30,7 @@
          "id" : 4,
          "speed" : 10,
          "path" : 2,
-         "high" : 30,
+         "high" : 8,
          "particle" : 4,
          "hit_particle" : 4,
          "bullet_prefab" : "Bullet/Bullet1"

@@ -1,6 +1,14 @@
 #include "timer.h"
 
 //////////////////////////////////////////////////////////////////////////////////////////////////
+void timer_handle_t::cancel() {
+	if (timer_ != NULL) {
+		timer_->cancel();
+		timer_ = NULL;
+	}
+}
+
+//////////////////////////////////////////////////////////////////////////////////////////////////
 ctimer_t::ctimer_t(timers_t &owner, timer_handler_t *handler, void *user_data, timestamp time, timestamp interval)
 	: owner_(owner)
 	, handler_(handler)

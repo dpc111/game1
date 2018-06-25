@@ -15,12 +15,7 @@ class timer_handle_t {
 public:
 	timer_handle_t(ctimer_t *timer = NULL) : timer_(timer) {}
 
-	void cancel() {
-		if (timer_ != NULL) {
-			timer_->cancel();
-			timer_ = NULL;
-		}
-	}
+	void cancel();
 
 	bool is_set() const { return timer_ != NULL; }
 

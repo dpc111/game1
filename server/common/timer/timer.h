@@ -156,7 +156,7 @@ public:
 
 	virtual ~timers_t();
 
-	static bool is_not_cancelled(const timer_t *timer) { return !timer->is_cancelled(); }
+	static bool is_not_cancelled(const ctimer_t *timer) { return !timer->is_cancelled(); }
 
 	inline int size() const { return time_queue_.size(); }
 

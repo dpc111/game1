@@ -17,6 +17,8 @@ public:
 
 	void cancel();
 
+	void clear() { timer_ = NULL; }
+
 	bool is_set() const { return timer_ != NULL; }
 
 	friend bool operator==(timer_handle_t h1, timer_handle_t h2);
@@ -42,8 +44,8 @@ public:
 
 	virtual void handle_timeout(timer_handle_t handle, void *user) = 0;
 
-// protected:
-	// virtual void on_release(timer_handle_t handle, void *user) {}
+protected:
+	virtual void on_release(timer_handle_t handle, void *user) {}
 
 private:
 	friend class ctimer_t;
@@ -54,7 +56,7 @@ private:
 
 	void release(timer_handle_t handle, void *user) {
 		this->dec_register_num();
-		// this->on_release(handle, user);
+		this->on_release(handle, user);
 	}
 
 private:

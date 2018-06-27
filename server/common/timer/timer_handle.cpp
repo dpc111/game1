@@ -1,0 +1,69 @@
+#include "timer_handle.h"
+#include "timer_axis.h"
+
+timer_handle_t::timer_handle_t(timer_axis_t *timer_axis) {
+	timers_.clear();
+	name_timers_.clear();
+	timer_axis_ = timer_axis;
+}
+
+timer_handle_t::~timer_handle_t() {
+	timers_t::iterator it = timers_.begin();
+	while (it != timers_.end()) {
+		timer_t *timer = it->second;
+		timer_axis_.unregister_timer(timer);
+		it = timers_.begin();
+	}
+	timers_.clear();
+	name_timers_.clear();
+	timer_axis_ = NULL;
+}
+
+void timer_handle_t::register_timer(const timer_t::cb_t& cb, uint32 interval, uint32 times, const char *name, void *data) {
+	timer_t *timer = new timer_t(cb, this, data, name, times, interval);
+	timer_axis_->register(timer);
+}
+
+void timer_handle_t::unregister_timer(const char *pname) {
+	std::string name(pname);
+	name_timers_t::iterator it = name_timers_.find(name);
+	if (it == name_timers_.end()) {
+		return;
+	}
+	timer_t *timer = it->second;
+	timer_axis_->unregister(timer);
+}
+
+void timer_handle_t::on_register(timer_t *timer) {
+	int pos = int(timer);
+	timers_t::iterator it = timers_.find(pos);
+	if (it != timers_.end()) {
+		return;
+	}
+	timers_[pos] = timer;
+	if (timer->name_) {
+		std::string name(timer->name_);
+		name_timers_t::iterator it = name_timers_.find(name);
+		if (it != name_timers_.end()) {
+			return;
+		}
+		name_timers_[name] = timer;
+	}
+}
+
+void timer_handle_t::on_unregister(timer_t *timer) {
+	int pos = int(timer);
+	timers_t::iterator it = timers_.find(pos);
+	if (it == timers_.end()) {
+		return;
+	}
+	timers_.erase(it);
+	if (timer->name_) {
+		std::string name(timer->name_);
+		name_timers_t::iterator it = name_timers_.find(name);
+		if (it == name_timers_.end()) {
+			return;
+		}
+		name_timers_.erase(it);
+	}
+}

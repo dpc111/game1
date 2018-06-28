@@ -3,6 +3,7 @@
 
 #include <list>
 #include <vector>
+#include "type.h"
 
 #define TIMER_SLOT_LENGTH 60
 #define TIMER_AXIS_LENGTH 600000

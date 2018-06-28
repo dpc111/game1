@@ -10,7 +10,7 @@
 
 class timer_mt {
 public:
-	typedef std::tr1::function<void (void *, uint32)> cb_t;
+	typedef std::tr1::function<void (void *)> cb_t;
 
 public:
 	timer_mt(const timer_mt::cb_t& cb, uint32 interval, uint32 times = ~0u, const char *name = NULL, void *data = NULL);

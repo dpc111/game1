@@ -16,7 +16,7 @@
 
 class timer_handle_t {
 public:
-	typedef void (callback_t) (void *, uint32);
+	typedef void (callback_t) (void *);
 
 	typedef std::hash_map<int, timer_mt *> timers_t;
 

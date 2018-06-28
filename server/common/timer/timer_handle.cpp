@@ -26,7 +26,7 @@ void timer_handle_t::register_timer_ms(const timer_mt::cb_t& cb, uint32 interval
 }
 
 void timer_handle_t::register_timer_sec(const callback_t& cb, float interval, uint32 times = 1, const char *name, void *data) {
-	register_timer_ms(std::tr1::bind(&cb, this, std::tr1::placeholders::_1, std::tr1::placeholders::_2),
+	register_timer_ms(std::tr1::bind(&cb, this, std::tr1::placeholders::_1),
 		floor(interval * 1000),
 		times,
 		name,
@@ -34,7 +34,7 @@ void timer_handle_t::register_timer_sec(const callback_t& cb, float interval, ui
 }
 
 void timer_handle_t::register_timer_repeat(const callback_t& cb, float interval, const char *name, void *data) {
-	register_timer_ms(std::tr1::bind(&cb, this, std::tr1::placeholders::_1, std::tr1::placeholders::_2),
+	register_timer_ms(std::tr1::bind(&cb, this, std::tr1::placeholders::_1),
 		floor(interval * 1000),
 		~0u,
 		name,
@@ -42,7 +42,7 @@ void timer_handle_t::register_timer_repeat(const callback_t& cb, float interval,
 }
 
 void timer_handle_t::register_timer_delay(const callback_t& cb, float interval, const char *name, void *data) {
-	register_timer_ms(std::tr1::bind(&cb, this, std::tr1::placeholders::_1, std::tr1::placeholders::_2),
+	register_timer_ms(std::tr1::bind(&cb, this, std::tr1::placeholders::_1),
 		floor(interval * 1000),
 		1,
 		name,

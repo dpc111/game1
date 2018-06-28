@@ -29,7 +29,7 @@ void timer_axis_t::registertimer(timer_mt* timer) {
 		timer->interval_ = 1;
 	}
 	timer->last_time_ = last_time_;
-	timer->slot_ = ((timer->last_time_ + interval_ - last_time_) / TIMER_SLOT_LENGTH) % axis_size_;
+	timer->slot_ = ((timer->last_time_ + timer->interval_ - last_time_) / TIMER_SLOT_LENGTH) % axis_size_;
 	slot_t& slot = axis_[timer->slot_];
 	slot.push_back(timer);
 	timer->pos_ = --slot.end();
@@ -50,14 +50,14 @@ void timer_axis_t::process() {
 	uint32 cur = start;
 	do {
 		slot_t& slot = axis_[cur];
-		for (axis_t::iterator it = slot.begin(); it != slot.end(); ) {
+		for (slot_t::iterator it = slot.begin(); it != slot.end(); ) {
 			timer_mt *timer = *it;
 			if (timer == NULL) {
 				it = slot.erase(it);
 				continue;
 			}
 			if (now - timer->last_time_ >= timer->interval_) {
-				timer->cb_(timer->data_, timer->id_);
+				timer->cb_(timer->data_);
 				timer->last_time_ = now;
 				--timer->times_;
 				if (timer->times_ <= 0) {

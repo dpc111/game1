@@ -1,5 +1,6 @@
 #include "timer_handle.h"
 #include "timer_axis.h"
+#include <math.h>
 
 timer_handle_t::timer_handle_t(timer_axis_t *timer_axis) {
 	timers_.clear();
@@ -19,9 +20,33 @@ timer_handle_t::~timer_handle_t() {
 	timer_axis_ = NULL;
 }
 
-void timer_handle_t::register_timer(const timer_t::cb_t& cb, uint32 interval, uint32 times, const char *name, void *data) {
+void timer_handle_t::register_timer_ms(const timer_t::cb_t& cb, uint32 interval, uint32 times, const char *name, void *data) {
 	timer_t *timer = new timer_t(cb, this, data, name, times, interval);
 	timer_axis_->register(timer);
+}
+
+void timer_handle_t::register_timer_sec(const callback_t& cb, float interval, uint32 times = 1, const char *name, void *data) {
+	register_timer_ms(std::tr1::bind(&cb, this, std::tr1::placeholders::_1, std::tr1::placeholders::_2),
+		floor(interval * 1000),
+		times,
+		name,
+		data);
+}
+
+void timer_handle_t::register_timer_repeat(const callback_t& cb, float interval, const char *name, void *data) {
+	register_timer_ms(std::tr1::bind(&cb, this, std::tr1::placeholders::_1, std::tr1::placeholders::_2),
+		floor(interval * 1000),
+		~0u,
+		name,
+		data);
+}
+
+void timer_handle_t::register_timer_delay(const callback_t& cb, float interval, const char *name, void *data) {
+	register_timer_ms(std::tr1::bind(&cb, this, std::tr1::placeholders::_1, std::tr1::placeholders::_2),
+		floor(interval * 1000),
+		1,
+		name,
+		data);
 }
 
 void timer_handle_t::unregister_timer(const char *pname) {

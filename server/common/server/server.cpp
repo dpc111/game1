@@ -6,7 +6,8 @@
 server_t::server_t() {
 	network_ = new tcp_network_t();
 	conn_mgr_ = new conn_mgr_t(this);
-	times_ = new timers_t();
+	// times_ = new timers_t();
+	timer_axis_ = new timer_axis_t();
 	lua_frame_ = new lua_frame_t(this);
 	json_mgr_ = new cfg_json_mgr_t();	
 	frame_last_tm_ = 0;
@@ -17,11 +18,13 @@ server_t::server_t() {
 server_t::~server_t() {
 	delete network_;
 	delete conn_mgr_;
-	delete times_;
+	// delete times_;
+	delete timer_axis_;
 	delete lua_frame_;
 	network_ = NULL;
 	conn_mgr_ = NULL;
-	times_ = NULL;
+	// times_ = NULL;
+	timer_axis_ = NULL;
 	lua_frame_ = NULL;
 }
 
@@ -42,7 +45,8 @@ void server_t::process() {
 	while (true) {
 		int64 tm = getms();
 		network_->process();
-		times_->process(tm);
+		// times_->process(tm);
+		timer_axis_->process();
 		if (frame_interval_ > 0 && tm - frame_last_tm_ > frame_interval_) {
 			frame_last_tm_ = tm;
 			this->update(tm);
@@ -113,17 +117,17 @@ void server_t::send_func(tcp_connection_t *conn, const char *funcname, const cha
 	va_end(vlist);
 }
 
-timer_handle_t server_t::register_timer(timer_handler_t *handler, void *user, timestamp start, timestamp interval) {
-	return times_->add(handler, user, start, interval);
-}
+// timer_handle_t server_t::register_timer(timer_handler_t *handler, void *user, timestamp start, timestamp interval) {
+// 	return times_->add(handler, user, start, interval);
+// }
 
-timer_handle_t server_t::register_delay_stimer(timer_handler_t *handler, void *user, timestamp delay, timestamp interval) {
-	return times_->add(handler, user, delay * 1000 + getms(), interval);
-}
+// timer_handle_t server_t::register_delay_stimer(timer_handler_t *handler, void *user, timestamp delay, timestamp interval) {
+// 	return times_->add(handler, user, delay * 1000 + getms(), interval);
+// }
 
-timer_handle_t server_t::register_delay_mstimer(timer_handler_t *handler, void *user, timestamp delay, timestamp interval) {
-	return times_->add(handler, user, delay + getms(), interval);
-}
+// timer_handle_t server_t::register_delay_mstimer(timer_handler_t *handler, void *user, timestamp delay, timestamp interval) {
+// 	return times_->add(handler, user, delay + getms(), interval);
+// }
 
 void server_t::on_disconnect(tcp_connection_t *conn) {
 	conn_mgr_->on_disconnect(conn);

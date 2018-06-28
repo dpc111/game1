@@ -4,7 +4,8 @@
 #include "msg_dispatch.h"
 #include "tcp_network.h"
 #include "conn_mgr.h"
-#include "timer.h"
+// #include "timer.h"
+#include "timer_axis.h"
 #include "lua_frame.h"
 #include "cfg_json_mgr.h"
 #include "type.h"
@@ -49,11 +50,11 @@ public:
 
 	void send_func(tcp_connection_t *conn, const char *funcname, const char *fmt, ...);
 
-	timer_handle_t register_timer(timer_handler_t *handler, void *user, timestamp start, timestamp interval);
+	// timer_handle_t register_timer(timer_handler_t *handler, void *user, timestamp start, timestamp interval);
 
-	timer_handle_t register_delay_stimer(timer_handler_t *handler, void *user, timestamp delay, timestamp interval);
+	// timer_handle_t register_delay_stimer(timer_handler_t *handler, void *user, timestamp delay, timestamp interval);
 
-	timer_handle_t register_delay_mstimer(timer_handler_t *handler, void *user, timestamp delay, timestamp interval);
+	// timer_handle_t register_delay_mstimer(timer_handler_t *handler, void *user, timestamp delay, timestamp interval);
 
 	template<typename T>
 	void register_message(const typename msg_dispatch_t::cbT_t<T>::msg_cb_t& cb) { network_->get_msg_dispatch()->register_message<T>(cb); }
@@ -70,7 +71,8 @@ private:
 
 	conn_mgr_t *conn_mgr_;
 
-	timers_t *times_;
+	// timers_t *times_;
+	timer_axis_t *timer_axis_;
 
 	lua_frame_t *lua_frame_;
 

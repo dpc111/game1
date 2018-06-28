@@ -9,7 +9,7 @@ timer_axis_t::timer_axis_t() {
 }
 
 timer_axis_t::~timer_axis_t() {
-	for (axis_t::iterator it = axis_.begin(); it != axis_.end(); it++) {
+	for (axis_t::iterator it = axis_.begin(); it != axis_.end(); ++it) {
 		slot_t& slot = *it;
 		for (slot_t::iterator it1 = slot.begin(); it1 != slot.end(); ++it1) {
 			timer_t *timer = *it1;

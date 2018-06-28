@@ -18,16 +18,16 @@ class timer_handle_t {
 public:
 	typedef void (callback_t) (void *, uint32);
 
-	typedef std::hash_map<int, timer_t *> timers_t;
+	typedef std::hash_map<int, timer_mt *> timers_t;
 
-	typedef std::hash_map<std::string, timer_t *> name_timers_t;
+	typedef std::hash_map<std::string, timer_mt *> name_timers_t;
 
 public:
 	timer_handle_t(timer_axis_t *timer_axis);
 
 	virtual ~timer_handle_t();
 
-	virtual void register_timer_ms(const timer_t::cb_t& cb, uint32 interval, uint32 times = 1, const char *name = NULL, void *data = NULL);
+	virtual void register_timer_ms(const timer_mt::cb_t& cb, uint32 interval, uint32 times = 1, const char *name = NULL, void *data = NULL);
 
 	virtual void register_timer_sec(const callback_t& cb, float interval, uint32 times = 1, const char *name = NULL, void *data = NULL);
 
@@ -37,9 +37,9 @@ public:
 
 	virtual void unregister_timer(const char *name);
 
-	void on_register(timer_t *timer);
+	void on_register(timer_mt *timer);
 
-	void on_unregister(timer_t *timer);
+	void on_unregister(timer_mt *timer);
 
 protected:
 	timers_t times_;

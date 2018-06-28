@@ -4,16 +4,16 @@
 #include <assert.h>
 #include <stdio.h>
 #include <algorithm>
-#include <vector>
 #include "type.h"
 
-class timer_t {
+class timer_mt {
 public:
 	typedef std::tr1::function<void (void *, uint32)> cb_t;
 
-	timer_t(const timer_t::cb_t& cb, uint32 interval, uint32 times = ~0u, const char *name = NULL, void *data = NULL);
+public:
+	timer_mt(const timer_mt::cb_t& cb, uint32 interval, uint32 times = ~0u, const char *name = NULL, void *data = NULL);
 
-	~timer_t();
+	~timer_mt();
 
 	void on_register();
 

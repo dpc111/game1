@@ -12,7 +12,7 @@ timer_axis_t::~timer_axis_t() {
 	for (axis_t::iterator it = axis_.begin(); it != axis_.end(); ++it) {
 		slot_t& slot = *it;
 		for (slot_t::iterator it1 = slot.begin(); it1 != slot.end(); ++it1) {
-			timer_t *timer = *it1;
+			timer_mt *timer = *it1;
 			if (timer != NULL) {
 				unregister(timer);
 			}
@@ -22,7 +22,7 @@ timer_axis_t::~timer_axis_t() {
 	axis_.clear();
 }
 
-void timer_axis_t::register(timer_t* timer) {
+void timer_axis_t::register(timer_mt* timer) {
 	if (timer->interval == 0) {
 		timer->interval = 1;
 	}
@@ -34,10 +34,10 @@ void timer_axis_t::register(timer_t* timer) {
 	timer->on_register();
 }
 
-void timer_axis_t::unregister(timer_t* timer) {
+void timer_axis_t::unregister(timer_mt* timer) {
 	// 不直接删除 防止定时器主循环崩溃
-	timer_->on_unregister();
-	*(cb->pos_) = NULL;
+	timer->on_unregister();
+	*(timer->pos_) = NULL;
 	delete timer;
 }
 
@@ -49,7 +49,7 @@ void timer_axis_t::process() {
 	do {
 		slot_t& slot = axis_[cur];
 		for (axis_t::iterator it = axis_.begin(); it != axis_.end(); ) {
-			timer_t *timer = *it;
+			timer_mt *timer = *it;
 			if (timer == NULL) {
 				it = axis_.erase(it);
 				continue;

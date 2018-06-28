@@ -10,7 +10,7 @@
 
 class timer_axis_t {
 private:
-	typedef std::list<timer_t *> slot_t;
+	typedef std::list<timer_mt *> slot_t;
 
 	typedef std::vector<slot_t> axis_t;
 
@@ -23,9 +23,9 @@ public:
 
 	timestamp get_last_time() const { return last_time_; }
 
-	void register(timer_t* timer);
+	void register(timer_mt *timer);
 
-	void unregister(timer_t* timer);
+	void unregister(timer_mt* timer);
 
 	void process();
 

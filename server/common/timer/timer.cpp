@@ -1,7 +1,7 @@
 #include "timer.h"
 #include "timer_handle.h"
 
-timer_t::timer_t(const cb_t& cb, void *obj, void *data, const char *name, uint32 times, uint32 interval) :
+timer_mt::timer_mt(const cb_t& cb, void *obj, void *data, const char *name, uint32 times, uint32 interval) :
 	cb_(cb),
 	obj_(obj),
 	data_(data),
@@ -14,7 +14,7 @@ timer_t::timer_t(const cb_t& cb, void *obj, void *data, const char *name, uint32
 
 }
 
-timer_t::~timer_t() {
+timer_mt::~timer_mt() {
 	cb_ = NULL;
 	obj_ = NULL;
 	data_ = 0;
@@ -25,12 +25,12 @@ timer_t::~timer_t() {
 	last_time_ = 0;
 }
 
-void timer_t::on_register() {
+void timer_mt::on_register() {
 	timer_handle_t *handle = static_cast<timer_handle_t *> obj_;
 	handle->on_register(this);
 }
 
-void timer_t::on_unregister() {
+void timer_mt::on_unregister() {
 	timer_handle_t *handle = static_cast<timer_handle_t *> obj_;
 	handle->on_unregister(this);
 }

@@ -27,7 +27,7 @@ public:
 
 	void *data_;
 
-	char *name_;
+	const char *name_;
 
 	uint32 times_;
 

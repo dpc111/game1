@@ -23,6 +23,8 @@ public:
 
 	player_t* create_player(int64 uid);
 
+	void kick(int64 uid);
+
 	int32 player_num() { return player_num_; }
 
 private:

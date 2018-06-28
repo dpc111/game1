@@ -1,6 +1,7 @@
 #include "timer_handle.h"
 #include "timer_axis.h"
 #include <math.h>
+#include <string>
 
 timer_handle_t::timer_handle_t(timer_axis_t *timer_axis) {
 	timers_.clear();
@@ -12,7 +13,7 @@ timer_handle_t::~timer_handle_t() {
 	timers_t::iterator it = timers_.begin();
 	while (it != timers_.end()) {
 		timer_mt *timer = it->second;
-		timer_axis_.unregister_timer(timer);
+		timer_axis_->unregister_timer(timer);
 		it = timers_.begin();
 	}
 	timers_.clear();
@@ -25,7 +26,7 @@ void timer_handle_t::register_timer_ms(const timer_mt::cb_t& cb, uint32 interval
 	timer_axis_->registertimer(timer);
 }
 
-void timer_handle_t::register_timer_sec(const callback_t& cb, float interval, uint32 times = 1, const char *name, void *data) {
+void timer_handle_t::register_timer_sec(const callback_t& cb, float interval, uint32 times, const char *name, void *data) {
 	register_timer_ms(std::tr1::bind(&cb, this, std::tr1::placeholders::_1),
 		floor(interval * 1000),
 		times,
@@ -60,7 +61,7 @@ void timer_handle_t::unregister_timer(const char *pname) {
 }
 
 void timer_handle_t::on_register(timer_mt *timer) {
-	int pos = int(timer);
+	int64 pos = int64(timer);
 	timers_t::iterator it = timers_.find(pos);
 	if (it != timers_.end()) {
 		return;
@@ -77,7 +78,7 @@ void timer_handle_t::on_register(timer_mt *timer) {
 }
 
 void timer_handle_t::on_unregister(timer_mt *timer) {
-	int pos = int(timer);
+	int64 pos = int64(timer);
 	timers_t::iterator it = timers_.find(pos);
 	if (it == timers_.end()) {
 		return;

@@ -18,7 +18,7 @@ class timer_handle_t {
 public:
 	typedef void (callback_t) (void *);
 
-	typedef std::map<int, timer_mt *> timers_t;
+	typedef std::map<int64, timer_mt *> timers_t;
 
 	typedef std::map<std::string, timer_mt *> name_timers_t;
 
@@ -42,7 +42,7 @@ public:
 	void on_unregister(timer_mt *timer);
 
 protected:
-	timers_t times_;
+	timers_t timers_;
 
 	name_timers_t name_timers_;
 

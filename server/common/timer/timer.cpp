@@ -9,8 +9,7 @@ timer_mt::timer_mt(const cb_t& cb, void *obj, void *data, const char *name, uint
 	times_(times),
 	interval_(interval),
 	slot_(0),
-	last_time_(0)
-	{ 
+	last_time_(0) { 
 
 }
 

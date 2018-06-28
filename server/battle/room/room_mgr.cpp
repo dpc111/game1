@@ -29,8 +29,10 @@ void room_mgr_t::add_room(int rid, room_t *room) {
 }
 
 void room_mgr_t::del_room(int rid) {
+	ERROR("del room %d", rid);
 	room_map_t::iterator it = rooms_.find(rid);
 	if (it == rooms_.end()) {
+		ERROR("");
 		return;
 	}
 	room_t *room = it->second;

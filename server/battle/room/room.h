@@ -67,8 +67,6 @@ public:
 
 	void start_end_timeout(void *data);
 
-	// virtual void handle_timeout(timer_handle_t handle, void *user);
-
 	/////////////////////////////////////////////////////////////////////////////////////////////////////////
 	// pack message
 	void pack_entity_info(entity_t *entity, battle_msg::entity_info *info);
@@ -113,12 +111,6 @@ private:
 	double begin_time_;
 
 	int32 player_num_;
-
-	// timer_handle_t wait_timer_;
-
-	// timer_handle_t ing_timer_;
-
-	// timer_handle_t end_timer_;
 };
 
 #endif

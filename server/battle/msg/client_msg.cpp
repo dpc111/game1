@@ -43,7 +43,6 @@ void client_msg_t::c_login(tcp_connection_t *conn, const battle_msg::c_login& ms
 		get_service()->send(conn, res);
 		return;
 	}
-	// room_t *room = get_room_mgr()->create_room();
 	room_t *room = get_room_mgr()->get_idle_room(true);
 	if (!room) {
 		ERROR("");

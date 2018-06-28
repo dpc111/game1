@@ -52,3 +52,7 @@ player_t* player_mgr_t::create_player(int64 uid) {
 	this->add_player(uid, player);
 	return player;
 }
+
+void player_mgr_t::kick(int64 uid) {
+	del_player(uid);
+}

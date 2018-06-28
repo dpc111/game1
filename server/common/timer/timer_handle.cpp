@@ -22,7 +22,7 @@ timer_handle_t::~timer_handle_t() {
 
 void timer_handle_t::register_timer_ms(const timer_mt::cb_t& cb, uint32 interval, uint32 times, const char *name, void *data) {
 	timer_mt *timer = new timer_mt(cb, this, data, name, times, interval);
-	timer_axis_->register(timer);
+	timer_axis_->registertimer(timer);
 }
 
 void timer_handle_t::register_timer_sec(const callback_t& cb, float interval, uint32 times = 1, const char *name, void *data) {

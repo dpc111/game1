@@ -3,10 +3,11 @@
 
 #include <list>
 #include <vector>
-#include "timer.h"
 
 #define TIMER_SLOT_LENGTH 60
 #define TIMER_AXIS_LENGTH 600000
+
+class timer_mt;
 
 class timer_axis_t {
 private:
@@ -23,7 +24,7 @@ public:
 
 	timestamp get_last_time() const { return last_time_; }
 
-	void register(timer_mt *timer);
+	void registertimer(timer_mt *timer);
 
 	void unregister(timer_mt* timer);
 

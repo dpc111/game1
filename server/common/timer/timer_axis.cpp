@@ -1,4 +1,5 @@
 #include "timer_axis.h"
+#include "timer.h"
 
 timer_axis_t::timer_axis_t() {
 	assert(TIMER_AXIS_LENGTH % TIMER_SLOT_LENGTH == 0)
@@ -22,7 +23,7 @@ timer_axis_t::~timer_axis_t() {
 	axis_.clear();
 }
 
-void timer_axis_t::register(timer_mt* timer) {
+void timer_axis_t::registertimer(timer_mt* timer) {
 	if (timer->interval == 0) {
 		timer->interval = 1;
 	}

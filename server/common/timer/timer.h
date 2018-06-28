@@ -5,6 +5,7 @@
 #include <stdio.h>
 #include <algorithm>
 #include "type.h"
+#include "timer_axis.h"
 
 class timer_mt {
 public:

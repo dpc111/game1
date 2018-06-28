@@ -4,7 +4,7 @@
 #include "stdafx.h"
 #include "dispatcher.h"
 #include "message/messages.h"
-#include "timer.h"
+#include "timer_handle.h"
 
 #define ROOM_STATE_WAIT 1
 #define ROOM_STATE_ING 2
@@ -19,7 +19,7 @@ class grid_t;
 class entity_t;
 class bullet_t;
 
-class room_t : public dispatcher_t, public timer_handler_t {
+class room_t : public dispatcher_t, timer_handle_t {
 public:
 	room_t(int32 rid);
 
@@ -61,7 +61,13 @@ public:
 
 	void start_end();
 
-	virtual void handle_timeout(timer_handle_t handle, void *user);
+	void start_wait_timeout(void *data);
+
+	void start_ing_timeout(void *data);
+
+	void start_end_timeout(void *data);
+
+	// virtual void handle_timeout(timer_handle_t handle, void *user);
 
 	/////////////////////////////////////////////////////////////////////////////////////////////////////////
 	// pack message
@@ -108,11 +114,11 @@ private:
 
 	int32 player_num_;
 
-	timer_handle_t wait_timer_;
+	// timer_handle_t wait_timer_;
 
-	timer_handle_t ing_timer_;
+	// timer_handle_t ing_timer_;
 
-	timer_handle_t end_timer_;
+	// timer_handle_t end_timer_;
 };
 
 #endif

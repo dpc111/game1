@@ -34,6 +34,8 @@ public:
 
 	tcp_network_t *get_network() { return network_; }
 
+	timer_axis_t *get_timer_axis() { return timer_axis_; }
+
 	lua_frame_t *get_lua_frame() { return lua_frame_; }
 
 	cfg_json_mgr_t* get_json_mgr() { return json_mgr_; }

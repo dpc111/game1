@@ -29,7 +29,7 @@ void timer_axis_t::registertimer(timer_mt* timer) {
 		timer->interval_ = 1;
 	}
 	timer->last_time_ = last_time_;
-	timer->slot_ = ((timer->last_time_ + timer->interval_ - last_time_) / TIMER_SLOT_LENGTH) % axis_size_;
+	timer->slot_ = ((timer->last_time_ + timer->interval_ - init_time_) / TIMER_SLOT_LENGTH) % axis_size_;
 	slot_t& slot = axis_[timer->slot_];
 	slot.push_back(timer);
 	timer->pos_ = --slot.end();

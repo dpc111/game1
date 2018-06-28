@@ -81,4 +81,5 @@ void timer_axis_t::process() {
 		}
 		cur = (cur + 1) % axis_size_;
 	} while (cur != end);
+	last_time_ = now;
 }

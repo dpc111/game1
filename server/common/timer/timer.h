@@ -4,6 +4,7 @@
 #include <assert.h>
 #include <stdio.h>
 #include <algorithm>
+#include <tr1/functional>
 #include "type.h"
 #include "timer_axis.h"
 

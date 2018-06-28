@@ -11,7 +11,7 @@
 class timer_mt;
 
 class timer_axis_t {
-private:
+public:
 	typedef std::list<timer_mt *> slot_t;
 
 	typedef std::vector<slot_t> axis_t;

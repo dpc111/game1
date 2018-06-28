@@ -1,8 +1,9 @@
 #include "timer_axis.h"
 #include "timer.h"
+#include "timestamp.h"
 
 timer_axis_t::timer_axis_t() {
-	assert(TIMER_AXIS_LENGTH % TIMER_SLOT_LENGTH == 0)
+	assert(TIMER_AXIS_LENGTH % TIMER_SLOT_LENGTH == 0);
 	axis_size_ = TIMER_AXIS_LENGTH / TIMER_SLOT_LENGTH;
 	axis_.resize(axis_size_);
 	init_time_ = getms();
@@ -24,11 +25,11 @@ timer_axis_t::~timer_axis_t() {
 }
 
 void timer_axis_t::registertimer(timer_mt* timer) {
-	if (timer->interval == 0) {
-		timer->interval = 1;
+	if (timer->interval_ == 0) {
+		timer->interval_ = 1;
 	}
 	timer->last_time_ = last_time_;
-	timer->slot_ = ((timer->last_time_ + interval - last_time_) / TIMER_SLOT_LENGTH) % axis_size_;
+	timer->slot_ = ((timer->last_time_ + interval_ - last_time_) / TIMER_SLOT_LENGTH) % axis_size_;
 	slot_t& slot = axis_[timer->slot_];
 	slot.push_back(timer);
 	timer->pos_ = --slot.end();
@@ -49,13 +50,13 @@ void timer_axis_t::process() {
 	uint32 cur = start;
 	do {
 		slot_t& slot = axis_[cur];
-		for (axis_t::iterator it = axis_.begin(); it != axis_.end(); ) {
+		for (axis_t::iterator it = slot.begin(); it != slot.end(); ) {
 			timer_mt *timer = *it;
 			if (timer == NULL) {
-				it = axis_.erase(it);
+				it = slot.erase(it);
 				continue;
 			}
-			if (now - timer->last_time_ >= timer->interval) {
+			if (now - timer->last_time_ >= timer->interval_) {
 				timer->cb_(timer->data_, timer->id_);
 				timer->last_time_ = now;
 				--timer->times_;
@@ -63,7 +64,7 @@ void timer_axis_t::process() {
 					unregister(timer);
 					continue;
 				} else {
-					uint32 newslot = ((timer->last_time_ + timer->interval - init_time_) / TIMER_SLOT_LENGTH) % axis_size_;
+					uint32 newslot = ((timer->last_time_ + timer->interval_ - init_time_) / TIMER_SLOT_LENGTH) % axis_size_;
 					if (newslot != timer->slot_) {
 						it = slot.erase(timer->pos_);
 						axis_[newslot].push_back(timer);
@@ -79,5 +80,5 @@ void timer_axis_t::process() {
 			break;
 		}
 		cur = (cur + 1) % axis_size_;
-	} while (cur != end)
+	} while (cur != end);
 }

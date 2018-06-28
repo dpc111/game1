@@ -2,7 +2,7 @@
 #define TIMER_HANDLE_H
 
 #include "timer.h"
-#include <hash_map>
+#include <map>
 
 // #define TIMER_CALLBACK(func, caller) \
 // 	std::tr1::bind(&func, \
@@ -18,9 +18,9 @@ class timer_handle_t {
 public:
 	typedef void (callback_t) (void *);
 
-	typedef std::hash_map<int, timer_mt *> timers_t;
+	typedef std::map<int, timer_mt *> timers_t;
 
-	typedef std::hash_map<std::string, timer_mt *> name_timers_t;
+	typedef std::map<std::string, timer_mt *> name_timers_t;
 
 public:
 	timer_handle_t(timer_axis_t *timer_axis);
@@ -47,6 +47,6 @@ protected:
 	name_timers_t name_timers_;
 
 	timer_axis_t *timer_axis_;
-}
+};
 
 #endif

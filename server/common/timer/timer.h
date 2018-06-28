@@ -13,7 +13,7 @@ public:
 	typedef std::tr1::function<void (void *)> cb_t;
 
 public:
-	timer_mt(const timer_mt::cb_t& cb, uint32 interval, uint32 times = ~0u, const char *name = NULL, void *data = NULL);
+	timer_mt(const cb_t& cb, void *obj, void *data, const char *name, uint32 times, uint32 interval);
 
 	~timer_mt();
 

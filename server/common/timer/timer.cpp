@@ -26,11 +26,11 @@ timer_mt::~timer_mt() {
 }
 
 void timer_mt::on_register() {
-	timer_handle_t *handle = static_cast<timer_handle_t *> obj_;
+	timer_handle_t *handle = static_cast<timer_handle_t *> (obj_);
 	handle->on_register(this);
 }
 
 void timer_mt::on_unregister() {
-	timer_handle_t *handle = static_cast<timer_handle_t *> obj_;
+	timer_handle_t *handle = static_cast<timer_handle_t *> (obj_);
 	handle->on_unregister(this);
 }

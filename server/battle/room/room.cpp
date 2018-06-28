@@ -145,7 +145,7 @@ void room_t::start_ing_timeout(void *data) {
 }
 
 void room_t::start_end_timeout(void *data) {
-	set_del();
+	set_del(true);
 }
 
 // void room_t::handle_timeout(timer_handle_t handle, void *user) {

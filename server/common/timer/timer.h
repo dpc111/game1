@@ -1,7 +1,14 @@
 #ifndef TIMER_H
 #define TIMER_H
 
-struct timer_t {
+#include <assert.h>
+#include <stdio.h>
+#include <algorithm>
+#include <vector>
+#include "type.h"
+
+class timer_t {
+public:
 	typedef std::tr1::function<void (void *, uint32)> cb_t;
 
 	timer_t(const timer_t::cb_t& cb, uint32 interval, uint32 times = ~0u, const char *name = NULL, void *data = NULL);

@@ -2,6 +2,7 @@
 #define TIMER_HANDLE_H
 
 #include "timer.h"
+#include <hash_map>
 
 // #define TIMER_CALLBACK(func, caller) \
 // 	std::tr1::bind(&func, \

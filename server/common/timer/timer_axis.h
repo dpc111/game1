@@ -1,6 +1,8 @@
 #ifndef TIMER_AXIS_H
 #define TIMER_AXIS_H
 
+#include <list>
+#include <vector>
 #include "timer.h"
 
 #define TIMER_SLOT_LENGTH 60
@@ -17,9 +19,9 @@ public:
 
 	~timer_axis_t();
 
-	timestamp get_init_time const { return init_time_; }
+	timestamp get_init_time() const { return init_time_; }
 
-	timestamp get_last_time const { return last_time_; }
+	timestamp get_last_time() const { return last_time_; }
 
 	void register(timer_t* timer);
 

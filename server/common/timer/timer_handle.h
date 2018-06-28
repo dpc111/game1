@@ -4,16 +4,6 @@
 #include "timer.h"
 #include <map>
 
-// #define TIMER_CALLBACK(func, caller) \
-// 	std::tr1::bind(&func, \
-// 	caller, \
-// 	std::tr1::placeholders::_1, \
-// 	std::tr1::placeholders::_2) 
-
-// #define REGISTER_TIMER(func, delay) register_timer(TIMER_CALLBACK(func, this), delay, 1) 
-
-// #define REGISTER_TIMER_REPEAT(func, interval) register_timer(TIMER_CALLBACK(func, this), interval, ~0u) 
-
 class timer_handle_t {
 public:
 	typedef void (callback_t) (void *);

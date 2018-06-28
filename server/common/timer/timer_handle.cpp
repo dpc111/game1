@@ -13,7 +13,7 @@ timer_handle_t::~timer_handle_t() {
 	timers_t::iterator it = timers_.begin();
 	while (it != timers_.end()) {
 		timer_mt *timer = it->second;
-		timer_axis_->unregister_timer(timer);
+		timer_axis_->unregister(timer);
 		it = timers_.begin();
 	}
 	timers_.clear();

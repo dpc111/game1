@@ -9,7 +9,6 @@ entity_t::entity_t(room_t *room, int32 entity_id, int32 type_id) :
 	object_base_t(entity_id, type_id),
 	room_(room) {
 	camp_ = 1;
-	// del_ = false;
 	level_ = 1;
 	cd_ = 1;
 	last_fire_tm_ = 0;
@@ -36,9 +35,6 @@ void entity_t::update_state(int32 state) {
 }
 
 void entity_t::update(double tm) {
-	// if (del_) {
-	// 	return;
-	// }
 	if (state_ == ENTITY_STATE_BORN) {
 		if (tm - last_state_time_ > born_time_) {
 			update_state(ENTITY_STATE_IDLE);
@@ -56,16 +52,10 @@ void entity_t::update(double tm) {
 	} else if (state_ == ENTITY_STATE_DEATH) {
 		if (tm - last_state_time_ > death_time_) {
 			update_state(ENTITY_STATE_DEL);
-			// set_del(true);
 		}
 	} else if (state_ == ENTITY_STATE_DEL) {
 		return;
 	}
-	// if (tm - last_fire_tm_ > cd_) {
-	// 	update_gun_state();
-	// 	fire();
-	// 	last_fire_tm_ = tm;
-	// } 
 }
 
 void entity_t::update_gun_state() {
@@ -114,7 +104,6 @@ void entity_t::on_collision(bullet_t *bullet) {
 	room_->on_entity_damage(this, damage);
 	if (blood_ <= 0) {
 		blood_ = 0;
-		// set_del(true);
 		death();
 	}
 }

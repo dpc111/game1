@@ -44,6 +44,9 @@ entity_t *entity_mgr_t::create_entity(int32 camp, int32 type_id, int32 row, int3
 	entity->set_blood(get_json_mgr()->get_int("entity", type_id - 1, "blood"));
 	entity->set_bullet_id(get_json_mgr()->get_int("entity", type_id - 1, "bullet"));
 	entity->set_damage(get_json_mgr()->get_float("entity", type_id - 1, "damage"));
+	entity->set_born_time(get_json_mgr()->get_float("entity", type_id - 1, "born_time"));
+	entity->set_fire_befor_time(get_json_mgr()->get_float("entity", type_id - 1, "fire_befor_time"));
+	entity->set_death_time(get_json_mgr()->get_float("entity", type_id - 1, "death_time"));
 	entity->set_row(row);
 	entity->set_col(col);
 	entity->set_bullet_path(get_json_mgr()->get_float("bullet", entity->get_bullet_id() - 1, "path"));

@@ -19,6 +19,7 @@ entity_t::entity_t(room_t *room, int32 entity_id, int32 type_id) :
 	frozen_ = 0;
 	row_ = 0;
 	col_ = 0;
+	last_state_time_ = 0;
 }
 
 entity_t::~entity_t() {

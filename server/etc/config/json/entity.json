@@ -10,9 +10,11 @@
          "frozen" : 0,
          "box" : [2,5,3],
          "gun_pos" : [1,2,0],
-         "fire_begin_time" : 2,
+         "born_time" : 1.5,
+         "fire_before_time" : 1.5,
+         "Death_time" : 2,
          "fire_end_time" : 1,
-         "entity_prefab" : "Entity/Entity1"
+         "entity_prefab" : "Entity/Slime"
       },
       {
          "id" : 2,
@@ -25,9 +27,11 @@
          "frozen" : 0,
          "box" : [2,5,3],
          "gun_pos" : [1,2,0],
-         "fire_begin_time" : 1,
+         "born_time" : 1.5,
+         "fire_before_time" : 1.5,
+         "Death_time" : 2,
          "fire_end_time" : 1,
-         "entity_prefab" : "Entity/Entity2"
+         "entity_prefab" : "Entity/Plant"
       },
       {
          "id" : 3,
@@ -40,9 +44,11 @@
          "frozen" : 0,
          "box" : [2,5,3],
          "gun_pos" : [1,2,0],
-         "fire_begin_time" : 1,
+         "born_time" : 1.5,
+         "fire_before_time" : 1.5,
+         "Death_time" : 2,
          "fire_end_time" : 1,
-         "entity_prefab" : "Entity/Entity3"
+         "entity_prefab" : "Entity/Elongata"
       },
       {
          "id" : 4,
@@ -55,8 +61,10 @@
          "frozen" : 0,
          "box" : [2,5,3],
          "gun_pos" : [1,2,0],
-         "fire_begin_time" : 2,
+         "born_time" : 1.5,
+         "fire_before_time" : 1.5,
+         "Death_time" : 2,
          "fire_end_time" : 1,
-         "entity_prefab" : "Entity/Entity3"
+         "entity_prefab" : "Entity/Elongata"
       }
 ]

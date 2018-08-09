@@ -3,6 +3,11 @@
 
 #include "object_base.h"
 
+#define ENTITY_STATE_BORN 1
+#define ENTITY_STATE_IDLE 2
+#define ENTITY_STATE_FIRE 3
+#define ENTITY_STATE_DEATH 4
+
 class room_t;
 class bullet_t;
 
@@ -35,12 +40,16 @@ private:
 	PROPERTY(int32,								bullet_id)
 	PROPERTY(int32,								damage)
 	PROPERTY(float,								frozen)
+	PROPERTY(float,								born_time)
+	PROPERTY(float,								fire_before_time)
+	PROPERTY(float,								death_time)
 	PROPERTY(int32,								row)
 	PROPERTY(int32,								col)
 
 	PROPERTY(int32,								target)
 	PROPERTY(float,								bullet_life_time)
 	PROPERTY_QUOTE(vector3_t,					bullet_begin_speed)
+	PROPERTY(double,							last_state_time)
 };
 
 #endif

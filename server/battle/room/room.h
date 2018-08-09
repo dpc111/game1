@@ -10,7 +10,7 @@
 #define ROOM_STATE_ING 2
 #define ROOM_STATE_END 3
 #define ROOM_WAIT_TIME 2 
-#define ROOM_ING_TIME 5
+#define ROOM_ING_TIME 300
 #define ROOM_END_TIME 5 
 
 class entity_mgr_t;

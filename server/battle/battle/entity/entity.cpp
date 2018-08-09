@@ -11,7 +11,6 @@ entity_t::entity_t(room_t *room, int32 entity_id, int32 type_id) :
 	camp_ = 1;
 	level_ = 1;
 	cd_ = 1;
-	last_fire_tm_ = 0;
 	blood_ = 0;
 	bullet_id_ = 0;
 	damage_ = 0;

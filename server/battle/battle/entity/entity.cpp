@@ -46,7 +46,7 @@ void entity_t::update(double tm) {
 	} else if (state_ == ENTITY_STATE_IDLE) {
 		if (tm - last_state_time_ > cd_) {
 			update_state(ENTITY_STATE_FIRE);
-			before_fire()
+			before_fire();
 		}
 	} else if (state_ == ENTITY_STATE_FIRE) {
 		if (tm - last_state_time_ > fire_before_time_) {
@@ -56,7 +56,7 @@ void entity_t::update(double tm) {
 	} else if (state_ == ENTITY_STATE_DEATH) {
 		if (tm - last_state_time_ > death_time_) {
 			update_state(ENTITY_STATE_DEL);
-			set_del(true);
+			// set_del(true);
 		}
 	} else if (state_ == ENTITY_STATE_DEL) {
 		return;
@@ -104,7 +104,7 @@ void entity_t::fire() {
 	room_->on_fire(this, bullet);
 }
 
-void death() {
+void entity_t::death() {
 	update_state(ENTITY_STATE_DEATH);
 }
 

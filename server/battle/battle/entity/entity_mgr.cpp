@@ -57,7 +57,7 @@ entity_t *entity_mgr_t::create_entity(int32 camp, int32 type_id, int32 row, int3
 	float boxy = get_json_mgr()->get_float("entity", type_id - 1, "box", 1);
 	float boxz = get_json_mgr()->get_float("entity", type_id - 1, "box", 2);
 	entity->set_collision_box(collision_cube_simple_t(entity->get_pos(), boxx, boxy, boxz));
-	entity->set_del(false);
+	// entity->set_del(false);
 	add_object(entity_id, entity);
 	room_->on_create_entity(entity);
 	return entity;
@@ -77,7 +77,8 @@ void entity_mgr_t::delete_entity(int32 entity_id) {
 void entity_mgr_t::update(double stm) {
 	for (object_map_t::iterator it = objects_.begin(); it != objects_.end(); ) {
 		entity_t *entity = (entity_t *)(it->second);
-		if (entity->get_del()) {
+		// if (entity->get_del()) {
+		if (entity->get_state() == ENTITY_STATE_DEL) {
 			++it;
 			delete_entity(entity->get_id());
 			continue;

@@ -3,10 +3,12 @@
 
 #include "object_base.h"
 
+#define ENTITY_STATE_NONE 1
 #define ENTITY_STATE_BORN 1
 #define ENTITY_STATE_IDLE 2
 #define ENTITY_STATE_FIRE 3
 #define ENTITY_STATE_DEATH 4
+#define ENTITY_STATE_DEL 5
 
 class room_t;
 class bullet_t;
@@ -17,11 +19,19 @@ public:
 
 	virtual ~entity_t();
 
+	void update_state(int32 state);
+
 	void update(double tm);
 
 	void update_gun_state();
 
+	void born();
+
+	void before_fire();
+
 	void fire();
+
+	void death();
 
 	void on_collision(bullet_t *bullet);
 
@@ -31,7 +41,7 @@ private:
 	PROPERTY_QUOTE(vector3_t, 					gun_pos)
 	PROPERTY_QUOTE(collision_cube_simple_t,		collision_box)
 	PROPERTY(int32,								camp)
-	PROPERTY(bool,								del)
+	// PROPERTY(bool,								del)
 	PROPERTY(int32,								level)
 	PROPERTY(float,								cd)
 	PROPERTY(double,							last_fire_tm)
@@ -49,6 +59,7 @@ private:
 	PROPERTY(int32,								target)
 	PROPERTY(float,								bullet_life_time)
 	PROPERTY_QUOTE(vector3_t,					bullet_begin_speed)
+	PROPERTY(int32,								state)
 	PROPERTY(double,							last_state_time)
 };
 

@@ -9,7 +9,7 @@ entity_t::entity_t(room_t *room, int32 entity_id, int32 type_id) :
 	object_base_t(entity_id, type_id),
 	room_(room) {
 	camp_ = 1;
-	del_ = false;
+	// del_ = false;
 	level_ = 1;
 	cd_ = 1;
 	last_fire_tm_ = 0;
@@ -19,6 +19,7 @@ entity_t::entity_t(room_t *room, int32 entity_id, int32 type_id) :
 	frozen_ = 0;
 	row_ = 0;
 	col_ = 0;
+	state_ = ENTITY_STATE_NONE;
 	last_state_time_ = 0;
 }
 
@@ -26,15 +27,45 @@ entity_t::~entity_t() {
 
 }
 
-void entity_t::update(double tm) {
-	if (del_) {
+void entity_t::update_state(int32 state) {
+	if (state_ == state) {
 		return;
 	}
-	if (tm - last_fire_tm_ > cd_) {
-		update_gun_state();
-		fire();
-		last_fire_tm_ = tm;
-	} 
+	set_state(state);
+	set_last_state_time(getfs());
+}
+
+void entity_t::update(double tm) {
+	// if (del_) {
+	// 	return;
+	// }
+	if (state_ == ENTITY_STATE_BORN) {
+		if (tm - last_state_time_ > born_time_) {
+			update_state(ENTITY_STATE_IDLE);
+		}
+	} else if (state_ == ENTITY_STATE_IDLE) {
+		if (tm - last_state_time_ > cd_) {
+			update_state(ENTITY_STATE_FIRE);
+			before_fire()
+		}
+	} else if (state_ == ENTITY_STATE_FIRE) {
+		if (tm - last_state_time_ > fire_before_time_) {
+			update_state(ENTITY_STATE_IDLE);
+			fire();
+		}
+	} else if (state_ == ENTITY_STATE_DEATH) {
+		if (tm - last_state_time_ > death_time_) {
+			update_state(ENTITY_STATE_DEL);
+			set_del(true);
+		}
+	} else if (state_ == ENTITY_STATE_DEL) {
+		return;
+	}
+	// if (tm - last_fire_tm_ > cd_) {
+	// 	update_gun_state();
+	// 	fire();
+	// 	last_fire_tm_ = tm;
+	// } 
 }
 
 void entity_t::update_gun_state() {
@@ -56,12 +87,25 @@ void entity_t::update_gun_state() {
 	}
 }
 
+void entity_t::born() {
+	update_state(ENTITY_STATE_BORN);
+}
+
+void entity_t::before_fire() {
+
+}
+
 void entity_t::fire() {
+	update_gun_state();
 	if (target_ == 0) {
 		return;
 	}
 	bullet_t *bullet = room_->get_bullet_mgr()->create_bullet(this, bullet_id_);
 	room_->on_fire(this, bullet);
+}
+
+void death() {
+	update_state(ENTITY_STATE_DEATH);
 }
 
 void entity_t::on_collision(bullet_t *bullet) {
@@ -70,6 +114,7 @@ void entity_t::on_collision(bullet_t *bullet) {
 	room_->on_entity_damage(this, damage);
 	if (blood_ <= 0) {
 		blood_ = 0;
-		set_del(true);
+		// set_del(true);
+		death();
 	}
 }

@@ -25,6 +25,6 @@ private:
 	double last_sync_time_;
 
 	battle_msg::s_update_state cache_:
-}
+};
 
 #endif

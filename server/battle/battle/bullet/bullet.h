@@ -19,6 +19,8 @@ public:
 
 	virtual void update(double stm);
 
+	void update_state(double stm);
+
 	void on_collision(entity_t *entity);
 
 	void on_bullet_out();

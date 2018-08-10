@@ -39,6 +39,5 @@ protected:
 	PROPERTY(int32,						state)
 	PROPERTY(double,					last_state_time)
 };
-};
 
 #endif

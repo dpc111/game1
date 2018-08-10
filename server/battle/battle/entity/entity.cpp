@@ -49,15 +49,14 @@ void entity_t::update(double tm) {
 
 		case ENTITY_STATE_IDLE:
 			if (tm - last_state_time_ > cd_) {
-				update_state(ENTITY_STATE_FIRE);
 				before_fire();
 			}
 			break;
 
 		case ENTITY_STATE_FIRE:
 			if (tm - last_state_time_ > fire_before_time_) {
-				update_state(ENTITY_STATE_IDLE);
 				fire();
+				update_state(ENTITY_STATE_IDLE);
 			}
 			break;
 

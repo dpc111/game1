@@ -37,7 +37,7 @@ void entity_t::update_state(int32 state) {
 
 void entity_t::update(double tm) {
 	switch (state_) {
-		case ENTITY_STATE_BORN:
+		case ENTITY_STATE_NONE:
 			update_state(ENTITY_STATE_BORN);
 			break;
 

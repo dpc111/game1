@@ -18,8 +18,6 @@ public:
 
 	void update_gun_state();
 
-	void born();
-
 	void before_fire();
 
 	void fire();

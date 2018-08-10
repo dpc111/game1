@@ -38,6 +38,10 @@ void entity_t::update_state(int32 state) {
 void entity_t::update(double tm) {
 	switch (state_) {
 		case ENTITY_STATE_BORN:
+			update_state(ENTITY_STATE_BORN);
+			break;
+
+		case ENTITY_STATE_BORN:
 			if (tm - last_state_time_ > born_time_) {
 				update_state(ENTITY_STATE_IDLE);
 			}
@@ -90,14 +94,16 @@ void entity_t::update_gun_state() {
 	}
 }
 
-void entity_t::born() {
-	update_state(ENTITY_STATE_BORN);
-}
-
+// 前摇
 void entity_t::before_fire() {
-
+	update_gun_state();
+	if (target_ == 0) {
+		return;
+	}
+	update_state(ENTITY_STATE_FIRE);
 }
 
+// 开火
 void entity_t::fire() {
 	update_gun_state();
 	if (target_ == 0) {

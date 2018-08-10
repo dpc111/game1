@@ -1,6 +1,7 @@
 #include "bullet.h"
 #include "room.h"
 #include "grid.h"
+#include "state_cache.h"
 
 bullet_t::bullet_t(room_t *room, int32 bullet_id, int32 type_id) :
 	object_base_t(bullet_id, type_id),
@@ -31,7 +32,7 @@ void bullet_t::init(entity_t *entity) {
 	set_line(entity->get_col());
 }
 
-void entity_t::update_state(int32 state) {
+void bullet_t::update_state(int32 state) {
 	if (state_ == state) {
 		return;
 	}
@@ -41,7 +42,7 @@ void entity_t::update_state(int32 state) {
 }
 
 void bullet_t::update(double stm) {
-	switch (state) {
+	switch (state_) {
 		case BULLET_STATE_NONE:
 			update_state(BULLET_STATE_FLY);
 			break;

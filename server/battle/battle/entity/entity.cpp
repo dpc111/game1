@@ -35,7 +35,7 @@ void entity_t::update_state(int32 state) {
 }
 
 void entity_t::update(double tm) {
-	switch (state) {
+	switch (state_) {
 		case ENTITY_STATE_BORN:
 			if (tm - last_state_time_ > born_time_) {
 				update_state(ENTITY_STATE_IDLE);

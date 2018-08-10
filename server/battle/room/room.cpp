@@ -8,6 +8,7 @@
 #include "service.h"
 #include "global.h"
 #include "player_mgr.h"
+#include "state_cache.h"
 
 #define REGISTER_ROOM_BIND(func) \
 	std::tr1::bind(&func, \

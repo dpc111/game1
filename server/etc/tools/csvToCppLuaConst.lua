@@ -179,7 +179,7 @@ public class ]])
 		elseif data[row].type == -1 then
 			fp:write("\n")
 		else
-			fp:write(string.format("	public static %s= %s// %s\n", 
+			fp:write(string.format("	public const int %s= %s// %s\n", 
 				align(string.gsub(data[row].content[1], "%.", "_"), maxLen + 4), 
 				align(data[row].content[2] .. ";", maxNumLen), 
 				data[row].content[3] or ""))

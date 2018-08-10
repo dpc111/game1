@@ -218,6 +218,54 @@ namespace battle_msg
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"update_state")]
+  public partial class update_state : global::ProtoBuf.IExtensible
+  {
+    public update_state() {}
+    
+    private int _state;
+    [global::ProtoBuf.ProtoMember(1, IsRequired = true, Name=@"state", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public int state
+    {
+      get { return _state; }
+      set { _state = value; }
+    }
+    private int _id;
+    [global::ProtoBuf.ProtoMember(2, IsRequired = true, Name=@"id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public int id
+    {
+      get { return _id; }
+      set { _id = value; }
+    }
+    private float _p1 = default(float);
+    [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"p1", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
+    [global::System.ComponentModel.DefaultValue(default(float))]
+    public float p1
+    {
+      get { return _p1; }
+      set { _p1 = value; }
+    }
+    private float _p2 = default(float);
+    [global::ProtoBuf.ProtoMember(4, IsRequired = false, Name=@"p2", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
+    [global::System.ComponentModel.DefaultValue(default(float))]
+    public float p2
+    {
+      get { return _p2; }
+      set { _p2 = value; }
+    }
+    private float _p3 = default(float);
+    [global::ProtoBuf.ProtoMember(5, IsRequired = false, Name=@"p3", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
+    [global::System.ComponentModel.DefaultValue(default(float))]
+    public float p3
+    {
+      get { return _p3; }
+      set { _p3 = value; }
+    }
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
   [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"c_login_hall")]
   public partial class c_login_hall : global::ProtoBuf.IExtensible
   {
@@ -543,6 +591,23 @@ namespace battle_msg
       get { return _bullet_destroy; }
       set { _bullet_destroy = value; }
     }
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"s_update_state")]
+  public partial class s_update_state : global::ProtoBuf.IExtensible
+  {
+    public s_update_state() {}
+    
+    private readonly global::System.Collections.Generic.List<battle_msg.update_state> _states = new global::System.Collections.Generic.List<battle_msg.update_state>();
+    [global::ProtoBuf.ProtoMember(1, Name=@"states", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    public global::System.Collections.Generic.List<battle_msg.update_state> states
+    {
+      get { return _states; }
+    }
+  
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }

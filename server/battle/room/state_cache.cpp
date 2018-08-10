@@ -31,6 +31,7 @@ void state_cache_t::add_cache(int32 state, int32 id, int32 p1, int32 p2, int32 p
 
 void state_cache_t::sync() {
 	room_->broadcast(cache_);
+	cache_.mutable_states()->Clear();
 	last_sync_time_ = getfs();
 }
 

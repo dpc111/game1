@@ -2,7 +2,7 @@
       {
          "id" : 1,
          "open" : 1,
-         "cd" : 5,
+         "cd" : 3,
          "cost" : 500,
          "blood" : 5000,
          "bullet" : 1,
@@ -12,7 +12,7 @@
          "gun_pos" : [1,2,0],
          "born_time" : 1.5,
          "fire_before_time" : 2.5,
-         "Death_time" : 1.5,
+         "Death_time" : 2,
          "fire_end_time" : 1,
          "entity_prefab" : "Entity/Slime"
       },
@@ -28,15 +28,15 @@
          "box" : [2,5,3],
          "gun_pos" : [1,2,0],
          "born_time" : 1.5,
-         "fire_before_time" : 2.5,
-         "Death_time" : 1.5,
+         "fire_before_time" : 3,
+         "Death_time" : 2,
          "fire_end_time" : 1,
          "entity_prefab" : "Entity/Plant"
       },
       {
          "id" : 3,
          "open" : 1,
-         "cd" : 4,
+         "cd" : 3,
          "cost" : 10000,
          "blood" : 10000,
          "bullet" : 3,
@@ -45,15 +45,15 @@
          "box" : [2,5,3],
          "gun_pos" : [1,2,0],
          "born_time" : 1.5,
-         "fire_before_time" : 2.5,
-         "Death_time" : 1.5,
+         "fire_before_time" : 2.8,
+         "Death_time" : 2,
          "fire_end_time" : 1,
          "entity_prefab" : "Entity/Elongata"
       },
       {
          "id" : 4,
          "open" : 1,
-         "cd" : 4,
+         "cd" : 3,
          "cost" : 20000,
          "blood" : 20000,
          "bullet" : 4,
@@ -62,8 +62,8 @@
          "box" : [2,5,3],
          "gun_pos" : [1,2,0],
          "born_time" : 1.5,
-         "fire_before_time" : 2.5,
-         "Death_time" : 1.5,
+         "fire_before_time" : 2.8,
+         "Death_time" : 2,
          "fire_end_time" : 1,
          "entity_prefab" : "Entity/Elongata"
       }

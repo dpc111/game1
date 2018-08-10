@@ -12,7 +12,7 @@
          "gun_pos" : [1,2,0],
          "born_time" : 1.5,
          "fire_before_time" : 2.5,
-         "Death_time" : 2,
+         "death_time" : 2,
          "fire_end_time" : 1,
          "entity_prefab" : "Entity/Slime"
       },
@@ -29,7 +29,7 @@
          "gun_pos" : [1,2,0],
          "born_time" : 1.5,
          "fire_before_time" : 3,
-         "Death_time" : 2,
+         "death_time" : 2,
          "fire_end_time" : 1,
          "entity_prefab" : "Entity/Plant"
       },
@@ -46,7 +46,7 @@
          "gun_pos" : [1,2,0],
          "born_time" : 1.5,
          "fire_before_time" : 2.8,
-         "Death_time" : 2,
+         "death_time" : 2,
          "fire_end_time" : 1,
          "entity_prefab" : "Entity/Elongata"
       },
@@ -63,7 +63,7 @@
          "gun_pos" : [1,2,0],
          "born_time" : 1.5,
          "fire_before_time" : 2.8,
-         "Death_time" : 2,
+         "death_time" : 2,
          "fire_end_time" : 1,
          "entity_prefab" : "Entity/Elongata"
       }

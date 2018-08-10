@@ -36,8 +36,8 @@ protected:
 	PROPERTY_PRO_QUOTE(vector3_t, 		v_speed)
 	PROPERTY_PRO_QUOTE(vector3_t, 		begin_pos)
 	PROPERTY_PRO_QUOTE(vector3_t, 		pos)
-	PROPERTY(int32,						state)
-	PROPERTY(double,					last_state_time)
+	PROPERTY_PRO(int32,					state)
+	PROPERTY_PRO(double,				last_state_time)
 };
 
 #endif

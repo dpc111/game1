@@ -1,9 +1,10 @@
 #ifndef STATE_CACHE_H
 #define STATE_CACHE_H
 
+#include "stdafx.h"
 #include "message/messages.h"
 
-class roomt_t;
+class room_t;
 
 class state_cache_t {
 public:

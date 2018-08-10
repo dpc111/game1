@@ -19,7 +19,7 @@ public:
 
 	virtual void update(double stm);
 
-	void update_state(double stm);
+	void update_state(int32 state);
 
 	void on_collision(entity_t *entity);
 

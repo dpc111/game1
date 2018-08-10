@@ -62,6 +62,7 @@ INCLUDES := -I../common \
 	-I../3rd/lua-5.3.4/src \
 	-I../3rd/json/include \
 	-I../etc/msg/proto_cpp \
+	-I../etc/const/cpp \
 	-I../battle \
 	-I../battle/msg \
 	-I../battle/player \

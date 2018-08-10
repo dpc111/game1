@@ -39,6 +39,14 @@ message room_info {
 	required double now_time = 3;
 }
 
+message update_state {
+	required int32 state = 1;
+	required int32 id = 2;
+	optional float p1 = 3;
+	optional float p2 = 4;
+	optional float p3 = 5;
+}
+
 ////////////////////////////////////////////////////////////////////////////////////////
 message c_login_hall {
 	required int64 uid = 1;
@@ -106,4 +114,8 @@ message s_collision {
 	required entity_info einfo = 1;
 	required bullet_info binfo = 2;
 	required bool bullet_destroy = 3;
+}
+
+message s_update_state {
+	repeated update_state states = 1;
 }

@@ -31,29 +31,42 @@ void entity_t::update_state(int32 state) {
 	}
 	set_state(state);
 	set_last_state_time(getfs());
+	room_->get_state_cache()->add_cache(state, get_id());
 }
 
 void entity_t::update(double tm) {
-	if (state_ == ENTITY_STATE_BORN) {
-		if (tm - last_state_time_ > born_time_) {
-			update_state(ENTITY_STATE_IDLE);
-		}
-	} else if (state_ == ENTITY_STATE_IDLE) {
-		if (tm - last_state_time_ > cd_) {
-			update_state(ENTITY_STATE_FIRE);
-			before_fire();
-		}
-	} else if (state_ == ENTITY_STATE_FIRE) {
-		if (tm - last_state_time_ > fire_before_time_) {
-			update_state(ENTITY_STATE_IDLE);
-			fire();
-		}
-	} else if (state_ == ENTITY_STATE_DEATH) {
-		if (tm - last_state_time_ > death_time_) {
-			update_state(ENTITY_STATE_DEL);
-		}
-	} else if (state_ == ENTITY_STATE_DEL) {
-		return;
+	switch (state) {
+		case ENTITY_STATE_BORN:
+			if (tm - last_state_time_ > born_time_) {
+				update_state(ENTITY_STATE_IDLE);
+			}
+			break;
+
+		case ENTITY_STATE_IDLE:
+			if (tm - last_state_time_ > cd_) {
+				update_state(ENTITY_STATE_FIRE);
+				before_fire();
+			}
+			break;
+
+		case ENTITY_STATE_FIRE:
+			if (tm - last_state_time_ > fire_before_time_) {
+				update_state(ENTITY_STATE_IDLE);
+				fire();
+			}
+			break;
+
+		case ENTITY_STATE_DEATH:
+			if (tm - last_state_time_ > death_time_) {
+				update_state(ENTITY_STATE_DEL);
+			}
+			break;
+
+		case ENTITY_STATE_DEL:
+			break;
+
+		default:
+			break;
 	}
 }
 

@@ -16,13 +16,15 @@ void bullet_parabola_t::init(entity_t * entity) {
 }
 
 void bullet_parabola_t::update(double stm) {
-	if (del_) {
+	if (state_ == BULLET_STATE_DEL) {
 		return;
 	}
-	double interval = stm - begin_time_;
-	v_speed_.y = begin_v_speed_.y - GRAVITY * interval;
-	pos_.x = begin_pos_.x + begin_v_speed_.x * interval;
-	pos_.y = begin_pos_.y + begin_v_speed_.y * interval - 0.5 * GRAVITY * interval * interval;
-	pos_.z = pos_.z;
+	if (state_ == BULLET_STATE_FLY) {
+		double interval = stm - last_state_time_;
+		v_speed_.y = begin_v_speed_.y - GRAVITY * interval;
+		pos_.x = begin_pos_.x + begin_v_speed_.x * interval;
+		pos_.y = begin_pos_.y + begin_v_speed_.y * interval - 0.5 * GRAVITY * interval * interval;
+		pos_.z = pos_.z;	
+	}
 	bullet_t::update(stm);
 }

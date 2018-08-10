@@ -1,9 +1,9 @@
-del /f /s /a csv\*.csv
+rem del /f /s /a csv\*.csv
 
-del /f /s /a csv\*.txt
+rem del /f /s /a csv\*.txt
 
-..\tools\xls2csv\xls2csv.exe xls csv default
+rem ..\tools\xls2csv\xls2csv.exe xls csv default
 
-del /f /s /a csv\*.txt
+rem del /f /s /a csv\*.txt
 
-lua ..\tools\csvRename.lua
+rem lua ..\tools\csvRename.lua

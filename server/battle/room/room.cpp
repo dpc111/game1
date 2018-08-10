@@ -22,6 +22,7 @@ room_t::room_t(int32 rid) :
 	entity_mgr_ = new entity_mgr_t(this);
 	bullet_mgr_ = new bullet_mgr_t(this);
 	grid_ = new grid_t(this);
+	state_cache_ = new state_cache_t(this);
 	del_ = false;
 	room_state_ = ROOM_STATE_WAIT;
 	begin_time_ = getfs();
@@ -39,6 +40,8 @@ room_t::~room_t() {
 	bullet_mgr_ = NULL;
 	delete grid_;
 	grid_ = NULL;
+	delete state_cache_;
+	state_cache_ = NULL;
 	for (int32 k = 0; k < 2; k++) {
 		camps_[k] = 0;
 	}
@@ -62,6 +65,7 @@ void room_t::update(int64 tm) {
 	double stm = (double)tm / 1000;
 	entity_mgr_->update(stm);
 	bullet_mgr_->update(stm);
+	state_cache_->update(stm);
 }
 
 void room_t::register_callback() {

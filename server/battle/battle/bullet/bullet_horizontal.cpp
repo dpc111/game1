@@ -21,11 +21,13 @@ void bullet_horizontal_t::init(entity_t * entity) {
 }
 
 void bullet_horizontal_t::update(double stm) {
-	if (del_) {
+	if (state_ == BULLET_STATE_DEL) {
 		return;
 	}
-	v_speed_ = begin_v_speed_;
-	double interval = stm - begin_time_;
-	pos_ = begin_pos_ + v_speed_ * interval;
+	if (state_ == BULLET_STATE_FLY) {
+		v_speed_ = begin_v_speed_;
+		double interval = stm - last_state_time_;
+		pos_ = begin_pos_ + v_speed_ * interval;
+	}
 	bullet_t::update(stm);
 }

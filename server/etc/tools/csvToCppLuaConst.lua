@@ -50,7 +50,7 @@ function loadConstsCsv(csvfile)
 					value = tonumber(value)
 				end
 				data[row].type = 1
-				data[row].content = {id ,value, comment}
+				data[row].content = {id, value, comment}
 			end
 		else
 			data[row].type = -1
@@ -78,6 +78,10 @@ function loadConstsCsv(csvfile)
 	local path = string.gsub(string.sub(csvfile, 1, y-1), "%.", "/")
 	local luaFielName = string.format("lua/%s.lua", path)
 	createLuaFile(data, line, luaFielName, csvfile, maxLen, string.sub(csvfile, 1, y-1))
+
+	local className = string.upper(string.sub(path, 1, 1)) .. string.sub(path, 2, -1)
+	local csharpFielName = string.format("csharp/%s.cs", className)
+	createCsharpFile(data, line, csharpFielName, csvfile, maxLen, className)
 	return true
 end
 
@@ -122,7 +126,7 @@ function createLuaFile(data, line, fileName, csvFile, maxLen, absFileName)
 			fp:write(string.format("%s= %s-- %s\n", 
 				align(id, maxLen + 4), 
 				align(tostring(data[row].content[2]), maxNumLen),
-				data[row].content[3]) )
+				data[row].content[3] or""))
 		end
 	end
 	fp:close()
@@ -145,9 +149,43 @@ function createHeadFile(data, line, fileName, csvfile, maxLen)
 			fp:write(string.format("#define %s%s// %s\n", 
 				align(string.gsub(data[row].content[1], "%.", "_"), maxLen + 4), 
 				align(data[row].content[2], maxNumLen), 
-				data[row].content[3]))
+				data[row].content[3] or ""))
 		end
 	end
+	fp:close()
+end
+
+function createCsharpFile(data, line, fileName, csvfile, maxLen, className)
+	local fp = io.open(fileName, "w")
+    if not fp then
+        error("open file error:" .. fileName)
+    end
+    fp:write("/////////////////////////////////////////////////////\n")
+    fp:write("// do not modify the file, gen by const/gen.bat\n")
+    fp:write("/////////////////////////////////////////////////////\n")
+
+    fp:write([[
+using System.Collections;
+using System.Collections.Generic;
+using System.IO;
+using System.Text;
+
+public class ]])
+    fp:write(className)
+    fp:write(" {\n")
+    for row = 1, line do
+		if data[row].type == 0 then
+			fp:write(string.format("	%s\n", data[row].content))
+		elseif data[row].type == -1 then
+			fp:write("\n")
+		else
+			fp:write(string.format("	public static %s= %s// %s\n", 
+				align(string.gsub(data[row].content[1], "%.", "_"), maxLen + 4), 
+				align(data[row].content[2] .. ";", maxNumLen), 
+				data[row].content[3] or ""))
+		end
+	end
+    fp:write("}")
 	fp:close()
 end
 

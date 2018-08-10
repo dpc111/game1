@@ -3,13 +3,6 @@
 
 #include "object_base.h"
 
-#define ENTITY_STATE_NONE 1
-#define ENTITY_STATE_BORN 1
-#define ENTITY_STATE_IDLE 2
-#define ENTITY_STATE_FIRE 3
-#define ENTITY_STATE_DEATH 4
-#define ENTITY_STATE_DEL 5
-
 class room_t;
 class bullet_t;
 

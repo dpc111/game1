@@ -6,18 +6,12 @@
 #include "message/messages.h"
 #include "timer_handle.h"
 
-#define ROOM_STATE_WAIT 1
-#define ROOM_STATE_ING 2
-#define ROOM_STATE_END 3
-#define ROOM_WAIT_TIME 2 
-#define ROOM_ING_TIME 300
-#define ROOM_END_TIME 5 
-
 class entity_mgr_t;
 class bullet_mgr_t;
 class grid_t;
 class entity_t;
 class bullet_t;
+class state_cache_t;
 
 class room_t : public dispatcher_t, timer_handle_t {
 public:
@@ -32,6 +26,8 @@ public:
 	bullet_mgr_t* get_bullet_mgr() { return bullet_mgr_; }
 
 	grid_t* get_grid() { return grid_; }
+
+	grid_t* get_state_cache() { return state_cache_; }
 
 	bool get_del() { return del_; }
 
@@ -101,6 +97,8 @@ private:
 	bullet_mgr_t *bullet_mgr_;
 
 	grid_t *grid_;
+
+	state_cache_t *state_cache_;
 	
 	int64 camps_[2];
 

@@ -14,6 +14,7 @@ state_cache_t::~state_cache_t() {
 }
 
 void state_cache_t::add_cache(int32 state, int32 id) {
+	LOG("%d  %d", state, id);
 	battle_msg::update_state *st = cache_.add_states();
 	st->set_state(state);
 	st->set_id(id);

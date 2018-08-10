@@ -27,7 +27,7 @@ public:
 
 	grid_t* get_grid() { return grid_; }
 
-	grid_t* get_state_cache() { return state_cache_; }
+	state_cache_t* get_state_cache() { return state_cache_; }
 
 	bool get_del() { return del_; }
 

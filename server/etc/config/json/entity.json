@@ -4,7 +4,7 @@
          "open" : 1,
          "cd" : 3,
          "cost" : 500,
-         "blood" : 5000,
+         "blood" : 20000,
          "bullet" : 1,
          "damage" : 1000,
          "frozen" : 0,
@@ -46,7 +46,7 @@
          "gun_pos" : [1,2,0],
          "born_time" : 1.5,
          "fire_before_time" : 2.8,
-         "death_time" : 2,
+         "death_time" : 3,
          "fire_end_time" : 1,
          "entity_prefab" : "Entity/Elongata"
       },
@@ -55,7 +55,7 @@
          "open" : 1,
          "cd" : 3,
          "cost" : 20000,
-         "blood" : 20000,
+         "blood" : 10000,
          "bullet" : 4,
          "damage" : 1500,
          "frozen" : 0,
@@ -63,7 +63,7 @@
          "gun_pos" : [1,2,0],
          "born_time" : 1.5,
          "fire_before_time" : 2.8,
-         "death_time" : 2,
+         "death_time" : 3,
          "fire_end_time" : 1,
          "entity_prefab" : "Entity/Elongata"
       }

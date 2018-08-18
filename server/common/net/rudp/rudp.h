@@ -9,3 +9,4 @@
 #define UDP_TYPE_REQ_SEQ 1
 #define UDP_TYPE_SYN_ACK 2
 #define UDP_TYPE_DATA 3
+#define UDP_TYPE_DATA_AGAIN 4

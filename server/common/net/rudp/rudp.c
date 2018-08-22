@@ -305,10 +305,10 @@ send_buff_out_process(udp_handle_t *h) {
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////
 void 
 init_udp_handle(udp_handle_t *h, udp_chunk_pool_t *pool, int64 tick) {
-	udp_chunk_t *c = pop_queue_front(h->recv_queue);
+	udp_chunk_t *c = pop_queue_front(&h->recv_queue);
 	while (c != NULL) {
 		chunk_pool_free(pool, c);
-		c = pop_queue_front(h->recv_queue);
+		c = pop_queue_front(&h->recv_queue);
 	}
 	if (h->recv_cur_in != NULL) {
 		chunk_pool_free(pool, h->recv_cur_in);
@@ -321,15 +321,15 @@ init_udp_handle(udp_handle_t *h, udp_chunk_pool_t *pool, int64 tick) {
 	h->recv_max_seq = 0;
 	h->recv_min_seq = 0;
 	h->recv_max_ack = 0;
-	c = pop_queue_front(h->send_queue);
+	c = pop_queue_front(&h->send_queue);
 	while (c != NULL) {
 		chunk_pool_free(pool, c);
-		c = pop_queue_front(h->send_queue);
+		c = pop_queue_front(&h->send_queue);
 	}
-	c = pop_queue_front(h->send_history);
+	c = pop_queue_front(&h->send_history);
 	while (c != NULL) {
 		chunk_pool_free(pool, c);
-		c = pop_queue_front(h->send_history);
+		c = pop_queue_front(&h->send_history);
 	}
 	if (h->send_cur_in != NULL) {
 		chunk_pool_free(pool, h->send_cur_in);
@@ -352,10 +352,10 @@ destroy_udp_handle(udp_handle_t *h) {
 	if (h->pool == NULL) {
 		return;
 	}
-	udp_chunk_t *c = pop_queue_front(h->recv_queue);
+	udp_chunk_t *c = pop_queue_front(&h->recv_queue);
 	while (c != NULL) {
 		chunk_pool_free(h->pool, c);
-		c = pop_queue_front(h->recv_queue);
+		c = pop_queue_front(&h->recv_queue);
 	}
 	if (h->recv_cur_in != NULL) {
 		chunk_pool_free(h->pool, h->recv_cur_in);
@@ -368,15 +368,15 @@ destroy_udp_handle(udp_handle_t *h) {
 	h->recv_max_seq = 0;
 	h->recv_min_seq = 0;
 	h->recv_max_ack = 0;
-	c = pop_queue_front(h->send_queue);
+	c = pop_queue_front(&h->send_queue);
 	while (c != NULL) {
 		chunk_pool_free(h->pool, c);
-		c = pop_queue_front(h->send_queue);
+		c = pop_queue_front(&h->send_queue);
 	}
-	c = pop_queue_front(h->send_history);
+	c = pop_queue_front(&h->send_history);
 	while (c != NULL) {
 		chunk_pool_free(h->pool, c);
-		c = pop_queue_front(h->send_history);
+		c = pop_queue_front(&h->send_history);
 	}
 	if (h->send_cur_in != NULL) {
 		chunk_pool_free(h->pool, h->send_cur_in);

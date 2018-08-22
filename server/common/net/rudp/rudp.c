@@ -236,7 +236,7 @@ void
 send_history_clear(udp_handle_t *h) {
 	udp_chunk_t *c = h->send_history.head;
 	while (c != NULL && c->seq <= h->recv_max_ack) {
-		c = pop_queue_front(h->send_history);
+		c = pop_queue_front(&h->send_history);
 		chunk_pool_free(h->pool, c);
 		c = h->send_history.head;
 	}

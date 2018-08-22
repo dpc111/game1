@@ -64,7 +64,7 @@ udp_chunk_t * send_buff_out(udp_handle_t *h);
 
 void send_buff_out_process(udp_handle_t *h);
 
-void udp_process(udp_handle_t *h, int64 tick);
+int udp_process(udp_handle_t *h, int64 tick);
 
 #ifdef __cplusplus
 }

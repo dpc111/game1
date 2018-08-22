@@ -1,11 +1,4 @@
 #include "udp_pool.h"
-#include "udp_chunk.h"
-
-struct udp_chunk_pool_t {
-	struct udp_chunk_t *head;
-	struct udp_chunk_t *tail;
-	int size = 0;
-};
 
 struct udp_chunk_t* 
 chunk_pool_malloc(struct udp_chunk_pool_t *pool) {

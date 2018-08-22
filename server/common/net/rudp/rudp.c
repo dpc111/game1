@@ -23,12 +23,12 @@ struct udp_handle_t {
 	int64 req_tick;
 	int req_times;
 
-	struct udp_chunk_pool_t *pool;
+	udp_chunk_pool_t *pool;
 };
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////
 void
-push_queue_front(struct udp_chunk_queue_t *q, struct udp_chunk_t *c) {
+push_queue_front(udp_chunk_queue_t *q, udp_chunk_t *c) {
 	if (q->head == NULL) {
 		q->head = c;
 		q->tail = c;
@@ -43,7 +43,7 @@ push_queue_front(struct udp_chunk_queue_t *q, struct udp_chunk_t *c) {
 }
 
 void 
-push_queue_back(struct udp_chunk_queue_t *q, struct udp_chunk_t *c) {
+push_queue_back(udp_chunk_queue_t *q, udp_chunk_t *c) {
 	if (q->head == NULL) {
 		q->head = c;
 		q->tail = c;
@@ -58,7 +58,7 @@ push_queue_back(struct udp_chunk_queue_t *q, struct udp_chunk_t *c) {
 }
 
 void 
-push_queue_after(struct udp_chunk_queue_t *q, struct udp_chunk_t *prev, struct udp_chunk_t *c) {
+push_queue_after(udp_chunk_queue_t *q, udp_chunk_t *prev, udp_chunk_t *c) {
 	if (q->head == NULL) {
 		q->head = c;
 		q->tail = c;
@@ -84,8 +84,8 @@ push_queue_after(struct udp_chunk_queue_t *q, struct udp_chunk_t *prev, struct u
 }
 
 void
-push_queue_back_sort(struct udp_chunk_queue_t *q, struct udp_chunk_t *c) {
-	struct udp_chunk_t *tmp = q->tail;
+push_queue_back_sort(udp_chunk_queue_t *q, udp_chunk_t *c) {
+	udp_chunk_t *tmp = q->tail;
 	while (tmp != NULL) {
 		if (tmp->seq <= c->seq) {
 			push_queue_after(q, tmp, c);
@@ -97,8 +97,8 @@ push_queue_back_sort(struct udp_chunk_queue_t *q, struct udp_chunk_t *c) {
 }
 
 bool
-push_queue_back_sort_check_same(struct udp_chunk_queue_t *q, struct udp_chunk_t *c) {
-	struct udp_chunk_t *tmp = q->tail;
+push_queue_back_sort_check_same(udp_chunk_queue_t *q, udp_chunk_t *c) {
+	udp_chunk_t *tmp = q->tail;
 	while (tmp != NULL) {
 		if (tmp->seq == c->seq) {
 			return false;
@@ -113,12 +113,12 @@ push_queue_back_sort_check_same(struct udp_chunk_queue_t *q, struct udp_chunk_t 
 	return true;
 }
 
-struct udp_chunk_t* 
-pop_queue_front(struct udp_chunk_queue_t *q) {
+udp_chunk_t* 
+pop_queue_front(udp_chunk_queue_t *q) {
 	if (q->head	== NULL) {
 		return NULL;
 	}
-	struct udp_chunk_t *c = q->head;
+	udp_chunk_t *c = q->head;
 	q->head = c->next;
 	if (q->head == NULL) {
 		q->tail = NULL;
@@ -130,9 +130,9 @@ pop_queue_front(struct udp_chunk_queue_t *q) {
 	return c;
 }
 
-struct udp_chunk_t*
-pop_queue_by_seq(struct udp_chunk_queue_t *q, int seq) {
-	struct udp_chunk_t *tmp = q->tail;
+udp_chunk_t*
+pop_queue_by_seq(udp_chunk_queue_t *q, int seq) {
+	udp_chunk_t *tmp = q->tail;
 	while (tmp != NULL) {
 		if (tmp->seq == seq) {
 			if (tmp->next == NULL) {
@@ -156,8 +156,8 @@ pop_queue_by_seq(struct udp_chunk_queue_t *q, int seq) {
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////
 void
-recv_min_seq_update(struct udp_handle_t *h) {
-	struct udp_chunk_t *c = h->recv_queue.head;
+recv_min_seq_update(udp_handle_t *h) {
+	udp_chunk_t *c = h->recv_queue.head;
 	while (c != NULL) {
 		if (c->seq > h->recv_min_seq) {
 			if (c->seq == h->recv_min_seq + 1) {
@@ -172,7 +172,7 @@ recv_min_seq_update(struct udp_handle_t *h) {
 }
 
 void* 
-revc_buff_in(struct udp_handle_t *h) {
+revc_buff_in(udp_handle_t *h) {
 	if (h->recv_cur_in != NULL) {
 		return h->recv_cur_in;
 	}
@@ -181,8 +181,8 @@ revc_buff_in(struct udp_handle_t *h) {
 }
 
 void
-revc_buff_in_process(struct udp_handle_t *h, int sz) {
-	struct udp_chunk_t *c = h->recv_cur_in;
+revc_buff_in_process(udp_handle_t *h, int sz) {
+	udp_chunk_t *c = h->recv_cur_in;
 	if (c == NULL) {
 		return;
 	}
@@ -198,7 +198,7 @@ revc_buff_in_process(struct udp_handle_t *h, int sz) {
 
 	switch (c->type) {
 		case UDP_TYPE_REQ_SEQ:
-			struct udp_chunk_t *c_again = pop_queue_by_seq(&h->send_history, c->ack);
+			udp_chunk_t *c_again = pop_queue_by_seq(&h->send_history, c->ack);
 			if (c_again == NULL) {
 				break;
 			}
@@ -230,12 +230,12 @@ revc_buff_in_process(struct udp_handle_t *h, int sz) {
 	}
 }
 
-struct udp_chunk_t*
-recv_cur_out(struct udp_handle_t *h) {
+udp_chunk_t*
+recv_cur_out(udp_handle_t *h) {
 	if (h->recv_cur_out != NULL) {
 		return h->recv_cur_out;
 	}
-	struct udp_chunk_t *c = h->recv_queue.head;
+	udp_chunk_t *c = h->recv_queue.head;
 	if (c->seq <= h->recv_min_seq) { 
 		h->recv_cur_out = pop_queue_front(&h->recv_queue);
 	}
@@ -243,7 +243,7 @@ recv_cur_out(struct udp_handle_t *h) {
 }
 
 void
-recv_cur_out_process(struct udp_handle_t *h) {
+recv_cur_out_process(udp_handle_t *h) {
 	if (h->recv_cur_out == NULL) {
 		return;
 	}
@@ -254,8 +254,8 @@ recv_cur_out_process(struct udp_handle_t *h) {
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////
 void
-send_history_clear(struct udp_handle_t *h) {
-	struct udp_chunk_t *c = h->send_history.head;
+send_history_clear(udp_handle_t *h) {
+	udp_chunk_t *c = h->send_history.head;
 	while (c != NULL && c->seq <= h->recv_max_ack) {
 		c = pop_queue_front(h->send_history);
 		chunk_pool_free(h->pool, c);
@@ -264,11 +264,11 @@ send_history_clear(struct udp_handle_t *h) {
 }
 
 void
-send_req_again(struct udp_handle_t *h) {
+send_req_again(udp_handle_t *h) {
 	if (h->recv_min_seq == h->recv_max_seq) {
 		return;
 	}
-	struct udp_chunk_t *c = chunk_pool_malloc(h->pool);
+	udp_chunk_t *c = chunk_pool_malloc(h->pool);
 	c->size = 0;
 	c->type = UDP_TYPE_REQ_SEQ;
 	c->seq = 0;
@@ -277,7 +277,7 @@ send_req_again(struct udp_handle_t *h) {
 }
 
 void*
-send_buff_in(struct udp_handle_t *h) {
+send_buff_in(udp_handle_t *h) {
 	if (h->send_cur_in != NULL) {
 		return h->send_cur_in->buff;
 	}
@@ -286,7 +286,7 @@ send_buff_in(struct udp_handle_t *h) {
 }
 
 void
-send_buff_in_process(struct udp_handle_t *h, int size) {
+send_buff_in_process(udp_handle_t *h, int size) {
 	udp_chunk_t *c = h->send_cur_in;
 	if (c == NULL) {
 		return;
@@ -303,8 +303,8 @@ send_buff_in_process(struct udp_handle_t *h, int size) {
 	h->send_cur_in = NULL;
 }
 
-struct udp_chunk_t *
-send_buff_out(struct udp_handle_t *h) {
+udp_chunk_t *
+send_buff_out(udp_handle_t *h) {
 	if (h->send_cur_out != NULL) {
 		return h->send_cur_out;
 	}
@@ -313,7 +313,7 @@ send_buff_out(struct udp_handle_t *h) {
 }
 
 void
-send_buff_out_process(struct udp_handle_t *h) {
+send_buff_out_process(udp_handle_t *h) {
 	if (h->send_cur_out == NULL) {
 		return;
 	}
@@ -323,7 +323,7 @@ send_buff_out_process(struct udp_handle_t *h) {
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////
 int
-udp_process(struct udp_handle_t *h, int64 tick) {
+udp_process(udp_handle_t *h, int64 tick) {
 	if (h->recv_max_seq - h->recv_min_seq > UDP_RECV_SEQ_MAX_DEV) {
 		return -1;
 	}

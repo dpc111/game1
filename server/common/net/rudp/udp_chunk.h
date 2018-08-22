@@ -17,14 +17,14 @@
     typedef     long long           int64;
 #endif
 
-struct udp_chunk_t {
+typedef struct{
 	int8 size;									// size of buff
 	int8 type;
 	int32 seq;
 	int32 ack;
 	char buff[UDP_DATA_MAX_LEN];
-	struct udp_chunk_t *prev;
-	struct udp_chunk_t *next;
-};
+	udp_chunk_t *prev;
+	udp_chunk_t *next;
+} udp_chunk_t;
 
 #endif

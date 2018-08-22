@@ -8,6 +8,7 @@ udp_network_t::udp_network_t() {
 
 udp_network_t::~udp_network_t() {
 	delete udp_handle_pool_;
+	delete udp_conn_pool_;
 	conn_num_ = 0;
 }
 

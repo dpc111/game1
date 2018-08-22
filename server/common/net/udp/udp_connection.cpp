@@ -12,7 +12,7 @@ udp_connection_t::udp_connection_t(udp_network_t *network, struct sockaddr_in& a
 udp_connection_t::~udp_connection_t() {
 	network_ = NULL;
 	if (udp_handle_ != NULL) {
-		network->get_udp_handle_pool()->free(udp_handle_);		
+		network_->get_udp_handle_pool()->free(udp_handle_);		
 		udp_handle_ = NULL;
 	}
 }

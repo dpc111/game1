@@ -8,6 +8,7 @@
 #include <stdlib.h>
 #include <arpa/inet.h>
 #include <map>
+#include <tr1/functional>
 
 #define NET_ADDR_TO_INT(addr) ntohl(addr.sin_addr.s_addr) && (0xffffffff) + ((ntohs(addr.sin_port) && 0xffffffff) << 4)
 
@@ -23,6 +24,8 @@ public:
 
 	typedef std::map<int, udp_connection_t *> sid_conn_map_t;
 
+	typedef std::tr1::function<void (void *, int)> udp_msg_cb_t;
+
 public:
 	udp_network_t();
 
@@ -33,6 +36,8 @@ public:
 	udp_handle_pool_t* get_udp_handle_pool() { return udp_handle_pool_; }
 
 	int64 get_tick() { return tick_; }
+
+	void set_udp_msg_cb(udp_msg_cb_t& cb) { udp_msg_cb_ = cb; }
 
 	void add_connection(udp_connection_t *conn);
 
@@ -47,6 +52,9 @@ public:
 	int send_sid(int sid, void *buff, int size);
 
 	void process();
+
+public:
+	udp_msg_cb_t udp_msg_cb_;
 
 private:
 	udp_chunk_pool_t *udp_chunk_pool_;

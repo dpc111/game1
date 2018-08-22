@@ -216,7 +216,7 @@ revc_buff_in_process(udp_handle_t *h, int sz) {
 }
 
 udp_chunk_t*
-recv_cur_out(udp_handle_t *h) {
+recv_buff_out(udp_handle_t *h) {
 	if (h->recv_cur_out != NULL) {
 		return h->recv_cur_out;
 	}
@@ -228,7 +228,7 @@ recv_cur_out(udp_handle_t *h) {
 }
 
 void
-recv_cur_out_process(udp_handle_t *h) {
+recv_buff_out_process(udp_handle_t *h) {
 	if (h->recv_cur_out == NULL) {
 		return;
 	}

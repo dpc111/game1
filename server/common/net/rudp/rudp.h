@@ -57,9 +57,9 @@ void* revc_buff_in(udp_handle_t *h);
 void revc_buff_in_process(udp_handle_t *h, int sz);
 
 // logic read recv
-udp_chunk_t* recv_cur_out(udp_handle_t *h);
+udp_chunk_t* recv_buff_out(udp_handle_t *h);
 
-void recv_cur_out_process(udp_handle_t *h);
+void recv_buff_out_process(udp_handle_t *h);
 
 // logic write send
 void* send_buff_in(udp_handle_t *h);

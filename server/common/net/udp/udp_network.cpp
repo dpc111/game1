@@ -6,6 +6,7 @@ udp_network_t::udp_network_t() {
 	udp_handle_pool_ = new udp_handle_pool_t;
 	udp_conn_pool_ = new udp_connection_pool_t;
 	conn_num_ = 0;
+	udp_msg_cb_ = NULL;
 }
 
 udp_network_t::~udp_network_t() {
@@ -13,6 +14,7 @@ udp_network_t::~udp_network_t() {
 	delete udp_handle_pool_;
 	delete udp_conn_pool_;
 	conn_num_ = 0;
+	udp_msg_cb_ = NULL;
 }
 
 void udp_network_t::add_connection(udp_connection_t *conn) {

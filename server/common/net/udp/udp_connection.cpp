@@ -26,3 +26,16 @@ int udp_connection_t::send(void *buff, int size) {
 	send_buff_write(udp_handle_, buff, size);
 	return size;
 }
+
+void udp_connection_t::process() {
+	while (1) {
+		udp_chunk_t *c = recv_buff_out(udp_handle_);
+		if (c == NULL) {
+			break;
+		}
+		if (network_->udp_msg_cb_ != NULL) {
+			network_->udp_msg_cb_((void *)c->buff, c->size);
+		}
+		recv_buff_out_process(udp_handle_);
+	}
+}

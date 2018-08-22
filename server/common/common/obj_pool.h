@@ -66,6 +66,7 @@
 #ifndef	OBJ_POOL_H 
 #define OBJ_POOL_H
 
+#include <assert.h>
 #include <stdlib.h>
 #include <list>
 

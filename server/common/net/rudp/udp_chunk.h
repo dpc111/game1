@@ -1,5 +1,5 @@
-#ifndef CHUNK_H
-#define CHUNK_H
+#ifndef UPP_CHUNK_H
+#define UPP_CHUNK_H
 
 #include <stdlib.h>
 
@@ -15,14 +15,14 @@
     typedef     long long           int64;
 #endif
 
-struct chunk_t {
+struct udp_chunk_t {
 	int8 size;									// size of buff
 	int8 type;
 	int32 seq;
 	int32 ack;
 	char buff[UDP_DATA_MAX_LEN];
-	struct chunk_t *prev;
-	struct chunk_t *next;
+	struct udp_chunk_t *prev;
+	struct udp_chunk_t *next;
 };
 
 #endif

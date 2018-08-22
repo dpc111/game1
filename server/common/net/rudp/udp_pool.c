@@ -1,12 +1,14 @@
-struct chunk_pool_t {
-	struct chunk_t *head;
-	struct chunk_t *tail;
+#include "udp_pool.h"
+
+struct udp_chunk_pool_t {
+	struct udp_chunk_t *head;
+	struct udp_chunk_t *tail;
 	int size = 0;
 };
 
-struct chunk_t* 
-chunk_pool_malloc(struct chunk_pool_t *pool) {
-	chunk_t* chunk = NULL;
+struct udp_chunk_t* 
+chunk_pool_malloc(struct udp_chunk_pool_t *pool) {
+	udp_chunk_t* chunk = NULL;
 	if (pool_->head) {
 		chunk = pool->head;
 		if (!chunk->next) {
@@ -17,14 +19,14 @@ chunk_pool_malloc(struct chunk_pool_t *pool) {
 		}
 		--pool->size;
 	} else {
-		chunk = (chunk_t *)malloc(sizeof(chunk_t));
+		chunk = (udp_chunk_t *)malloc(sizeof(udp_chunk_t));
 	}
 	chunk->next = NULL;
 	return chunk;
 }
 
 void 
-chunk_pool_free(struct chunk_pool_t *pool, struct chunk_t *chunk) {
+chunk_pool_free(struct udp_chunk_pool_t *pool, struct udp_chunk_t *chunk) {
 	if (chunk == NULL) {
 		return;
 	}
@@ -39,7 +41,7 @@ chunk_pool_free(struct chunk_pool_t *pool, struct chunk_t *chunk) {
 	}
 	++pool->size;
 	while (pool->size > CHUNK_POOL_MAX_SIZE) {
-		chunk_t *head = pool->head;
+		udp_chunk_t *head = pool->head;
 		pool->head = head->next; 
 		free(head);
 	}

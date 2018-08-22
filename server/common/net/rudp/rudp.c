@@ -1,6 +1,9 @@
 #include "rudp.h"
 #include <assert.h>
 #include <stdlib.h>
+#include <string.h>
+#include <stdint.h>
+#include <stdio.h>
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////
 void send_history_clear(udp_handle_t *h);

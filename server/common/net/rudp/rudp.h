@@ -15,6 +15,7 @@
 #define UDP_REQ_AGAIN_TICKS 10
 #define UDP_REQ_AGAIN_MAX_TIMES 10
 #define UDP_RECV_SEQ_MAX_DEV 20
+#define UDP_TIME_OUT_TICKS 1000
 
 #include "udp_pool.h"
 #include "udp_chunk.h"
@@ -38,10 +39,11 @@ typedef struct udp_handle {
 	udp_chunk_t *send_cur_out;									// 网络读
 	int send_seq;
 	
+	udp_chunk_pool_t *pool;
+	int64 cur_tick;
+	int64 recv_tick;
 	int64 req_tick;
 	int req_times;
-
-	udp_chunk_pool_t *pool;
 } udp_handle_t;
 
 #ifdef __cplusplus
@@ -60,9 +62,13 @@ void* send_buff_in(udp_handle_t *h);
 
 void send_buff_in_process(udp_handle_t *h, int size);
 
-udp_chunk_t * send_buff_out(udp_handle_t *h);
+udp_chunk_t* send_buff_out(udp_handle_t *h);
 
 void send_buff_out_process(udp_handle_t *h);
+
+void init_udp_handle(udp_handle_t *h, udp_chunk_pool_t *pool, int64 tick);
+
+void destroy_udp_handle(udp_handle_t *h);
 
 int udp_process(udp_handle_t *h, int64 tick);
 

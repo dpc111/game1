@@ -201,7 +201,8 @@ revc_buff_in_process(udp_handle_t *h, int sz) {
 				if (h->recv_max_ack < c->ack) {
 					h->recv_max_ack = c->ack;
 					send_history_clear(h);
-				} 
+				}
+				h->recv_tick = h->cur_tick; 
 			}
 			break;
 		default :
@@ -253,6 +254,7 @@ send_req_again(udp_handle_t *h) {
 	c->seq = 0;
 	c->ack = h->recv_min_seq + 1;
 	push_queue_front(&h->send_queue, c);
+	++h->req_times;
 }
 
 void*
@@ -301,17 +303,113 @@ send_buff_out_process(udp_handle_t *h) {
 }
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////
+void 
+init_udp_handle(udp_handle_t *h, udp_chunk_pool_t *pool, int64 tick) {
+	udp_chunk_t *c = pop_queue_front(h->recv_queue);
+	while (c != NULL) {
+		chunk_pool_free(pool, c);
+		c = pop_queue_front(h->recv_queue);
+	}
+	if (h->recv_cur_in != NULL) {
+		chunk_pool_free(pool, h->recv_cur_in);
+		h->recv_cur_in = NULL;
+	}
+	if (h->recv_cur_out != NULL) {
+		chunk_pool_free(pool, h->recv_cur_out);
+		h->recv_cur_out = NULL;
+	}
+	h->recv_max_seq = 0;
+	h->recv_min_seq = 0;
+	h->recv_max_ack = 0;
+	c = pop_queue_front(h->send_queue);
+	while (c != NULL) {
+		chunk_pool_free(pool, c);
+		c = pop_queue_front(h->send_queue);
+	}
+	c = pop_queue_front(h->send_history);
+	while (c != NULL) {
+		chunk_pool_free(pool, c);
+		c = pop_queue_front(h->send_history);
+	}
+	if (h->send_cur_in != NULL) {
+		chunk_pool_free(pool, h->send_cur_in);
+		h->send_cur_in = NULL;
+	}
+	if (h->send_cur_out != NULL) {
+		chunk_pool_free(pool, h->send_cur_out);
+		h->send_cur_out = NULL;
+	}
+	h->send_seq = 0;
+	h->pool = pool;
+	h->cur_tick = tick;
+	h->recv_tick = tick;
+	h->req_tick = 0;
+	h->req_times = 0;
+}
+
+void 
+destroy_udp_handle(udp_handle_t *h) {
+	if (h->pool == NULL) {
+		return;
+	}
+	udp_chunk_t *c = pop_queue_front(h->recv_queue);
+	while (c != NULL) {
+		chunk_pool_free(h->pool, c);
+		c = pop_queue_front(h->recv_queue);
+	}
+	if (h->recv_cur_in != NULL) {
+		chunk_pool_free(h->pool, h->recv_cur_in);
+		h->recv_cur_in = NULL;
+	}
+	if (h->recv_cur_out != NULL) {
+		chunk_pool_free(h->pool, h->recv_cur_out);
+		h->recv_cur_out = NULL;
+	}
+	h->recv_max_seq = 0;
+	h->recv_min_seq = 0;
+	h->recv_max_ack = 0;
+	c = pop_queue_front(h->send_queue);
+	while (c != NULL) {
+		chunk_pool_free(h->pool, c);
+		c = pop_queue_front(h->send_queue);
+	}
+	c = pop_queue_front(h->send_history);
+	while (c != NULL) {
+		chunk_pool_free(h->pool, c);
+		c = pop_queue_front(h->send_history);
+	}
+	if (h->send_cur_in != NULL) {
+		chunk_pool_free(h->pool, h->send_cur_in);
+		h->send_cur_in = NULL;
+	}
+	if (h->send_cur_out != NULL) {
+		chunk_pool_free(h->pool, h->send_cur_out);
+		h->send_cur_out = NULL;
+	}
+	h->send_seq = 0;
+	h->pool = NULL;
+	h->cur_tick = 0;
+	h->recv_tick = 0;
+	h->req_tick = 0;
+	h->req_times = 0;
+}
+
+
 int
 udp_process(udp_handle_t *h, int64 tick) {
+	h->cur_tick = tick;
+	if (h->cur_tick - h->recv_tick > UDP_TIME_OUT_TICKS) {
+		return -1;
+	}
 	if (h->recv_max_seq - h->recv_min_seq > UDP_RECV_SEQ_MAX_DEV) {
 		return -1;
 	}
 	if (h->req_times > UDP_REQ_AGAIN_MAX_TIMES) {
 		return -1;	
 	}
-	if (tick - h->req_tick > UDP_REQ_AGAIN_TICKS) {
+	if (h->cur_tick - h->req_tick > UDP_REQ_AGAIN_TICKS) {
 		send_req_again(h);
-		++h->req_times;
+		h->req_tick = h->cur_tick;
 	}
 	return 0;
 }

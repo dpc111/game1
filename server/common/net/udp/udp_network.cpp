@@ -1,4 +1,5 @@
 #include "udp_network.h"
+#include "udp_connection.h"
 
 udp_network_t::udp_network_t() {
 	udp_handle_pool_ = new udp_handle_pool_t;

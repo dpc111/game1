@@ -284,6 +284,18 @@ send_buff_in_process(udp_handle_t *h, int size) {
 	h->send_cur_in = NULL;
 }
 
+void 
+send_buff_write(udp_handle_t *h, void *buff, int size) {
+	assert(size <= UDP_DATA_MAX_LEN);
+	udp_chunk_t *c = chunk_pool_malloc(h->pool);
+	c->size = size;
+	c->type = UDP_TYPE_DATA;
+	c->seq = ++h->send_seq;
+	c->ack = h->recv_min_seq;
+	memcpy(c->buff, buff, size);
+	push_queue_back(&h->send_queue, c);
+}
+
 udp_chunk_t *
 send_buff_out(udp_handle_t *h) {
 	if (h->send_cur_out != NULL) {

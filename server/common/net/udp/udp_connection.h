@@ -14,6 +14,8 @@ public:
 
 	~udp_connection_t();
 
+	int send(void *buff, int size);
+
 public:
 	struct sockaddr_in address_;
 

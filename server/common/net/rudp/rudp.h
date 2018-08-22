@@ -51,22 +51,29 @@ typedef struct udp_handle {
 extern "C" {
 #endif
 
+// net write recv
 void* revc_buff_in(udp_handle_t *h);
 
 void revc_buff_in_process(udp_handle_t *h, int sz);
 
+// logic read recv
 udp_chunk_t* recv_cur_out(udp_handle_t *h);
 
 void recv_cur_out_process(udp_handle_t *h);
 
+// logic write send
 void* send_buff_in(udp_handle_t *h);
 
 void send_buff_in_process(udp_handle_t *h, int size);
 
+void send_buff_write(udp_handle_t *h, void *buff, int size);
+
+// net read send
 udp_chunk_t* send_buff_out(udp_handle_t *h);
 
 void send_buff_out_process(udp_handle_t *h);
 
+// handle
 void init_udp_handle(udp_handle_t *h, udp_chunk_pool_t *pool, int64 tick);
 
 void destroy_udp_handle(udp_handle_t *h);

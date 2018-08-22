@@ -39,6 +39,7 @@ void udp_network_t::remove_connection_addr(int64 addr) {
 		sid_conns_.erase(it2);
 	}
 	udp_conn_pool_->free(conn);
+	--conn_num_;
 }
 
 void udp_network_t::remove_connection_sid(int sid) {
@@ -53,6 +54,31 @@ void udp_network_t::remove_connection_sid(int sid) {
 		addr_conns_.erase(it2);
 	}
 	udp_conn_pool_->free(conn);
+	--conn_num_;
+}
+
+udp_connection_t udp_network_t::get_connection_addr(int64 addr) {
+	addr_conn_map_t::iterator it = addr_conns_.find(addr);
+	if (it == addr_conns_.end()) {
+		return NULL;
+	}
+	return it->second;
+}
+
+udp_connection_t udp_network_t::get_connection_sid(int sid) {
+	sid_conn_map_t::iterator it = sid_conns_.find(sid);
+	if (it == sid_conns_.end()) {
+		return NULL;
+	}
+	return it->second;
+}
+
+int udp_network_t::send_sid(int sid, void *buff, int size) {
+	udp_connection_t *conn = get_connection_sid(sid);
+	if (conn == NULL) {
+		return 0;
+	}
+	return conn->send(buff, size);
 }
 
 void udp_network_t::process() {

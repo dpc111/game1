@@ -30,11 +30,19 @@ public:
 
 	udp_handle_pool_t* get_udp_handle_pool() { return udp_handle_pool_; }
 
+	int64 get_tick() { return tick_; }
+
 	void add_connection(udp_connection_t *conn);
 
 	void remove_connection_addr(int64 addr);
 
 	void remove_connection_sid(int sid);
+
+	udp_connection_t* get_connection_addr(int64 addr);
+
+	udp_connection_t* get_connection_sid(int sid);
+
+	int send_sid(int sid, void *buff, int size);
 
 	void process();
 
@@ -48,6 +56,8 @@ private:
 	sid_conn_map_t sid_conns_;
 
 	int conn_num_;
+
+	int tick_;
 };
 
 #endif

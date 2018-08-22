@@ -1,6 +1,8 @@
 #ifndef UPP_CHUNK_H
 #define UPP_CHUNK_H
 
+#define UDP_DATA_MAX_LEN 512                    // Internet(非局域网)上的标准MTU值为576字节 (控制在548字节 (576-8-20)以内)
+
 #include <stdlib.h>
 
 #if defined(_WIN32)

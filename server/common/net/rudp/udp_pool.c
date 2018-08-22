@@ -1,4 +1,5 @@
 #include "udp_pool.h"
+#include "udp_chunk.h"
 
 struct udp_chunk_pool_t {
 	struct udp_chunk_t *head;
@@ -9,7 +10,7 @@ struct udp_chunk_pool_t {
 struct udp_chunk_t* 
 chunk_pool_malloc(struct udp_chunk_pool_t *pool) {
 	udp_chunk_t* chunk = NULL;
-	if (pool_->head) {
+	if (pool->head) {
 		chunk = pool->head;
 		if (!chunk->next) {
 			pool->head = NULL;

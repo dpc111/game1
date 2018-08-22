@@ -52,7 +52,7 @@ void udp_network_t::remove_connection_sid(int sid) {
 	if (it2 != addr_conns_.end()) {
 		addr_conns_.erase(it2);
 	}
-	udp_conn_pool_.free(conn);
+	udp_conn_pool_->free(conn);
 }
 
 void udp_network_t::process() {

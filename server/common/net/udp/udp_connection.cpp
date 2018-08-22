@@ -27,7 +27,11 @@ int udp_connection_t::send(void *buff, int size) {
 	return size;
 }
 
-void udp_connection_t::process() {
+int udp_connection_t::process() {
+	int res = udp_process(udp_handle_, network_->get_tick());
+	if (res < 0){
+		return res;
+	}
 	while (1) {
 		udp_chunk_t *c = recv_buff_out(udp_handle_);
 		if (c == NULL) {
@@ -38,4 +42,5 @@ void udp_connection_t::process() {
 		}
 		recv_buff_out_process(udp_handle_);
 	}
+	return 0;
 }

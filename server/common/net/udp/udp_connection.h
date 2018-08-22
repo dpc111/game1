@@ -16,7 +16,7 @@ public:
 
 	int send(void *buff, int size);
 
-	void process();
+	int process();
 
 public:
 	struct sockaddr_in address_;

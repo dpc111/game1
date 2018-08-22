@@ -28,6 +28,8 @@ public:
 
 	~udp_network_t();
 
+	udp_chunk_pool_t* get_udp_chunk_pool() { return udp_chunk_pool_; }
+
 	udp_handle_pool_t* get_udp_handle_pool() { return udp_handle_pool_; }
 
 	int64 get_tick() { return tick_; }
@@ -47,6 +49,8 @@ public:
 	void process();
 
 private:
+	udp_chunk_pool_t *udp_chunk_pool_;
+
 	udp_handle_pool_t *udp_handle_pool_;
 
 	udp_connection_pool_t *udp_conn_pool_;

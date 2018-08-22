@@ -394,7 +394,6 @@ destroy_udp_handle(udp_handle_t *h) {
 	h->req_times = 0;
 }
 
-
 int
 udp_process(udp_handle_t *h, int64 tick) {
 	h->cur_tick = tick;

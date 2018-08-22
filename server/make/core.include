@@ -52,6 +52,7 @@ INCLUDES := -I../common \
     -I../common/common \
 	-I../common/interface \
 	-I../common/net \
+	-I../common/net/udp \
 	-I../common/net/rudp \
 	-I../common/test \
 	-I../common/script \

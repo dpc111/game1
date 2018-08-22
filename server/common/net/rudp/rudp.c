@@ -113,12 +113,12 @@ pop_queue_by_seq(udp_chunk_queue_t *q, int seq) {
 	while (tmp != NULL) {
 		if (tmp->seq == seq) {
 			if (tmp->next == NULL) {
-				h->tail = tmp->prev;
+				q->tail = tmp->prev;
 			} else {
 				tmp->next->prev = tmp->prev;
 			}
 			if (tmp->prev == NULL) {
-				h->head = tmp->next;
+				q->head = tmp->next;
 			} else {
 				tmp->prev->next = tmp->next;
 			}
@@ -175,11 +175,13 @@ revc_buff_in_process(udp_handle_t *h, int sz) {
 
 	switch (c->type) {
 		case UDP_TYPE_REQ_SEQ:
-			udp_chunk_t *c_again = pop_queue_by_seq(&h->send_history, c->ack);
-			if (c_again == NULL) {
-				break;
+			{
+				udp_chunk_t *c_again = pop_queue_by_seq(&h->send_history, c->ack);
+				if (c_again == NULL) {
+					break;
+				}
+				push_queue_front(&h->send_queue, c_again);
 			}
-			push_queue_front(&h->send_queue, c_again);
 			break;
 		case UDP_TYPE_SYN_ACK:
 			break;

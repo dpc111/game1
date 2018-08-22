@@ -1,4 +1,5 @@
 #include "udp_connection.h"
+#include "udp_network.h"
 
 udp_connection_t::udp_connection_t(udp_network_t *network, struct sockaddr_in& addr, int sid) {
 	network_ = network;

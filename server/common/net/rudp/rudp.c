@@ -1,30 +1,7 @@
 #include "rudp.h"
-#include "udp_pool.h"
 
-struct udp_chunk_queue_t {
-	struct udp_chunk_t *head;
-	struct udp_chunk_t *tail;
-};
-
-struct udp_handle_t {
-	struct udp_chunk_queue_t recv_queue;								// 接收队列
-	struct udp_chunk_t *recv_cur_in; 									// 网络写
-	struct udp_chunk_t *recv_cur_out;				 					// 逻辑读
-	int recv_max_seq;
-	int recv_min_seq;
-	int recv_max_ack;
-
-	struct udp_chunk_queue_t send_queue;								// 发送队列
-	struct udp_chunk_queue_t send_history;								// 发送历史
-	struct udp_chunk_t *send_cur_in;									// 逻辑写
-	struct udp_chunk_t *send_cur_out;									// 网络读
-	int send_seq;
-	
-	int64 req_tick;
-	int req_times;
-
-	udp_chunk_pool_t *pool;
-};
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////
+void send_history_clear(udp_handle_t *h)
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////
 void
@@ -162,7 +139,7 @@ recv_min_seq_update(udp_handle_t *h) {
 		if (c->seq > h->recv_min_seq) {
 			if (c->seq == h->recv_min_seq + 1) {
 				h->recv_min_seq = c->seq;
-				h->req_times = 0
+				h->req_times = 0;
 			} else {
 				return;
 			}

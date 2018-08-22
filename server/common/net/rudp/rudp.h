@@ -19,12 +19,12 @@
 #include "udp_pool.h"
 #include "udp_chunk.h"
 
-typedef struct udp_chunk_queue_t {
+typedef struct udp_chunk_queue {
 	udp_chunk_t *head;
 	udp_chunk_t *tail;
 } udp_chunk_queue_t;
 
-typedef struct udp_handle_t {
+typedef struct udp_handle {
 	udp_chunk_queue_t recv_queue;								// 接收队列
 	udp_chunk_t *recv_cur_in; 									// 网络写
 	udp_chunk_t *recv_cur_out;				 					// 逻辑读
@@ -60,7 +60,7 @@ void* send_buff_in(udp_handle_t *h);
 
 void send_buff_in_process(udp_handle_t *h, int size);
 
-udp_chunk_t * send_buff_out(udp_handle_t *h)
+udp_chunk_t * send_buff_out(udp_handle_t *h);
 
 void send_buff_out_process(udp_handle_t *h);
 

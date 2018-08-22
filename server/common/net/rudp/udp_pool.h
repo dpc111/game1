@@ -5,7 +5,7 @@
 
 #define CHUNK_POOL_MAX_SIZE 1024
 
-typedef struct udp_chunk_pool_t {
+typedef struct udp_chunk_pool {
 	udp_chunk_t *head;
 	udp_chunk_t *tail;
 	int size;

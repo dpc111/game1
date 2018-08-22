@@ -2,7 +2,7 @@
 #include "udp_connection.h"
 
 udp_network_t::udp_network_t() {
-	udp_chunk_pool_ = new udp_chunk_pool_;
+	udp_chunk_pool_ = new udp_chunk_pool_t;
 	udp_handle_pool_ = new udp_handle_pool_t;
 	udp_conn_pool_ = new udp_connection_pool_t;
 	conn_num_ = 0;
@@ -59,7 +59,7 @@ void udp_network_t::remove_connection_sid(int sid) {
 	--conn_num_;
 }
 
-udp_connection_t udp_network_t::get_connection_addr(int64 addr) {
+udp_connection_t* udp_network_t::get_connection_addr(int64 addr) {
 	addr_conn_map_t::iterator it = addr_conns_.find(addr);
 	if (it == addr_conns_.end()) {
 		return NULL;
@@ -67,7 +67,7 @@ udp_connection_t udp_network_t::get_connection_addr(int64 addr) {
 	return it->second;
 }
 
-udp_connection_t udp_network_t::get_connection_sid(int sid) {
+udp_connection_t* udp_network_t::get_connection_sid(int sid) {
 	sid_conn_map_t::iterator it = sid_conns_.find(sid);
 	if (it == sid_conns_.end()) {
 		return NULL;

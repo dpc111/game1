@@ -17,7 +17,7 @@
     typedef     long long           int64;
 #endif
 
-typedef struct{
+typedef struct udp_chunk_t {
 	int8 size;									// size of buff
 	int8 type;
 	int32 seq;

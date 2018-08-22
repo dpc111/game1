@@ -8,7 +8,7 @@
 struct udp_chunk_pool_t {
 	struct udp_chunk_t *head;
 	struct udp_chunk_t *tail;
-	int size = 0;
+	int size;
 };
 
 struct udp_chunk_t* chunk_pool_malloc(struct udp_chunk_pool_t *pool);

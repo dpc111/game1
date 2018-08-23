@@ -4,6 +4,7 @@
 #include "type.h"
 #include "obj_pool.h"
 #include "rudp.h"
+#include "single_select.h"
 #include "net_address.h"
 #include <stdio.h>
 #include <stdlib.h>
@@ -69,6 +70,8 @@ public:
 	udp_msg_cb_t udp_msg_cb_;
 
 	int socket_fd_;
+
+	single_select_t *single_select_;
 
 private:
 	udp_chunk_t *cur_recv_chunk_;

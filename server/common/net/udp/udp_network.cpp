@@ -9,6 +9,7 @@ udp_network_t::udp_network_t() {
 	conn_num_ = 0;
 	udp_msg_cb_ = NULL;
 	socket_fd_ = 0;
+	single_select_ = NULL;
 }
 
 udp_network_t::~udp_network_t() {
@@ -22,6 +23,10 @@ udp_network_t::~udp_network_t() {
 	conn_num_ = 0;
 	udp_msg_cb_ = NULL;
 	socket_fd_ = 0;
+	if (single_select_ != NULL) {
+		delete single_select_;
+		single_select_ = NULL;
+	}
 }
 
 void udp_network_t::add_connection(udp_connection_t *conn) {
@@ -101,6 +106,11 @@ int udp_network_t::start(const char *ip, int port) {
 	if (bind(socket_fd_, (struct sockaddr*)&addr_, sizeof(addr_)) < 0) {
 		return -1;
 	}
+	if (single_select_ != NULL) {
+		delete single_select_;
+		single_select_ = NULL;
+	}
+	single_select_ = new single_select_t(socket_fd_);
 	return 0;
 }
 
@@ -114,6 +124,9 @@ void udp_network_t::process(int64 tick) {
 	while (1) {
 		if (cur_recv_chunk_ == NULL) {
 			cur_recv_chunk_ = chunk_pool_malloc(udp_chunk_pool_);
+		}
+		if (!single_select_->read_check()) {
+			break;
 		}
 		len = recvfrom(socket_fd_, cur_recv_chunk_, UDP_HEAD_BYTE_ALL + UDP_DATA_MAX_LEN, 0, (struct sockaddr*)&address, &addr_len);
 		if (len <= 0) {

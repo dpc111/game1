@@ -15,7 +15,7 @@ class udp_network_t;
 
 class udp_connection_t {
 public:
-	udp_connection_t(udp_network_t *network, struct sockaddr_in& addr, int sid);
+	udp_connection_t(udp_network_t *network, struct sockaddr_in addr, int sid);
 
 	~udp_connection_t();
 

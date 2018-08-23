@@ -61,10 +61,14 @@ int udp_connection_t::process() {
 	if (!network_->get_block()) {
 		c = send_buff_out(udp_handle_);
 		while (c != NULL) {
+			LOG("...");
 			if (!network_->single_select_->write_check()) {
+			LOG("...");
 				break;
 			}
+			LOG("...");
 			int n = sendto(network_->socket_fd_, c, c->size + UDP_HEAD_BYTE_ALL, 0, (struct sockaddr*)&address_, sizeof(address_));
+			LOG("%d", n);
 			if (n != c->size + UDP_HEAD_BYTE_ALL) {
 				network_->set_block(true);
 				break;

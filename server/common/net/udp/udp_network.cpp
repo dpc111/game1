@@ -7,6 +7,7 @@
 udp_network_t::udp_network_t() {
 	cur_recv_chunk_ = NULL;
 	udp_chunk_pool_ = new udp_chunk_pool_t;
+	chunk_pool_init(udp_chunk_pool_);
 	udp_handle_pool_ = new udp_handle_pool_t;
 	udp_conn_pool_ = new udp_connection_pool_t;
 	conn_num_ = 0;

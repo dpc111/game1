@@ -29,4 +29,6 @@ typedef struct udp_chunk_t {
 	udp_chunk_t *next;
 } udp_chunk_t;
 
+void udp_chunk_init(udp_chunk_t *c);
+
 #endif

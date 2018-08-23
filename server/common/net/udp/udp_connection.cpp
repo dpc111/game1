@@ -2,7 +2,7 @@
 #include "udp_network.h"
 #include "log.h"
 
-udp_connection_t::udp_connection_t(udp_network_t *network, struct sockaddr_in& addr, int sid) {
+udp_connection_t::udp_connection_t(udp_network_t *network, struct sockaddr_in addr, int sid) {
 	network_ = network;
 	udp_handle_ = network->get_udp_handle_pool()->alloc();
 	init_udp_handle(udp_handle_, network->get_udp_chunk_pool(), network->get_tick());

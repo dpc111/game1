@@ -16,7 +16,8 @@
 int main() {
 	service_t *service = get_service();
 	service->init();
-	service->start("0.0.0.0", 7769);
+	service->start_tcp("0.0.0.0", 7769);
+	service->start_udp("0.0.0.0", 7779);
 	service->process();
 	return 1;
 }

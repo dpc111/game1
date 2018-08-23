@@ -38,6 +38,8 @@ public:
 
 	~udp_network_t();
 
+	bool running() { return socket_fd_ != 0; }
+
 	udp_chunk_pool_t* get_udp_chunk_pool() { return udp_chunk_pool_; }
 
 	udp_handle_pool_t* get_udp_handle_pool() { return udp_handle_pool_; }

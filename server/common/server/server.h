@@ -3,6 +3,7 @@
 
 #include "msg_dispatch.h"
 #include "tcp_network.h"
+#include "udp_network.h"
 #include "conn_mgr.h"
 // #include "timer.h"
 #include "timer_axis.h"
@@ -24,7 +25,9 @@ public:
 
 	virtual void update(int64 tm) = 0;
 
-	void start(const char *ip, int port);
+	void start_tcp(const char *ip, int port);
+
+	void start_udp(const char *ip, int port);
 
 	void start();
 
@@ -32,7 +35,7 @@ public:
 
 	void set_frame_interval(int64 interval);
 
-	tcp_network_t *get_network() { return network_; }
+	tcp_network_t *get_network() { return tcp_network_; }
 
 	timer_axis_t *get_timer_axis() { return timer_axis_; }
 
@@ -59,17 +62,19 @@ public:
 	// timer_handle_t register_delay_mstimer(timer_handler_t *handler, void *user, timestamp delay, timestamp interval);
 
 	template<typename T>
-	void register_message(const typename msg_dispatch_t::cbT_t<T>::msg_cb_t& cb) { network_->get_msg_dispatch()->register_message<T>(cb); }
+	void register_message(const typename msg_dispatch_t::cbT_t<T>::msg_cb_t& cb) { tcp_network_->get_msg_dispatch()->register_message<T>(cb); }
 
 	template<typename T>
-	void register_net_message(const typename msg_dispatch_t::cb_netT_t<T>::msg_cb_t& cb) { network_->get_msg_dispatch()->register_net_message<T>(cb); }
+	void register_net_message(const typename msg_dispatch_t::cb_netT_t<T>::msg_cb_t& cb) { tcp_network_->get_msg_dispatch()->register_net_message<T>(cb); }
 
-	void register_default_message(const msg_dispatch_t::msg_default_cb_t& cb) { network_->get_msg_dispatch()->register_default_message(cb); }
+	void register_default_message(const msg_dispatch_t::msg_default_cb_t& cb) { tcp_network_->get_msg_dispatch()->register_default_message(cb); }
 
 	void on_disconnect(tcp_connection_t *conn);
 
 private:
-	tcp_network_t *network_;
+	tcp_network_t *tcp_network_;
+
+	udp_network_t *udp_network_;
 
 	conn_mgr_t *conn_mgr_;
 

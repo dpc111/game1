@@ -4,7 +4,8 @@
 #include "msg_operate.h"
 
 server_t::server_t() {
-	network_ = new tcp_network_t();
+	tcp_network_ = new tcp_network_t();
+	udp_network_ = new udp_network_t();
 	conn_mgr_ = new conn_mgr_t(this);
 	// times_ = new timers_t();
 	timer_axis_ = new timer_axis_t();
@@ -12,20 +13,22 @@ server_t::server_t() {
 	json_mgr_ = new cfg_json_mgr_t();	
 	frame_last_tm_ = 0;
 	frame_interval_ = 0;
-	network_->set_on_disconnect_cb(std::tr1::bind(&server_t::on_disconnect, this, std::tr1::placeholders::_1));
+	tcp_network_->set_on_disconnect_cb(std::tr1::bind(&server_t::on_disconnect, this, std::tr1::placeholders::_1));
 }
 
 server_t::~server_t() {
-	delete network_;
+	delete tcp_network_;
+	tcp_network_ = NULL;
+	delete udp_network_;
+	udp_network_ = NULL;
 	delete conn_mgr_;
-	// delete times_;
-	delete timer_axis_;
-	delete lua_frame_;
-	network_ = NULL;
 	conn_mgr_ = NULL;
-	// times_ = NULL;
+	delete timer_axis_;
 	timer_axis_ = NULL;
+	delete lua_frame_;
 	lua_frame_ = NULL;
+	// delete times_;
+	// times_ = NULL;
 }
 
 void server_t::init() {
@@ -37,14 +40,23 @@ void server_t::init_json_mgr() {
 
 }
 
-void server_t::start(const char *ip, int port) {
-	network_->start(ip, port);
+void server_t::start_tcp(const char *ip, int port) {
+	tcp_network_->start(ip, port);
+}
+
+void server_t::start_udp(const char *ip, int port) {
+	udp_network_->start(ip, port);
 }
 
 void server_t::process() {
 	while (true) {
 		int64 tm = getms();
-		network_->process();
+		if (tcp_network_->running()) {
+			tcp_network_->process(tm);
+		}
+		if (udp_network_->running()) {
+			udp_network_->process(tm);
+		}
 		// times_->process(tm);
 		timer_axis_->process();
 		if (frame_interval_ > 0 && tm - frame_last_tm_ > frame_interval_) {
@@ -60,7 +72,7 @@ void server_t::set_frame_interval(int64 interval) {
 }
 
 tcp_connection_t *server_t::connect_to(const char *ip, int port, void *context) {
-	return network_->connect_to(ip, port, context);
+	return tcp_network_->connect_to(ip, port, context);
 }
 
 tcp_connection_t *server_t::connect_to(int sid) {
@@ -80,11 +92,11 @@ void server_t::send(int sid, google::protobuf::Message& msg) {
 		LOG("send %s to %d : disconnect", msg.GetDescriptor()->full_name().c_str(), sid);
 		return;
 	}
-	network_->get_msg_operate()->send(conn, msg);
+	tcp_network_->get_msg_operate()->send(conn, msg);
 }
 
 void server_t::send(tcp_connection_t *conn, google::protobuf::Message& msg) {
-	network_->get_msg_operate()->send(conn, msg);
+	tcp_network_->get_msg_operate()->send(conn, msg);
 }
 
 void server_t::send_func(tcp_connection_t *conn, const char *funcname, const char *fmt, ...) {
@@ -113,7 +125,7 @@ void server_t::send_func(tcp_connection_t *conn, const char *funcname, const cha
 		++walk;
 	}
 	va_start(vlist, fmt);
-	network_->get_msg_operate()->send_func(conn, funcname, fmt, vlist, len);
+	tcp_network_->get_msg_operate()->send_func(conn, funcname, fmt, vlist, len);
 	va_end(vlist);
 }
 

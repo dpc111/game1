@@ -23,11 +23,13 @@ public:
 
 	~tcp_network_t();
 
+	bool running() { return ev_listen_ != NULL; }
+
 	void start(const char *ip, int port);
 
 	void shutdown();
  
-	void process();
+	void process(int64 tm);
 
 	const net_address_t& get_local_addr() { return addr_; }
 

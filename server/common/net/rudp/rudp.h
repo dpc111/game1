@@ -70,6 +70,8 @@ void send_buff_in_process(udp_handle_t *h, int size);
 
 void send_buff_write(udp_handle_t *h, void *buff, int size);
 
+void send_chunk_force(udp_handle_t *h, udp_chunk_t *c);
+
 // net read send
 udp_chunk_t* send_buff_out(udp_handle_t *h);
 

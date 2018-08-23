@@ -29,6 +29,8 @@ public:
 
 	int send(void *buff, int size);
 
+	int send_chunk_force(udp_chunk_t *c);
+
 	int process();
 
 public:

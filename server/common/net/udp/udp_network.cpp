@@ -1,6 +1,7 @@
 #include "udp_network.h"
 #include "udp_connection.h"
 #include "net_common.h"
+#include "log.h"
 
 udp_network_t::udp_network_t() {
 	cur_recv_chunk_ = NULL;
@@ -90,6 +91,22 @@ udp_connection_t* udp_network_t::get_connection_sid(int sid) {
 	return it->second;
 }
 
+udp_connection_t* udp_network_t::connect_to(int sid, const char *ip, int port) {
+	udp_connection_t *conn = get_connection_sid(sid);
+	if (conn != NULL) {
+		return conn;
+	}
+	udp_connection_t *conn = udp_conn_pool_->alloc();
+	new (conn) udp_connection_t(this, (struct sockaddr_in)net_address_t(ip, port), sid);
+	add_connection(conn);
+	udp_chunk_t *c = chunk_pool_malloc(udp_chunk_pool_);
+	c->type = UDP_TYPE_CONNECT;
+	c->size = 0;
+	c->seq = 0;
+	c->ack = sid;
+	conn->send_chunk_force(c);
+}
+
 int udp_network_t::send_sid(int sid, void *buff, int size) {
 	udp_connection_t *conn = get_connection_sid(sid);
 	if (conn == NULL) {
@@ -131,6 +148,7 @@ void udp_network_t::process(int64 tick) {
 			break;
 		}
 		len = recvfrom(socket_fd_, cur_recv_chunk_, UDP_HEAD_BYTE_ALL + UDP_DATA_MAX_LEN, 0, (struct sockaddr*)&address, &addr_len);
+		LOG("%d", len);
 		if (len <= 0) {
 			break;
 		}

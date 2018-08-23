@@ -340,6 +340,11 @@ send_buff_write(udp_handle_t *h, void *buff, int size) {
 	push_queue_back(&h->send_queue, c);
 }
 
+void 
+send_chunk_force(udp_handle_t *h, udp_chunk_t *c) {
+	push_queue_front(&h->send_queue, c);
+}
+
 udp_chunk_t *
 send_buff_out(udp_handle_t *h) {
 	if (h->send_cur_out != NULL) {

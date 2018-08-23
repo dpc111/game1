@@ -62,6 +62,8 @@ public:
 
 	udp_connection_t* get_connection_sid(int sid);
 
+	udp_connection_t* connect_to(int sid, const char *ip, int port);
+
 	int send_sid(int sid, void *buff, int size);
 
 	int start(const char *ip, int port);

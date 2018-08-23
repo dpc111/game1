@@ -1,5 +1,6 @@
 #include "udp_connection.h"
 #include "udp_network.h"
+#include "log.h"
 
 udp_connection_t::udp_connection_t(udp_network_t *network, struct sockaddr_in& addr, int sid) {
 	network_ = network;
@@ -32,6 +33,14 @@ int udp_connection_t::send(void *buff, int size) {
 	return size;
 }
 
+int udp_connection_t::send_chunk_force(udp_chunk_t *c) {
+	if (c->size > UDP_DATA_MAX_LEN) {
+		return -1;
+	}
+	send_chunk_force(udp_handle_, c);
+	return c->size;
+}
+
 int udp_connection_t::process() {
 	// udp hand process
 	int res = udp_process(udp_handle_, network_->get_tick());
@@ -44,6 +53,7 @@ int udp_connection_t::process() {
 		if (network_->udp_msg_cb_ != NULL) {
 			network_->udp_msg_cb_(sid_, (void *)c->buff, c->size);
 		}
+		LOG("%d, %d", sid_, c->sid);
 		recv_buff_out_process(udp_handle_);
 		c = recv_buff_out(udp_handle_);
 	}

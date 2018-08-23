@@ -38,7 +38,7 @@ int main() {
 	service->init();
 	service->start_tcp("0.0.0.0", tcp_port);
 	service->start_udp("0.0.0.0", udp_port);
-#ifdef SERVER
+#ifndef SERVER
 	test(service);
 #endif
 	service->process();

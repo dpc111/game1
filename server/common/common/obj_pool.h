@@ -118,7 +118,8 @@ public:
 
 private:
 	void alloc_obj() {
-		obj_t* obj = (obj_t*)malloc(sizeof(obj_t)); 
+		int size = sizeof(obj_t);
+		obj_t* obj = (obj_t*)malloc(size); 
 		// obj_t* obj = new obj_t; 
 		pool_.push_back(obj);
 		size_ += 1;

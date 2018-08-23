@@ -26,7 +26,7 @@ typedef struct udp_chunk_queue {
 	udp_chunk_t *tail;
 } udp_chunk_queue_t;
 
-typedef struct udp_handle {
+typedef struct udp_handle_t {
 	udp_chunk_queue_t recv_queue;								// 接收队列
 	udp_chunk_t *recv_cur_in; 									// 网络写
 	udp_chunk_t *recv_cur_out;				 					// 逻辑读

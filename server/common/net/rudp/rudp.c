@@ -366,40 +366,59 @@ send_buff_out_process(udp_handle_t *h) {
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////
 void 
 init_udp_handle(udp_handle_t *h, udp_chunk_pool_t *pool, int64 tick) {
-	udp_chunk_t *c = pop_queue_front(&h->recv_queue);
-	while (c != NULL) {
-		chunk_pool_free(pool, c);
-		c = pop_queue_front(&h->recv_queue);
-	}
-	if (h->recv_cur_in != NULL) {
-		chunk_pool_free(pool, h->recv_cur_in);
-		h->recv_cur_in = NULL;
-	}
-	if (h->recv_cur_out != NULL) {
-		chunk_pool_free(pool, h->recv_cur_out);
-		h->recv_cur_out = NULL;
-	}
+	// udp_chunk_t *c = pop_queue_front(&h->recv_queue);
+	// while (c != NULL) {
+	// 	chunk_pool_free(pool, c);
+	// 	c = pop_queue_front(&h->recv_queue);
+	// }
+	// if (h->recv_cur_in != NULL) {
+	// 	chunk_pool_free(pool, h->recv_cur_in);
+	// 	h->recv_cur_in = NULL;
+	// }
+	// if (h->recv_cur_out != NULL) {
+	// 	chunk_pool_free(pool, h->recv_cur_out);
+	// 	h->recv_cur_out = NULL;
+	// }
+	// h->recv_max_seq = 0;
+	// h->recv_min_seq = 0;
+	// h->recv_max_ack = 0;
+	// c = pop_queue_front(&h->send_queue);
+	// while (c != NULL) {
+	// 	chunk_pool_free(pool, c);
+	// 	c = pop_queue_front(&h->send_queue);
+	// }
+	// c = pop_queue_front(&h->send_history);
+	// while (c != NULL) {
+	// 	chunk_pool_free(pool, c);
+	// 	c = pop_queue_front(&h->send_history);
+	// }
+	// if (h->send_cur_in != NULL) {
+	// 	chunk_pool_free(pool, h->send_cur_in);
+	// 	h->send_cur_in = NULL;
+	// }
+	// if (h->send_cur_out != NULL) {
+	// 	chunk_pool_free(pool, h->send_cur_out);
+	// 	h->send_cur_out = NULL;
+	// }
+	// h->send_seq = 0;
+	// h->pool = pool;
+	// h->cur_tick = tick;
+	// h->recv_tick = tick;
+	// h->req_tick = 0;
+	// h->req_times = 0;
+	h->recv_queue.head = NULL;
+	h->recv_queue.tail = NULL;
+	h->recv_cur_in = NULL;
+	h->recv_cur_out = NULL;
 	h->recv_max_seq = 0;
 	h->recv_min_seq = 0;
 	h->recv_max_ack = 0;
-	c = pop_queue_front(&h->send_queue);
-	while (c != NULL) {
-		chunk_pool_free(pool, c);
-		c = pop_queue_front(&h->send_queue);
-	}
-	c = pop_queue_front(&h->send_history);
-	while (c != NULL) {
-		chunk_pool_free(pool, c);
-		c = pop_queue_front(&h->send_history);
-	}
-	if (h->send_cur_in != NULL) {
-		chunk_pool_free(pool, h->send_cur_in);
-		h->send_cur_in = NULL;
-	}
-	if (h->send_cur_out != NULL) {
-		chunk_pool_free(pool, h->send_cur_out);
-		h->send_cur_out = NULL;
-	}
+	h->send_queue.head = NULL;
+	h->send_queue.tail = NULL;
+	h->send_history.head = NULL;
+	h->send_history.tail = NULL;
+	h->send_cur_in = NULL;
+	h->send_cur_out = NULL;
 	h->send_seq = 0;
 	h->pool = pool;
 	h->cur_tick = tick;

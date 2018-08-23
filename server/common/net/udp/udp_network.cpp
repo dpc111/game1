@@ -122,9 +122,11 @@ int udp_network_t::start(const char *ip, int port) {
 	addr_ = net_address_t(ip, port);
 	socket_fd_ = socket(AF_INET, SOCK_DGRAM, 0);
 	if (socket_fd_ < 0) {
+		ERROR("");
 		return -1;
 	}
 	if (bind(socket_fd_, (struct sockaddr*)&addr_, sizeof(addr_)) < 0) {
+		ERROR("");
 		return -1;
 	}
 	SET_SOCKET_NONBLOCK(socket_fd_);

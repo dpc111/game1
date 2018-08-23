@@ -31,13 +31,10 @@ bool single_select_t::write_check() {
 	FD_ZERO(&fd_write_set_);
 	FD_SET(fd_, &fd_write_set_);
 	if (select(fd_ + 1, NULL, &fd_write_set_, NULL, &tv_) < 0) {
-		ERROR("");
 		return false;
 	}
 	if (FD_ISSET(fd_, &fd_write_set_)) {
-		ERROR("");
 		return true;
 	}
-		ERROR("");
 	return false;
 }

@@ -2,6 +2,7 @@
 #include "udp_connection.h"
 #include "net_common.h"
 #include "log.h"
+#include "timestamp.h"
 
 udp_network_t::udp_network_t() {
 	cur_recv_chunk_ = NULL;
@@ -9,6 +10,7 @@ udp_network_t::udp_network_t() {
 	udp_handle_pool_ = new udp_handle_pool_t;
 	udp_conn_pool_ = new udp_connection_pool_t;
 	conn_num_ = 0;
+	tick_ = getms();
 	udp_msg_cb_ = NULL;
 	socket_fd_ = 0;
 	single_select_ = NULL;
@@ -23,6 +25,7 @@ udp_network_t::~udp_network_t() {
 	delete udp_handle_pool_;
 	delete udp_conn_pool_;
 	conn_num_ = 0;
+	tick_ = 0;
 	udp_msg_cb_ = NULL;
 	socket_fd_ = 0;
 	if (single_select_ != NULL) {

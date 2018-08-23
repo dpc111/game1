@@ -37,6 +37,8 @@ public:
 
 	tcp_network_t *get_network() { return tcp_network_; }
 
+	udp_network_t *get_udp_network() { return udp_network_; }
+
 	timer_axis_t *get_timer_axis() { return timer_axis_; }
 
 	lua_frame_t *get_lua_frame() { return lua_frame_; }

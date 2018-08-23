@@ -14,19 +14,32 @@
 #include "service.h"
 #include "global.h"
 
-int main() {
-	service_t *service = get_service();
-	service->init();
-	service->start_tcp("0.0.0.0", 7001);
-	service->start_udp("0.0.0.0", 7002);
-	test();
-	service->process();
-	return 1;
-}
+#define SERVER
+
+#ifdef SERVER 
+int tcp_port = 7001;
+int udp_port = 7002;
+#else
+int tcp_port = 7101;
+int udp_port = 7102;
+int serv_udp_port = 7002;
+#endif
 
 void test(service_t *service) {
 	udp_network_t *udp_network = service->get_udp_network();
-	udp_network->connect_to(1001, "127.0.0.1", 7102)
+	udp_network->connect_to(1001, "127.0.0.1", serv_udp_port);
 	const char *s = "aaaaas"; 
 	udp_network->send_sid(1001, s, 5);
+}
+
+int main() {
+	service_t *service = get_service();
+	service->init();
+	service->start_tcp("0.0.0.0", tcp_port);
+	service->start_udp("0.0.0.0", udp_port);
+#ifdef SERVER
+	test();
+#endif
+	service->process();
+	return 1;
 }

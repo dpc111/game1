@@ -259,6 +259,9 @@ recv_buff_out(udp_handle_t *h) {
 	if (h->recv_cur_out != NULL) {
 		return h->recv_cur_out;
 	}
+	if (h->recv_queue.head == NULL) {
+		return h->recv_cur_out;
+	}
 	udp_chunk_t *c = h->recv_queue.head;
 	if (c->seq <= h->recv_min_seq) { 
 		h->recv_cur_out = pop_queue_front(&h->recv_queue);

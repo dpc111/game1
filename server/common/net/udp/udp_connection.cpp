@@ -37,7 +37,7 @@ int udp_connection_t::send_chunk_force(udp_chunk_t *c) {
 	if (c->size > UDP_DATA_MAX_LEN) {
 		return -1;
 	}
-	send_chunk_force(udp_handle_, c);
+	udp_send_chunk_force(udp_handle_, c);
 	return c->size;
 }
 
@@ -53,7 +53,7 @@ int udp_connection_t::process() {
 		if (network_->udp_msg_cb_ != NULL) {
 			network_->udp_msg_cb_(sid_, (void *)c->buff, c->size);
 		}
-		LOG("%d, %d", sid_, c->sid);
+		LOG("%d, %d", sid_, c->seq);
 		recv_buff_out_process(udp_handle_);
 		c = recv_buff_out(udp_handle_);
 	}

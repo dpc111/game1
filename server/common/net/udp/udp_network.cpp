@@ -1,5 +1,6 @@
 #include "udp_network.h"
 #include "udp_connection.h"
+#include "net_common.h"
 
 udp_network_t::udp_network_t() {
 	cur_recv_chunk_ = NULL;
@@ -106,6 +107,7 @@ int udp_network_t::start(const char *ip, int port) {
 	if (bind(socket_fd_, (struct sockaddr*)&addr_, sizeof(addr_)) < 0) {
 		return -1;
 	}
+	SET_SOCKET_NONBLOCK(socket_fd_);
 	if (single_select_ != NULL) {
 		delete single_select_;
 		single_select_ = NULL;

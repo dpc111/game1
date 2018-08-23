@@ -45,6 +45,7 @@ tcp_connection_t *tcp_network_t::connect_to(const char *ip, int port, void *cont
 		evutil_closesocket(fd);
 		return NULL;
 	}
+	evutil_make_socket_nonblocking(fd);
 	tcp_connection_t *conn = connection_alloc();
 	conn->set_fd(fd);
 	conn->set_network(this);
@@ -123,6 +124,7 @@ void tcp_network_t::ev_close() {
 void tcp_network_t::ev_listen_cb(evconnlistener *listener, evutil_socket_t fd, sockaddr *sa, int socklen, void *ud) {
 	tcp_network_t *network = (tcp_network_t *)ud;
 	assert(sa->sa_family == AF_INET);
+	evutil_make_socket_nonblocking(fd);
 	tcp_connection_t *conn = connection_alloc();
 	conn->set_fd(fd);
 	conn->set_peer_addr(*(sockaddr_in *)sa);

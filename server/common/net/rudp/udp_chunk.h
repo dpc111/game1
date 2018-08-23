@@ -19,6 +19,7 @@
 
 struct udp_chunk_t;
 
+#pragma pack(1)
 typedef struct udp_chunk_t {
 	int8 size;									// size of buff
 	int8 type;
@@ -28,6 +29,7 @@ typedef struct udp_chunk_t {
 	udp_chunk_t *prev;
 	udp_chunk_t *next;
 } udp_chunk_t;
+#pragma pack()
 
 void udp_chunk_init(udp_chunk_t *c);
 

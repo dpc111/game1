@@ -17,7 +17,7 @@ single_select_t::~single_select_t() {
 bool single_select_t::read_check() {
 	FD_ZERO(&fd_read_set_);
 	FD_SET(fd_, &fd_read_set_);
-	if (select(1, &fd_read_set_, NULL, NULL, &tv_) < 0) {
+	if (select(2, &fd_read_set_, NULL, NULL, &tv_) < 0) {
 		return false;
 	}
 	if (FD_ISSET(fd_, &fd_read_set_)) {
@@ -29,7 +29,7 @@ bool single_select_t::read_check() {
 bool single_select_t::write_check() {
 	FD_ZERO(&fd_write_set_);
 	FD_SET(fd_, &fd_write_set_);
-	if (select(1, NULL, &fd_write_set_, NULL, &tv_) < 0) {
+	if (select(2, NULL, &fd_write_set_, NULL, &tv_) < 0) {
 		return false;
 	}
 	if (FD_ISSET(fd_, &fd_write_set_)) {

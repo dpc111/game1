@@ -128,7 +128,7 @@ void udp_network_t::process(int64 tick) {
 		if (conn == NULL) {
 			if (cur_recv_chunk_->type == UDP_TYPE_CONNECT) {
 				udp_connection_t *conn = udp_conn_pool_->alloc();
-				new (conn) udp_connection_t(this, address, c->ack);
+				new (conn) udp_connection_t(this, address, cur_recv_chunk_->ack);
 				add_connection(conn);
 			}
 			continue;

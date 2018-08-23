@@ -15,11 +15,13 @@ typedef struct udp_chunk_pool {
 extern "C" {
 #endif
 
-void chunk_pool_init(udp_chunk_pool *pool);
+void udp_chunk_pool_init(udp_chunk_pool *pool);
 
-udp_chunk_t* chunk_pool_malloc(udp_chunk_pool_t *pool);
+udp_chunk_t* udp_chunk_pool_malloc(udp_chunk_pool_t *pool);
 
-void chunk_pool_free(udp_chunk_pool_t *pool, udp_chunk_t *chunk);
+void udp_chunk_pool_free(udp_chunk_pool_t *pool, udp_chunk_t *chunk);
+
+void udp_chunk_pool_destroy(udp_chunk_pool *pool);
 
 #ifdef __cplusplus
 }

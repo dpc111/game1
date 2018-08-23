@@ -52,23 +52,23 @@ extern "C" {
 #endif
 
 // net write recv
-void* recv_buff_in(udp_handle_t *h);
+void* udp_recv_buff_in(udp_handle_t *h);
 
-void recv_buff_in_process(udp_handle_t *h, int sz);
+void udp_recv_buff_in_process(udp_handle_t *h, int sz);
 
-void recv_buff_write(udp_handle_t *h, udp_chunk_t *c);
+void udp_recv_buff_write(udp_handle_t *h, udp_chunk_t *c);
 
 // logic read recv
-udp_chunk_t* recv_buff_out(udp_handle_t *h);
+udp_chunk_t* udp_recv_buff_out(udp_handle_t *h);
 
-void recv_buff_out_process(udp_handle_t *h);
+void udp_recv_buff_out_process(udp_handle_t *h);
 
 // logic write send
-void* send_buff_in(udp_handle_t *h);
+void* udp_send_buff_in(udp_handle_t *h);
 
-void send_buff_in_process(udp_handle_t *h, int size);
+void udp_send_buff_in_process(udp_handle_t *h, int size);
 
-void send_buff_write(udp_handle_t *h, void *buff, int size);
+void udp_send_buff_write(udp_handle_t *h, void *buff, int size);
 
 void udp_send_chunk_force(udp_handle_t *h, udp_chunk_t *c);
 

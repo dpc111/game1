@@ -1,14 +1,14 @@
 #include "udp_pool.h"
 
 void 
-chunk_pool_init(udp_chunk_pool *pool) {
+udp_chunk_pool_init(udp_chunk_pool *pool) {
 	pool->head = NULL;
 	pool->tail = NULL;
 	pool->size = 0;
 }
 
 udp_chunk_t* 
-chunk_pool_malloc(udp_chunk_pool_t *pool) {
+udp_chunk_pool_malloc(udp_chunk_pool_t *pool) {
 	udp_chunk_t* chunk = NULL;
 	if (pool->head) {
 		chunk = pool->head;
@@ -28,7 +28,7 @@ chunk_pool_malloc(udp_chunk_pool_t *pool) {
 }
 
 void 
-chunk_pool_free(udp_chunk_pool_t *pool, udp_chunk_t *chunk) {
+udp_chunk_pool_free(udp_chunk_pool_t *pool, udp_chunk_t *chunk) {
 	if (chunk == NULL) {
 		return;
 	}
@@ -48,4 +48,16 @@ chunk_pool_free(udp_chunk_pool_t *pool, udp_chunk_t *chunk) {
 		pool->head = head->next; 
 		free(head);
 	}
+}
+
+void 
+udp_chunk_pool_destroy(udp_chunk_pool *pool) {
+	udp_chunk_t *c = pool->head;
+	while (c != NULL) {
+		pool->head = c->next;
+		free(c);
+		c = pool->head;
+	}
+	pool->tail = NULL;
+	pool->size = 0;
 }

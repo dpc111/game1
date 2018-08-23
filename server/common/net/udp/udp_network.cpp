@@ -7,7 +7,7 @@
 udp_network_t::udp_network_t() {
 	cur_recv_chunk_ = NULL;
 	udp_chunk_pool_ = new udp_chunk_pool_t;
-	chunk_pool_init(udp_chunk_pool_);
+	udp_chunk_pool_init(udp_chunk_pool_);
 	udp_handle_pool_ = new udp_handle_pool_t;
 	udp_conn_pool_ = new udp_connection_pool_t;
 	conn_num_ = 0;
@@ -19,10 +19,13 @@ udp_network_t::udp_network_t() {
 
 udp_network_t::~udp_network_t() {
 	if (cur_recv_chunk_ != NULL) {
-		chunk_pool_free(udp_chunk_pool_, cur_recv_chunk_);
+		udp_chunk_pool_free(udp_chunk_pool_, cur_recv_chunk_);
 		cur_recv_chunk_ = NULL;
 	}
-	delete udp_chunk_pool_;
+	if (udp_chunk_pool_ != NULL) {
+		udp_chunk_pool_destroy(udp_chunk_pool_);
+		delete udp_chunk_pool_;		
+	}
 	delete udp_handle_pool_;
 	delete udp_conn_pool_;
 	conn_num_ = 0;
@@ -103,7 +106,7 @@ udp_connection_t* udp_network_t::connect_to(int sid, const char *ip, int port) {
 	conn = udp_conn_pool_->alloc();
 	new (conn) udp_connection_t(this, net_address_t(ip, port).address(), sid);
 	add_connection(conn);
-	udp_chunk_t *c = chunk_pool_malloc(udp_chunk_pool_);
+	udp_chunk_t *c = udp_chunk_pool_malloc(udp_chunk_pool_);
 	c->type = UDP_TYPE_CONNECT;
 	c->size = 0;
 	c->seq = 0;
@@ -148,7 +151,7 @@ void udp_network_t::process(int64 tick) {
 	int len;
 	while (1) {
 		if (cur_recv_chunk_ == NULL) {
-			cur_recv_chunk_ = chunk_pool_malloc(udp_chunk_pool_);
+			cur_recv_chunk_ = udp_chunk_pool_malloc(udp_chunk_pool_);
 		}
 		if (!single_select_->read_check()) {
 			break;

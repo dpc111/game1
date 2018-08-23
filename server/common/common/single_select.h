@@ -15,7 +15,7 @@ public:
 
 	void set_fd(int fd) { fd_ = fd; }
 
-	void working() { return fd_ != 0; }
+	bool working() { return fd_ != 0; }
 
 	bool read_check();
 

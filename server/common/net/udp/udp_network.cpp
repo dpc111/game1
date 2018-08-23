@@ -108,7 +108,7 @@ void udp_network_t::process(int64 tick) {
 	tick_ = tick;
 	// net recv
 	struct sockaddr_in address;
-	int addr_len = sizeof(struct sockaddr_in);
+	socklen_t addr_len = sizeof(struct sockaddr_in);
 	int addr;
 	int len;
 	while (1) {
@@ -128,7 +128,7 @@ void udp_network_t::process(int64 tick) {
 		if (conn == NULL) {
 			if (cur_recv_chunk_->type == UDP_TYPE_CONNECT) {
 				udp_connection_t *conn = udp_conn_pool_->alloc();
-				new conn udp_connection_t(this, address, c->ack);
+				new (conn) udp_connection_t(this, address, c->ack);
 				add_connection(conn);
 			}
 			continue;
@@ -140,7 +140,7 @@ void udp_network_t::process(int64 tick) {
 	}
 	// conn process
 	for (addr_conn_map_t::iterator it = addr_conns_.begin(); it != addr_conns_.end(); ) {
-		udp_connection_t *conn = it->second();
+		udp_connection_t *conn = it->second;
 		if (conn->process() < 0) {
 			++it;
 			remove_connection_addr(conn->get_addr());

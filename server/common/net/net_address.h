@@ -52,6 +52,8 @@ public:
 		return ntohs(addr_.sin_port);
 	}
 
+	struct sockaddr_in address() { return addr_; }
+
 public:
 	struct sockaddr_in addr_;
 };

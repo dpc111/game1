@@ -96,8 +96,8 @@ udp_connection_t* udp_network_t::connect_to(int sid, const char *ip, int port) {
 	if (conn != NULL) {
 		return conn;
 	}
-	udp_connection_t *conn = udp_conn_pool_->alloc();
-	new (conn) udp_connection_t(this, (struct sockaddr_in)net_address_t(ip, port), sid);
+	conn = udp_conn_pool_->alloc();
+	new (conn) udp_connection_t(this, net_address_t(ip, port).address(), sid);
 	add_connection(conn);
 	udp_chunk_t *c = chunk_pool_malloc(udp_chunk_pool_);
 	c->type = UDP_TYPE_CONNECT;

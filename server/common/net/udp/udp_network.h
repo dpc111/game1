@@ -4,6 +4,7 @@
 #include "type.h"
 #include "obj_pool.h"
 #include "rudp.h"
+#include "net_address.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <arpa/inet.h>

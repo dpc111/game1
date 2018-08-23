@@ -19,6 +19,10 @@ udp_connection_t::~udp_connection_t() {
 	}
 }
 
+void udp_connection_t::on_recv_udp_chunk(udp_chunk_t *c) {
+	recv_buff_write(udp_handle_, c);
+}
+
 int udp_connection_t::send(void *buff, int size) {
 	if (size > UDP_DATA_MAX_LEN) {
 		return -1;
@@ -28,19 +32,33 @@ int udp_connection_t::send(void *buff, int size) {
 }
 
 int udp_connection_t::process() {
+	// udp hand process
 	int res = udp_process(udp_handle_, network_->get_tick());
 	if (res < 0){
 		return res;
 	}
-	while (1) {
-		udp_chunk_t *c = recv_buff_out(udp_handle_);
-		if (c == NULL) {
-			break;
-		}
+	// logic callback
+	udp_chunk_t *c = recv_buff_out(udp_handle_);
+	while (c != NULL) {
 		if (network_->udp_msg_cb_ != NULL) {
-			network_->udp_msg_cb_((void *)c->buff, c->size);
+			network_->udp_msg_cb_(sid_, (void *)c->buff, c->size);
 		}
 		recv_buff_out_process(udp_handle_);
+		c = recv_buff_out(udp_handle_);
 	}
+	// net send
+	if (!network_->get_block()) {
+		c = send_buff_out(udp_handle_);
+		while (c != NULL) {
+			int n = sendto(network_->fd_, c, c->size + UDP_HEAD_BYTE_ALL, 0, (struct sockaddr*)&address_, sizeof(address_));
+			if (n != c->size + UDP_HEAD_BYTE_ALL) {
+				network_->set_block(true);
+				break;
+			}
+			send_buff_out_process(udp_handle_);
+			c = send_buff_out(udp_handle_);
+		}
+	}
+
 	return 0;
 }

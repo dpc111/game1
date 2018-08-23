@@ -2,19 +2,26 @@
 #include "udp_connection.h"
 
 udp_network_t::udp_network_t() {
+	cur_recv_chunk_ = NULL;
 	udp_chunk_pool_ = new udp_chunk_pool_t;
 	udp_handle_pool_ = new udp_handle_pool_t;
 	udp_conn_pool_ = new udp_connection_pool_t;
 	conn_num_ = 0;
 	udp_msg_cb_ = NULL;
+	socket_fd_ = 0;
 }
 
 udp_network_t::~udp_network_t() {
+	if (cur_recv_chunk_ != NULL) {
+		chunk_pool_free(udp_chunk_pool_, cur_recv_chunk_);
+		cur_recv_chunk_ = NULL;
+	}
 	delete udp_chunk_pool_;
 	delete udp_handle_pool_;
 	delete udp_conn_pool_;
 	conn_num_ = 0;
 	udp_msg_cb_ = NULL;
+	socket_fd_ = 0;
 }
 
 void udp_network_t::add_connection(udp_connection_t *conn) {
@@ -85,6 +92,60 @@ int udp_network_t::send_sid(int sid, void *buff, int size) {
 	return conn->send(buff, size);
 }
 
-void udp_network_t::process() {
+int udp_network_t::start(const char *ip, int port) {
+	addr_ = net_address_t(ip, port);
+	socket_fd_ = socket(AF_INET, SOCK_DGRAM, 0);
+	if (socket_fd_ < 0) {
+		return -1;
+	}
+	if (bind(socket_fd_, (struct sockaddr*)&addr_, sizeof(addr_)) < 0) {
+		return -1;
+	}
+	return 0;
+}
 
+void udp_network_t::process(int64 tick) {
+	tick_ = tick;
+	// net recv
+	struct sockaddr_in address;
+	int addr_len = sizeof(struct sockaddr_in);
+	int addr;
+	int len;
+	while (1) {
+		if (cur_recv_chunk_ == NULL) {
+			cur_recv_chunk_ = chunk_pool_malloc(udp_chunk_pool_);
+		}
+		len = recvfrom(socket_fd_, cur_recv_chunk_, UDP_HEAD_BYTE_ALL + UDP_DATA_MAX_LEN, 0, (struct sockaddr*)&address, &addr_len);
+		if (len <= 0) {
+			break;
+		}
+		if (len != cur_recv_chunk_->size + UDP_HEAD_BYTE_ALL) {
+			// ERROR
+			continue;
+		}
+		addr = NET_ADDR_TO_INT(address);
+		udp_connection_t *conn =  get_connection_addr(addr);
+		if (conn == NULL) {
+			if (cur_recv_chunk_->type == UDP_TYPE_CONNECT) {
+				udp_connection_t *conn = udp_conn_pool_->alloc();
+				new conn udp_connection_t(this, address, c->ack);
+				add_connection(conn);
+			}
+			continue;
+		}
+		if (cur_recv_chunk_ != NULL) {
+			conn->on_recv_udp_chunk(cur_recv_chunk_);
+			cur_recv_chunk_ = NULL;
+		}
+	}
+	// conn process
+	for (addr_conn_map_t::iterator it = addr_conns_.begin(); it != addr_conns_.end(); ) {
+		udp_connection_t *conn = it->second();
+		if (conn->process() < 0) {
+			++it;
+			remove_connection_addr(conn->get_addr());
+			continue;
+		}
+		++it;
+	}
 }

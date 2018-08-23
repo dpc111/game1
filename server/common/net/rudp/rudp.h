@@ -52,9 +52,11 @@ extern "C" {
 #endif
 
 // net write recv
-void* revc_buff_in(udp_handle_t *h);
+void* recv_buff_in(udp_handle_t *h);
 
-void revc_buff_in_process(udp_handle_t *h, int sz);
+void recv_buff_in_process(udp_handle_t *h, int sz);
+
+void recv_buff_write(udp_handle_t *h, udp_chunk_t *c);
 
 // logic read recv
 udp_chunk_t* recv_buff_out(udp_handle_t *h);

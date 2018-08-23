@@ -7,6 +7,11 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <arpa/inet.h>
+#include <sys/types.h>
+#include <sys/socket.h>
+#include <netinet/in.h>
+#include <unistd.h>
+#include <string.h>
 #include <map>
 #include <tr1/functional>
 
@@ -24,7 +29,7 @@ public:
 
 	typedef std::map<int, udp_connection_t *> sid_conn_map_t;
 
-	typedef std::tr1::function<void (void *, int)> udp_msg_cb_t;
+	typedef std::tr1::function<void (int, void *, int)> udp_msg_cb_t;
 
 public:
 	udp_network_t();
@@ -39,6 +44,10 @@ public:
 
 	void set_udp_msg_cb(udp_msg_cb_t& cb) { udp_msg_cb_ = cb; }
 
+	bool get_block() { return block_; }
+
+	void set_block(bool block) { block_ = block; }
+
 	void add_connection(udp_connection_t *conn);
 
 	void remove_connection_addr(int64 addr);
@@ -51,12 +60,18 @@ public:
 
 	int send_sid(int sid, void *buff, int size);
 
-	void process();
+	int start(const char *ip, int port);
+
+	void process(int64 tick);
 
 public:
 	udp_msg_cb_t udp_msg_cb_;
 
+	int socket_fd_;
+
 private:
+	udp_chunk_t *cur_recv_chunk_;
+
 	udp_chunk_pool_t *udp_chunk_pool_;
 
 	udp_handle_pool_t *udp_handle_pool_;
@@ -70,6 +85,10 @@ private:
 	int conn_num_;
 
 	int tick_;
+
+	net_address_t addr_;
+
+	bool block_;
 };
 
 #endif

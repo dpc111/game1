@@ -154,7 +154,7 @@ recv_min_seq_update(udp_handle_t *h) {
 }
 
 void* 
-revc_buff_in(udp_handle_t *h) {
+recv_buff_in(udp_handle_t *h) {
 	if (h->recv_cur_in != NULL) {
 		return h->recv_cur_in;
 	}
@@ -163,7 +163,7 @@ revc_buff_in(udp_handle_t *h) {
 }
 
 void
-revc_buff_in_process(udp_handle_t *h, int sz) {
+recv_buff_in_process(udp_handle_t *h, int sz) {
 	udp_chunk_t *c = h->recv_cur_in;
 	if (c == NULL) {
 		return;
@@ -178,6 +178,45 @@ revc_buff_in_process(udp_handle_t *h, int sz) {
 		return;
 	}
 
+	switch (c->type) {
+		case UDP_TYPE_REQ_SEQ:
+			{
+				udp_chunk_t *c_again = pop_queue_by_seq(&h->send_history, c->ack);
+				if (c_again == NULL) {
+					break;
+				}
+				push_queue_front(&h->send_queue, c_again);
+			}
+			break;
+		case UDP_TYPE_SYN_ACK:
+			break;
+		case UDP_TYPE_DATA:
+		case UDP_TYPE_DATA_AGAIN:
+			if (h->recv_min_seq >= c->seq) {
+				break;
+			}
+			if (push_queue_back_sort_check_same(&h->recv_queue, c)) {
+				h->recv_cur_in = NULL;
+				if (h->recv_min_seq < c->seq) {
+					recv_min_seq_update(h);					
+				}
+				if (h->recv_max_seq < c->seq) {
+					h->recv_max_seq = c->seq;
+				}
+				if (h->recv_max_ack < c->ack) {
+					h->recv_max_ack = c->ack;
+					send_history_clear(h);
+				}
+				h->recv_tick = h->cur_tick; 
+			}
+			break;
+		default :
+			break;
+	}
+}
+
+void 
+recv_buff_write(udp_handle_t *h, udp_chunk_t *c) {
 	switch (c->type) {
 		case UDP_TYPE_REQ_SEQ:
 			{

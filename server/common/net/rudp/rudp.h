@@ -73,16 +73,16 @@ void udp_send_buff_write(udp_handle_t *h, void *buff, int size);
 void udp_send_chunk_force(udp_handle_t *h, udp_chunk_t *c);
 
 // net read send
-udp_chunk_t* send_buff_out(udp_handle_t *h);
+udp_chunk_t* udp_send_buff_out(udp_handle_t *h);
 
-void send_buff_out_process(udp_handle_t *h);
+void udp_send_buff_out_process(udp_handle_t *h);
 
 // handle
-void init_udp_handle(udp_handle_t *h, udp_chunk_pool_t *pool, int64 tick);
+void udp_handle_init(udp_handle_t *h, udp_chunk_pool_t *pool, int64 tick);
 
-void destroy_udp_handle(udp_handle_t *h);
+void udp_handle_destroy(udp_handle_t *h);
 
-int udp_process(udp_handle_t *h, int64 tick);
+int udp_handle_process(udp_handle_t *h, int64 tick);
 
 #ifdef __cplusplus
 }

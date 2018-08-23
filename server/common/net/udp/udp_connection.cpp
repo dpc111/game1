@@ -58,7 +58,7 @@ int udp_connection_t::process() {
 		c = recv_buff_out(udp_handle_);
 	}
 	// net send
-	if (!network_->get_block()) {
+	// if (!network_->get_block()) {
 		c = send_buff_out(udp_handle_);
 		while (c != NULL) {
 			LOG("...");
@@ -70,13 +70,13 @@ int udp_connection_t::process() {
 			int n = sendto(network_->socket_fd_, c, c->size + UDP_HEAD_BYTE_ALL, 0, (struct sockaddr*)&address_, sizeof(address_));
 			LOG("%d", n);
 			if (n != c->size + UDP_HEAD_BYTE_ALL) {
-				network_->set_block(true);
+				// network_->set_block(true);
 				break;
 			}
 			send_buff_out_process(udp_handle_);
 			c = send_buff_out(udp_handle_);
 		}
-	}
+	// }
 
 	return 0;
 }

@@ -3,12 +3,13 @@
 
 #include "chunk.h"
 #include "obj_pool.h"
+#include "thread_private_pool.h"
 
 typedef chunk_t<10240> cache_chunk_t;
 
 typedef std::list<cache_chunk_t *> cache_chunk_list_t;
 
-typedef obj_pool_t<cache_chunk_t> cache_chunk_pool_t;
+typedef thread_private_pool_t<cache_chunk_t> cache_chunk_pool_t;
 
 class cache_t {
 public:
@@ -18,9 +19,7 @@ public:
 
 	void read(void *buff, int size);
 
-	void write(void *buff, int size);
-
-	void finish();
+	int write(const void *buff, int size);
 
 private:
 	cache_chunk_list_t cache_list_;

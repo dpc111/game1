@@ -43,7 +43,7 @@ int net_output_stream_t::write(const void *buff, int size) {
 			break;
 		}
 	}
-	return (char *)buff - ptr;	
+	return ptr - (char *)buff;	
 }
 
 int net_output_stream_t::write_fd(void *ud, int fd) {

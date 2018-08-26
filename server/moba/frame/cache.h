@@ -20,8 +20,12 @@ public:
 
 	void write(void *buff, int size);
 
+	void finish();
+
 private:
 	cache_chunk_list_t cache_list_;
+
+	int total_size_;
 
 	int size_;
 };

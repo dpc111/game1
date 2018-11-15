@@ -1,6 +1,7 @@
 #ifndef FRAME_MGR_H
 #define FRAME_MGR_H
 
+#include "stdafx.h"
 #include "type.h"
 #include "chunk.h"
 #include "cache.h"

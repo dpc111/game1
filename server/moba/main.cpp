@@ -27,10 +27,10 @@ int udp_port = 7002;
 // }
 
 int main() {
-	service_t *service = get_service();
-	service->init();
-	service->start_tcp("0.0.0.0", 7001);
-	service->start_udp("0.0.0.0", 7002);
-	service->process();
+	// service_t *service = get_service();
+	get_service()->init();
+	get_service()->start_tcp("0.0.0.0", 7001);
+	get_service()->start_udp("0.0.0.0", 7002);
+	get_service()->process();
 	return 1;
 }

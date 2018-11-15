@@ -28,6 +28,6 @@ public:
 
 private:
 	tls_t tls_;
-}
+};
 
 #endif

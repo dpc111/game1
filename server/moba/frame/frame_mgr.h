@@ -25,6 +25,8 @@ public:
 	void sync();
 
 private:
+	room_t *room_;
+
 	frame_chunk_t chunk_;
 
 	int frame_;

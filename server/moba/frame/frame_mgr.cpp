@@ -20,9 +20,9 @@ void frame_mgr_t::recv(int uid, void *buff, int size)  {
 	if (chunk_.write_size() < size + 4) {
 		return;
 	}
-	memcpy(chunk_.write_ptr(), &uid, 4)
+	memcpy(chunk_.write_ptr(), &uid, 4);
 	chunk_.write_offset_ += 4;
-	memcpy(chunk_.write_ptr(), buff, size) 
+	memcpy(chunk_.write_ptr(), buff, size); 
 	chunk_.write_offset_ += size;
 }
 
@@ -32,7 +32,7 @@ void frame_mgr_t::refresh()  {
 	chunk_.read_offset_ = 0;
 	chunk_.write_offset_ = 0;
 	++frame_;
-	memcpy(chunk_->write_ptr(), &frame_, 4);
+	memcpy(chunk_.write_ptr(), &frame_, 4);
 	chunk.write_offset_ += 4;
 }
 
@@ -40,6 +40,6 @@ void frame_mgr_t::sync()  {
 	room_t::player_map_t& players = room_->get_players();
 	room_t::player_map_t::iterator it = players.end();
 	for ( ; it != players.end(); it++) {
-		get_service()->udp_send_sid(it->first, chunk_->buff, chunk_->read_size());
+		get_service()->udp_send_sid(it->first, chunk_.buff, chunk_.read_size());
 	}
 }

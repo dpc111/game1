@@ -1,5 +1,6 @@
 #include "frame_mgr.h"
 #include "room.h"
+#include "service.h"
 
 frame_mgr_t::frame_mgr_t(room_t *room) {
 	room_ = room;

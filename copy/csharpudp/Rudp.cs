@@ -84,20 +84,61 @@ public class Rudp {
 
 	// UdpRecvBuffIn
 	
-	public UdpRecvBuffInProcess(int sz) {
+	// public void UdpRecvBuffInProcess(UdpChunk c, int sz) {
+	// 	if (c == null) {
+	// 		return;
+	// 	}
+	// 	if (sz < UdpConst.udpHeadByteAll || 
+	// 		sz > UdpConst.udpDataMaxLen + UdpConst.udpHeadByteAll) {
+	// 		return;
+	// 	} 
+	// 	if (c.size + UdpConst.udpHeadByteAll != sz) {
+	// 		return;
+	// 	}
 
-	}
+	// 	switch (c.type) {
+	// 		case UdpConst.udpTypeReqSeq:
+	// 		{
+	// 			UdpChunk cAgain = PopQueueBySeq(sendHistory, c.ack);
+	// 			if (cAgain == null) {
+	// 				break;
+	// 			}
+	// 			sendQueue.AddFirst(cAgain);
+	// 		}
+	// 		case UdpConst.udpTypeSynAck:
+	// 			break;
+	// 		case UdpConst.udpTypeData:
+	// 		case UdpConst.udpTypeDataAgain:
+	// 			if (recvMinSeq >= c.seq) {
+	// 				break;
+	// 			}
+	// 			if (PushQueueBackSortCheckSame(recvQueue, c)) {
+	// 				// recv cur in
+	// 				if (recvMinSeq < c.seq) {
+	// 					RecvMinSeqUpdate();
+	// 				}
+	// 				if (recvMaxSeq < c.seq) {
+	// 					recvMaxSeq = c.seq;
+	// 				}
+	// 				if (recvMaxAck < c.ack) {
+	// 					recvMaxAck = c.ack;
+	// 					SendHistoryClear();
+	// 				}
+	// 				recvTick = curTick;
+	// 			}
+	// 	}
+	// }
 
-	public UdpRecvBuffWrite(UdpChunk c) {
+	public void UdpRecvBuffIn(UdpChunk c) {
 		switch (c.type) {
 			case UdpConst.udpTypeReqSeq:
-				{
-					UdpChunk cAgain = PopQueueBySeq(sendHistory, c.ack);
-					if (cAgain == null) {
-						break;
-					}
-					sendQueue.AddFirst(cAgain);
+			{
+				UdpChunk cAgain = PopQueueBySeq(sendHistory, c.ack);
+				if (cAgain == null) {
+					break;
 				}
+				sendQueue.AddFirst(cAgain);
+			}
 			case UdpConst.udpTypeSynAck:
 				break;
 			case UdpConst.udpTypeData:
@@ -127,8 +168,16 @@ public class Rudp {
 	// UdpRecvBuffOut
 	// UdpRecvBuffOutProcess
 	
-	UdpChunk UdpRecvBuffOut() {
-		
+	public UdpChunk UdpRecvBuffOut() {
+		LinkedListNode<UdpChunk> n = recvQueue.First;
+		if (n == null) {
+			return null;
+		}
+		UdpChunk c = n.Value;
+		if (c.seq <= recvMinSeq) {
+			return c;
+		}
+		return null;
 	}
 
 
@@ -139,5 +188,66 @@ public class Rudp {
 			sendHistory.Remove(n);
 			n = sendHistory.First;
 		}
+	}
+
+	void SendReqAgain() {
+		if (recvMinSeq == recvMaxSeq) {
+			return;
+		}
+		UdpChunk c = new UdpChunk();
+		c.size = 0;
+		c.type = UdpConst.udpTypeReqSeq;
+		c.seq = 0;
+		c.ack = recvMinSeq + 1;
+		sendQueue.AddFirst(c);
+		++reqTimes;
+	} 
+
+	void UdpSendBuffIn(byte[] buff, int size) {
+		if (size > UdpConst.udpDataMaxLen) {
+			return;
+		}
+		UdpChunk c = new UdpChunk();
+		c.size = size;
+		c.type = UdpConst.udpTypeData;
+		c.seq = ++sendSeq;
+		c.ack = recvMinSeq;
+		Array.Copy(buff, c.buff, size);
+		sendQueue.AddLast(c);
+	}
+
+	UdpChunk UpdSendBuffOut() {
+		LinkedListNode<UdpChunk> n = sendQueue.First;
+		if (n == null) {
+			return;
+		}
+		UdpChunk c = n.Value;
+		return c;
+	}
+	//////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	void UdpInit(long tick) {
+		recvMaxSeq = 0;
+		recvMinSeq = 0;
+		recvMaxAck = 0;
+		sendSeq =0;
+		curTick = tick;
+		recvTick = tick;
+		reqTick = 0;
+		reqTimes = 0;
+	}
+
+	int UdpHandleProcess {
+		curTick = tick;
+		if (curTick - recvTick > UdpConst.udpTimeOutTicks) {
+			return -1;
+		}
+		if (recvMaxSeq - recvMinSeq > UdpConst.udpRecvSeqMaxDev) {
+			return -1;
+		}
+		if (curTick - reqTick > UdpConst.udpReqAgainTicks) {
+			SendReqAgain();
+			reqTick = curTick;
+		}
+		return 0;
 	}
 }

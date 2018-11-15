@@ -50,6 +50,7 @@ void udp_network_t::add_connection(udp_connection_t *conn) {
 	addr_conns_[conn->addr_ ] = conn;
 	sid_conns_[conn->sid_] = conn;
 	++conn_num_;
+	LOG("udp connect %d", conn_num_);
 }
 
 void udp_network_t::remove_connection_addr(int64 addr) {
@@ -65,6 +66,7 @@ void udp_network_t::remove_connection_addr(int64 addr) {
 	}
 	udp_conn_pool_->free(conn);
 	--conn_num_;
+	LOG("udp disconnect %d", conn_num_);
 }
 
 void udp_network_t::remove_connection_sid(int sid) {
@@ -80,6 +82,7 @@ void udp_network_t::remove_connection_sid(int sid) {
 	}
 	udp_conn_pool_->free(conn);
 	--conn_num_;
+	LOG("udp disconnect %d", conn_num_);
 }
 
 udp_connection_t* udp_network_t::get_connection_addr(int64 addr) {
@@ -162,7 +165,7 @@ void udp_network_t::process(int64 tick) {
 			break;
 		}
 		if (len != cur_recv_chunk_->size + UDP_HEAD_BYTE_ALL) {
-			// ERROR
+			ERROR("");
 			continue;
 		}
 		addr = NET_ADDR_TO_INT(address);

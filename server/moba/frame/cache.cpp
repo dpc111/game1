@@ -1,3 +1,4 @@
+#include "stdafx.h"
 #include "cache.h"
 
 static cache_chunk_pool_t cache_chunk_pool;
@@ -23,9 +24,9 @@ cache_t::~cache_t() {
 int cache_t::read(void *buff, int size) {
 	char *ptr = (char *)buff;
 	for (cache_chunk_list_t::iterator it = cache_list_.begin(); it != cache_list_.end(); ++it) {
-		cache_chunk_t *chunk = it->second;
-		int read_size = size < chunk->read_size() ? size : chunk->read_size();
-		memcpy(ptr, chunk->read_ptr(); read_size);
+		cache_chunk_t *chunk = *it;
+		int read_size = (size < chunk->read_size()) ? size : chunk->read_size();
+		memcpy(ptr, chunk->read_ptr(), read_size);
 		ptr += read_size;
 		size -= read_size;
 		chunk->read_offset_ += read_size;
@@ -48,7 +49,7 @@ int cache_t::write(const void *buff, int size) {
 		} else {
 			chunk = cache_list_.back();
 		}
-		int write_size = size < chunk->write_size(); ? size : chunk->write_size();
+		int write_size = (size < chunk->write_size()) ? size : chunk->write_size();
 		memcpy(chunk->write_ptr(), ptr, write_size);
 		chunk->write_offset_ += write_size;
 		size -= write_size;

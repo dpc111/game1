@@ -12,11 +12,14 @@ frame_mgr_t::~frame_mgr_t() {
 }
 
 void frame_mgr_t::recv(int uid, void *buff, int size)  {
-	if (chunk_.write_size() < size + 4 + 4) {
+	// if (chunk_.write_size() < size + 4 + 4) {
+	// 	return;
+	// }
+	// memcpy(chunk_.write_ptr(), &size, 4)
+	// chunk_.write_offset_ += 4;
+	if (chunk_.write_size() < size + 4) {
 		return;
 	}
-	memcpy(chunk_.write_ptr(), &size, 4)
-	chunk_.write_offset_ += 4;
 	memcpy(chunk_.write_ptr(), &uid, 4)
 	chunk_.write_offset_ += 4;
 	memcpy(chunk_.write_ptr(), buff, size) 

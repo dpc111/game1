@@ -175,6 +175,9 @@ void udp_network_t::process(int64 tick) {
 			}
 			continue;
 		}
+		if (cur_recv_chunk_->type == UDP_TYPE_DISCONNECT) {
+			remove_connection_addr(addr);
+		}
 		if (cur_recv_chunk_ != NULL) {
 			conn->on_recv_udp_chunk(cur_recv_chunk_);
 			cur_recv_chunk_ = NULL;

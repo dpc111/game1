@@ -75,7 +75,7 @@ public:
 
 	void udp_send_sid(int64 sid, void *buff, int32 size) { udp_network_->send_sid(sid, buff, size); }
 
-	void udp_register_cb(udp_network_t::udp_msg_cb_t& cb) { udp_network_->set_udp_msg_cb(cb); }
+	void udp_register_cb(const udp_network_t::udp_msg_cb_t& cb) { udp_network_->set_udp_msg_cb(cb); }
 
 private:
 	tcp_network_t *tcp_network_;

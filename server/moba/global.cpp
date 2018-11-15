@@ -1,4 +1,5 @@
 #include "global.h"
+#include "thread_private_obj.h"
 #include "player_mgr.h"
 #include "room_mgr.h"
 #include "service.h"

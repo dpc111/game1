@@ -1,7 +1,11 @@
+#include "stdafx.h"
 #include "room.h"
 #include "frame_mgr.h"
+#include "service.h"
 
-room_t::room_t(int32 rid) {
+room_t::room_t(int32 rid)
+	: dispatcher_t(),
+	timer_handle_t(get_service()->get_timer_axis()) {
 	rid_ = rid;
 	start_time_ = 0;
 	over_ = false;
@@ -34,13 +38,13 @@ void room_t::update(int64 ms) {
 	}
 	if (ms - start_time_ > ROOM_MAX_GAME_TIME) {
 		end();
-		return
+		return;
 	}
 	frame_mgr_->refresh();
 }
 
 void room_t::add_player(int64 uid, player_t *player) {
-	player_map_t::iterator it = players_.fine(uid);
+	player_map_t::iterator it = players_.find(uid);
 	if (it != players_.end()) {
 		return;
 	}
@@ -49,7 +53,7 @@ void room_t::add_player(int64 uid, player_t *player) {
 }
 
 void room_t::del_player(int64 uid) {
-	player_map_t::iterator it = players_.fine(uid);
+	player_map_t::iterator it = players_.find(uid);
 	if (it == players_.end()) {
 		return;
 	}

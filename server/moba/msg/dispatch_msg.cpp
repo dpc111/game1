@@ -3,6 +3,7 @@
 #include "service.h"
 #include "client_msg.h"
 #include "server_msg.h"
+#include "udp_msg.h"
 
 #define REGISTER_BIND(func, caller) \
 	std::tr1::bind(&func, \
@@ -37,5 +38,5 @@ void dispatch_msg_t::register_server_msg() {
 }
 
 void dispatch_msg_t::register_udp_msg() {
-	service_->udp_register_cb(std::tr1::bind(udp_msg_t::on_message, udp_msg_, std::tr1::placeholders::_1, std::tr1::placeholders::_2, std::tr1::placeholders::_3));
+	service_->udp_register_cb(std::tr1::bind(&udp_msg_t::on_message, udp_msg_, std::tr1::placeholders::_1, std::tr1::placeholders::_2, std::tr1::placeholders::_3));
 }

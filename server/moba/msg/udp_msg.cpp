@@ -3,6 +3,7 @@
 #include "player.h"
 #include "room_mgr.h"
 #include "room.h"
+#include "frame_mgr.h"
 
 udp_msg_t::udp_msg_t() {
 
@@ -12,12 +13,12 @@ udp_msg_t::~udp_msg_t() {
 
 }
 
-void udp_msg_t::on_message(int32 sid, void *buff, void size) {
+void udp_msg_t::on_message(int sid, void *buff, int size) {
 	player_t *player = get_player_mgr()->get_player(sid);
 	if (!player) {
 		return;
 	}
-	room_t *room = get_room_mgr()->get_room(player->get_rid());
+	room_t *room = player->get_room();
 	if (!room) {
 		return;
 	}

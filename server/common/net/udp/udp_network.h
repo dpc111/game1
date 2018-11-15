@@ -46,7 +46,7 @@ public:
 
 	int64 get_tick() { return tick_; }
 
-	void set_udp_msg_cb(udp_msg_cb_t& cb) { udp_msg_cb_ = cb; }
+	void set_udp_msg_cb(const udp_msg_cb_t& cb) { udp_msg_cb_ = cb; }
 
 	bool get_block() { return block_; }
 

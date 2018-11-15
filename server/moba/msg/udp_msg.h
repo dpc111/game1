@@ -9,7 +9,7 @@ public:
 
 	~udp_msg_t();
 
-	void on_message(int32 sid, void *buff, void size);
+	void on_message(int sid, void *buff, int size);
 };
 
 #endif

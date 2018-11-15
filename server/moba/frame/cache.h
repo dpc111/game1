@@ -17,7 +17,7 @@ public:
 
 	~cache_t();
 
-	void read(void *buff, int size);
+	int read(void *buff, int size);
 
 	int write(const void *buff, int size);
 

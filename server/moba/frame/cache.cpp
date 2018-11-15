@@ -44,9 +44,9 @@ int cache_t::write(const void *buff, int size) {
 		if (cache_list_.size() <= 0 || cache_list_.back()->write_size() == 0) {
 			chunk = cache_chunk_pool.alloc();
 			new (chunk) cache_chunk_t;
-			cache_list_->push_back(chunk);
+			cache_list_.push_back(chunk);
 		} else {
-			chunk = cache_list_->back();
+			chunk = cache_list_.back();
 		}
 		int write_size = size < chunk->write_size(); ? size : chunk->write_size();
 		memcpy(chunk->write_ptr(), ptr, write_size);

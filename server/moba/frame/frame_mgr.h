@@ -6,7 +6,7 @@
 #include "chunk.h"
 #include "cache.h"
 
-#define FRAME_INTERVAL_MS 50
+#define FRAME_INTERVAL_MS 100
 
 class room_t;
 

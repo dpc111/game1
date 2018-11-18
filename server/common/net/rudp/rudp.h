@@ -17,7 +17,7 @@
 #define UDP_REQ_AGAIN_TICKS 10
 #define UDP_REQ_AGAIN_MAX_TIMES 10
 #define UDP_RECV_SEQ_MAX_DEV 20
-#define UDP_TIME_OUT_TICKS 1000
+#define UDP_TIME_OUT_TICKS 60000
 
 #include "udp_pool.h"
 #include "udp_chunk.h"

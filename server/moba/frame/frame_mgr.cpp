@@ -28,7 +28,6 @@ void frame_mgr_t::refresh()  {
 	cache_.write(chunk_.read_ptr(), chunk_.read_size());
 	chunk_.read_offset_ = 0;
 	chunk_.write_offset_ = 0;
-	++frame_;
 	memcpy(chunk_.write_ptr(), &frame_, 4);
 	chunk_.write_offset_ += 4;
 }
@@ -45,6 +44,7 @@ void frame_mgr_t::update(int64 ms) {
 	if (ms - last_update_tm_ < FRAME_INTERVAL_MS) {
 		return;
 	}
+	++frame_;
 	last_update_tm_ = ms;
 	refresh();
 }

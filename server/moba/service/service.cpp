@@ -2,6 +2,8 @@
 #include "player_mgr.h"
 #include "room_mgr.h"
 #include "dispatch_msg.h"
+#include "player.h"
+#include "room.h"
 
 service_t::service_t()
 	: server_t() {

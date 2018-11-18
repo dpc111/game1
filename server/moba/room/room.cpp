@@ -2,6 +2,7 @@
 #include "room.h"
 #include "frame_mgr.h"
 #include "service.h"
+#include "player.h"
 
 room_t::room_t(int32 rid)
 	: dispatcher_t(),

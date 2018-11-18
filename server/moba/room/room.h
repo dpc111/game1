@@ -8,7 +8,7 @@
 #include "obj_pro_def.h"
 #include <map>
 
-#define ROOM_MAX_PLAYER_NUM 2
+#define ROOM_MAX_PLAYER_NUM 1
 #define ROOM_MAX_GAME_TIME 600000
 
 class frame_mgr_t;
@@ -31,7 +31,7 @@ public:
 
 	bool is_over() { return over_; }
 
-	void add_player(int64 uid, player_t *player);
+	void add_player(player_t *player);
 
 	void del_player(int64 uid);
 	

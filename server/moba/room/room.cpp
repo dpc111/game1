@@ -43,12 +43,12 @@ void room_t::update(int64 ms) {
 	frame_mgr_->refresh();
 }
 
-void room_t::add_player(int64 uid, player_t *player) {
-	player_map_t::iterator it = players_.find(uid);
+void room_t::add_player(player_t *player) {
+	player_map_t::iterator it = players_.find(player->get_uid());
 	if (it != players_.end()) {
 		return;
 	}
-	players_[uid] = player;
+	players_[player->get_uid()] = player;
 	++player_num_;
 }
 

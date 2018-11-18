@@ -36,6 +36,18 @@ void service_t::init_json_mgr() {
 void service_t::udp_on_connect(int32 uid) {
 	server_t::udp_on_connect(uid);
 	ERROR("%d", uid);
+	player_t *player = get_player_mgr()->get_player(uid);
+	if (player) {
+		return;
+	}
+	player = get_player_mgr()->create_player(uid);		
+	room_t *room = player->get_room();
+	if (room) {
+		return;
+	}
+	room = get_room_mgr()->create_room();
+	room->add_player(player);
+	player->set_room(room);
 }
 
 void service_t::udp_on_disconnect(int32 uid) {

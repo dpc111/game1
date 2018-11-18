@@ -39,7 +39,7 @@ void frame_mgr_t::refresh()  {
 
 void frame_mgr_t::sync()  {
 	room_t::player_map_t& players = room_->get_players();
-	room_t::player_map_t::iterator it = players.end();
+	room_t::player_map_t::iterator it = players.begin();
 	for ( ; it != players.end(); it++) {
 		get_service()->udp_send_sid(it->first, chunk_.buff_, chunk_.read_size());
 	}

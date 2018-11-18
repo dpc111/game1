@@ -53,6 +53,19 @@ void service_t::udp_on_connect(int32 uid) {
 void service_t::udp_on_disconnect(int32 uid) {
 	server_t::udp_on_disconnect(uid);
 	ERROR("%d", uid);
+	player_t *player = get_player_mgr()->get_player(uid);
+	if (!player) {
+		return;
+	}
+	room_t *room = player->get_room();
+	if (room) {
+		room->del_player(player->get_uid());
+		if (!room->has_player()) {
+			get_room_mgr()->del_room(room->get_rid());
+		}
+		player->set_room(NULL);
+	}
+	get_player_mgr()->del_player(player->get_uid());
 }
 
 void service_t::update(int64 tm) {

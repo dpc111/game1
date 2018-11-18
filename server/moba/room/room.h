@@ -34,6 +34,8 @@ public:
 	void add_player(player_t *player);
 
 	void del_player(int64 uid);
+
+	bool has_player() { return players.empty(); }
 	
 private:
 	PROPERTY(int32, 							rid)

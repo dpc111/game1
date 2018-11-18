@@ -25,14 +25,18 @@ public:
 
 	void sync();
 
+	void update(int64 ms);
+
 private:
 	room_t *room_;
 
 	frame_chunk_t chunk_;
 
-	int frame_;
+	int32 frame_;
 
 	cache_t cache_;
+
+	int64 last_update_tm_;
 };
 
 #endif

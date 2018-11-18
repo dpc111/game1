@@ -50,6 +50,7 @@ void service_t::udp_on_connect(int32 uid) {
 	room = get_room_mgr()->create_room();
 	room->add_player(player);
 	player->set_room(room);
+	room->start();
 }
 
 void service_t::udp_on_disconnect(int32 uid) {

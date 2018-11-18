@@ -5,6 +5,7 @@
 frame_mgr_t::frame_mgr_t(room_t *room) {
 	room_ = room;
 	frame_ = 0;
+	last_update_tm_ = 0;
 }
 
 frame_mgr_t::~frame_mgr_t() {
@@ -13,11 +14,6 @@ frame_mgr_t::~frame_mgr_t() {
 }
 
 void frame_mgr_t::recv(int uid, void *buff, int size)  {
-	// if (chunk_.write_size() < size + 4 + 4) {
-	// 	return;
-	// }
-	// memcpy(chunk_.write_ptr(), &size, 4)
-	// chunk_.write_offset_ += 4;
 	if (chunk_.write_size() < size + 4) {
 		return;
 	}
@@ -43,4 +39,12 @@ void frame_mgr_t::sync()  {
 	for ( ; it != players.end(); it++) {
 		get_service()->udp_send_sid(it->first, chunk_.buff_, chunk_.read_size());
 	}
+}
+
+void frame_mgr_t::update(int64 ms) {
+	if (ms - last_update_tm_ < FRAME_INTERVAL_MS) {
+		return;
+	}
+	last_update_tm_ = ms;
+	refresh();
 }

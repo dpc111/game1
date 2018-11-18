@@ -41,7 +41,7 @@ void room_t::update(int64 ms) {
 		end();
 		return;
 	}
-	frame_mgr_->refresh();
+	frame_mgr_->update(ms);
 }
 
 void room_t::add_player(player_t *player) {

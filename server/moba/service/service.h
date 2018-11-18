@@ -20,6 +20,10 @@ public:
 
 	virtual void update(int64 tm);
 
+	virtual void udp_on_connect(int32 uid);
+
+	virtual void udp_on_disconnect(int32 uid);
+
 	player_mgr_t* get_player_mgr() { return player_mgr_; }
 
 	room_mgr_t* get_room_mgr() { return room_mgr_; }

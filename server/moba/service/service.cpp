@@ -33,6 +33,16 @@ void service_t::init_json_mgr() {
 	get_json_mgr()->load("../etc/config/json/bullet.json", "bullet");
 }
 
+void service_t::udp_on_connect(int32 uid) {
+	server_t::udp_on_connect(uid);
+	ERROR("%d", uid);
+}
+
+void service_t::udp_on_disconnect(int32 uid) {
+	server_t::udp_on_disconnect(uid);
+	ERROR("%d", uid);
+}
+
 void service_t::update(int64 tm) {
 	room_mgr_->update(tm);
 }

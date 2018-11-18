@@ -77,6 +77,10 @@ public:
 
 	void udp_register_cb(const udp_network_t::udp_msg_cb_t& cb) { udp_network_->set_udp_msg_cb(cb); }
 
+	virtual void udp_on_connect(int sid) {}
+
+	virtual void udp_on_disconnect(int sid) {}
+
 private:
 	tcp_network_t *tcp_network_;
 

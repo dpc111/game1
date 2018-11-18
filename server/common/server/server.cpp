@@ -14,6 +14,8 @@ server_t::server_t() {
 	frame_last_tm_ = 0;
 	frame_interval_ = 0;
 	tcp_network_->set_on_disconnect_cb(std::tr1::bind(&server_t::on_disconnect, this, std::tr1::placeholders::_1));
+	udp_network_->set_udp_connect_cb(std::tr1::bind(&server_t::udp_on_connect, this, std::tr1::placeholders::_1));
+	udp_network_->set_udp_disconnect_cb(std::tr1::bind(&server_t::udp_on_disconnect, this, std::tr1::placeholders::_1));
 }
 
 server_t::~server_t() {

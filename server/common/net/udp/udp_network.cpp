@@ -50,6 +50,9 @@ void udp_network_t::add_connection(udp_connection_t *conn) {
 	addr_conns_[conn->addr_ ] = conn;
 	sid_conns_[conn->sid_] = conn;
 	++conn_num_;
+	if (connect_cb_) {
+		connect_cb_(conn->get_sid());
+	}
 	LOG("udp connect %d", conn_num_);
 }
 
@@ -63,6 +66,9 @@ void udp_network_t::remove_connection_addr(int64 addr) {
 	sid_conn_map_t::iterator it2 = sid_conns_.find(conn->sid_);
 	if (it2 != sid_conns_.end()) {
 		sid_conns_.erase(it2);
+	}
+	if (disconnect_cb_) {
+		disconnect_cb_(conn->get_sid());
 	}
 	udp_conn_pool_->free(conn);
 	--conn_num_;
@@ -79,6 +85,9 @@ void udp_network_t::remove_connection_sid(int sid) {
 	addr_conn_map_t::iterator it2 = addr_conns_.find(conn->addr_);
 	if (it2 != addr_conns_.end()) {
 		addr_conns_.erase(it2);
+	}
+	if (disconnect_cb_) {
+		disconnect_cb_(conn->get_sid());
 	}
 	udp_conn_pool_->free(conn);
 	--conn_num_;
@@ -169,7 +178,7 @@ void udp_network_t::process(int64 tick) {
 			continue;
 		}
 		addr = NET_ADDR_TO_INT(address);
-		udp_connection_t *conn =  get_connection_addr(addr);
+		udp_connection_t *conn = get_connection_addr(addr);
 		if (conn == NULL) {
 			if (cur_recv_chunk_->type == UDP_TYPE_CONNECT) {
 				conn = udp_conn_pool_->alloc();

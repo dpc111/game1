@@ -33,6 +33,10 @@ public:
 
 	typedef std::tr1::function<void (int, void *, int)> udp_msg_cb_t;
 
+	typedef std::tr1::function<void (int)> udp_connect_cb_t;
+
+	typedef std::tr1::function<void (int)> udp_disconnect_cb_t;
+
 public:
 	udp_network_t();
 
@@ -47,6 +51,10 @@ public:
 	int64 get_tick() { return tick_; }
 
 	void set_udp_msg_cb(const udp_msg_cb_t& cb) { udp_msg_cb_ = cb; }
+
+	void set_udp_connect_cb(const udp_connect_cb_t& cb) { connect_cb_ = cb; }
+
+	void set_udp_disconnect_cb(const udp_disconnect_cb_t& cb) { disconnect_cb_ = cb; }
 
 	bool get_block() { return block_; }
 
@@ -72,6 +80,10 @@ public:
 
 public:
 	udp_msg_cb_t udp_msg_cb_;
+
+	udp_connect_cb_t connect_cb_;
+
+	udp_disconnect_cb_t disconnect_cb_;
 
 	int socket_fd_;
 

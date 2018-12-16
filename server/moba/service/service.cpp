@@ -47,7 +47,7 @@ void service_t::udp_on_connect(int32 uid) {
 	if (room) {
 		return;
 	}
-	room = get_room_mgr()->create_room();
+	room = get_room_mgr()->get_idle_room(true);
 	room->add_player(player);
 	player->set_room(room);
 	room->start();

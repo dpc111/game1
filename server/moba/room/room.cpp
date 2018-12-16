@@ -26,6 +26,9 @@ room_t::~room_t() {
 }
 
 void room_t::start() {
+	if (player_num_ < ROOM_MAX_PLAYER_NUM) {
+		return;
+	}
 	start_time_ = getms();
 }
 
@@ -34,7 +37,7 @@ void room_t::end() {
 }
 
 void room_t::update(int64 ms) {
-	if (get_over()) {
+	if (start_time_ == 0 || get_over()) {
 		return;
 	}
 	if (ms - start_time_ > ROOM_MAX_GAME_TIME) {

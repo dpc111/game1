@@ -159,7 +159,7 @@ void udp_network_t::process(int64 tick) {
 	// net recv
 	struct sockaddr_in address;
 	socklen_t addr_len = sizeof(struct sockaddr_in);
-	int addr;
+	int64 addr;
 	int len;
 	while (1) {
 		if (cur_recv_chunk_ == NULL) {

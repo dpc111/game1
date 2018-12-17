@@ -35,7 +35,7 @@ public:
 
 	void del_player(int64 uid);
 
-	bool has_player() { return players_.empty(); }
+	bool has_player() { return !players_.empty(); }
 	
 private:
 	PROPERTY(int32, 							rid)

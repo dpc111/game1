@@ -17,7 +17,7 @@
 #include <map>
 #include <tr1/functional>
 
-#define NET_ADDR_TO_INT(addr) ntohl(addr.sin_addr.s_addr) & (0xffffffff) << 4 | ((ntohl(addr.sin_port) & 0xffffffff))
+#define NET_ADDR_TO_INT(addr) ((ntohl(addr.sin_addr.s_addr) & (0xffffffff)) << 4) | ((ntohl(addr.sin_port) & 0xffff))
 
 class udp_connection_t;
 

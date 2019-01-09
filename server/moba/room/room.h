@@ -8,7 +8,7 @@
 #include "obj_pro_def.h"
 #include <map>
 
-#define ROOM_MAX_PLAYER_NUM 2
+#define ROOM_MAX_PLAYER_NUM 1
 #define ROOM_MAX_GAME_TIME 600000
 
 class frame_mgr_t;
